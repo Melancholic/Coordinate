@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GeoWork</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/ie' %>
+</head>
+<body>
+<div id='wrap'>
+ <%= render 'layouts/header' %>
+  <div class="container">
+    <!-- Hello new user! BEGIN -->
+    <%flash.each do |key, val| %>
+      <%= content_tag(:div, val, class: "alert alert-#{key}")%>
+    <%end %>
+    <!-- Hello new user! END -->
+    <%= yield %>
+    <hr>
+    <%= debug(params) if Rails.env.development? %>
+    <div id="push"></div>
+  </div>
+    <%= render 'layouts/footer' %>
+</div>
+</body>
+</html>

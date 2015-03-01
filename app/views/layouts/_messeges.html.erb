@@ -1,0 +1,14 @@
+<!-- Hello new user! BEGIN -->
+<%if signed_in? %>
+  <!--Not verificated -->
+  <% if !current_user.verificated? && !current_page?(verification_user_path(current_user)) %>
+    <%= render 'shared/modals/form', form:'users/verification_form', id:'verification_form', title:'Verification', run: 'auto', type:'warning' %>
+  <%end %>
+
+<%end%>
+
+<%flash.each do |key, val| %>
+  <%=render 'shared/modals/modal', type:key, messege: val %>
+<%end %>
+
+<!-- Hello new user! BEGIN -->

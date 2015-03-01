@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228094644) do
+ActiveRecord::Schema.define(version: 20150301173020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20150228094644) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "reset_passwords", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "password_key", null: false
+    t.string   "host"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "reset_passwords", ["user_id"], name: "index_reset_passwords_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "login",                           null: false

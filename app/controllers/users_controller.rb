@@ -27,12 +27,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params());
     if(@user.save)
-      flash[:success] = "Welcome to Tweets!";
+      flash[:success] = "Welcome to #{app_name}!";
       sign_in @user;
       redirect_to(@user);
+      
       UsersMailer.verification(@user).deliver_now;
     else
-      render 'new';
+      respond_to do |format|
+        format.html {render 'new'}
+        format.json { render :json => {errors: @user.errors.full_messages} }
+      end
     end
   end
 
@@ -89,11 +93,11 @@ class UsersController < ApplicationController
   
   def reset_password
     @title="Reset Password";
-    if (!params[:key] || !ResetPassword.getUser(params[:key]))
+    if (!params[:key] || !ResetPassword.get_user(params[:key]))
       @request_email=true;
     else
       @request_email=false;
-      user=ResetPassword.getUser(params[:key])
+      user=ResetPassword.get_user(params[:key])
       if(TimeDifference.between(Time.now, user.reset_password.updated_at).in_minutes <=TYME_LIM_PASSRST_KEY)
         @user=user;
         #@key=params[:key];
@@ -124,7 +128,7 @@ class UsersController < ApplicationController
   def resetpass_recive_pass
    @user = User.find(params[:format]);
    if  (@user.update_attributes(user_params()))
-      flash[:succes] = "Updating your profile is success"
+      flash[:success] = "Updating your profile is success"
       redirect_to(root_url);
       UsersMailer.send_new_pass_notification(@user).deliver_now;
       @user.reset_password.destroy;

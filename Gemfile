@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#for reset passwords
+gem 'time_difference' 
 
 gem 'simple_form'
 #geo

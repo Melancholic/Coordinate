@@ -28,10 +28,14 @@ def sign_in (user, args={})
     cookies[:remember_token]=remember_token;
     user.update_attribute(:remember_token,User.encrypt(remember_token));
   else
-      visit signin_path;
-        fill_in "Email", with: user.email;
-        fill_in "Password", with: user.password;
-        click_button "Sign In"
+    visit root_path;
+    click_link 'Authorization'
+    click_link 'Log in'
+    within("#signin_tab") do 
+      fill_in "Email", with: user.email;
+      fill_in "Password", with: user.password;
+      click_button "Log in"
+    end
   end
 end
 

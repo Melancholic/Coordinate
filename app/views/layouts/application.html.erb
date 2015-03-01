@@ -10,17 +10,13 @@
 <body>
  <%= render 'layouts/header' %>
   <div class="container">
-    <!-- Hello new user! BEGIN -->
-    <%flash.each do |key, val| %>
-      <%=render 'shared/modals/modal', type:key, messege: val %>
-      <%# content_tag(:div, val, class: "alert alert-#{key}")%>
-    <%end %>
+    <%=render 'layouts/messeges'%>
     <!-- Hello new user! END -->
     <%= yield %>
     <hr>
     <%= debug(params) if Rails.env.development? %>
     <div id="push"></div>
-    <%= render 'layouts/footer' %>
   </div>
+    <%= render 'layouts/footer' %>
 </body>
 </html>

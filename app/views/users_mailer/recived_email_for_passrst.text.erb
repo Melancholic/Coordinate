@@ -1,0 +1,8 @@
+Dear <%=@user.login%>!
+
+  In <b><%= @time %></b> server time we had worked out a request to change the password  your account from <%= @host%></b> host.
+  If you did not make such a request, and does not want to change your password, no further action is required from you.
+
+  If you want to change your password, please go to <%= reset_password_users_url()+"?key="+ @user.reset_password_key %> and fill the form. The link will be valid for <%=TYME_LIM_PASSRST_KEY%>  minutes.
+
+With thanks to your <%= app_name %>!

@@ -1,0 +1,10 @@
+<% unless current_page? signin_path  %>
+  <%= link_to "Log in", signin_path%>
+<% end -%>
+
+<%- unless current_page? signup_path%>
+  <%= link_to "Sign up", signup_path%>
+<% end -%>
+<%= link_to"Forgot your password?", reset_password_users_path %>
+<%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+

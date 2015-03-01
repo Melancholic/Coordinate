@@ -1,0 +1,34 @@
+<p>
+  <h2>Dear <%=@user.login%>!</h2>
+</p>
+
+<p><em><strong>Your password to the site   <%= link_to(app_name, root_url)%> has been updated successfully !</strong></em></p>
+
+<p>You can use it right now for authorization on page <%= link_to("Signin page", signin_url)%>     </p>
+
+<p>&nbsp;</p>
+
+<table border="0" cellpadding="5" cellspacing="1">
+	<caption>Information on operations:</caption>
+	<tbody>
+		<tr>
+			<td>Name:</td>
+			<td><%=@user.login %></td>
+		</tr>
+		<tr>
+			<td>E-mail:</td>
+			<td><%=@user.email%></td>
+		</tr>
+		<tr>
+			<td>Date change the password :</td>
+			<td><%=@time%></td>
+		</tr>
+		<tr>
+			<td>Hostname:</td>
+			<td><%=@host%></td>
+		</tr>
+	</tbody>
+</table>
+
+<p><br />
+<em>&nbsp;<span >Thank you from the use of <%= link_to(app_name, root_url)%>!</span></em></p>

@@ -1,0 +1,35 @@
+<%#
+  feed_item - element (Micropost)
+  timeformat - format time view
+%>
+
+<% author= feed_item.author %>
+<% original= feed_item.original %>
+<%= render 'shared/timestamp', {style: timeformat,text: "Posted", object:feed_item} %>
+<% if (signed_in?)%>
+  <%= content_tag :span, class: "timestamp perference " do %>
+    <% if (!feed_item.repost_possible?(current_user))%>
+      <%="\u21B7"%>
+    <% else %>
+      <%= link_to_repost(feed_item)%>
+    <%end %>
+    <span id="count">
+      <%=original.reposted_count %>
+    </span>
+  <% end%>
+  <% if (current_user?(feed_item.user) || current_user.admin?)%>
+    <span class="perference">
+      <%= link_to_delete(feed_item) %>
+    </span>
+  <% end %>
+<% else %>
+  <%= content_tag :span, class: "timestamp perference " do %>
+    <%="\u21B7"%>
+    <span id="count">
+      <%=original.reposted_count %>
+    </span>
+  <% end%>
+<% end %>
+<span class="timestamp perference" style="float:right;" id="link-to">
+  <%= link_to '#',path_to_post(original) , title:"Original"%>
+</span>

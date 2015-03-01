@@ -1,0 +1,22 @@
+<h3>Dear <%=@user.login%>!</h3>
+<p>
+  Someone, or maybe you, have used this e-mail to register for resource <%= link_to app_name ,root_url%>. 
+If it were not for you, then just ignore this message: no further action is for you.
+</p>
+<br>
+<p>
+  If you registered yet, you need to confirm this address. To do this, you must go to the link 
+<br>
+ <%= verification_user_url(@user)+"?key="+ @user.verification_key %> 
+<br>
+or enter the following code 
+<br>
+<b>
+  <%= @user.verification_key %>
+</b>
+<br>
+on the <%= link_to "confirmation page",verification_user_url(@user)%> , then you will be able to gain access to the main functions projects <%= app_name %>.
+<br>
+<p>
+  Thank for your attention. Your <%= app_name %>.
+</p>

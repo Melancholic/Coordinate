@@ -1,0 +1,22 @@
+<% provide(:title,'Sign Up') %> 
+<div class="center jumbotron">
+<h1>Sign up</h1>
+</div>
+<div class="row">
+  <div class="col-xs-4 col-md-offset-4">
+    <%= simple_form_for(@user) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <%= f.input :login, required: true, autofocus: true, span:'span6' %>
+        <%= f.input :email, required: true %>
+        <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
+        <%= f.input :password_confirmation, required: true %>
+      </div>
+    
+      <div class="form-actions">
+        <%= f.button :submit, "Sign up" %>
+      </div>
+    <% end %>
+    </div>
+</div>
+

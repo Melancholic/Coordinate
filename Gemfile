@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'simple_form'
 #geo
 gem 'geocoder'
 # async request

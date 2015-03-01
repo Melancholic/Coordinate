@@ -1,0 +1,22 @@
+<% provide(:title,"Verification")%>
+<div class="center hero-unit">
+ <h1> Verification</h1>
+<h2>To your email address sent an email with instructions required to confirm your e-mail. Please check your e-mail!</h2>
+
+
+</div>
+  <div class="row ">
+    <aside class ="span3">
+    </aside>
+  <div class ="center span6">  
+  <center>
+    <%= form_tag("verification",method: "get") do  %>
+      <%= label_tag(:key, "Verification key:") %>
+      <%= text_field_tag(:key) %>
+      <%= submit_tag("Send key", class: "btn btn-large btn-primary") %>
+    <% end %>
+    <%= link_to  "Resend", sent_verification_mail_user_url(@user), method: :post %> a letter to  <%=@user.email %>
+    </center>
+
+  </div>
+</div>

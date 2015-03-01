@@ -1,0 +1,8 @@
+<% @user||=current_user %>
+<big><b>
+<%= link_to gravatar_for(@user, size: 100), current_user %>
+ <div> <%= @user.login %></div>
+</b></big>
+<span>
+  <%= link_to("view profile", @user)%>
+</span>

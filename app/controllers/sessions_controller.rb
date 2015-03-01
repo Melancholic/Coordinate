@@ -8,11 +8,11 @@ class SessionsController < ApplicationController
     user= User.find_by(email: params[:session][:email].downcase);
     if(user && user.authenticate(params[:session][:password]))
         sign_in(user)
-        flash.now[:succes]="#{user.name}, welcome!";
+        flash[:succes]="#{user.login}, welcome!";
         redirect_to(root_url);
     else
-        flash.now[:error]='Uncorrect email or password!'
-        render('new');
+        flash[:error]='Uncorrect email or password!'
+        redirect_to(:back);
     end
   end
 

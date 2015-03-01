@@ -1,12 +1,12 @@
 VALID_EMAIL_REGEX =  /\A[\w+\-.0-9]+@([a-z\d\-]+(\.[a-z\d]+)*\.[a-z]+)+\z/i
-VALID_NAME_REGEX = /\A[a-z \d \- \_]*[a-z \- \_]+[a-z \d \- \_]*\z/i
+VALID_login_REGEX = /\A[a-z \d \- \_]*[a-z \- \_]+[a-z \d \- \_]*\z/i
 class User < ActiveRecord::Base
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
   #Порядок
-  default_scope -> {order('name ASC')}
+  default_scope -> {order('login ASC')}
 
-  validates(:name, presence: true, length:{maximum:15,minimum:3},format: {with: VALID_NAME_REGEX});
+  validates(:login, presence: true, length:{maximum:15,minimum:3},format: {with: VALID_login_REGEX});
   validates(:email, presence: true, length:{maximum:50,minimum:3},
       format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false});
   

@@ -1,0 +1,20 @@
+<li id="<%=feed_item.id %>">
+<a class="anchor" name="post<%=feed_item.id %>"></a>
+  <% timeformat||={format: :full_info}%>
+  <%= link_to gravatar_for(feed_item.user, size:48), feed_item.user %>
+  <span class="user">
+    <%= link_to feed_item.user.name, feed_item.user %>
+  </span>
+  <% if feed_item.repost? %>
+    <% style="quote"%>
+    <span class="timestamp">
+      <% @author=feed_item.author%>
+      reposted by <%=link_to @author.name, @author %>
+    </span>
+  <%end%>
+  <%= content_tag :span, class: "content #{style}" do -%>
+    <%=raw  make_preprocess(feed_item.content)%>
+  <% end %>
+  <%= render 'shared/micropost_peference', feed_item: feed_item, timeformat:timeformat %>
+</li>
+

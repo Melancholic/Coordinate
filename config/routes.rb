@@ -3,10 +3,24 @@ Rails.application.routes.draw do
   match '/about',to:'static_pages#about', via:'get'
   match '/contacts',to:'static_pages#contacts', via:'get'
   match '/faq', to:'static_pages#faq', via: 'get'
+  match '/signup', to: 'users#new',via: 'get' 
   
   resources :sessions, only: [:new, :create, :destroy];
   match '/signin', to: 'sessions#new', via:'get';
   match '/signout', to:'sessions#destroy', via:'delete';
+  resources :users do
+     #add user/id/following and user/id/followers
+    member do
+      get :verification
+      post :sent_verification_mail
+    end
+     #add user/otherpages (without id!!!)
+     collection do
+      get :reset_password
+      post :recive_email_for_reset_pass
+      post :resetpass_recive_pass
+     end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

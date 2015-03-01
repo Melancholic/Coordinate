@@ -37,5 +37,9 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Raises error for missing translations
+  config.log_formatter = ::Logger::Formatter.new
+  config.action_mailer.default_url_options = { :host => 'coordinate.anagorny.com' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method= :smtp
   # config.action_view.raise_on_missing_translations = true
 end

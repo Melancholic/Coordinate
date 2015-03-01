@@ -1,0 +1,23 @@
+<section>
+<div class="span4 left-block top_post" >
+   <div class="head">
+        Top post
+       <span class="link-to-top" >
+       <%=link_to "Top list", "#" %>
+       </span>
+  </div>
+      <ul class="top-post-micropost" id="top-posts">
+          <%= render 'shared/feed_item', feed_item: @top_post, timeformat: {} %>  
+      </ul>
+</div>
+</section>
+<!--
+<section>
+<div class="span4 left-block top_post" >
+   <div class="head">
+    Title 1
+  </div>
+    body 1
+</div>
+</section>
+-->

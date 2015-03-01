@@ -1,0 +1,12 @@
+<%= form_for(:session, url: sessions_path) do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit("Sign In", class: "btn btn-large btn-primary span2") %>
+<% end %>
+<%= link_to("Create new account.",signup_path, {class:"btn btn-primary btn-lg disabled inline ", role:"button"}) %>
+<%= link_to("Forgot your password?",reset_password_users_path, {class:"btn btn-default btn-lg disabled inline ", role:"button"});%>

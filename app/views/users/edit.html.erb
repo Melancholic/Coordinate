@@ -1,0 +1,24 @@
+<% provide(:title,'Edit profile') %> 
+<div class="center hero-unit">
+  <h1>Update your profile</h1>  
+</div>
+<div class="row">
+  <aside class ="span4">
+    <section>
+      <%= link_to(gravatar_for(@user,size:150),"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
+    </section>
+    <section>
+      <%= link_to('Change Gravatar',"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
+    </section>
+  </aside>
+  <div class ="span8">  
+    <%= form_for(@user) do |f| %>
+      <%= render('shared/error_msgs', object: f.object) %>
+      <%=render 'fields', f: f %>
+      <br>
+      <%= f.submit("Save changes", class: "btn btn-large btn-primary") %>
+    <% end %>
+  </div>
+</div>
+
+

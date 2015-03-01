@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   #for not signed users redirect to root
   before_action :signed_in_user, only:[:index,:edit,:update, :destroy,  :verification, :sent_verification_mail] # in app/helpers/session_helper.rb
-  before_action :verificated_user, only:[:index, :destroy,:show, :following, :followers]
+  before_action :verificated_user, only:[:index, :destroy,:show]
   #For verificated user - redirect to root
   before_action :verificated_user_is_done, only: [:verification, :sent_verification_mail]
   #for signied users
@@ -17,13 +17,10 @@ class UsersController < ApplicationController
 
   def show()
     @user = User.find(params[:id]); 
-    @microposts=@user.microposts.paginate(page: params[:page]);
-    @micropost=current_user.microposts.build if(signed_in?);
-    @mypath = user_path(@user);
   end
 
   def index()
-    #@users =  User.all.sort_by { |s| s.name };
+    #@users =  User.all.sort_by { |s| s.login };
     @users=User.paginate(page: params[:page]);
   end
 
@@ -33,7 +30,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to Tweets!";
       sign_in @user;
       redirect_to(@user);
-      TweetsMailer.verification(@user).deliver_now;
+      UsersMailer.verification(@user).deliver_now;
     else
       render 'new';
     end
@@ -56,11 +53,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    uname=User.find(params[:id]).name;
+    ulogin=User.find(params[:id]).login;
     if(User.find(params[:id]).destroy)
-      flash[:success]="User #{uname} has been deleted!";
+      flash[:success]="User #{ulogin} has been deleted!";
     else
-      flash[:error]="User #{uname} has not been deleted!";
+      flash[:error]="User #{ulogin} has not been deleted!";
     end
     redirect_to(users_url);
  end
@@ -68,7 +65,7 @@ class UsersController < ApplicationController
 #verification meil sent  function (step 1 in create)
   def sent_verification_mail()
     @user= User.find(params[:id]);
-    TweetsMailer.verification(@user).deliver_now;
+    UsersMailer.verification(@user).deliver_now;
     flash[:success]="Mail to #{@user.email} has been sended!";
     redirect_to(verification_user_url(@user));
   end
@@ -80,11 +77,11 @@ class UsersController < ApplicationController
   if(params[:key])
     if(params[:key]==@user.verification_key)
       @user.verification_user.update(verification_key:"",verificated:true);
-      TweetsMailer.verificated(@user).deliver_now;
-      flash[:success]="User #{@user.name} has been verificated!";
+      UsersMailer.verificated(@user).deliver_now;
+      flash[:success]="User #{@user.login} has been verificated!";
       redirect_to(user_path(@user));
     else
-      flash[:error]="User #{@user.name} has not been verificated!";
+      flash[:error]="User #{@user.login} has not been verificated!";
       render('verification');
     end
   end
@@ -116,7 +113,7 @@ class UsersController < ApplicationController
       #Make key for reset
       user.make_reset_password(host:host);
       #user.reset_password= ResetPassword.create(user_id: user.id, host:host);
-      TweetsMailer.recived_email_for_passrst(user).deliver_now;
+      UsersMailer.recived_email_for_passrst(user).deliver_now;
       redirect_to(root_url);
     else
       flash[:error]="User with e-mail: #{params[:email]} not found!";
@@ -129,7 +126,7 @@ class UsersController < ApplicationController
    if  (@user.update_attributes(user_params()))
       flash[:succes] = "Updating your profile is success"
       redirect_to(root_url);
-      TweetsMailer.send_new_pass_notification(@user).deliver_now;
+      UsersMailer.send_new_pass_notification(@user).deliver_now;
       @user.reset_password.destroy;
     else
       @title="Reset Password";
@@ -140,7 +137,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:name,:email,:password, :password_confirmation);
+    params.require(:user).permit(:login,:email,:password, :password_confirmation);
   end
 
   #before-filter

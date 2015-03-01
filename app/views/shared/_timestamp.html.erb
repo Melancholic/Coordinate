@@ -1,0 +1,18 @@
+<%#
+  render with 3 args:
+   style - params
+   text - thext
+   object - object 
+%>
+<span class="timestamp">
+  <%time=object.created_at%>
+  <%style||={}%>
+  <%if (style[:format]==:full_info)%>
+    <%=  text+ " "+ time_ago_in_words(time) %> ago.
+  <%elsif (style[:text].nil? || style[:text]=:none)%>
+    <%= time.strftime("%F") %>
+  <%end%>
+    
+
+</span>
+

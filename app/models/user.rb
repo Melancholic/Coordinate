@@ -1,6 +1,6 @@
 VALID_EMAIL_REGEX =  /\A[\w+\-.0-9]+@([a-z\d\-]+(\.[a-z\d]+)*\.[a-z]+)+\z/i
 VALID_login_REGEX = /\A[a-z \d \- \_]*[a-z \- \_]+[a-z \d \- \_]*\z/i
-TYME_LIM_PASSRST_KEY =30;
+TIME_LIM_PASSRST_KEY =30;
 class User < ActiveRecord::Base
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
@@ -22,14 +22,15 @@ class User < ActiveRecord::Base
   before_create :create_remember_token;
   
   has_secure_password();
-   validates :password, :presence => true,
-                       :confirmation => true,
-                       :length => {:within => 6..40},
-                       :on => :create
-   validates :password, :confirmation => true,
-                       :length => {:within => 6..40},
-                       :allow_blank => true,
-                       :on => :update
+  validates :password, length: { minimum: 6}, allow_nil: true
+  # validates :password, :presence => true,
+  #                     :confirmation => true,
+  #                     :length => {:within => 6..40},
+  #                     :on => :create
+  # validates :password, :confirmation => true,
+  #                     :length => {:within => 6..40},
+  #                     :allow_blank => true,
+  #                     :on => :update
   
  
   # pagination

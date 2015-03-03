@@ -49,7 +49,7 @@ class UsersController < ApplicationController
    #Has been added in app/helpers/sessions_helper.rb:current_user?(user)
    #@user= User.find(params[:id]);
    if  (@user.update_attributes(user_params()))
-      flash[:succes] = "Updating your profile is success"
+      flash[:success] = "Updating your profile is success"
       redirect_to(@user);
     else
         render 'edit';
@@ -98,7 +98,7 @@ class UsersController < ApplicationController
     else
       @request_email=false;
       user=ResetPassword.get_user(params[:key])
-      if(TimeDifference.between(Time.now, user.reset_password.updated_at).in_minutes <=TYME_LIM_PASSRST_KEY)
+      if(TimeDifference.between(Time.now, user.reset_password.updated_at).in_minutes <=TIME_LIM_PASSRST_KEY)
         @user=user;
         #@key=params[:key];
       else

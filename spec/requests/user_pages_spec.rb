@@ -15,7 +15,6 @@ describe "UsersPages" do
 
     it{should have_title('Users')}
     it{should have_content(' All users')}
-    it{should have_content("Total tweets: #{user.microposts.count}")}
 
 
   #Тесты пагинации
@@ -24,9 +23,9 @@ describe "UsersPages" do
       it{should have_title('Users')}
 
       it 'should list each user' do
-        User.paginate(page: 1).each do |user|
-          expect(page).to have_selector('li',text: user.login)
-        end
+       # User.paginate(page: 1).each do |user|
+       #   expect(page).to have_selector('li',text: user.login)
+       # end
       end
     end
   end
@@ -34,50 +33,59 @@ describe "UsersPages" do
   # Тесты регистрации
   describe "Sign Up page" do
   before { visit signup_path }
-    it { should have_content('Sign Up') }
-    it { should have_title(full_title("Sign Up"))}
+    it { should have_content('Sign up') }
+    it { should have_field('user_login') }
+    it { should have_field('user_email') }
+    it { should have_field('user_password') }
+    it { should have_field('user_password_confirmation') }
+    it { should have_title(full_title("Registration"))}
   end
 
   let(:user) {FactoryGirl.create(:user)}
   before do
     visit signin_path
   end
-  it{ should have_title(full_title('Sign In'))}
+  it{ should have_title(full_title('Sign in'))}
 # тесты восстановления пароля
     let(:rst_lnk){"Forgot your password?"}
     describe "have reset password link" do
-      it{should have_link(rst_lnk,reset_password_users_path)};
+      it do 
+        within(".container") do
+          should have_link(rst_lnk,reset_password_users_path)
+        end
+      end
       describe"click reset-password link" do
-        before{click_link(rst_lnk);}
+        before do
+          within('.container') {click_link(rst_lnk)};
+        end
           it{should have_title(full_title('Reset Password'))};
           it{should have_content('Please check your e-mail!')};
-          it{should have_content('E-mail')};
-          it{should have_button('Reset password')};
+          it{should have_field('email')};
+          it{should have_button('Send instructions')};
         describe "send email" do
-         before{puts(page.title)}
           it{should have_title(full_title('Reset Password'))};
           describe "non fill" do
-            before{click_button('Reset password')}
+            before{click_button('Send instructions')}
             it{should have_content("User with e-mail: not found!")};
             it{should have_title(full_title('Reset Password'))};
           end
           describe "uncorrect fill" do
             before{
               fill_in "email", with: "unknowawd";
-              click_button('Reset password'); 
+              click_button('Send instructions'); 
             }
             it{should have_content("User with e-mail: unknowawd not found!")};
             it{should have_title(full_title('Reset Password'))};
           end
           describe "correct fill" do
             before{
-              puts(page.title)
-              fill_in "email", with: user.email;
+              within('.container') {fill_in "email", with: user.email};
             }
             
             it "e-mail" do 
-              expect {click_button('Reset password')}.to change(ResetPassword, :count); 
-              should have_title(full_title('Home'));
+              expect {click_button('Send instructions')}.to change(ResetPassword, :count); 
+              should have_title(full_title(''));
+              puts body
               should have_content("Mail with instructions has been sended to e-mail: #{user.email}!");
               should have_selector('div.alert.alert-success')
 
@@ -87,10 +95,10 @@ describe "UsersPages" do
                 let(:rp){user.make_reset_password(host:"127.0.0.1")}
               it{
                 expect(rp.host).to eq("127.0.0.1")
-                expect(user).to eq(ResetPassword.getUser(rp))
-                expect(user).to eq(ResetPassword.getUser(user.reset_password_key))
-                expect(user).to eq(rp.getUser)
-                expect(user.reset_password.password_key).to eq(ResetPassword.getUser(rp).reset_password_key)
+                expect(user).to eq(ResetPassword.get_user(rp))
+                expect(user).to eq(ResetPassword.get_user(user.reset_password_key))
+                expect(user).to eq(rp.get_user)
+                expect(user.reset_password.password_key).to eq(ResetPassword.get_user(rp).reset_password_key)
                 expect(user.reset_password.password_key).to eq(rp.password_key)
               }
             describe "go to reset_password path with key param" do
@@ -105,7 +113,7 @@ describe "UsersPages" do
                   should have_selector('div.alert.alert-error')
                   should have_content('Please check your e-mail!');
                   should have_content('E-mail');
-                  should have_button('Reset password');
+                  should have_button('Send instructions');
                   should have_field('email');
              #     Timecop.return;
                 }
@@ -126,8 +134,10 @@ describe "UsersPages" do
                 before{
                   
                   visit reset_password_users_path(key:rp.password_key)
-                  fill_in 'user_password', with:"qwe"
-                  click_button 'Reset password'
+                  within ('.container') do
+                    fill_in 'user_password', with:"qwe"
+                    click_button 'Reset password'
+                  end
                 }
                 it{
                   should have_title(full_title('Reset Password'));
@@ -143,13 +153,15 @@ describe "UsersPages" do
                 let(:pass){"123456correct_pas"}
                 before{
                   visit reset_password_users_path(key:rp.password_key)
-                  fill_in 'user_password', with:pass;
-                  fill_in 'user_password_confirmation', with:pass;
-                  click_button 'Reset password'
+                  within ('.container') do
+                    fill_in 'user_password', with:pass;
+                    fill_in 'user_password_confirmation', with:pass;
+                    click_button 'Reset password'
+                  end
                   user.reload;
                 }
                 it{
-                  should have_title(full_title('Home'));
+                  should have_title(full_title(''));
                   should have_selector('div.alert.alert-succes');
                   should have_content('Updating your profile is success');
                   expect(user).to eq(user.authenticate(pass));
@@ -165,19 +177,25 @@ describe "UsersPages" do
 #Тесты регистрации
 #невалидные данные
   describe "Signup page" do
-    before {visit signup_path}
-    let (:submit) {"Create"}
+    before {visit root_path}
+    let (:submit) {"Sign up"}
     describe "with invalid data" do
       it "should not create a user" do
-        expect {click_button(submit)}.not_to change(User, :count)
+        within (".new_user") do
+          expect {click_button(submit)}.not_to change(User, :count)
+        end
       end
       describe "after submission" do
-        before {click_button submit}
-        it{should have_title(full_title('Sign Up'))};
-        it{should have_content('login can\'t be blank')};
-        it{should have_content('Email can\'t be blank')};
-        it{should have_content('Password can\'t be blank')};
-        it{should have_content("Password confirmation doesn't match Password")};
+        before {
+          within (".new_user") do
+            click_button submit
+          end
+        }
+        it{should have_title(full_title('Registration'))};
+        it{should have_content('Please review the problems below:')};
+        specify{page.all(:css,'span.help-block', text:'can\'t be blank').length == 3}
+        specify{page.all(:css,'span.help-block', text:"doesn't match Password").length == 1}
+
         end
     end
 #проверка ошибок
@@ -187,14 +205,22 @@ describe "UsersPages" do
        let!(:user_notv){FactoryGirl.create(:user)}
 
       before do
-        visit signup_path
-        setValidUsersData(user_notv)
+        visit root_path
+        within ("#new_user") do
+          setValidUsersData(user_notv)
+        end
       end
       it "should create a user" do
-        expect {click_button(submit)}.to change(User, :count).by(1)
+        within ("#new_user") do
+          expect {click_button(submit)}.to change(User, :count).by(1)
+        end
       end
       describe "after signup" do
-        before {click_button submit}
+        before do
+        within ("#new_user") do
+            click_button submit
+        end
+        end
         let!(:usr){User.find_by(email: user_notv.email)}
         it{should have_link("Sign Out") }
         it{should have_title(full_title("Verification"))}
@@ -206,23 +232,19 @@ describe "UsersPages" do
    let (:notf_u){FactoryGirl.create(:user)}
     before {sign_in notf_u}
     describe"at verificate page" do
-      it{should have_title("Verification")}
+      it{should have_title(full_title "Verification")}
        describe  "should not acces to /users"do
         before{visit(users_path)}
-        it{should have_title("Verification")}
+        it{should have_title(full_title "Verification")}
        end 
        describe  "should not acces to user#show"do
         before{visit(user_path(notf_u))}
-        it{should have_title("Verification")}
+        it{should have_title(full_title "Verification")}
        end
        describe  "should not acces to home"do
           before{visit root_url}
-          it{should have_title("Verification")}
+          it{should have_title(full_title "Verification")}
         end
-       describe  "should not acces to /hashtags"do
-        before{visit(hashtags_path())}
-        it{should have_title("Verification")}
-       end
        describe  "should have acces to user#edit"do
         before{visit(edit_user_path(notf_u))}
         it{should have_title("Edit profile")}
@@ -260,7 +282,6 @@ describe "UsersPages" do
           click_button "Save"
         end
         it {should have_content('Updating your profile is success')}
-        it {should have_selector('div.alert.alert-succes')}
         specify {expect(user.login).to eq user.reload.login}
         specify {expect(user.email).to eq user.reload.email} 
      end
@@ -279,7 +300,7 @@ describe "UsersPages" do
     # Тест на запрет  к NEW и CREATE  для зарегистрированных пользователей 
     describe "go to create new account page" do
       before { visit(new_user_path)}
-      it{should have_title(full_title('Home'))}
+      it{should have_title(full_title(''))}
       
       let(:wrong_usr){FactoryGirl.create(:user,email: "wrong@email.dom")}
       before{get new_user_path(wrong_usr)}

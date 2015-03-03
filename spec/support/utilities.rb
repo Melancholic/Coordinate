@@ -53,10 +53,10 @@ def setValidUsersData(user)
   user.email="example#{Random.rand(1000)}@mail.com";
   user.password="123456";
   user.password_confirmation=user.password;
-  fill_in "Login", with: user.login;
-  fill_in "Email", with: user.email;
-  fill_in "Password", with: user.password;
-  fill_in "Confirmation", with: user.password_confirmation;
+    fill_in "Login", with: user.login;
+    fill_in "Email", with: user.email;
+    fill_in "Password", with: user.password;
+    fill_in "Confirmation", with: user.password_confirmation;
   return user;
 end
 def setInvalidUsersData(user)
@@ -64,10 +64,10 @@ def setInvalidUsersData(user)
   user.email="uncorrectemail";
   user.password="123";
   user.password_confirmation=user.password;
-  fill_in "Login", with: user.login;
-  fill_in "Email", with: user.email;
-  fill_in "Password", with: user.password;
-  fill_in "Confirmation", with: user.password_confirmation;
+    fill_in "Login", with: user.login;
+    fill_in "Email", with: user.email;
+    fill_in "Password", with: user.password;
+    fill_in "Confirmation", with: user.password_confirmation;
   return user;
   end
 

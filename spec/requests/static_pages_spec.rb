@@ -31,8 +31,6 @@ describe "StaticPages" do
     should have_link('Home',root_path);
     click_link("Home");   
     expect(page).to have_title(full_title(''));
-    click_link("Sign Up");
-    expect(page).to have_title(full_title('Registration'));
     click_link("Contacts");
     expect(page).to have_title(full_title('Contacts'));
 

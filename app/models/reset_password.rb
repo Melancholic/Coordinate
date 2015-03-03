@@ -1,6 +1,6 @@
 class ResetPassword < ActiveRecord::Base
   before_create{
-    self.password_key=SecureRandom.urlsafe_base64;
+    self.password_key=SecureRandom.urlsafe_base64(60);
   }
 
   def get_user()

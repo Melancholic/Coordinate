@@ -43,6 +43,7 @@ describe "UsersPages" do
 
   let(:user) {FactoryGirl.create(:user)}
   before do
+   # Capybara.default_driver = :selenium
     visit signin_path
   end
   it{ should have_title(full_title('Sign in'))}
@@ -63,9 +64,12 @@ describe "UsersPages" do
           it{should have_field('email')};
           it{should have_button('Send instructions')};
         describe "send email" do
+        
           it{should have_title(full_title('Reset Password'))};
           describe "non fill" do
-            before{click_button('Send instructions')}
+            before do
+              click_button('Send instructions')
+            end
             it{should have_content("User with e-mail: not found!")};
             it{should have_title(full_title('Reset Password'))};
           end
@@ -205,7 +209,7 @@ describe "UsersPages" do
        let!(:user_notv){FactoryGirl.create(:user)}
 
       before do
-        visit root_path
+        visit signin_path
         within ("#new_user") do
           setValidUsersData(user_notv)
         end

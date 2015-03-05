@@ -1,8 +1,8 @@
 class StaticPagesController < ApplicationController
   def home
-    @location= Location.new(address: 'Stupino');
-    @location.geocode;
-    @marks=[];
+  #  @location= Location.new(address: 'Stupino');
+  #  @location.geocode;
+  #  @marks=[];
   end
 
   def about

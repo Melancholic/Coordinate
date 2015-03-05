@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+
+#admin
+gem 'activeadmin', github: 'activeadmin'
 #for reset passwords
 gem 'time_difference' 
 
@@ -19,7 +22,8 @@ gem 'autoprefixer-rails'
 gem 'sass-rails'
 #gem "jqcloud-rails"
 #Use pagination
-gem "will_paginate"
+gem 'kaminari'
+#gem "will_paginate"
 gem "less-rails"
 gem 'bootstrap-will_paginate' 
 # Use sqlite3 as the database for Active Record

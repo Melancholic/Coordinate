@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+#gem "cancan"
+gem 'cancancan', '~> 1.10'
 #admin
 gem 'activeadmin', github: 'activeadmin'
 #for reset passwords

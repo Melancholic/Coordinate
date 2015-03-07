@@ -138,11 +138,12 @@ class UsersController < ApplicationController
     end
   end
 
-private
-
+protected
   def user_params
     params.require(:user).permit(:login,:email,:password, :password_confirmation);
   end
+private
+
 
   #before-filter
   

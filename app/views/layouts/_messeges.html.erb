@@ -1,4 +1,7 @@
 <!-- Hello new user! BEGIN -->
+<%flash.each do |key, val| %>
+  <%=render 'shared/modals/modal', type:key, messege: val %>
+<%end %>
 <%if signed_in? %>
   <!--Not verificated -->
   <% if !current_user.verificated? && !current_page?(verification_user_path(current_user)) %>
@@ -7,8 +10,3 @@
 
 <%end%>
 
-<%flash.each do |key, val| %>
-  <%=render 'shared/modals/modal', type:key, messege: val %>
-<%end %>
-
-<!-- Hello new user! BEGIN -->

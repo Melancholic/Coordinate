@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
  
   # pagination
   self.per_page = 10;
- 
+  
   def self.get_regex
      return /[@][a-zA-Zа-яА-Я0-9\_]+/;
   end

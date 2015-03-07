@@ -1,9 +1,5 @@
-def authenticate_admin!
-  unless current_user.admin?
-    redirect_to signin_path
-  end
-end
 ActiveAdmin.setup do |config|
+  #config.skip_before_filter :authenticate_active_admin_user
   # == Site Title
   #
   # Set the title that is displayed on the main layout
@@ -59,7 +55,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the application controller.
-   config.authentication_method = :authenticate_admin!
+   config.authentication_method = :authenticate_admin_user!
 
   
   # == User Authorization
@@ -77,7 +73,7 @@ ActiveAdmin.setup do |config|
 
   # You can customize your CanCan Ability class name here.
   # config.cancan_ability_class = "Ability"
-
+ 
   # You can specify a method to be called on unauthorized access.
   # This is necessary in order to prevent a redirect loop which happens
   # because, by default, user gets redirected to Dashboard. If user
@@ -92,7 +88,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-   config.current_user_method = :current_user
+   config.current_user_method = :current_user  #:current_admin_user
 
 
   # == Logging Out
@@ -105,13 +101,14 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :sign_out
+  #config.logout_link_path = :sign_out
+  config.logout_link_path = false
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
   #
   # Default:
-   config.logout_link_method = :delete
+  # config.logout_link_method = :delete
 
   # == Root
   #

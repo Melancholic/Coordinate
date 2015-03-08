@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305170456) do
+ActiveRecord::Schema.define(version: 20150308154158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,25 @@ ActiveRecord::Schema.define(version: 20150305170456) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id",          null: false
+    t.string   "name"
+    t.string   "second_name"
+    t.string   "middle_name"
+    t.string   "mobile_phone"
+    t.string   "country"
+    t.string   "region"
+    t.string   "city"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
   create_table "reset_passwords", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "password_key", null: false
@@ -57,6 +76,9 @@ ActiveRecord::Schema.define(version: 20150305170456) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",           default: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "ip_address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

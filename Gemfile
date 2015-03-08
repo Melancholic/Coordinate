@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
+#images
+gem "paperclip"
+
+gem 'country_select'
+gem 'require_all'
 #gem "cancan"
 gem 'cancancan', '~> 1.10'
 #admin

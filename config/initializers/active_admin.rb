@@ -1,4 +1,5 @@
 ActiveAdmin.setup do |config|
+ config.display_name_methods = [:admin_display_name]
   #config.skip_before_filter :authenticate_active_admin_user
   # == Site Title
   #

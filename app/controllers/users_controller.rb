@@ -140,7 +140,7 @@ class UsersController < ApplicationController
 
 protected
   def user_params
-    params.require(:user).permit(:login,:email,:password, :password_confirmation);
+    params.require(:user).permit(:login,:email,:password, :password_confirmation,profile_attributes: [:id, :user_id, :name]);
   end
 private
 

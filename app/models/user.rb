@@ -2,37 +2,39 @@ VALID_EMAIL_REGEX =  /\A[\w+\-.0-9]+@([a-z\d\-]+(\.[a-z\d]+)*\.[a-z]+)+\z/i
 VALID_login_REGEX = /\A[a-z \d \- \_]*[a-z \- \_]+[a-z \d \- \_]*\z/i
 TIME_LIM_PASSRST_KEY =30;
 class User < ActiveRecord::Base
+    extend ActiveModel::Callbacks
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
+  has_one :profile, dependent: :destroy;
+  accepts_nested_attributes_for :profile,:reject_if => proc { |attributes| !attributes['img'].present? }, :allow_destroy => true, allow_destroy: true
   #Порядок
   default_scope -> {order('login ASC')}
+  
+  geocoded_by :ip_address
+
 
   validates(:login, presence: true, length:{maximum:15,minimum:3},format: {with: VALID_login_REGEX});
   validates(:email, presence: true, length:{maximum:50,minimum:3},
       format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false});
   
+  #after_initialize{
+  #  self.create_profile
+  #}
   before_save{
     self.email=email.downcase;
   }
   after_create{
     self.verificate!
-    #self.verification_user=VerificationUser.create(user_id: self.id, verificated:false);
   }
+
+  after_validation :geocode 
+
 
   before_create :create_remember_token;
   
   has_secure_password();
   validates :password, length: { minimum: 6}, allow_nil: true
-  # validates :password, :presence => true,
-  #                     :confirmation => true,
-  #                     :length => {:within => 6..40},
-  #                     :on => :create
-  # validates :password, :confirmation => true,
-  #                     :length => {:within => 6..40},
-  #                     :allow_blank => true,
-  #                     :on => :update
   
- 
   # pagination
   self.per_page = 10;
   
@@ -48,6 +50,7 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
   
+
   def verificated?()
     self.verification_user.verificated
   end
@@ -80,6 +83,42 @@ class User < ActiveRecord::Base
     else
       self.create_reset_password(args);
     end
+  end
+
+  def full_name 
+    ([self.name,self.middle_name, self.second_name].compact.delete_if{|x| x.empty?}).join(' ')
+  end
+  
+  def short_name 
+    ([self.second_name, self.name.initial, self.middle_name.initial].compact.delete_if{|x| x.empty?}).join(' ')
+  end
+  
+  def admin_display_name
+    "#{self.login} [#{self.short_name}]"
+  end
+  def name
+    (self.profile)? self.profile.name : nil
+  end
+  def name=(new_name)
+    self.profile.update_attributes(name: new_name)
+    self.name
+  end
+
+  def second_name
+    (self.profile)? self.profile.second_name : nil
+  end
+  def second_name=(new_second_name)
+    self.profile.update_attributes(second_name: new_second_name)
+    self.second_name
+  end
+  
+  def middle_name
+    (self.profile)? self.profile.middle_name : nil
+  end
+
+  def middle_name=(new_middle_name)
+    self.profile.update_attributes(middle_name: new_middle_name)
+    self.middle_name
   end
 
 private

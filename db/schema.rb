@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308154158) do
+ActiveRecord::Schema.define(version: 20150309091736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20150308154158) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
+  create_table "images", force: :cascade do |t|
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string   "address"
     t.float    "latitude"
@@ -40,7 +49,8 @@ ActiveRecord::Schema.define(version: 20150308154158) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.integer  "user_id",          null: false
+    t.integer  "user_id",      null: false
+    t.integer  "image_id"
     t.string   "name"
     t.string   "second_name"
     t.string   "middle_name"
@@ -48,12 +58,8 @@ ActiveRecord::Schema.define(version: 20150308154158) do
     t.string   "country"
     t.string   "region"
     t.string   "city"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "img_file_name"
-    t.string   "img_content_type"
-    t.integer  "img_file_size"
-    t.datetime "img_updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -76,9 +82,6 @@ ActiveRecord::Schema.define(version: 20150308154158) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",           default: false
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "ip_address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

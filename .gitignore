@@ -27,6 +27,7 @@ users.log
 *.bup
 /.idea
 /public/assets/
+/public/system/
 #/config/environment/*
 #/config/environment/production.rb
 #config/environments/production.rb

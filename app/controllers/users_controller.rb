@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :user_exist
   #for not signed users redirect to root
   before_action :signed_in_user, only:[:index,:edit,:update, :destroy,  :verification, :sent_verification_mail] # in app/helpers/session_helper.rb
   before_action :verificated_user, only:[:index, :destroy,:show]
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show()
-    @user = User.find(params[:id]); 
+    @user = User.find_by_id(params[:id]); 
   end
 
   def index()
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
 
   def edit
     #Has been added in app/helpers/sessions_helper.rb:current_user?(user)
-    #@user= User.find(params[:id]);
+   #@user= User.find(params[:id]);
   end
   
   def update
@@ -140,15 +141,27 @@ class UsersController < ApplicationController
 
 protected
   def user_params
-    params.require(:user).permit(:login,:email,:password, :password_confirmation,profile_attributes: [:id, :user_id, :name]);
+    params.require(:user).permit(:login,:email,:password, :password_confirmation,
+     profile_attributes:[:id,:name,:second_name,:middle_name,:img,:mobile_phone,:country, :city,:region, image_attributes:[:id, :img, :_destroy]]);
   end
 private
 
 
   #before-filter
-  
+  def user_exist
+    if(params[:id])
+      unless User.find_by_id(params[:id])
+        flash[:error]='Uncorrect params!';
+        logger.error("User with params[:id]=#{params[:id]} not founded!")
+        redirect_to(root_url);
+      end
+    else
+      true
+    end
+  end
+
   def correct_user
-    @user=User.find(params[:id]);
+    @user=User.find_by_id(params[:id]);
     if (!current_user?(@user))
       redirect_to(root_url);
     end

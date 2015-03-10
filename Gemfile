@@ -7,6 +7,7 @@ gem 'require_all'
 #gem "cancan"
 gem 'cancancan', '~> 1.10'
 #admin
+gem "cocoon"
 gem 'activeadmin', github: 'activeadmin'
 #for reset passwords
 gem 'time_difference' 

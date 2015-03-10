@@ -1,6 +1,6 @@
 <% @user||=current_user %>
 <big><b>
-<%= link_to gravatar_for(@user, size: 100), current_user %>
+<%= link_to avatar_for(@user, size: 100), @user %>
  <div> <%= @user.login %></div>
 </b></big>
 <span>

@@ -15,3 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+//= require cocoon
+      
+
+//$('input[type=file]').bootstrapFileInput();

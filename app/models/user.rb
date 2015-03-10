@@ -6,12 +6,11 @@ class User < ActiveRecord::Base
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
   has_one :profile, dependent: :destroy;
-  accepts_nested_attributes_for :profile,:reject_if => proc { |attributes| !attributes['img'].present? }, :allow_destroy => true, allow_destroy: true
+  accepts_nested_attributes_for :profile, update_only:true, allow_destroy: true
   #Порядок
   default_scope -> {order('login ASC')}
   
-  geocoded_by :ip_address
-
+#  geocoded_by :ip_address
 
   validates(:login, presence: true, length:{maximum:15,minimum:3},format: {with: VALID_login_REGEX});
   validates(:email, presence: true, length:{maximum:50,minimum:3},
@@ -27,7 +26,7 @@ class User < ActiveRecord::Base
     self.verificate!
   }
 
-  after_validation :geocode 
+ # after_validation :geocode 
 
 
   before_create :create_remember_token;
@@ -96,9 +95,11 @@ class User < ActiveRecord::Base
   def admin_display_name
     "#{self.login} [#{self.short_name}]"
   end
+
   def name
     (self.profile)? self.profile.name : nil
   end
+
   def name=(new_name)
     self.profile.update_attributes(name: new_name)
     self.name
@@ -119,6 +120,31 @@ class User < ActiveRecord::Base
   def middle_name=(new_middle_name)
     self.profile.update_attributes(middle_name: new_middle_name)
     self.middle_name
+  end
+
+  def avatar
+    if self.profile && self.profile.image
+      self.profile.image.img  
+    else
+      nil
+    end
+  end
+  
+  def avatar=(arg)
+    unless self.profile.image
+      self.profile.create_image(img:arg)
+    else
+      self.profile.image.update_attributes(img:arg)
+    end
+    self.profile.image
+  end
+
+  def avatar?
+    if self.profile && self.profile.image
+      !self.profile.image.img.nil?
+    else
+      nil
+    end
   end
 
 private

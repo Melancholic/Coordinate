@@ -1,24 +1,106 @@
-<% provide(:title,'Edit profile') %> 
-<div class="center hero-unit">
-  <h1>Update your profile</h1>  
-</div>
-<div class="row">
-  <aside class ="span4">
+    <% provide(:title,'Edit profile') %> 
+
+    <div class="center jumbotron">
+      <h1>Update your profile</h1>  
+    </div>
+
+    <div class="row" >
+      <%= simple_form_for(@user, class:"form-horizontal") do |f| %>
+      <!-- left column -->
+
+      <div class="col-md-3 ">
+        <div class="text-center">
+          <% if @user.avatar? %>
+          <%= avatar_for(@user, height:200, class:"avatar img-rounded ") %>
+          <% else %>
+          <section>
+          <%= link_to(avatar_for(@user,size:200, class:"avatar img-rounded"),"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
+          </section>
+          <section>
+          <%= link_to('Change Gravatar',"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar')%>
+          </section>
+          <% end %>
+          <h3>Upload your avatar</h3>
+
+          <%= f.simple_fields_for :profile,f.object.profile || f.object.build_profile do |p| %>
+            <%= p.simple_fields_for :image, p.object.image || p.object.build_image do |i| %>
+              <%=i.input :img, label: false, input_html:{class:"form-control"}%>
+              <%= i.input  :_destroy, as: :boolean, label:"Don't use native avatar", hint:"Will use an avatar from http://gravatar.com, and native avatar will be deleted." %>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+
+        <%= f.error_notification %>
+        <div class="row">
+          <div class="col-md-offset-1 col-md-5">
+            <h2>User settings</h2>
+            <div class="form-inputs">
+              <%= f.input :login, required: true, autofocus: true, span:'span6' %>
+              <%= f.input :email, required: true %>
+              <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
+              <%= f.input :password_confirmation, required: true %>
+            </div>
+          </div>
+          <div class="col-md-offset-1 col-md-5">
+            <div class="form-inputs">
+              <h2>Profile settings</h2>
+              <%= f.simple_fields_for :profile,f.object.profile || f.object.build_profile do |p| %>
+              <%= p.input :name %>  
+              <%= p.input :second_name %>  
+              <%= p.input :middle_name %>  
+              <%= p.input :mobile_phone %>
+              <% end %>
+            </div>
+          </div>    
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-offset-1 col-md-5">
+            <h2>Region settings</h2>
+            <%= f.simple_fields_for :profile,f.object.profile || f.object.build_profile do |p| %>
+            <%= p.input :country %>  
+            <%= p.input :region %>  
+            <%= p.input :city %>  
+            <% end %>
+          </div>
+           <!-- <div class="col-md-offset-1 col-md-5">
+            <h2>System settings</h2>
+             
+          </div>-->
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <hr>
+          <div class="col-md-9">
+            <div class="col-md-offset-5 col-md-3">
+              <%= f.button :submit, "Save Changes",class:"btn btn-primary" %>
+            </div>
+          <div class="col-md-offset-1  col-md-3">
+            <%= link_to "Cancel", user_url(@user), class:"btn btn-default", role:"button"  %>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <% end %>
+
+    </div>
     <section>
-      <%= link_to(gravatar_for(@user,size:150),"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
+      <% if @user.avatar? %>
+      <%= avatar_for(@user,size:150) %>
+      <% else %>
+      <%= link_to(avatar_for(@user,size:150),"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
     </section>
     <section>
-      <%= link_to('Change Gravatar',"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
+      <%= link_to('Change Gravatar',"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar')%>
+      <%end%>
     </section>
-  </aside>
-  <div class ="span8">  
-    <%= form_for(@user) do |f| %>
-      <%= render('shared/error_msgs', object: f.object) %>
-      <%=render 'fields', f: f %>
-      <br>
-      <%= f.submit("Save changes", class: "btn btn-large btn-primary") %>
-    <% end %>
   </div>
-</div>
+  <script> 
+  $('input[type=file]').bootstrapFileInput();
+  </script>
 
 

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
   has_one :profile, dependent: :destroy;
+  has_many :trackers, dependent: :destroy;
+  has_many :cars, dependent: :destroy;
   accepts_nested_attributes_for :profile, update_only:true, allow_destroy: true
   #Порядок
   default_scope -> {order('login ASC')}
@@ -21,7 +23,8 @@ class User < ActiveRecord::Base
   #}
   before_save{
     self.email=email.downcase;
-  }
+    self.auth_hash= Digest::SHA256.hexdigest(self.email+self.password) if self.password;
+  } 
   after_create{
     self.verificate!
   }
@@ -146,6 +149,15 @@ class User < ActiveRecord::Base
       nil
     end
   end
+
+  def create_car(args={})
+    if args[:user_id] || args[:user_id]!=self.id
+      args[:user_id]=self.id
+    end
+    self.cars<< Car.new(args)
+    self.save
+  end
+
 
 private
   def create_remember_token

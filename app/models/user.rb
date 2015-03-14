@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
     self.email=email.downcase;
     self.auth_hash= Digest::SHA256.hexdigest(self.email+self.password) if self.password;
   } 
+
   after_create{
     self.verificate!
   }
@@ -134,6 +135,9 @@ class User < ActiveRecord::Base
   end
   
   def avatar=(arg)
+    if(self.profile.nil?)
+      return
+    end
     unless self.profile.image
       self.profile.create_image(img:arg)
     else

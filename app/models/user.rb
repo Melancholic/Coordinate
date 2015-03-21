@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
   has_one :profile, dependent: :destroy;
-  has_many :trackers, dependent: :destroy;
-  has_many :cars, dependent: :destroy;
+  has_many :trackers, dependent: :destroy, inverse_of: :user;
+  has_many :cars, dependent: :destroy, inverse_of: :user;
   accepts_nested_attributes_for :profile, update_only:true, allow_destroy: true
   #Порядок
   default_scope -> {order('login ASC')}

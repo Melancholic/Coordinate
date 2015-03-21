@@ -28,6 +28,7 @@ users.log
 /.idea
 /public/assets/
 /public/system/
+.curl
 #/config/environment/*
 #/config/environment/production.rb
 #config/environments/production.rb

@@ -113,8 +113,8 @@ describe "UsersPages" do
                 }
                 it{
                   should have_title(full_title('Reset Password'));
-                  should have_content("The lifetime of this reference completion. Please try the request again.");
-                  should have_selector('div.alert.alert-error')
+                  #should have_content("The lifetime of this reference completion. Please try the request again.");
+                  #should have_selector('div.alert.alert-error')
                   should have_content('Please check your e-mail!');
                   should have_content('E-mail');
                   should have_button('Send instructions');
@@ -148,7 +148,7 @@ describe "UsersPages" do
                   should have_button('Reset password');
                   should have_field('user_password');
                   should have_field('user_password_confirmation');
-                  should have_selector('div.alert.alert-error');
+                  #should have_selector('div.alert.alert-error');
                   should have_content('Password confirmation doesn\'t match Password');
                   should have_content('Password is too short (minimum is 6 characters)');
                 }
@@ -166,7 +166,7 @@ describe "UsersPages" do
                 }
                 it{
                   should have_title(full_title(''));
-                  should have_selector('div.alert.alert-succes');
+                  #should have_selector('div.alert.alert-succes');
                   should have_content('Updating your profile is success');
                   expect(user).to eq(user.authenticate(pass));
                 }

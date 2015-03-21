@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
 	#skip_before_filter :verify_authenticity_token, :only => :login
-	before_filter :restrict_access, except:[:login]
+	before_filter :check_token, except:[:login]
 	protect_from_forgery unless: -> { request.format.json? }
 
 	def login
@@ -9,10 +9,11 @@ class Api::V1::SessionsController < ApplicationController
 		if(json)
 			user=User.where(auth_hash: json['logdata']).first
 			if(user && json['uuid'])
-				@tracker=user.trackers.where(uuid:json['uuid']).first
-				if(@tracker)
-					@tracker.generate_api_token
-					render status: 200, json:{success: true, data:@tracker,info:"Log in has been success"}
+				@car=user.cars.where(tracker_uuid:json['uuid']).first
+				if(@car)
+					@car.api_token.generate_api_token
+					@token=@car.api_token.token
+					render status: 200, json:{success: true, data:{api_token: @token} ,info:"Log in has been success"}
 				else
 					render :status => :bad_request,
 						:json => { :success => false,
@@ -38,10 +39,10 @@ class Api::V1::SessionsController < ApplicationController
 	end
 
 protected
-	def restrict_access
+	def check_token
   		authenticate_or_request_with_http_token do |token, options|
   			logger.info("Connected with #{token} by #{request.remote_ip}!");
-    		Tracker.exists?(api_token: token)
+    		ApiToken.exists?(token: token)
   		end
 	end
 end

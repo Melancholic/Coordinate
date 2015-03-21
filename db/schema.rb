@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314145540) do
+ActiveRecord::Schema.define(version: 20150321171000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,13 +31,26 @@ ActiveRecord::Schema.define(version: 20150314145540) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "cars", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.string   "description"
-    t.integer  "user_id",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "api_tokens", force: :cascade do |t|
+    t.integer  "car_id"
+    t.string   "token",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  add_index "api_tokens", ["car_id"], name: "index_api_tokens_on_car_id", using: :btree
+
+  create_table "cars", force: :cascade do |t|
+    t.string   "title",        null: false
+    t.string   "description"
+    t.integer  "user_id",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "tracker_uuid"
+  end
+
+  add_index "cars", ["title", "user_id"], name: "index_cars_on_title_and_user_id", unique: true, using: :btree
+  add_index "cars", ["tracker_uuid"], name: "index_cars_on_tracker_uuid", unique: true, using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "img_file_name"
@@ -81,18 +94,6 @@ ActiveRecord::Schema.define(version: 20150314145540) do
   end
 
   add_index "reset_passwords", ["user_id"], name: "index_reset_passwords_on_user_id", using: :btree
-
-  create_table "trackers", force: :cascade do |t|
-    t.string   "uuid",       default: "", null: false
-    t.string   "api_token",  default: "", null: false
-    t.string   "user_id",                 null: false
-    t.string   "car_id",                  null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  add_index "trackers", ["user_id", "car_id"], name: "index_trackers_on_user_id_and_car_id", using: :btree
-  add_index "trackers", ["uuid", "user_id", "car_id"], name: "index_trackers_on_uuid_and_user_id_and_car_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "login",                           null: false

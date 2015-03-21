@@ -37,8 +37,6 @@ it {should respond_to(:avatar=)}
 it {should respond_to(:second_name)}
 it {should respond_to(:second_name=)}
 
-it {should respond_to(:trackers)}
-
 it {should respond_to(:cars)}
 it {should respond_to(:create_car)}
 
@@ -193,8 +191,8 @@ describe "create car is valid" do
   let(:user){FactoryGirl.create(:user)}
   before {user.create_car(title:"car1")}
   it {expect(user.cars.first).to eq Car.find_by(title:"car1")}
-  it {expect(user.cars.first.tracker.user).to eq Car.find_by(title:"car1").user}
-  it {expect(user.trackers.first.user).to eq user}  
+  it {expect(ApiToken.count).to eq 1}
+  it {expect(user.cars.first.api_token.car).to eq user.cars.first}  
 end
 
 describe "delete car is valid" do
@@ -204,26 +202,22 @@ describe "delete car is valid" do
     user.create_car(title:"car2")
   end
   it {expect(user.cars.count).to eq 2 }
-  it {expect(user.trackers.count).to eq 2}
+  it {expect(ApiToken.count).to eq 2}
   subject { -> {user.cars.first.destroy} }
   it { should change(Car, :count).by(-1) }
-  it { should change(Tracker, :count).by(-1) }
-  it {expect(user.trackers.count).to eq 1}
-  it {expect(user.cars.count).to eq 1 }
+  it { should change(ApiToken, :count).by(-1) }
 end
 
-describe "delete tracker is valid" do
+describe "delete ApiToken is valid" do
   let(:user){FactoryGirl.create(:user)}
   before  do
     user.create_car(title:"car1")
     user.create_car(title:"car2")
   end
   it {expect(user.cars.count).to eq 2 }
-  it {expect(user.trackers.count).to eq 2}
-  subject { -> {user.trackers.first.destroy} }
+  subject { -> {user.cars.first.api_token.destroy} }
   it { should change(Car, :count).by(0) }
-  it { should change(Tracker, :count).by(-1) }
-  it {expect(user.trackers.count).to eq 1}
+  it { should change(ApiToken, :count).by(-1) }
   it {expect(user.cars.count).to eq 2 } 
 end
 end

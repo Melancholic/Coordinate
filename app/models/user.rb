@@ -26,13 +26,17 @@ class User < ActiveRecord::Base
   } 
 
   after_create{
+
     self.verificate!
   }
 
  # after_validation :geocode 
 
 
-  before_create :create_remember_token;
+  before_create{
+    self.build_profile
+    create_remember_token
+  }
   
   has_secure_password();
   validates :password, length: { minimum: 6}, allow_nil: true

@@ -8,6 +8,7 @@ class Api::V1::GeodataController < Api::V1::BaseController
 
 private
 	def check_data
+		#Time.at(1427021993900/1000).utc
 		logger.info(params);
 	end
 end

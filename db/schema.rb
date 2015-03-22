@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321171000) do
+ActiveRecord::Schema.define(version: 20150322084002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,11 +63,18 @@ ActiveRecord::Schema.define(version: 20150321171000) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "address"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "latitude",                        null: false
+    t.float    "longitude",                       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "state",      default: "Location", null: false
+    t.float    "accuracy"
+    t.float    "speed"
+    t.time     "time"
+    t.integer  "track_id"
   end
+
+  add_index "locations", ["track_id", "latitude", "longitude", "time"], name: "track_id_lat_long_time_index", unique: true, using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",      null: false
@@ -95,13 +102,21 @@ ActiveRecord::Schema.define(version: 20150321171000) do
 
   add_index "reset_passwords", ["user_id"], name: "index_reset_passwords_on_user_id", using: :btree
 
+  create_table "tracks", force: :cascade do |t|
+    t.time     "start_time"
+    t.time     "stop_time"
+    t.integer  "car_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "login",                           null: false
     t.string   "email",                           null: false
     t.string   "password_digest"
     t.string   "remember_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.boolean  "admin",           default: false
     t.string   "auth_hash"
   end

@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  menu priority: 2
   permit_params do 
     permitted=[:id,:login, :email, :admin, :password, :password_confirmation, :ip_address, :avatar];
     permitted.append(profile_attributes:[:name,:second_name,:middle_name,:img,:mobile_phone,:country, :city,:region, image_attributes:[:img]]);

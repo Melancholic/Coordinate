@@ -34,6 +34,25 @@ class Api::V1::SessionsController < ApplicationController
 		end
 	end
 
+	def logout
+  		authenticate_or_request_with_http_token do |token, options|
+  			logger.info("Tracker with #{token} from #{request.remote_ip} has been logout!");
+    		@token=ApiToken.find_by(token: token);
+  		end
+  		if(@token)
+			@token.generate_api_token
+			render :status => 200,
+				:json => { :success => true,
+				:info => "logout complete!" 
+				}
+		else
+			render :status => bad_request,
+				:json => { :success => false,
+				:info => "unknow API token!" 
+				}
+		end
+	end
+
 	def hello
 		render status:200, json:{status:'ok',data:'hello'}
 	end
@@ -41,7 +60,7 @@ class Api::V1::SessionsController < ApplicationController
 protected
 	def check_token
   		authenticate_or_request_with_http_token do |token, options|
-  			logger.info("Connected with #{token} by #{request.remote_ip}!");
+  			logger.info("Connected with #{token} from #{request.remote_ip}!");
     		ApiToken.exists?(token: token)
   		end
 	end

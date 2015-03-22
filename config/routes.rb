@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   namespace :api,  :defaults => {:format => :json}do
     namespace :v1 do
       post 'login' => 'sessions#login'
+      post 'logout' => 'sessions#logout'
       post 'hello' => 'sessions#hello'
     end
   end

@@ -28,6 +28,9 @@ Rails.application.routes.draw do
       post 'login' => 'sessions#login'
       post 'logout' => 'sessions#logout'
       post 'hello' => 'sessions#hello'
+      namespace :geodata do
+        post 'recive'
+      end
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,4 +1,4 @@
-class Api::V1::SessionsController < ApplicationController
+class Api::V1::SessionsController < Api::V1::BaseController
 	#skip_before_filter :verify_authenticity_token, :only => :login
 	before_filter :check_token, except:[:login]
 	protect_from_forgery unless: -> { request.format.json? }
@@ -58,10 +58,5 @@ class Api::V1::SessionsController < ApplicationController
 	end
 
 protected
-	def check_token
-  		authenticate_or_request_with_http_token do |token, options|
-  			logger.info("Connected with #{token} from #{request.remote_ip}!");
-    		ApiToken.exists?(token: token)
-  		end
-	end
+
 end

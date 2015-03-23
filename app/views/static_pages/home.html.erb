@@ -1,20 +1,75 @@
-<div class="conteiner">
-<div class="span8">
-	<div class="btn-group" role="group" aria-label="...">
-<!--	  <button type="button" class="btn btn-default">Left</button>
-	  <button type="button" class="btn btn-default">Middle</button>
-	  <button type="button" class="btn btn-default">Right</button> -->
-	</div>
-	<div style="height: 600px; position: relative;"<>
-	<%# map(container_id:'main_map',center:{ latlng: [@location.latitude,@location.longitude],zoom:15},markers:@marks)%>
-	</div>
-	<div class="btn-group"  >
-	  <button id="bfindme"type="button" class="btn btn-default" data-toggle="button" aria-pressed="false" autocomplete="off"> Find me</button>
-	 <!-- <button type="button" class="btn btn-default">Middle</button>
-	  <button type="button" class="btn btn-default">Right</button>-->
-	</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="height: 600px; position: relative; margin-bottom:10px;" id='map'>
+                        <nav id='map-ui' class='menu-ui'>
+                            <a href='#' class='active' id='findme_but'>Find Me</a>
+                        </nav>
+                    </div>
+                    <script>
+                    $("#findme_but").click(function() {
+                        map.setView(<%=@user_mark%>, 10);
+                    });
+                    L.mapbox.accessToken = 'pk.eyJ1IjoiaW9leGNlcHRpb24iLCJhIjoiMHh6bEJYayJ9.HEXx3zsabVu0J7S12XPjzA';
+                    var map = L.mapbox.map('map', 'ioexception.lhif9p6f')
+                    .setView([0, 0], 18);
+                    var polyline = L.polyline([]).addTo(map);
+                    var pointsAdded = 0;
+                    add();
+                    function add() {
+                        <%@locs||=[]%>
+                        <%@user_mark||=[]%>
+                        <%@locs.each do |loc|%>
+                        console.log(<%=loc.latitude%>+"  "+<%=loc.longitude %>)
+                        polyline.addLatLng(
+                            L.latLng(<%=loc.latitude%>,
+                                <%=loc.longitude %>));
+                        <%end %>
+                        <% unless @user_mark.empty? %>
+                        var marker = L.marker(<%=@user_mark %>, {
+                            icon: L.mapbox.marker.icon({
+                              'marker-color': '#f86767'
+                          })})
+                        marker.addTo(map);
+                        <% end %>
+                        map.setView([0, pointsAdded], 10);
+                    }
+                    </script>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+
+          <!--      <div class="container">
+                    <div class="col-sm-12">
+                        <div class="btn-group">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <%= form_tag(root_path, remote: true,method: :get) do %>
+                        <div class="input-daterange input-group" id="datepicker">  
+                            <span class="input-group-addon">from</span>
+                            <input type="text" class="input-sm form-control" name="start" />
+                            <span class="input-group-addon">to</span>
+                            <input type="text" class="input-sm form-control" name="end" />
+                        </div>
+                        <div><%= submit_tag 'Save' %></div>
+                        <% end%>
+                        <script>
+                        $('.input-daterange').datepicker({
+                            format: "dd/mm/yyyy 00:00:00",
+                            weekStart: 1,
+                            todayBtn: "linked",
+                            clearBtn: true,
+                            todayHighlight: true
+                        });
+                        </script>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-
-
-

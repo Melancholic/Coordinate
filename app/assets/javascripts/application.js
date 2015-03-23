@@ -16,6 +16,9 @@
 //= require turbolinks
 //= require_tree .
 //= require cocoon
-      
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+
+   
 
 //$('input[type=file]').bootstrapFileInput();

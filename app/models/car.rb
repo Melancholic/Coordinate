@@ -6,4 +6,8 @@ class Car < ActiveRecord::Base
 		self.tracker_uuid=SecureRandom.hex(4);
 		self.build_api_token()
 	end
+
+	def create_track(args)
+		self.tracks.create(args)
+	end
 end

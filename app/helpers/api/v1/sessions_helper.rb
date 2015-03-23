@@ -5,4 +5,10 @@ module Api::V1::SessionsHelper
     		ApiToken.exists?(token: token)
   		end
 	end
+
+	def get_token()
+  		authenticate_or_request_with_http_token do |token, options|
+    		return token
+  		end
+	end
 end

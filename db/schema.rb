@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150322084002) do
     t.string   "state",      default: "Location", null: false
     t.float    "accuracy"
     t.float    "speed"
-    t.time     "time"
+    t.datetime "time"
     t.integer  "track_id"
   end
 
@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 20150322084002) do
   add_index "reset_passwords", ["user_id"], name: "index_reset_passwords_on_user_id", using: :btree
 
   create_table "tracks", force: :cascade do |t|
-    t.time     "start_time"
-    t.time     "stop_time"
-    t.integer  "car_id"
+    t.datetime "start_time"
+    t.datetime "stop_time"
+    t.integer  "car_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

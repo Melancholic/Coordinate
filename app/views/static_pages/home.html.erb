@@ -3,44 +3,10 @@
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-12">
-                    <div style="height: 600px; position: relative; margin-bottom:10px;" id='map'>
-                        <nav id='map-ui' class='menu-ui'>
-                            <a href='#' class='active' id='findme_but'>Find Me</a>
-                        </nav>
-                    </div>
-                    <script>
-                    $("#findme_but").click(function() {
-                        map.setView(<%=@user_mark%>, 10);
-                    });
-                    L.mapbox.accessToken = 'pk.eyJ1IjoiaW9leGNlcHRpb24iLCJhIjoiMHh6bEJYayJ9.HEXx3zsabVu0J7S12XPjzA';
-                    var map = L.mapbox.map('map', 'ioexception.lhif9p6f')
-                    .setView([0, 0], 18);
-                    var polyline = L.polyline([]).addTo(map);
-                    var pointsAdded = 0;
-                    add();
-                    function add() {
-                        <%@locs||=[]%>
-                        <%@user_mark||=[]%>
-                        <%@locs.each do |loc|%>
-                        console.log(<%=loc.latitude%>+"  "+<%=loc.longitude %>)
-                        polyline.addLatLng(
-                            L.latLng(<%=loc.latitude%>,
-                                <%=loc.longitude %>));
-                        <%end %>
-                        <% unless @user_mark.empty? %>
-                        var marker = L.marker(<%=@user_mark %>, {
-                            icon: L.mapbox.marker.icon({
-                              'marker-color': '#f86767'
-                          })})
-                        marker.addTo(map);
-                        <% end %>
-                        map.setView([0, pointsAdded], 10);
-                    }
-                    </script>
+                    <%= render 'shared/maps/root_map'%>
                 </div>
-            </div>
-            <hr>
-            <div class="row">
+                <hr>
+                <div class="row">
 
           <!--      <div class="container">
                     <div class="col-sm-12">

@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
 
   def home
     gon.umark=[request.location.latitude, request.location.longitude];
-     if signed_in?
+    if signed_in?
     #   unless params.has_key(:filter)
     #     @car=current_user.primary_car
     #     @tracks=@car.tracks
@@ -10,9 +10,9 @@ class StaticPagesController < ApplicationController
     #    #   start=params[:start].to_date;
     #    #   stop=params[:end].to_date;
     #    #   @locs=Track.find(:all, :conditions => {:start_time => start..stop, :stop_time => start..stop})
-    @locs=[];
-         current_user.cars.first.tracks.each{|x| @locs.append(x.track_locations)} if signed_in?;
-    gon.locs=@locs;
+      @locs=[];
+          current_user.cars.first.tracks.each{|x| @locs.append(x.track_locations)} if signed_in?;
+      gon.locs=@locs;
     #     #@locs=current_user.cars.first.tracks[-2].track_locations if signed_in?;
     #  #end
     #   else  

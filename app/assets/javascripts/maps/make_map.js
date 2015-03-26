@@ -15,7 +15,7 @@ function getRandomColor() {
 var pointsAdded = 0;
 add();
 function add() {
-	if (gon.locs_){
+	if (gon.locs){
 		gon.locs.forEach(function(track) {
 			var counter=0;
 			var polyline = L.polyline([],{color: getRandomColor()}).addTo(map);

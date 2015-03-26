@@ -11,6 +11,21 @@ class Api::V1::GeodataController < Api::V1::BaseController
 			logger.debug("Cur track is create via tracks is nil")
 		else
 			@last_loc=track.track_locations.order(time: :desc).first
+			# if(@last_loc && params[:speed]==0)
+			# s=(@last_loc.distance_from ([params[:latitude],params[:longitude]]))*1000
+			# t=TimeDifference.between(@last_loc.time, convert_time(params[:time])).in_seconds
+			# v=(s/t)*3.6;
+			# if(t==0 || v<0.8)
+			# 	logger.debug("Location is duplicated, update pred!")
+			# 	n_coord={latitude: (@last_loc.latitude+params[:latitude])/2,
+			# 			 longitude: (@last_loc.longitude+params[:longitude])/2}
+			# 	@last_loc.update_attributes(n_coord);
+			# 	render status: 200, :json => { :success => true, :info => "Pred location updated"} 
+			# 	return;
+			# else
+			# 	params[:speed]=v;
+			# end
+			# end
 			if(@last_loc.nil?)
 
 				if(TimeDifference.between(convert_time(params[:time]),track.start_time).in_minutes > 15)
@@ -27,17 +42,10 @@ class Api::V1::GeodataController < Api::V1::BaseController
 				logger.debug("Cur track is create via tracks is ended")				
 			end
 		end
-		if(@last_loc && params[:speed]==0)
-			s=(@last_loc.distance_from ([params[:latitude],params[:longitude]]))*1000
-			t=TimeDifference.between(@last_loc.time, convert_time(params[:time])).in_seconds
-			params[:speed]=(s/t)*3.6 if t!=0;
-			logger.debug("s=#{s}")
-			logger.debug("t=#{t}")	
-			logger.debug("v=#{params[:speed]}")
-		end
+
 		@cur_track.create_location({longitude:params[:longitude],latitude:params[:latitude],	speed:params[:speed],accuracy:params[:accuracy], time:convert_time(params[:time])});
 		logger.debug("Location has been saved!")
-		render status: 200, :json => { :success => true, :info => "ok"} 
+		render status: 200, :json => { :success => true, :info => "New location saved"} 
 	end
 
 

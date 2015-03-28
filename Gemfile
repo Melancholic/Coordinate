@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'gon'
 gem 'bootstrap-datepicker-rails'
-#gem 'momentjs-rails'
+gem 'momentjs-rails'
 #gem 'bootstrap3-datetimepicker-rails'
 #images
 gem "paperclip"

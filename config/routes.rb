@@ -22,7 +22,11 @@ Rails.application.routes.draw do
       post :resetpass_recive_pass
      end
   end
-
+  namespace :maps,  :defaults => {:format => :json} do
+    resources :cars, only:[:index]
+    resources :tracks, only:[:index]
+    resources :locations, only:[:index] 
+  end
   namespace :api,  :defaults => {:format => :json}do
     namespace :v1 do
       post 'login' => 'sessions#login'

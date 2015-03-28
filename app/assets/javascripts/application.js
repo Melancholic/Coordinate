@@ -18,7 +18,6 @@
 //= require cocoon
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
-
-   
+//= require moment
 
 //$('input[type=file]').bootstrapFileInput();

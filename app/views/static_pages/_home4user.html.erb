@@ -1,0 +1,90 @@
+<div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <%= render 'shared/maps/root_map'%>
+                </div>
+                <hr>
+                <div class="row">
+
+                <div class="container">
+                    <div class="col-sm-12">
+                        <div class="btn-group">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <form role="form">
+                        <div class="row">
+                            <div class="col-md-offset-1 col-sm-4 ">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="car_sel">Select car:</label>
+                                        <select class="form-control" id="car_sel">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="car_sel">Date pick:</label>
+                                        <select class="form-control" id="#">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-1 col-sm-4">
+                                <div class="form-group">
+                                    <label for="tracks_sel">Select tracks:</label>
+                                    <select multiple class="form-control" id="tracks_sel" size="6">
+                                    </select>
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+                    <script>
+                    $.getJSON( "<%=maps_cars_path%>", function( data ) {
+                        if ( data.success ) {
+                            $.each(data.cars, function(key,value) {  
+                                $('#car_sel').append($('<option>', { value : value.id }).text(value.title)); 
+                            });
+                            $('#car_sel').change();
+                        }
+                    });
+
+                    $("#car_sel").on ('change', function(){
+                        $('#tracks_sel').children().remove();
+                        $.getJSON( "<%=maps_tracks_path%>", {car : $("#car_sel").val()} , function( data ) {
+                            if ( data.success ) {
+                                var date=null;
+                                $.each(data.tracks, function(key,value) { 
+                                    if(date!=convert_date(value.start_time)){
+                                    $('#tracks_sel').append($('<option style=""disabled>').text("---"+convert_date(value.start_time)+"---")); 
+                                    date=convert_date(value.start_time);
+                                    }
+                                    $('#tracks_sel').append($('<option>', { value : value.id }).text(convert_datetime(value.start_time)+" - "+convert_datetime(value.stop_time))); 
+                                });
+                                $('#tracks_sel option:eq(1)').attr("selected", "selected");
+                                $('#tracks_sel option:eq(1)').change();
+                            }
+                        });
+                    });
+
+                    $("#tracks_sel").on ('change', function(){
+                        var tracks_array = []; 
+                        $('#tracks_sel :selected').each(function(i, selected){ 
+                          tracks_array[i] = $(selected).val(); 
+                      });
+                        console.log(JSON.stringify(tracks_array));
+                        $.getJSON( "<%=maps_locations_path%>", {tracks : $("#tracks_sel").val()} , function( data ) {
+                            if ( data.success ) {
+                                add_locs_to_map(data.locations)   
+                            }
+                        });
+                    });
+                    </script>
+                    
+                </div>
+            </div>
+        </div>
+    </div>

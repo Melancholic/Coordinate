@@ -31,6 +31,8 @@ function add_locs_to_map(locs) {
 					L.latLng(loc.latitude,
 						loc.longitude));
 			});
+			map.fitBounds(polyline.getBounds());
+	
 		});
 	
 

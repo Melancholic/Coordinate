@@ -59,9 +59,9 @@
                             if ( data.success ) {
                                 var date=null;
                                 $.each(data.tracks, function(key,value) { 
-                                    if(date!=value.start_time){
+                                    if(date!=convert_date(value.start_time)){
                                     $('#tracks_sel').append($('<option style=""disabled>').text("---"+convert_date(value.start_time)+"---")); 
-                                    date=value.start_time;
+                                    date=convert_date(value.start_time);
                                     }
                                     $('#tracks_sel').append($('<option>', { value : value.id }).text(convert_datetime(value.start_time)+" - "+convert_datetime(value.stop_time))); 
                                 });

@@ -43,7 +43,7 @@ class Api::V1::GeodataController < Api::V1::BaseController
 			end
 		end
 
-		@cur_track.create_location({longitude:params[:longitude],latitude:params[:latitude],	speed:params[:speed],accuracy:params[:accuracy], time:convert_time(params[:time])});
+		@cur_track.create_location({longitude:params[:longitude],latitude:params[:latitude],	speed:params[:speed]*3.6 ,accuracy:params[:accuracy], time:convert_time(params[:time])});
 		logger.debug("Location has been saved!")
 		render status: 200, :json => { :success => true, :info => "New location saved"} 
 	end

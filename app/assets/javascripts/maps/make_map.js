@@ -1,13 +1,10 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiaW9leGNlcHRpb24iLCJhIjoiMHh6bEJYayJ9.HEXx3zsabVu0J7S12XPjzA';
 var map = L.mapbox.map('map', 'ioexception.lhif9p6f').setView(gon.umark, 10);
-var marker = L.marker(gon.umark , {
-	icon: L.mapbox.marker.icon({
-		'marker-color': '#f86767'
-})})
-marker.addTo(map);
+map.locate({setView : true});
+L.control.locate({setView : true}).addTo(map);
 
 $("#findme_but").click(function() {
-	map.setView(gon.umark, 10);
+	map.locate({setView : true});
 });
 
 function getRandomColor() {
@@ -34,7 +31,6 @@ function add_locs_to_map(locs) {
 			map.fitBounds(polyline.getBounds());
 	
 		});
-	
-
-
 }
+
+

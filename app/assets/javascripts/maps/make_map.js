@@ -3,9 +3,9 @@ var map = L.mapbox.map('map', 'ioexception.lhif9p6f').setView(gon.umark, 10);
 map.locate({setView : true});
 L.control.locate({setView : true}).addTo(map);
 
-$("#findme_but").click(function() {
+/*$("#findme_but").click(function() {
 	map.locate({setView : true});
-});
+});*/
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');

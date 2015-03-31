@@ -1,0 +1,2 @@
+module Maps::CarsHelper
+end

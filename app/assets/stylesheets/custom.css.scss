@@ -12,6 +12,49 @@ $gray-lighter: #eee;
   box-sizing: border-box;
 }
 
+.menu-ui {
+  background:$gray-dark;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid $gray-darker;
+  opacity: 0.5
+  }
+  .menu-ui a {
+    font-size:13px;
+    color: #FFF;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom: 2px solid #000;
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:$lighthGray;
+      color:#FFF;
+      }
+    .menu-ui a.active {
+      font-weight: bold;
+      background: #111;
+      color: #FFF;
+      }
+      .menu-ui a.active:hover {
+        background: #FFF;
+        color: #111;
+        opacity: 0.5;
+      }
+
+
 .debug_dump{
   clear: both;
   float: left;

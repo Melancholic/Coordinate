@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
   has_one :profile, dependent: :destroy;
+  has_many :cars, dependent: :destroy, inverse_of: :user;
   accepts_nested_attributes_for :profile, update_only:true, allow_destroy: true
   #Порядок
   default_scope -> {order('login ASC')}
@@ -21,15 +22,21 @@ class User < ActiveRecord::Base
   #}
   before_save{
     self.email=email.downcase;
-  }
+    self.auth_hash= Digest::SHA256.hexdigest(self.email+self.password) if self.password;
+  } 
+
   after_create{
+
     self.verificate!
   }
 
  # after_validation :geocode 
 
 
-  before_create :create_remember_token;
+  before_create{
+    self.build_profile
+    create_remember_token
+  }
   
   has_secure_password();
   validates :password, length: { minimum: 6}, allow_nil: true
@@ -131,6 +138,9 @@ class User < ActiveRecord::Base
   end
   
   def avatar=(arg)
+    if(self.profile.nil?)
+      return
+    end
     unless self.profile.image
       self.profile.create_image(img:arg)
     else
@@ -146,6 +156,15 @@ class User < ActiveRecord::Base
       nil
     end
   end
+
+  def create_car(args={})
+    if args[:user_id] || args[:user_id]!=self.id
+      args[:user_id]=self.id
+    end
+    self.cars<< Car.new(args)
+    self.save
+  end
+
 
 private
   def create_remember_token

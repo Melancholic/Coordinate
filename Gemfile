@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
+gem 'gon'
+gem 'bootstrap-datepicker-rails'
+gem 'momentjs-rails'
+#gem 'bootstrap3-datetimepicker-rails'
 #images
 gem "paperclip"
 
@@ -39,6 +43,9 @@ group :development, :test do
     gem 'sqlite3', '1.3.8'
     gem 'pg'#, '0.15.1';
     gem 'rspec-rails'
+    gem 'guard-rspec'
+    gem 'spork-rails'
+    gem 'guard-spork'
 end
 
 group :test do

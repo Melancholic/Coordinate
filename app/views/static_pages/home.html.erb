@@ -1,20 +1,7 @@
-<div class="conteiner">
-<div class="span8">
-	<div class="btn-group" role="group" aria-label="...">
-<!--	  <button type="button" class="btn btn-default">Left</button>
-	  <button type="button" class="btn btn-default">Middle</button>
-	  <button type="button" class="btn btn-default">Right</button> -->
-	</div>
-	<div style="height: 600px; position: relative;"<>
-	<%# map(container_id:'main_map',center:{ latlng: [@location.latitude,@location.longitude],zoom:15},markers:@marks)%>
-	</div>
-	<div class="btn-group"  >
-	  <button id="bfindme"type="button" class="btn btn-default" data-toggle="button" aria-pressed="false" autocomplete="off"> Find me</button>
-	 <!-- <button type="button" class="btn btn-default">Middle</button>
-	  <button type="button" class="btn btn-default">Right</button>-->
-	</div>
+<div class="container">
+    <%if signed_in? %>
+        <%= render 'home4user' %>
+    <%else%>
+        <%= render 'home4guest' %>
+    <%end%>
 </div>
-</div>
-
-
-

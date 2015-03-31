@@ -22,6 +22,21 @@ Rails.application.routes.draw do
       post :resetpass_recive_pass
      end
   end
+  namespace :maps,  :defaults => {:format => :json} do
+    resources :cars, only:[:index]
+    resources :tracks, only:[:index]
+    resources :locations, only:[:index] 
+  end
+  namespace :api,  :defaults => {:format => :json}do
+    namespace :v1 do
+      post 'login' => 'sessions#login'
+      post 'logout' => 'sessions#logout'
+      post 'hello' => 'sessions#hello'
+      namespace :geodata do
+        post 'recive'
+      end
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

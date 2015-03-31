@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email, null:false
       t.string :password_digest
       t.string :remember_token
-      t.timestamps, null:false
+      t.timestamps null:false
       t.boolean :admin, default:false
       #Добавление уникального ключа
     end

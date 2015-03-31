@@ -14,8 +14,10 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
-//= require_tree .
+//= require_tree ./auto/
 //= require cocoon
-      
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+//= require moment
 
 //$('input[type=file]').bootstrapFileInput();

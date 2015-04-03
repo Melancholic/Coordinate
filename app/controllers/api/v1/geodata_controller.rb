@@ -10,7 +10,9 @@ class Api::V1::GeodataController < Api::V1::BaseController
 			@cur_track=@car.create_track(start_time: convert_time(params[:time]))
 			logger.debug("Cur track is create via tracks is nil")
 		else
-			@last_loc=track.track_locations.order(time: :desc).first
+			#order by time  DESC 
+			@last_loc=track.track_locations.last;
+			
 			# if(@last_loc && params[:speed]==0)
 			# s=(@last_loc.distance_from ([params[:latitude],params[:longitude]]))*1000
 			# t=TimeDifference.between(@last_loc.time, convert_time(params[:time])).in_seconds

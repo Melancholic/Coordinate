@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :cars, only:[:index]
     resources :tracks, only:[:index]
     resources :locations, only:[:index] 
+    get :location, to:'locations#show' ;
   end
   namespace :api,  :defaults => {:format => :json}do
     namespace :v1 do

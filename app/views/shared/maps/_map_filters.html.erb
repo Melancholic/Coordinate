@@ -16,7 +16,6 @@ function update_tracks(){
     var params = {car : $("#car_sel").val()};
     if(start_d && start_d!='')params['start_date']=start_d;
     if(end_d && end_d!='')params['end_date']=end_d;
-    console.log(params)
     $.getJSON( "<%=maps_tracks_path%>",  params , function( data ) {
         if ( data.success ) {
             var date=null;
@@ -62,7 +61,6 @@ $("#tracks_sel").on ('change', function(){
     $('#tracks_sel :selected').each(function(i, selected){ 
       tracks_array[i] = $(selected).val(); 
   });
-    console.log(JSON.stringify(tracks_array));
     $.getJSON( "<%=maps_locations_path%>", {tracks : $("#tracks_sel").val()} , function( data ) {
         if ( data.success ) {
             add_locs_to_map(data.locations)   

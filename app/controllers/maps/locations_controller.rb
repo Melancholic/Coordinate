@@ -16,7 +16,7 @@ class Maps::LocationsController <  Maps::JsonController
 			time: @loc.time,
 			address: (@loc.address)? @loc.address : '???',
 			dur_time: TimeDifference.between(@loc.time , @loc.track.start_time ).in_minutes,
-			distance: '???' #TODO !
+			distance: (@loc.distance)? @loc.distance.round(3) : '???' #TODO !
 		}
 		render status: 200, :json => { :success => true, location: res , :info => "ok!"}
 	end

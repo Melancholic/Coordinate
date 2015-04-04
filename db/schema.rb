@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322084002) do
+ActiveRecord::Schema.define(version: 20150404173655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150322084002) do
     t.float    "speed"
     t.datetime "time"
     t.integer  "track_id"
+    t.float    "distance"
   end
 
   add_index "locations", ["track_id", "latitude", "longitude", "time"], name: "track_id_lat_long_time_index", unique: true, using: :btree

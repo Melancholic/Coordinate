@@ -5,4 +5,8 @@ class Track < ActiveRecord::Base
 	def create_location(args)
 		self.track_locations.create(args)
 	end
+
+	def distance
+		self.track_locations.last.distance;
+	end
 end

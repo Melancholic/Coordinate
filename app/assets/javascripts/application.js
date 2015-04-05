@@ -19,5 +19,6 @@
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
 //= require moment
+//= require moment-timezone-with-data-2010-2020
 
 //$('input[type=file]').bootstrapFileInput();

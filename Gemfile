@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'gon'
-gem 'bootstrap-datepicker-rails'
 gem 'momentjs-rails'
+gem 'moment_timezone-rails'
 #gem 'bootstrap3-datetimepicker-rails'
 #images
 gem "paperclip"
@@ -24,8 +25,10 @@ gem "resque"
 #show map
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.0'
-#gem 'bootstrap-sass'
-gem "twitter-bootstrap-rails"
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
+gem 'bootstrap-datepicker-rails'
+#gem "twitter-bootstrap-rails"
 gem 'sprockets-rails'
 gem 'bcrypt-ruby'
 gem 'autoprefixer-rails'

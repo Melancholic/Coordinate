@@ -29,4 +29,6 @@ function car_init_list() {
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#car_color').colorselector();
+    $("#car_priority").slider();
+
 }

@@ -28,6 +28,7 @@ gem 'rails', '~> 4.2.0'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-slider-rails'
 gem "gretel"
 #gem "twitter-bootstrap-rails"
 gem 'sprockets-rails'

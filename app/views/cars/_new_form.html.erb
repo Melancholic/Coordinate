@@ -1,11 +1,12 @@
 <div class="col-md-offset-3 col-md-4" id="new_car_form">
 	<%@user ||=current_user %>
 	<%= simple_form_for(@car, class:"form-horizontal") do |f| %>
-	      <%= f.input(:title) %>
-	      <%= f.input :description %>
-	      <%=f.input :color,  as: :select do
-  				f.select :color, Color.select_array
-			end%>
+	    <%= f.input(:title) %>
+	    <%= f.input :description %>
+	    <%=f.input :color,  as: :select do
+  			f.select :color, Color.select_array
+		end%>
+		<%= f.input :priority%>
 
 	       <%= f.button :submit, "Save",class:"btn btn-primary" %>
 	<% end %>

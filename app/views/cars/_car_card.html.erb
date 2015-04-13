@@ -19,6 +19,8 @@
                         <dl>
                             <dt>Color:</dt>
                             <dd><%=color_to car%></dd>
+                            <dt>Priority:</dt>
+                            <dd><%=car.priority%></dd>
                             <dt>Created at:</dt>
                             <dd><%=car.created_at.in_time_zone(car.user.time_zone).strftime("%d/%m/%Y")%></dd>
                             <dt>Total tracks:</dt>
@@ -41,6 +43,10 @@
                                 <tr>
                                     <td>Color:</td>
                                     <td ><%=color_to car%></td>
+                                </tr>
+                                <tr>
+                                    <td>Priority:</td>
+                                    <td ><%=car.priority%></td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">Created at:</td>

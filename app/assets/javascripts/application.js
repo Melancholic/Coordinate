@@ -20,5 +20,7 @@
 //= require moment
 //= require moment-timezone-with-data-2010-2020
 //= require data-confirm-modal
+//= require bootstrap-slider
 //= require_tree ./auto/
+
 //$('input[type=file]').bootstrapFileInput();

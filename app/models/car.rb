@@ -6,7 +6,8 @@ class Car < ActiveRecord::Base
 	validates(:title, uniqueness: {scope: :user_id,
     message: "You already have a car with the same title" });
 	validates :color, :color_format => true
-
+	validates :priority, inclusion:{in: 0..10, message: "is not included in 0 .. 10" }
+	default_scope -> { order(:priority => :desc, :title =>:asc) }
 	before_create do 
 		self.color.upcase!
 		self.tracker_uuid=SecureRandom.hex(4);

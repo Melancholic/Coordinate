@@ -4,6 +4,7 @@ class CarsController < ApplicationController
   before_action :car_exist
   before_action :correct_car
 
+
   def show
     @car= Car.find(params[:id]);
     
@@ -71,7 +72,7 @@ end
 
 protected
   def car_params
-    params.require(:car).permit(:title, :description, :user_id);
+    params.require(:car).permit(:title, :description, :user_id, :color);
   end
 
   def car_exist

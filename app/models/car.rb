@@ -5,8 +5,10 @@ class Car < ActiveRecord::Base
 	validates(:title, presence: true, length:{maximum:15,minimum:3});
 	validates(:title, uniqueness: {scope: :user_id,
     message: "You already have a car with the same title" });
-	self.per_page= 5;
+	validates :color, :color_format => true
+
 	before_create do 
+		self.color.upcase!
 		self.tracker_uuid=SecureRandom.hex(4);
 		self.build_api_token()
 	end

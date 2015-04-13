@@ -1,20 +1,21 @@
 <% provide(:title,'User settings') %>
-<div class="row">
-<div class="center jumbotron">
-  <h1>Your settings</h1>  
+<div class="center jumbotron container">
+   <div class="col-md-12">
+    <h1>Your settings</h1>  
+  </div>
 </div> 
-</div>
+
 <div class="container">
   <div class="row">
     <%= render 'shared/settings_nav' %>
-    <div class="col-md-10" id="content">
-      <div class="row">
+    <div class="col-md-10 well" id="content">
+      <div class='row'>
         <div class="col-md-12">
         <% breadcrumb :settings, current_user %>
         <%= breadcrumbs style: :bootstrap%>
         </div>
       </div>
-      <div class="row">
+      <div class='row'>
         <%=render 'edit' %>
       </div>
     </div>
@@ -22,6 +23,6 @@
 </div>
 
 
-  <script> 
-  $('input[type=file]').bootstrapFileInput();
-  </script>
+<script> 
+$('input[type=file]').bootstrapFileInput();
+</script>

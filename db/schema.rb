@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405085113) do
+ActiveRecord::Schema.define(version: 20150413152726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,12 +41,13 @@ ActiveRecord::Schema.define(version: 20150405085113) do
   add_index "api_tokens", ["car_id"], name: "index_api_tokens_on_car_id", using: :btree
 
   create_table "cars", force: :cascade do |t|
-    t.string   "title",        null: false
+    t.string   "title",                           null: false
     t.string   "description"
-    t.integer  "user_id",      null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "user_id",                         null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "tracker_uuid"
+    t.string   "color",        default: "FF0000", null: false
   end
 
   add_index "cars", ["title", "user_id"], name: "index_cars_on_title_and_user_id", unique: true, using: :btree

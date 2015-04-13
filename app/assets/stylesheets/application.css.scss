@@ -4,16 +4,59 @@
 @import "bootstrap-sprockets";
 
 // Import cerulean variables
-@import "bootswatch/slate/variables";
+@import "bootswatch/flatly/variables";
 
 // Then bootstrap itself
 @import "bootstrap";
 
 
 // And finally bootswatch style itself
-@import "bootswatch/slate/bootswatch";
+@import "bootswatch/flatly/bootswatch";
 
+//find -name "*.css" -exec echo '@import "'$1{}'";'  \;
 
 @import "**/*";
+@import "bootstrap-datepicker3";
 
-@import "bootstrap-datepicker3"
+
+a{
+	color:rgb(44, 62, 80);
+}
+a:hover{
+	color:rgb(44, 62, 80);
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #ecf0f1;
+  background-color: rgba(44, 62, 80, 0.6);
+}
+.pagination > li > a:hover, .pagination > li > a:focus,
+.pagination > li > span:hover,
+.pagination > li > span:focus {
+  color: #fff;
+  background-color: rgba(44, 62, 80, 0.9);;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+  color: #fff;
+  background-color: rgba(30, 30, 50, 1);
+
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  color: #fff;
+  background-color: rgba(44, 62, 80, 1);
+}
+
+.text-muted {
+  color: #666666;
+}

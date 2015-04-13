@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :user_exist
   #for not signed users redirect to root
-  before_action :signed_in_user, only:[:index,:edit,:update, :destroy,  :verification, :sent_verification_mail] # in app/helpers/session_helper.rb
+  before_action :signed_in_user, only:[:show,:index,:edit,:update, :destroy,  :verification, :sent_verification_mail] # in app/helpers/session_helper.rb
   before_action :verificated_user, only:[:index, :destroy,:show]
   #For verificated user - redirect to root
   before_action :verificated_user_is_done, only: [:verification, :sent_verification_mail]
   #for signied users
-  before_action :correct_user, only:[:edit,:update,:verification]
+  before_action :correct_user, only:[:edit,:update,:verification, :show]
   #for admins
   before_action :admin_user, only: :destroy
   #for signed for NEW and CREATE
@@ -45,10 +45,11 @@ class UsersController < ApplicationController
     #Has been added in app/helpers/sessions_helper.rb:current_user?(user)
    #@user= User.find(params[:id]);
   end
+
   
   def update
    #Has been added in app/helpers/sessions_helper.rb:current_user?(user)
-   #@user= User.find(params[:id]);
+   @user= User.find(params[:id]);
    if  (@user.update_attributes(user_params()))
       flash[:success] = "Updating your profile is success"
       redirect_to(@user);
@@ -141,7 +142,7 @@ class UsersController < ApplicationController
 
 protected
   def user_params
-    params.require(:user).permit(:login,:email,:password, :password_confirmation,
+    params.require(:user).permit(:login,:email,:password, :password_confirmation, :time_zone,
      profile_attributes:[:id,:name,:second_name,:middle_name,:img,:mobile_phone,:country, :city,:region, image_attributes:[:id, :img, :_destroy]]);
   end
 private

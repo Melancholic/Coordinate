@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: e5ce49a62751a4a69c3f84058d398ce0fb78eb76
+  revision: e9eca8f8b9ff4ddaed25a734702a4131ac31f124
   specs:
     activeadmin (1.0.0.pre1)
       arbre (~> 1.0, >= 1.0.2)
@@ -15,6 +15,13 @@ GIT
       rails (>= 3.2, < 5.0)
       ransack (~> 1.3)
       sass-rails
+
+GIT
+  remote: git://github.com/ifad/data-confirm-modal.git
+  revision: ba73f2fccd4451ee2f41f2f6995bff8f7ede3459
+  specs:
+    data-confirm-modal (1.0.2)
+      railties (>= 3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -62,7 +69,7 @@ GEM
       activesupport (>= 3.2)
       request_store (~> 1.0)
       scrypt (~> 1.2)
-    autoprefixer-rails (5.1.8)
+    autoprefixer-rails (5.1.8.1)
       execjs
       json
     bazaar (0.0.2)
@@ -71,9 +78,14 @@ GEM
       bcrypt (>= 3.1.3)
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
+    bootstrap-sass (3.3.4.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     bootstrap-will_paginate (0.0.10)
       will_paginate
-    bourbon (4.2.1)
+    bootswatch-rails (3.2.4)
+      railties (>= 3.1)
+    bourbon (4.2.2)
       sass (~> 3.4)
       thor
     builder (3.2.2)
@@ -86,7 +98,7 @@ GEM
       xpath (~> 2.0)
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    childprocess (0.5.5)
+    childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -97,10 +109,10 @@ GEM
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.9.1.1)
     commonjs (0.2.7)
     countries (0.11.3)
       currencies (~> 0.4.2)
@@ -111,7 +123,7 @@ GEM
     currencies (0.4.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    execjs (2.4.0)
+    execjs (2.5.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -128,13 +140,15 @@ GEM
       actionpack (>= 3.2.13)
     formtastic_i18n (0.2.0)
     geocoder (1.2.8)
-    globalid (0.3.3)
+    globalid (0.3.5)
       activesupport (>= 4.1.0)
     gon (5.2.3)
       actionpack (>= 2.3.0)
       json
       multi_json
       request_store (>= 1.0.5)
+    gretel (3.0.8)
+      rails (>= 3.2.0)
     guard (2.12.5)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -157,7 +171,6 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
     i18n_data (0.6.3)
@@ -166,7 +179,7 @@ GEM
       has_scope (~> 0.6.0.rc)
       railties (>= 3.2, < 5)
       responders
-    jbuilder (2.2.12)
+    jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)
@@ -198,6 +211,8 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
+    moment_timezone-rails (0.2.1)
+      momentjs-rails (~> 2.7)
     momentjs-rails (2.9.0)
       railties (>= 3.1)
     mono_logger (1.1.0)
@@ -214,7 +229,7 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.1)
-    polyamorous (1.1.0)
+    polyamorous (1.2.0)
       activerecord (>= 3.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -255,19 +270,19 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    ransack (1.6.5)
+    ransack (1.6.6)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       i18n
-      polyamorous (~> 1.1)
+      polyamorous (~> 1.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.2.0)
       json (~> 1.4)
     redis (3.2.1)
-    redis-namespace (1.5.1)
+    redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     request_store (1.1.0)
@@ -284,9 +299,9 @@ GEM
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.2)
+    rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.0)
+    rspec-expectations (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-mocks (3.2.1)
@@ -303,7 +318,7 @@ GEM
     rspec-support (3.2.2)
     rubyzip (1.1.7)
     sass (3.4.13)
-    sass-rails (5.0.1)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -335,17 +350,14 @@ GEM
     spork-rails (4.0.0)
       rails (>= 3.0.0, < 5)
       spork (>= 1.0rc0)
-    sprockets (2.12.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
+    sprockets (3.0.0)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.8)
-    therubyracer (0.12.1)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
@@ -358,11 +370,6 @@ GEM
       hitimes
     turbolinks (2.5.3)
       coffee-rails
-    twitter-bootstrap-rails (3.2.0)
-      actionpack (~> 4.1)
-      execjs (~> 2.2)
-      rails (~> 4.1)
-      railties (~> 4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -386,16 +393,20 @@ DEPENDENCIES
   bazaar (~> 0.0.2)
   bcrypt-ruby
   bootstrap-datepicker-rails
+  bootstrap-sass
   bootstrap-will_paginate
+  bootswatch-rails
   cancancan (~> 1.10)
   capybara
   cocoon
   coffee-rails
   country_select
+  data-confirm-modal!
   factory_girl_rails
   faker
   geocoder
   gon
+  gretel
   guard-rspec
   guard-spork
   jbuilder
@@ -403,6 +414,7 @@ DEPENDENCIES
   kaminari
   less-rails
   minitest
+  moment_timezone-rails
   momentjs-rails
   paperclip
   pg
@@ -422,5 +434,4 @@ DEPENDENCIES
   time_difference
   timecop
   turbolinks
-  twitter-bootstrap-rails
   uglifier

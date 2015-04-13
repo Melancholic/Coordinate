@@ -14,12 +14,11 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
-//= require_tree ./auto/
 //= require cocoon
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
 //= require moment
 //= require moment-timezone-with-data-2010-2020
 //= require data-confirm-modal
-
+//= require_tree ./auto/
 //$('input[type=file]').bootstrapFileInput();

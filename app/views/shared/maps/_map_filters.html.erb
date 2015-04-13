@@ -24,7 +24,7 @@ function update_tracks(){
                     $('#tracks_sel').append($('<option style=""disabled>').text("---"+convert_date(value.start_time)+"---")); 
                     date=convert_date(value.start_time);
                 }
-                $('#tracks_sel').append($('<option>', { value : value.id }).text(convert_datetime(value.start_time)+" - "+convert_datetime(value.stop_time))); 
+                $('#tracks_sel').append($('<option>', { value : value.id }).text(convert_datetime(value.start_time, gon.timezone)+" - "+convert_datetime(value.stop_time, gon.timezone))); 
             });
             $('#tracks_sel option:eq(1)').attr("selected", "selected");
             $('#tracks_sel option:eq(1)').change();

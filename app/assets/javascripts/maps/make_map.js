@@ -1,5 +1,5 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoiaW9leGNlcHRpb24iLCJhIjoiMHh6bEJYayJ9.HEXx3zsabVu0J7S12XPjzA';
-var map = L.mapbox.map('map', 'ioexception.lhif9p6f').setView(gon.umark, 10);
+var map = L.mapbox.map('map', 'ioexception.lhif9p6f');
 map.locate({setView : true});
 L.control.locate({setView : true}).addTo(map);
 

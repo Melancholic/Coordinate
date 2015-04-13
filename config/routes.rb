@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   match '/signin', to: 'sessions#new', via:'get';
   match '/signout', to:'sessions#destroy', via:'delete';
   resources :users do
+    
      #add user/id/following and user/id/followers
     member do
       get :verification
@@ -20,6 +21,14 @@ Rails.application.routes.draw do
       get :reset_password
       post :recive_email_for_reset_pass
       post :resetpass_recive_pass
+     end
+  end
+  resources :cars do
+    member do
+    end
+     #add user/otherpages (without id!!!)
+     collection do
+      get 'edit' => 'cars#edit_collection'
      end
   end
   namespace :maps,  :defaults => {:format => :json} do

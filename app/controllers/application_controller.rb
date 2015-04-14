@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
       redirect_to root_path 
     end
   end
- 
   def current_admin_user
    #signed_in?
     return nil if signed_in? && !current_user.admin?

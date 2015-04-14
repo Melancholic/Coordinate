@@ -1,7 +1,7 @@
-<% provide(:title,'User settings') %>
+<% provide(:title,'New car') %>
 <div class="center jumbotron container">
    <div class="col-md-12">
-    <h1>Your settings</h1>  
+    <h1>Add new car</h1>  
   </div>
 </div> 
 
@@ -11,12 +11,12 @@
     <div class="col-md-10 well" id="content">
       <div class='row'>
         <div class="col-md-12">
-        <% breadcrumb :settings, current_user %>
-        <%= breadcrumbs style: :bootstrap%>
+          <% breadcrumb :new_car, current_user %>
+          <%= breadcrumbs style: :bootstrap%>
         </div>
       </div>
       <div class='row'>
-        <%=render 'edit' %>
+        <%=render 'new_form' %>
       </div>
     </div>
   </div>

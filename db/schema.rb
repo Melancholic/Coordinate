@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404173655) do
+ActiveRecord::Schema.define(version: 20150414150939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,12 +41,15 @@ ActiveRecord::Schema.define(version: 20150404173655) do
   add_index "api_tokens", ["car_id"], name: "index_api_tokens_on_car_id", using: :btree
 
   create_table "cars", force: :cascade do |t|
-    t.string   "title",        null: false
+    t.string   "title",                                     null: false
     t.string   "description"
-    t.integer  "user_id",      null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "user_id",                                   null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "tracker_uuid"
+    t.string   "color",                  default: "FF0000", null: false
+    t.integer  "priority",     limit: 2, default: 5,        null: false
+    t.integer  "image_id"
   end
 
   add_index "cars", ["title", "user_id"], name: "index_cars_on_title_and_user_id", unique: true, using: :btree
@@ -112,14 +115,15 @@ ActiveRecord::Schema.define(version: 20150404173655) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "login",                           null: false
-    t.string   "email",                           null: false
+    t.string   "login",                                       null: false
+    t.string   "email",                                       null: false
     t.string   "password_digest"
     t.string   "remember_token"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "admin",           default: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "admin",                       default: false
     t.string   "auth_hash"
+    t.string   "time_zone",       limit: 255, default: "UTC"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

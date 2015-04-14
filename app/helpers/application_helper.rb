@@ -10,4 +10,6 @@ module ApplicationHelper
       "#{page_title} | #{app_name}"
     end
   end
+
+  
 end

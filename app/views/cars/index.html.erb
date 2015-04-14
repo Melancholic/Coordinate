@@ -1,0 +1,32 @@
+<% provide(:title,'Cars settings') %>
+<div class="row">
+  <div class="center jumbotron container">
+   <div class="col-md-12">
+    <h1>Your cars</h1>  
+  </div>
+</div> 
+
+<div class="container">
+  <div class="row">
+    <%= render 'shared/settings_nav' %>
+    <div class="col-md-10 well bs-content" id="content">
+      <div class='row'>
+       <div class="col-md-12">
+        <% breadcrumb :cars, current_user %>
+        <%= breadcrumbs style: :bootstrap%>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="col-md-12" id="content">
+        <%=render 'cars/cars' %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+<script> 
+$('input[type=file]').bootstrapFileInput();
+</script>

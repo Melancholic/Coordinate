@@ -4,6 +4,7 @@ class TrackLocation < Location
 	validates :time, presence: true 
 	validates :distance, presence: true 
 	belongs_to :track
+	default_scope -> { order(time: :asc, id: :asc) }
 
 	before_validation do
 		pred=self.track.track_locations.where('time < ?', self.time).last;

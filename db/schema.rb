@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413180308) do
+ActiveRecord::Schema.define(version: 20150414150939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150413180308) do
     t.string   "tracker_uuid"
     t.string   "color",                  default: "FF0000", null: false
     t.integer  "priority",     limit: 2, default: 5,        null: false
+    t.integer  "image_id"
   end
 
   add_index "cars", ["title", "user_id"], name: "index_cars_on_title_and_user_id", unique: true, using: :btree

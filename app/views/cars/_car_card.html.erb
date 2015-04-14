@@ -8,12 +8,22 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
-                        <%=image_tag("icons/auto-icon.png", size: "100x100", alt: "#{car.title}", class: "img-circle car-small-image" )  %>
-                    </div>
-                    <div class="col-xs-2 col-sm-2 hidden-md hidden-lg">
-                        <%=image_tag("icons/auto-icon.png", size: "100x100", alt: "#{car.title}", class: "img-circle car-small-image" )  %>
-                    </div>
+                    <% if car.image %>
+                        <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                            <%=image_tag(car.img.url, size: "100x100", alt: "#{car.title}", class: "img-rounded car-small-image" )  %>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 hidden-md hidden-lg">
+                            <%=image_tag(car.img.url, size: "100x100", alt: "#{car.title}", class: "img-rounded car-small-image" )  %>
+                        </div>
+                    <%else%>
+                        <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                            <%=image_tag("icons/auto-icon.png", size: "100x100", alt: "#{car.title}", class: "img-rounded car-small-image" )  %>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 hidden-md hidden-lg">
+                            <%=image_tag("icons/auto-icon.png", size: "100x100", alt: "#{car.title}", class: "img-rounded car-small-image" )  %>
+                        </div>
+                    <%end%>
+
                     <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
                         <strong><%=car.title%></strong><br>
                         <dl>

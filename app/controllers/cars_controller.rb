@@ -72,7 +72,7 @@ end
 
 protected
   def car_params
-    params.require(:car).permit(:title, :description, :user_id, :color, :priority);
+    params.require(:car).permit(:title, :description, :user_id, :color, :priority, image_attributes:[:id, :img, :_destroy]);
   end
 
   def car_exist

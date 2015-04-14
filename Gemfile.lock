@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: e9eca8f8b9ff4ddaed25a734702a4131ac31f124
+  revision: c96fadb5a5e00c7fef3aa18e2a76ee9b6e4214cc
   specs:
     activeadmin (1.0.0.pre1)
       arbre (~> 1.0, >= 1.0.2)
@@ -69,7 +69,7 @@ GEM
       activesupport (>= 3.2)
       request_store (~> 1.0)
       scrypt (~> 1.2)
-    autoprefixer-rails (5.1.8.1)
+    autoprefixer-rails (5.1.9)
       execjs
       json
     bazaar (0.0.2)
@@ -212,7 +212,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.0)
     moment_timezone-rails (0.2.1)
       momentjs-rails (~> 2.7)
     momentjs-rails (2.9.0)

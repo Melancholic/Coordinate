@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+
 //= require turbolinks
 //= require cocoon
 //= require bootstrap-datepicker
@@ -23,4 +24,4 @@
 //= require bootstrap-slider
 //= require_tree ./auto/
 
-//$('input[type=file]').bootstrapFileInput();
+

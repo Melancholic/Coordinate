@@ -3,12 +3,13 @@ class Api::V1::GeodataController < Api::V1::BaseController
 	before_filter :check_data
 	protect_from_forgery unless: -> { request.format.json? }
 	def recive
+		new_loc_time=convert_time(params[:time]);
 		@car=Car.find(ApiToken.find_by(token:get_token()).car_id)
 		track=Track.where(car_id:@car.id).order(start_time: :desc).first
 		@cur_track=track
 		if track.nil?
 			@cur_track=@car.create_track(start_time: convert_time(params[:time]))
-			logger.debug("Cur track is create via tracks is nil")
+			logger.debug("Cur track is create because tracks is nil")
 		else
 			#order by time  DESC 
 			@last_loc=track.track_locations.last;
@@ -33,15 +34,25 @@ class Api::V1::GeodataController < Api::V1::BaseController
 				if(TimeDifference.between(convert_time(params[:time]),track.start_time).in_minutes > 15)
 					track.destroy;
 					@cur_track=@car.create_track(start_time: convert_time(params[:time]));
-					logger.debug("New Track is created after destroy old via old Track is empty");
+					logger.debug("New Track is created after destroy old because old Track is empty");
 				else
 					track.update_attributes(start_time: convert_time(params[:time]))
 					@cur_track=track;
 				end
 			elsif (TimeDifference.between(@last_loc.time,convert_time(params[:time])).in_minutes > 15 )
-				track.update_attributes(stop_time: @last_loc.time);
-				@cur_track=@car.create_track(start_time: convert_time(params[:time]))	
-				logger.debug("Cur track is create via tracks is ended")				
+				if(new_loc_time>@last_loc.time)
+					track.update_attributes(stop_time: @last_loc.time);
+					@cur_track=@car.create_track(start_time: convert_time(params[:time]))	
+					logger.debug("Cur track is create because tracks is ended")
+				else
+					if(new_loc_time>track.start_time)
+						@cur_track=track;
+						logger.debug("Current track is last, because location time > track start time, but < track stop time")
+					elsif 
+						@cur_track=@car.tracks.where(":dt > start_time  AND ((stop_time > :dt) OR (stop_time iS NULL))", dt: new_loc_time).first
+						logger.debug("Find other track, where location time > track start time, but < track stop time")
+					end 
+				end				
 			end
 		end
 

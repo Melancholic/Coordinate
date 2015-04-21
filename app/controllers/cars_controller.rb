@@ -70,6 +70,15 @@ def destroy
   redirect_to :back;
 end
 
+def info
+  @car=Car.find(params[:car_id]);
+  car_info=@car.info();
+    respond_to do |format|
+    format.json { render json: car_info }
+  end
+
+end
+
 protected
   def car_params
     params.require(:car).permit(:title, :description, :user_id, :color, :priority, image_attributes:[:id, :img, :_destroy]);

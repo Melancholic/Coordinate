@@ -4,6 +4,7 @@
 $(document).on "page:change", ->
   console.log( $(document).height() )
   console.log( $(window).height() );
+  $('.pagination a').attr('data-remote', 'true')
+  $('.custom_tooltip').tooltipster()
   if $(document).height() <= $(window).height()
     $("#footer").addClass("navbar-fixed-bottom")
-

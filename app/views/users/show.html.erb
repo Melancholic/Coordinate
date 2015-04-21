@@ -1,13 +1,31 @@
 <% provide(:title,@user.login)%>
-<div class="row">
-  <aside class ="col-md-4">
-    <section>
-      <%= render 'shared/user_info', user:@user %>
-    </section> 
-    <section>
-    <%= "Hello, #{@user.login}" if signed_in? and !current_user?(@user) %>
-    </section>
-  </aside>
-  <div class="col-md-8">
-   </div>
+<div class="center jumbotron container">
+ <div class="row">
+  <div class ="col-md-4">
+      <%= link_to avatar_for(@user, size: 200, class: 'img-rounded'), @user %>
+  </div>
+  <div class="col-md-4">
+    <h1><%=@user.login%></h1>  
+    <h2><%= @user.full_name %> </h2>
+    <h5><%=mail_to @user.email%></h5>
+    <h5> <%=@user.full_region%></h5>
+    <%= link_to 'Edit information', edit_user_path(@user), class:"btn btn-default btn-xs" %>
+  </div>
+</div>
+</div> 
+
+<div class="container">
+  <div class="row">
+    <!--<div class="col-md-3">
+      <div class ="col-md-12 well">
+        <%= render 'user_info' %>
+      </div>
+      <div class ="col-md-12 well">
+        <%= render 'cars_info'%>
+      </div>
+    </div>-->
+    <div class="col-md-12" id="content">
+      <%= render 'cars'%>
+    </div>
+  </div>
 </div>

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
      #add user/otherpages (without id!!!)
      collection do
+      get :info, :defaults => {:format => :json};
       get 'edit' => 'cars#edit_collection'
      end
   end

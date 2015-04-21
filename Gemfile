@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+#gem 'tooltipster-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'gon'
 gem 'momentjs-rails'

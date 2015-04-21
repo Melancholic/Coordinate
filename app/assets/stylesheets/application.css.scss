@@ -16,6 +16,7 @@
 //find -name "*.css" -exec echo '@import "'$1{}'";'  \;
 
 @import "**/*";
+@import "vendor/*";
 @import "bootstrap-datepicker3";
 @import "bootstrap-slider";
 
@@ -60,4 +61,17 @@ a:hover{
 
 .text-muted {
   color: #666666;
+}
+
+.table > tbody >tr >td{
+  vertical-align: middle;
+}
+
+table a:not(.btn),
+.table a:not(.btn) {
+  text-decoration: none;
+}
+table a:hover,
+.table a:hover {
+  text-decoration: underline;
 }

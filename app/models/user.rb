@@ -91,6 +91,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def full_region
+    return "" unless (self.profile); 
+    [self.profile.country, self.profile.region, self.profile.city].delete_if{|x| x.nil? || x.empty?}.join(', ')
+  end
+
   def full_name 
     ([self.name,self.middle_name, self.second_name].compact.delete_if{|x| x.empty?}).join(' ')
   end
@@ -163,6 +168,12 @@ class User < ActiveRecord::Base
     end
     self.cars<< Car.new(args)
     self.save
+  end
+
+  def local_time(time)
+    return "now" if time.nil?
+    zone=ActiveSupport::TimeZone.new(self.time_zone)
+    time.in_time_zone(zone).strftime("%d.%m.%y %H:%M")
   end
 
 

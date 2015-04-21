@@ -12,7 +12,7 @@ class Car < ActiveRecord::Base
 	validates :priority, inclusion:{in: 0..10, message: "is not included in 0 .. 10" }
 	validates :description, length:{maximum: DescriptionLength ,minimum:3}
 	default_scope -> { order(:priority => :desc, :title =>:asc) }
-
+	self.per_page=5;
 
 	before_create do 
 		self.color.upcase!
@@ -26,5 +26,62 @@ class Car < ActiveRecord::Base
 
 	def img
 		self.image.img;
+	end
+
+
+	def info
+		result={};
+		result[:speed_avg]="#{TrackLocation.where(track_id: self.track_ids).average('speed').to_f.round} kmh";
+		result[:speed_max]="#{TrackLocation.where(track_id: self.track_ids).maximum('speed').to_f.round} kmh";
+		result[:total_tracks_length]="#{self.total_tracks_length.round(3)} km";
+		result[:total_tracks_duration]="#{(self.total_tracks_duration/60/60).round()} hrs";
+		result[:tracks_count]="#{self.tracks.count}";
+
+			result[:max_track_length]="#{self.max_track_length.round(3)} km";
+			result[:min_track_duration]="#{(self.min_track_duration/3600).round()} hrs"
+			result[:max_track_duration]="#{(self.max_track_duration/3600).round()} hrs"
+		return result
+	end
+
+	def max_track_length
+		sql= Location.select("MAX(distance) as distance")
+				.joins("INNER JOIN tracks ON tracks.id=locations.track_id")
+				.where("tracks.car_id = ?", self.id).group(:track_id).to_sql
+		res=Car.from("(#{sql}) l").maximum("l.distance")
+		res||=0;
+	end
+
+	def total_tracks_length
+		sql= Location.select("MAX(distance) as distance")
+				.joins("INNER JOIN tracks ON tracks.id=locations.track_id")
+				.where("tracks.car_id = ?", self.id).group(:track_id).to_sql
+		res=Car.from("(#{sql}) l").sum("l.distance")
+		res||=0;
+	end
+
+	#returned in seconds
+	def total_tracks_duration
+		sql= Location.select(" EXTRACT(EPOCH FROM MAX(time) - MIN(time) ) as duration")
+				.joins("INNER JOIN tracks ON tracks.id=locations.track_id")
+				.where("tracks.car_id = ?", self.id).group(:track_id).to_sql
+		res=Car.from("(#{sql}) l").sum("l.duration")
+		res||=0;
+	end
+
+	def min_track_duration
+		sql= Location.select(" EXTRACT(EPOCH FROM MAX(time) - MIN(time) ) as duration")
+				.joins("INNER JOIN tracks ON tracks.id=locations.track_id")
+				.where("tracks.car_id = ?", self.id).group(:track_id).to_sql
+		res=Car.from("(#{sql}) l").minimum("l.duration") 
+		res||=0;
+		
+	end
+
+	def max_track_duration
+		sql= Location.select(" EXTRACT(EPOCH FROM MAX(time) - MIN(time) ) as duration")
+				.joins("INNER JOIN tracks ON tracks.id=locations.track_id")
+				.where("tracks.car_id = ?", self.id).group(:track_id).to_sql
+		res=Car.from("(#{sql}) l").maximum("l.duration") 
+		res||=0;
 	end
 end

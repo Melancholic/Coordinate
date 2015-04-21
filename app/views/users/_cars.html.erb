@@ -1,0 +1,70 @@
+      <div class="well" id="cars">
+        <table class="table table-striped" >
+
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Color</th>
+            <th>Created at</th>
+            <th>Total tracks</th>
+            <th>Last track</th>           
+            <th>Actions</th>
+
+          </tr>
+
+          <% @cars.each do |x| %>
+          <tr class="car_tooltip" title="..." data-item=<%="#{x.id}"%> >
+            <td><%=car_image x, size:"50x50"%></td>
+            <td><strong><%=link_to x.title, x %></strong></td>
+            <td><%=x.priority%></td>
+            <td><%= color_to x.color %></td>
+            <td><%=@user.local_time x.created_at%></td>
+            <td><%=x.tracks.count%></td>
+            <td><%=@user.local_time x.tracks.first.start_time unless x.tracks.empty?%></td>
+            <td> 
+              <%=edit_car_for x%>
+              <%=delete_car_for x%>
+            </td>
+          </tr>
+
+          <% end %>
+        </table>
+
+        <%= will_paginate @cars%>
+      </div>
+      <script>
+$( document ).ready(function(){
+$('.car_tooltip').tooltipster({
+    contentAsHTML: true,
+    functionInit: function(origin, content) {
+      console.log();
+        if (content === '...') {
+          $.ajax({
+            url: "<%=info_cars_path%>",
+            dataType: 'json',
+            async: true,
+            data: {car_id : this.data('item')},
+            success: function( data ) {
+                console.log(data)
+               origin.tooltipster('content',  '<b>'+'Speed average: '+'</b>'+data['speed_avg']+'<br>'+
+                                              '<b>'+'Speed max: '+'</b>'+data['speed_max']+'<br>'+
+                                              '<b>'+'Total tracks length: '+'</b>'+data['total_tracks_length']+'<br>'+
+                                              '<b>'+'Max track length: '+'</b>'+data['max_track_length']+'<br>'+
+                                              '<b>'+'Total tracks durations: '+'</b>'+data['total_tracks_duration']+'<br>'+
+                                              '<b>'+'Max track duration: '+'</b>'+data['max_track_duration']+'<br>'+
+                                              '<b>'+'Min track duration: '+'</b>'+data['min_track_duration']+'<br>'
+              )  
+            }});
+        
+      
+            // this returned string will overwrite the content of the tooltip for the time being
+            return 'Wait while we load new content...';
+        }
+        else {
+            // return nothing : the initialization continues normally with its content unchanged.
+        }
+    }
+});
+    });
+</script>

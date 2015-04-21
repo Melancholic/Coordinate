@@ -17,7 +17,15 @@ class UsersController < ApplicationController
   end
 
   def show()
-    @user = User.find_by_id(params[:id]); 
+    @user = current_user; 
+    @zone = ActiveSupport::TimeZone.new(@user.time_zone)
+    @tracks ||= Track.where(car_id: @user.car_ids);
+    @cars = current_user.cars.paginate(page: params[:page]);
+    respond_to do |format|
+      format.html 
+      format.json
+      format.js {render 'paginate.js'}
+    end
   end
 
   def index()

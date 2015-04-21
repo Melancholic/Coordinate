@@ -23,5 +23,4 @@
 //= require data-confirm-modal
 //= require bootstrap-slider
 //= require_tree ./auto/
-
-
+//= require_tree ./vendor/

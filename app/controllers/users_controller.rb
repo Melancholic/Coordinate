@@ -21,11 +21,17 @@ class UsersController < ApplicationController
     @zone = ActiveSupport::TimeZone.new(@user.time_zone)
     @tracks ||= Track.where(car_id: @user.car_ids);
     @cars = current_user.cars.paginate(page: params[:page]);
+    gon.cars_tracks_colors=[];
+    gon.cars_tracks_percent=current_user.cars.map do |x| 
+      gon.cars_tracks_colors.append("##{x.color}");[x.title, x.tracks.count*1.0/User.first.all_tracks.count] if x.tracks.count>0 
+    end.compact
+    
     respond_to do |format|
       format.html 
       format.json
       format.js {render 'paginate.js'}
     end
+
   end
 
   def index()

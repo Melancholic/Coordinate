@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem "highcharts-rails", "~> 4.0.0"
 #gem 'tooltipster-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'gon'
@@ -52,6 +53,7 @@ group :development, :test do
     gem 'guard-rspec'
     gem 'spork-rails'
     gem 'guard-spork'
+    gem 'rails-erd'
 end
 
 group :test do

@@ -176,6 +176,9 @@ class User < ActiveRecord::Base
     time.in_time_zone(zone).strftime("%d.%m.%y %H:%M")
   end
 
+  def all_tracks()
+    Track.where(car_id: self.car_ids)
+  end
 
 private
   def create_remember_token

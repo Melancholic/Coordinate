@@ -15,17 +15,29 @@
 </div> 
 
 <div class="container">
-  <div class="row">
-    <!--<div class="col-md-3">
-      <div class ="col-md-12 well">
-        <%= render 'user_info' %>
+  <% if (@user.cars.empty?)%>
+    <%= render 'shared/empty_message', msg:"You have not added any car!",
+          sub_msg:"You can go into the settings and add your car right now.",
+          target_url: new_car_path %>
+  <%else%>
+    <div class="row">
+      <div class="col-md-12 well" id="content">
+        <%= render 'cars'%>
       </div>
-      <div class ="col-md-12 well">
-        <%= render 'cars_info'%>
-      </div>
-    </div>-->
-    <div class="col-md-12" id="content">
-      <%= render 'cars'%>
     </div>
-  </div>
+  <%end%>
+  <%if @user.all_tracks.count>0 %>
+    <div class="row">
+      <div class="col-md-12 well">
+        <div id="tracks_for_cars_diagram" ></div>
+      </div>
+    </div>
+  <%else%>
+    <%= render 'shared/empty_message',
+            msg:"You have not made a of one track...",
+            sub_msg:"Learn how bind a tracker to your car!",
+            but_msg: "to FAQ",
+            target_url: faq_path
+    %>
+  <%end%>
 </div>

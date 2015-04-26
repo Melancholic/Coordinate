@@ -22,5 +22,8 @@
 //= require moment-timezone-with-data-2010-2020
 //= require data-confirm-modal
 //= require bootstrap-slider
+//= require highcharts
+//= require highcharts/highcharts-more
+
 //= require_tree ./auto/
 //= require_tree ./vendor/

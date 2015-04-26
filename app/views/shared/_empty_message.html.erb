@@ -1,0 +1,15 @@
+<%
+	msg||="Something is missing ..."
+	sub_msg||="You forgot something, and something we have lost..."
+	but_msg||="fix it"
+	target_url||=root_path
+%>
+    <div class="row">
+      <div class="col-md-12 well">
+      	<div class="empty_message">
+       		<h1><%=msg%></h1>
+       		<h3><%=sub_msg%></h3>
+       		<%= link_to but_msg, target_url, class:"btn btn-default" %>
+      	</div>
+      </div>
+    </div>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     member do
       get :verification
       post :sent_verification_mail
+      get :charts_controller, :defaults => {:format => :json}
     end
      #add user/otherpages (without id!!!)
      collection do

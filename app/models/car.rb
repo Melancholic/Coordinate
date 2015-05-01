@@ -28,6 +28,9 @@ class Car < ActiveRecord::Base
 		self.image.img;
 	end
 
+	def color_html
+		"##{self.color}"
+	end
 
 	def info
 		result={};
@@ -36,10 +39,9 @@ class Car < ActiveRecord::Base
 		result[:total_tracks_length]="#{self.total_tracks_length.round(3)} km";
 		result[:total_tracks_duration]="#{(self.total_tracks_duration/60/60).round()} hrs";
 		result[:tracks_count]="#{self.tracks.count}";
-
-			result[:max_track_length]="#{self.max_track_length.round(3)} km";
-			result[:min_track_duration]="#{(self.min_track_duration/3600).round()} hrs"
-			result[:max_track_duration]="#{(self.max_track_duration/3600).round()} hrs"
+		result[:max_track_length]="#{self.max_track_length.round(3)} km";
+		result[:min_track_duration]="#{(self.min_track_duration/3600).round()} hrs"
+		result[:max_track_duration]="#{(self.max_track_duration/3600).round()} hrs"
 		return result
 	end
 

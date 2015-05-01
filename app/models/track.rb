@@ -7,7 +7,11 @@ class Track < ActiveRecord::Base
 	end
 
 	def distance
-		self.track_locations.last.distance;
+		if(track_locations.empty?)
+			0
+		else
+			self.track_locations.select(:distance).last.distance || 0;
+		end
 	end
 
 	def duration

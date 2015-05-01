@@ -4,23 +4,15 @@ function car_init_list() {
     var panels = $('.car-infos');
     var panelsButton = $('.dropdown-car');
     panels.hide();
-
-    //Click dropdown
     panelsButton.click(function() {
-        //get data-for attribute
         var dataFor = $(this).attr('data-for');
         var idFor = $(dataFor);
-
-        //current button
         var currentButton = $(this);
         idFor.slideToggle(400, function() {
-            //Completed slidetoggle
-            if(idFor.is(':visible'))
-            {
+            if(idFor.is(':visible')){
                 currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
             }
-            else
-            {
+            else{
                 currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
             }
         })
@@ -50,3 +42,4 @@ function length_check(len_max, field_id, counter_id) {
       document.getElementById(counter_id).firstChild.data = rest + ' / ' + len_max;   
     } 
   }
+

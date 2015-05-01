@@ -1,6 +1,6 @@
 class Color
 	COLORS=%w(
-    	FFFFFF
+    	EEEEEE
 	    000000
 	    FF0000
 	    FFFF00

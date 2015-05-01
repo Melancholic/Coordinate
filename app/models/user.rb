@@ -177,7 +177,32 @@ class User < ActiveRecord::Base
   end
 
   def all_tracks()
-    Track.where(car_id: self.car_ids)
+    Track.where(car: self.cars)
+  end
+
+  def group_tracks_by_day(arg)
+    arg||=:all;
+    if(arg == :all)
+      tracks_sql=self.all_tracks
+      name="All cars"
+      color="#FF6347"
+    elsif(arg.instance_of?(Car) && self.cars.include?(arg))
+      tracks_sql=arg.tracks
+      name=arg.title
+      color=arg.color_html
+    else
+      return nil
+    end
+      x=tracks_sql.
+      map{|x| [x.start_time.beginning_of_day , x.distance.round(3)] if  x.distance >0}.compact.
+      group_by(&:first).map { |k,v| [k, v.map(&:last).inject(:+)] }
+      #TrackLocation.unscoped.joins(:track).
+      #where(track: tracks_sql).
+      #where("tracks.start_time < ? AND tracks.start_time > ?",Time.now.to_date, Time.now.to_date-1.year).
+      #group(:start_time).maximum(:distance).
+      #map{|x,v| {x.beginning_of_day => v.round(3)} if v}.
+      #compact.reduce(Hash.new, :merge).to_a
+      result={name:name, data:x.sort{|a,b| a[0] <=> b[0] }, color:color } unless x.empty?
   end
 
 private

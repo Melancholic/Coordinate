@@ -2,7 +2,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiaW9leGNlcHRpb24iLCJhIjoiMHh6bEJYayJ9.HEXx3zsa
 var map = L.mapbox.map('map', 'ioexception.lhif9p6f');
 map.locate({setView : true});
 L.control.locate({setView : true}).addTo(map);
-
+L.control.fullscreen().addTo(map);
 /*$("#findme_but").click(function() {
 	map.locate({setView : true});
 });*/

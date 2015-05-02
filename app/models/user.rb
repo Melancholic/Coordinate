@@ -185,7 +185,7 @@ class User < ActiveRecord::Base
     if(arg == :all)
       tracks_sql=self.all_tracks
       name="All cars"
-      color="#FF6347"
+      color="#32CD32"
     elsif(arg.instance_of?(Car) && self.cars.include?(arg))
       tracks_sql=arg.tracks
       name=arg.title
@@ -193,7 +193,7 @@ class User < ActiveRecord::Base
     else
       return nil
     end
-      x=tracks_sql.
+      x=tracks_sql.where("start_time < ? AND start_time > ?",Time.now.beginning_of_day, Time.now.beginning_of_day-1.month).
       map{|x| [x.start_time.beginning_of_day , x.distance.round(3)] if  x.distance >0}.compact.
       group_by(&:first).map { |k,v| [k, v.map(&:last).inject(:+)] }
       #TrackLocation.unscoped.joins(:track).

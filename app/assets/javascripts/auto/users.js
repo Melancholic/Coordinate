@@ -115,7 +115,7 @@ function percent_distance_for_cars_init(data) {
 function length_tracks_of_time(data) {
     $('#length_tracks_of_time_diagram').highcharts({
         chart: {
-            type: 'spline'
+            type: 'column'
         },
         title: {
             text: 'Distance for days'

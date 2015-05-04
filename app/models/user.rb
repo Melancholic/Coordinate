@@ -193,7 +193,7 @@ class User < ActiveRecord::Base
     else
       return nil
     end
-      x=tracks_sql.where("start_time < ? AND start_time > ?",Time.now.beginning_of_day, Time.now.beginning_of_day-1.month).
+      x=tracks_sql.where("start_time < ? AND start_time > ?",Time.now.beginning_of_day+1.day, Time.now.beginning_of_day-1.month).
       map{|x| [x.start_time.beginning_of_day , x.distance.round(3)] if  x.distance >0}.compact.
       group_by(&:first).map { |k,v| [k, v.map(&:last).inject(:+)] }
       #TrackLocation.unscoped.joins(:track).

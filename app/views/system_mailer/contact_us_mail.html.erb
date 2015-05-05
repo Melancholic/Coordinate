@@ -1,0 +1,38 @@
+<%=@mail.message%>
+<hr>
+<p>Message sent by the form "Contact Us" service <i>"<%=app_name%>"</i>.</P>
+<p>&nbsp;</p>
+
+<table border="0" cellpadding="5" cellspacing="1">
+	<caption>Information on operations:</caption>
+	<tbody>
+		<tr>
+			<td>Message ID:</td>
+			<td><%=@mail.id%></td>
+		</tr>
+		<tr>
+			<td>User:</td>
+			<td><%= (@mail.user.nil?) ? "guest" : user_url(@mail.user) %></td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><%=@mail.first_name%></td>
+		</tr>
+		<tr>
+			<td>Lastname:</td>
+			<td><%=@mail.last_name%></td>
+		</tr>
+		<tr>
+			<td>email:</td>
+			<td><%=@mail.email%></td>
+		</tr>
+		<tr>
+			<td>Posted at:</td>
+			<td><%= @mail.created_at.in_time_zone(@tz).strftime("%D %T %Z")%></td>
+		</tr>
+	</tbody>
+</table>
+ 
+ 
+<hr>
+Copyright© <i>"<%=app_name%>"</i>. For the administration of the resource.

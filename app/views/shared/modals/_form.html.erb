@@ -5,6 +5,8 @@
 
 <%  
   run||=nil  
+  without_footer||=false
+  remote||=false
   %>
 <% unless (run == 'auto') %>
   <%#<a onclick="signup_form_call()" href="#">Sign Up</a> %>
@@ -28,11 +30,13 @@
         <h4 class="modal-title"><%= title %></h4>
       </div>
       <div class="modal-body">
-        <%= render form, remote:false%> 
+        <%= render form, remote:remote%> 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+      <%unless without_footer %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      <%end%>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

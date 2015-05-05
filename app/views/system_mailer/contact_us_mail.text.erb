@@ -1,0 +1,12 @@
+<%=@mail.message%>
+<%="#{'='*50}"%>
+Message sent by the form "Contact Us" service "<%=app_name%>"
+Message ID: <%= @mail.id %>
+User: <%= (@mail.user.nil?) ? "guest" : user_url(@mail.user) %>
+Name: <%=@mail.first_name%>
+Lastname: <%=@mail.last_name%>
+email: <%=@mail.email%>
+Host: <%=@mail.host%>
+Posted at: <%= @mail.created_at.in_time_zone(@tz).strftime("%D %T %Z")%>
+<%="#{'='*50}"%>
+Copyright© "<%=app_name%>". For the administration of the resource.

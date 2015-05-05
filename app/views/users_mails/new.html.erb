@@ -1,0 +1,12 @@
+<% provide(:title,'Contacts') %> 
+<div class="center jumbotron">
+<h1>Contacts Us</h1>
+</div>
+<div class="row">
+  <div class="col-xs-4 col-md-offset-4">
+      <%#= render 'new', mail: @mail %>
+      <%= render 'shared/modals/form', form: 'new', id:'contact_modal', title: 'Contact us', without_footer: true, remote:true %>
+      <a onclick="contact_modal_call()" href="#">Contact us</a>
+    </div>
+</div>
+

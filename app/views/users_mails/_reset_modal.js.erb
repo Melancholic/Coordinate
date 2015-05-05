@@ -1,0 +1,8 @@
+$('#contact_modal').modal('hide');
+$("#new_users_mail").replaceWith("<%= escape_javascript( render'new', mail:UsersMail.new, remote:true)%>");
+BootstrapDialog.show({
+   type: BootstrapDialog.TYPE_SUCCESS,
+   title: 'Success',
+   message: "<%=flash[:success]%>",
+ });
+<%flash.delete(:success)%>

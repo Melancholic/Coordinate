@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
+  get 'users_mails/new'
+
+  get 'users_mails/create'
+
+  get 'users_mails/new'
+
+  get 'users_mails/create'
+
   ActiveAdmin.routes(self)
   root 'static_pages#home'
   match '/about',to:'static_pages#about', via:'get'
-  match '/contacts',to:'static_pages#contacts', via:'get'
+  #match '/contacts',to:'users_mails#new', via:'get'
   match '/faq', to:'static_pages#faq', via: 'get'
   match '/signup', to: 'users#new',via: 'get' 
   
@@ -33,12 +41,16 @@ Rails.application.routes.draw do
       get 'edit' => 'cars#edit_collection'
      end
   end
+
+  resources :users_mails, only:[:create];
+
   namespace :maps,  :defaults => {:format => :json} do
     resources :cars, only:[:index]
     resources :tracks, only:[:index]
     resources :locations, only:[:index] 
     get :location, to:'locations#show' ;
   end
+
   namespace :api,  :defaults => {:format => :json}do
     namespace :v1 do
       post 'login' => 'sessions#login'

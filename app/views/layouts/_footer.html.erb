@@ -1,4 +1,5 @@
 <!-- Static navbar -->
+<%= render 'shared/modals/form', form: 'users_mails/new', id:'contact_modal', title: 'Contact us',  remote:true %>
 <div class="navbar navbar-default" role="navigation" id="footer">
   <div class="container-fluid">
 
@@ -14,7 +15,8 @@
     </ul>
  
   <ul class="nav navbar-nav navbar-right">
-   		<li> <%= link_to("Contacts", contacts_path) %></li>
+   		<li> <%#= link_to("Contacts", contacts_path) %></li>
+      <li><a onclick="contact_modal_call()" href="#">Contact us</a></li>
     </ul>
   </div>
   

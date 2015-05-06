@@ -1,53 +1,53 @@
 <div class="row">
-    <div class="col-md-12 well">
-        <div class="col-md-6" style="background-color: #fff;">
-          <div id="speed_avg_for_all_car"></div>
-        </div>
-        <div class="col-md-6"style="background-color: #fff;">
-          <div id="speed_max_for_all_car"  ></div>
-        </div>
+  <div class="col-md-12 well">
+    <div class="col-md-6" style="background-color: #fff;">
+      <div id="speed_avg_for_all_car"></div>
+    </div>
+    <div class="col-md-6"style="background-color: #fff;">
+      <div id="speed_max_for_all_car"  ></div>
+    </div>
 
+  </div>
+  <div class="col-md-12 well" >
+    <div class="col-md-6" style="background-color: #fff;">
+      <div id="tracks_for_cars_diagram" style="min-width: 310px;" ></div>
     </div>
-    <div class="col-md-12 well" >
-        <div class="col-md-6" style="background-color: #fff;">
-        <div id="tracks_for_cars_diagram" style="min-width: 310px;" ></div>
-        </div>
-        <div class="col-md-6"style="background-color: #fff;">
-        <div id="distance_for_cars_diagram" style="min-width: 310px;" ></div>
-        </div>
+    <div class="col-md-6"style="background-color: #fff;">
+      <div id="distance_for_cars_diagram" style="min-width: 310px;" ></div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 well">
-      <div id="length_tracks_of_time_diagram"  style="min-width: 310px;" ></div>
-    </div>
+</div>
+<div class="row">
+  <div class="col-md-12 well">
+    <div id="length_tracks_of_time_diagram"  style="min-width: 310px;" ></div>
   </div>
-  <div class="row">
-    <div class="col-md-12 well">
-      <div class="tracks_statistic">
+</div>
+<div class="row">
+  <div class="col-md-12 well">
+    <div class="tracks_statistic">
       <h1> General statistic of your tracks </h1>
-        <table class="table table-striped" >
-          <tr>
-            <td><strong>Total tracks:</strong></td>
-            <td><%=@total_tracks%></td>
-          </tr>
-          <tr>
-            <td><strong>Total distance:</strong></td>
-            <td><%=@total_distance%> km</td>
-          </tr>
-          <tr>
-            <td><strong>Average distance per track:</strong></td>
-            <td><%=@average_distance%> km</td>
-          </tr>
-          <tr>
-            <td><strong>Average distance per day:</strong></td>
-            <td><%=@average_distance_per_day%> km</td>
-          </tr>
-          <tr>
-            <td><strong>Average distance per car:</strong></td>
-            <td><%=@average_distance_per_car%> km</td>
-          </tr>
-          <tr>
+      <table class="table table-striped" >
+        <tr>
+          <td><strong>Total tracks:</strong></td>
+          <td><%=@total_tracks%></td>
+        </tr>
+        <tr>
+          <td><strong>Total distance:</strong></td>
+          <td><%=@total_distance%> km</td>
+        </tr>
+        <tr>
+          <td><strong>Average distance per track:</strong></td>
+          <td><%=@average_distance%> km</td>
+        </tr>
+        <tr>
+          <td><strong>Average distance per day:</strong></td>
+          <td><%=@average_distance_per_day%> km</td>
+        </tr>
+        <tr>
+          <td><strong>Average distance per car:</strong></td>
+          <td><%=@average_distance_per_car%> km</td>
+        </tr>
+        <tr>
           <tr>
             <td><strong>Average tracks per day:</strong></td>
             <td><%=@average_tracks_per_day%></td>
@@ -71,35 +71,65 @@
 
   <script>
   $(document).ready(function(){
-     $.getJSON( "<%=charts_controller_user_path%>", {request : "speed_max"} , function( data ) {
-        if ( data.success ) {
-            max_speed_chart_init(data.result);
-        }
-    });
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "speed_avg"} , function( data ) {
-        if ( data.success ) {
-            avg_speed_chart_init(data.result);
-        }
-    });
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "percent_tracks_for_cars"} , function( data ) {
-        if ( data.success ) {
-            percent_tracks_for_cars_init(data.result);
-        }
-    });
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "percent_distance_for_cars"} , function( data ) {
+    max_speed_chart_init();
+    avg_speed_chart_init();
+    percent_tracks_for_cars_init();
+    percent_distance_for_cars_init();
+    length_tracks_of_time();
+    $("#length_tracks_of_time_diagram").highcharts().showLoading();
+    $("#speed_avg_for_all_car").highcharts().showLoading();
+    $("#speed_max_for_all_car").highcharts().showLoading();
+    $("#tracks_for_cars_diagram").highcharts().showLoading();
+    $("#distance_for_cars_diagram").highcharts().showLoading();
+
+    $.getJSON( "<%=charts_controller_user_path%>", {request : "speed_max"} , function( data ) {
       if ( data.success ) {
-          percent_distance_for_cars_init(data.result);
+        $("#speed_max_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.result));
+        $("#speed_max_for_all_car").highcharts().hideLoading();
       }
     });
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "length_tracks_of_time"} , function( data ) {
-        if ( data.success ) {   
-          for(var i in data.result){
-            for(var j in data.result[i].data){
-              data.result[i].data[j]=[Date.parse(data.result[i].data[j][0]), data.result[i].data[j][1]]
-            }
-          }
-            length_tracks_of_time(data.result);
-        }
+
+    $.getJSON( "<%=charts_controller_user_path%>", {request : "speed_avg"} , function( data ) {
+      if ( data.success ) {
+        $("#speed_avg_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.result));
+        $("#speed_avg_for_all_car").highcharts().hideLoading();
+      }
     });
+
+    $.getJSON( "<%=charts_controller_user_path%>", {request : "percent_tracks_for_cars"} , function( data ) {
+      if ( data.success ) {
+        $("#tracks_for_cars_diagram").highcharts().addSeries({
+            type: 'pie',
+            name: 'of total tracks',
+            colors:get_highcharts_colors(data.result.colors),
+            data: data.result.data
+        });
+        $("#tracks_for_cars_diagram").highcharts().hideLoading();
+      }
+    });
+
+    $.getJSON( "<%=charts_controller_user_path%>", {request : "percent_distance_for_cars"} , function( data ) {
+      if ( data.success ) {
+        $("#distance_for_cars_diagram").highcharts().addSeries({
+            type: 'pie',
+            name: 'of total distance',
+            colors:get_highcharts_colors(data.result.colors),
+            data: data.result.data
+        });
+        $("#distance_for_cars_diagram").highcharts().hideLoading();
+      }
+    });
+    
+    $.getJSON( "<%=charts_controller_user_path%>", {request : "length_tracks_of_time"} , function( data ) {
+      if ( data.success ) {   
+        for(var i in data.result){
+          for(var j in data.result[i].data){
+            data.result[i].data[j]=[Date.parse(data.result[i].data[j][0]), data.result[i].data[j][1]]
+          }
+          $("#length_tracks_of_time_diagram").highcharts().addSeries(data.result[i]);
+        }
+           $("#length_tracks_of_time_diagram").highcharts().hideLoading();
+         }
+       });
   });
-  </script>
+</script>

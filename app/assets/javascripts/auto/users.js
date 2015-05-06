@@ -17,16 +17,6 @@ $(document).on('page:load', ready);
 $(document).on('page:change', ready);
 
 function percent_tracks_for_cars_init(data) {
-    Highcharts.getOptions().colors = Highcharts.map(data.colors, function (color) {
-        return {
-            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-            stops: [
-                [0, color],
-                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-            ]
-        };
-    });
-
     // Build the chart
     $('#tracks_for_cars_diagram').highcharts({
         chart: {
@@ -54,26 +44,16 @@ function percent_tracks_for_cars_init(data) {
                 }
             }
         },
-        series: [{
+        /*series: [{
             type: 'pie',
             name: 'of total tracks',
             data: data.data
-        }]
+        }]*/
     });
 }
 
 
 function percent_distance_for_cars_init(data) {
-    Highcharts.getOptions().colors = Highcharts.map(data.colors, function (color) {
-        return {
-            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-            stops: [
-                [0, color],
-                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-            ]
-        };
-    });
-
     // Build the chart
     $('#distance_for_cars_diagram').highcharts({
         chart: {
@@ -101,18 +81,18 @@ function percent_distance_for_cars_init(data) {
                 }
             }
         },
-        series: [{
+        /*series: [{
             type: 'pie',
             name: 'of total distance',
             data: data.data
-        }]
+        }]*/
     });
 }
 
 
 
 
-function length_tracks_of_time(data) {
+function length_tracks_of_time() {
     $('#length_tracks_of_time_diagram').highcharts({
         chart: {
             type: 'column'
@@ -152,12 +132,12 @@ function length_tracks_of_time(data) {
             }
         },
 
-        series: data
+        //series: data
     });
 }
 
 
-function avg_speed_chart_init(data) {
+function avg_speed_chart_init() {
     $('#speed_avg_for_all_car').highcharts({
 
         chart: {
@@ -212,38 +192,10 @@ function avg_speed_chart_init(data) {
             endOnTick: false
         }],
 
-        series: [{
-            name: 'Speed',
-            data: [data],
-            dataLabels: {
-                formatter: function () {
-                    var kmh = data
-                        mph = Math.round(kmh * 0.621);
-                    return '<span style="color:#339">' + kmh + ' km/h</span><br/>' +
-                        '<span style="color:#933">' + mph + ' mph</span>';
-                },
-                backgroundColor: {
-                    linearGradient: {
-                        x1: 0,
-                        y1: 0,
-                        x2: 0,
-                        y2: 1
-                    },
-                    stops: [
-                        [0, '#DDD'],
-                        [1, '#FFF']
-                    ]
-                }
-            },
-            tooltip: {
-                valueSuffix: ' km/h'
-            }
-        }]
-
     })
 }
 
-function max_speed_chart_init(data) {
+function max_speed_chart_init() {
     $('#speed_max_for_all_car').highcharts({
 
         chart: {
@@ -298,33 +250,60 @@ function max_speed_chart_init(data) {
             endOnTick: false
         }],
 
-        series: [{
+    })
+}
+//private
+function data_labels_for_speedometer (data){
+    res={
+        formatter: function () {
+            var kmh = data
+            mph = Math.round(kmh * 0.621);
+            return '<span style="color:#339">' + kmh + ' km/h</span><br/>' +
+            '<span style="color:#933">' + mph + ' mph</span>';
+        },
+        backgroundColor: {
+            linearGradient: {
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 1
+            },
+            stops: [
+            [0, '#DDD'],
+            [1, '#FFF']
+            ]
+        }
+    }
+
+    return res;
+}
+
+//private
+function tooltip_for_speedometer(){
+    return {
+        valueSuffix: ' km/h'
+    }
+}
+//private
+function make_series_for_speedometer(data){
+    return {
             name: 'Speed',
             data: [data],
-            dataLabels: {
-                formatter: function () {
-                    var kmh = data
-                        mph = Math.round(kmh * 0.621);
-                    return '<span style="color:#339">' + kmh + ' km/h</span><br/>' +
-                        '<span style="color:#933">' + mph + ' mph</span>';
-                },
-                backgroundColor: {
-                    linearGradient: {
-                        x1: 0,
-                        y1: 0,
-                        x2: 0,
-                        y2: 1
-                    },
-                    stops: [
-                        [0, '#DDD'],
-                        [1, '#FFF']
-                    ]
-                }
-            },
-            tooltip: {
-                valueSuffix: ' km/h'
-            }
-        }]
+            dataLabels: data_labels_for_speedometer(data),
+            tooltip: tooltip_for_speedometer()
+        };
+}
 
-    })
+//public
+function get_highcharts_colors(colors){
+    x=Highcharts.map(colors, function (color) {
+        return {
+            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+            stops: [
+            [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                ]
+            };
+        });
+    return x;
 }

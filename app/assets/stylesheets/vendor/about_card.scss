@@ -1,7 +1,7 @@
 
 
 .card {
-    background-color: rgba(214, 224, 226, 0.3);
+    background-color: rgba(255, 255, 255, 1);
     border-top-width: 0;
     border-bottom-width: 2px;
     -webkit-border-radius: 10px;
@@ -188,7 +188,8 @@
     padding-top: 0;
     overflow: hidden;
     text-align: center;
-    background-color: rgba(214, 224, 226, 0.2);
+    background-color: rgba(0,0,0,0.05);
+    
 }
 
 .card.hovercard .cardheader {

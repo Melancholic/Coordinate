@@ -87,6 +87,7 @@ textarea {
 h1, h2, h3, h4, h5, h6{
     line-height: 1;
 }
+
 h1{
   font-size: 3em;
   letter-spacing: -2px;
@@ -162,4 +163,8 @@ h5{
 .loading{
   background-color: black;
   opacity: 0.5;
+}
+
+.about-icon{
+  margin-top: 15px;
 }

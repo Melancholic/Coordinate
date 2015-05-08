@@ -1,106 +1,110 @@
 <% provide(:title,'About') %>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="row">
-    <div class="center jumbotron">
-        <h1>About</h1>
-    </div>
+<div class="center jumbotron container">
+ <div class="row">
+  <div class ="col-xs-2 col-md-2 col-md-offset-2">
+    <%= image_tag "icons/logo-gray.png", class:'img-responsive about-icon'%>
+  </div>
+  <div class="col-xs-10 col-md-offset-1 col-md-4">
+    <h1>About "Coordinate"</h2>
+    <h6>Developed by Andrey Nagorny, 2015</h6>
+  </div>
 </div>
+</div> 
 <div class="row">
     <div class="col-md-4">
         <div class="container">
-         <div class="row">
-          <div class="col-md-3 col-lg-3">
+           <div class="row">
+              <div class="col-xs-12 col-md-3 col-lg-3">
 
-            <div class="card hovercard">
-                <div class="cardheader">
+                <div class="card hovercard">
+                    <div class="cardheader">
 
-                </div>
-                <div class="avatar">
-                    <%= image_tag "about_card/author.png", alt: "Andrey Nagorny"%>
-                </div>
-                <div class="info">
-                    <div class="title">
-                        <a target="_blank" href="http://anagorny.com/">Nagorny Andrey</a>
                     </div>
-                    <div class="desc">Curious student</div>
-                    <div class="desc">Full-stack developer</div>
-                    <div class="desc">Passionate motorist</div>
-                    <div class="desc"><%= mail_to "mail@anagorny.com"%></div>
-                </div>
-                <div class="bottom">
-                    <%= link_to "#", class:"btn btn-danger btn-sm btn-card",  target:"_blank" do %>
-                    <i class="fa fa-google-plus"></i>
-                    <%end%>
-                    <%= link_to "#", class:"btn btn-default btn-sm btn-card",  target:"_blank" do %>
-                    <i class="fa fa-vk"></i>
-                    <%end%>
-                    <%= link_to "https://github.com/Melancholic", class:"btn btn-primary btn-sm btn-card",  target:"_blank" do %>
-                    <i class="fa fa-github"></i>
-                    <%end%>
-                    <%= mail_to "mail@anagorny.com", class:"btn btn-primary btn-sm btn-card",  target:"_blank" do %>
-                    <i class="fa fa-envelope-o"></i>
-                    <%end%>
-                    <!--<a class="btn btn-primary btn-sm btn-card" rel="publisher" href="https://plus.google.com/shahnuralam">-->
-                    <%= link_to "http://anagorny.com", class:"btn btn-warning btn-sm btn-card", target:"_blank" do %>
-                    <i class="fa fa-globe"></i>
-                    <%end%>
-                    <!-- </a> -->       
+                    <div class="avatar">
+                        <%= image_tag "about_card/author.png", alt: "Andrey Nagorny"%>
+                    </div>
+                    <div class="info">
+                        <div class="title">
+                            <a target="_blank" href="http://anagorny.com/">Nagorny Andrey</a>
+                        </div>
+                        <div class="desc">Curious student</div>
+                        <div class="desc">Full-stack developer</div>
+                        <div class="desc">Passionate motorist</div>
+                        <div class="desc"><%= mail_to "mail@anagorny.com"%></div>
+                    </div>
+                    <div class="bottom">
+                        <%= link_to "#", class:"btn btn-danger btn-sm btn-card",  target:"_blank" do %>
+                        <i class="fa fa-google-plus"></i>
+                        <%end%>
+                        <%= link_to "#", class:"btn btn-default btn-sm btn-card",  target:"_blank" do %>
+                        <i class="fa fa-vk"></i>
+                        <%end%>
+                        <%= link_to "https://github.com/Melancholic", class:"btn btn-primary btn-sm btn-card",  target:"_blank" do %>
+                        <i class="fa fa-github"></i>
+                        <%end%>
+                        <%= mail_to "mail@anagorny.com", class:"btn btn-primary btn-sm btn-card",  target:"_blank" do %>
+                        <i class="fa fa-envelope-o"></i>
+                        <%end%>
+                        <!--<a class="btn btn-primary btn-sm btn-card" rel="publisher" href="https://plus.google.com/shahnuralam">-->
+                        <%= link_to "http://anagorny.com", class:"btn btn-warning btn-sm btn-card", target:"_blank" do %>
+                        <i class="fa fa-globe"></i>
+                        <%end%>
+                        <!-- </a> -->       
 
+                    </div>
                 </div>
+
             </div>
 
+        </div>
+    </div>
+</div>
+<div class="col-md-8 col-lg-8 ">
+    <div class='row well'>
+        <div class='col-xs-12 col-md-12'>
+            <p><strong>Coordinate</strong> - a non-profit, and free product, with a number of registered trade marks and free libraries.</p>
+            <p><strong>Coordinate</strong> will allow you to monitor the location of your vehicle, view tracks, and detailed statistics. I tried to make service, as comfortable as possible for the end user, while not forgetting about the safety of the system as a whole.</p>
+            <p>The project is developing, and your opinions and suggestions are important to me. You can send them to me via any appropriate form on the site of the project (such as <%=link_to "here", "#", onclick:"contact_modal_call()" %>) or by <%=mail_to "mail@anagorny.com","e-mail"%>.</p>
+
+            <p>Thank you for your attention!</p>
         </div>
 
     </div>
-</div>
-</div>
-    <div class="col-md-8 col-lg-8 ">
-        <div class='row well'>
-        <div class='col-md-8'>
-        <p><strong>Coordinate</strong> - a non-profit, and free product, with a number of registered trade marks and free libraries.</p>
-        <p><strong>Coordinate</strong> will allow you to monitor the location of your vehicle, view tracks, and detailed statistics. I tried to make service, as comfortable as possible for the end user, while not forgetting about the safety of the system as a whole.</p>
-        <p>The project is developing, and your opinions and suggestions are important to me. You can send them to me via any appropriate form on the site of the project (such as <%=link_to "here", "#", onclick:"contact_modal_call()" %>) or by <%=mail_to "mail@anagorny.com","e-mail"%>.</p>
-
-        <p>Thank you for your attention!</p>
+    <div class='row well'>
+        <div class="col-xs-12 col-sm-12">
+            <p>I express my deep gratitude to the following for their help in project development:</p>
         </div>
-        <div class='col-md-3 col-with-icon'>
-            <%= image_tag "icons/logo-dark.png", height:200%>
+        <div class="col-xs-4 col-sm-2">
+            <%=link_to "http://rubyonrails.org/",class:"thumbnail", target:"_blank" do%>
+            <%= image_tag "partners/ror.jpg"%>
+            <%end%>
         </div>
+        <div class="col-xs-4 col-sm-2">
+            <%=link_to "https://github.com/activeadmin/activeadmin",class:"thumbnail", target:"_blank" do%>
+            <%= image_tag "partners/aa.png"%>
+            <%end%>
         </div>
-        <div class='row well'>
-            <div class="col-md-12">
-                <p>I express my deep gratitude to the following for their help in project development:</p>
-            </div>
-            <div class="col-md-2">
-                <%=link_to "http://rubyonrails.org/",class:"thumbnail", target:"_blank" do%>
-                    <%= image_tag "partners/ror.jpg",size:"80x80"%>
-                <%end%>
-            </div>
-            <div class="col-md-2">
-                <%=link_to "https://github.com/activeadmin/activeadmin",class:"thumbnail", target:"_blank" do%>
-                    <%= image_tag "partners/aa.png"%>
-                <%end%>
-            </div>
-            <div class="col-md-2">
-                <%=link_to "http://getbootstrap.com/",class:"thumbnail", target:"_blank" do%>
-                    <%= image_tag "partners/twitter-bootstrap.jpg"%>
-                <%end%>
-            </div>
-            <div class="col-md-2">
-                <%=link_to "http://bootsnipp.com/",class:"thumbnail", target:"_blank" do%>
-                    <%= image_tag "partners/bootsnipp.png"%>
-                <%end%>
-            </div>
-            <div class="col-md-2">
-                <%=link_to "https://www.mapbox.com/",class:"thumbnail", target:"_blank" do%>
-                    <%= image_tag "partners/mapbox.jpg"%>
-                <%end%>
-            </div>
-            <div class="col-md-2">
-                <%=link_to "http://leafletjs.com/",class:"thumbnail", target:"_blank" do%>
-                    <%= image_tag "partners/leaflet.png"%>
-                <%end%>
-            </div>
-       </div>
+        <div class="col-xs-4 col-sm-2">
+            <%=link_to "http://getbootstrap.com/",class:"thumbnail", target:"_blank" do%>
+            <%= image_tag "partners/twitter-bootstrap.jpg"%>
+            <%end%>
+        </div>
+        <div class="col-xs-4 col-sm-2">
+            <%=link_to "http://bootsnipp.com/",class:"thumbnail", target:"_blank" do%>
+            <%= image_tag "partners/bootsnipp.png"%>
+            <%end%>
+        </div>
+        <div class="col-xs-4 col-sm-2">
+            <%=link_to "https://www.mapbox.com/",class:"thumbnail", target:"_blank" do%>
+            <%= image_tag "partners/mapbox.jpg"%>
+            <%end%>
+        </div>
+        <div class="col-xs-4 col-sm-2">
+            <%=link_to "http://leafletjs.com/",class:"thumbnail", target:"_blank" do%>
+            <%= image_tag "partners/leaflet.png"%>
+            <%end%>
+        </div>
     </div>
+</div>
 </div>

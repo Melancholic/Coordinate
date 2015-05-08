@@ -1,25 +1,34 @@
 <!-- Static navbar -->
 <%= render 'shared/modals/form', form: 'users_mails/new', id:'contact_modal', title: 'Contact us',  remote:true %>
 <div class="navbar navbar-default" role="navigation" id="footer">
-  <div class="container-fluid">
-
-	<div class="navbar-center">
+  <div class="container-id">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-footer">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <li> <%= link_to( app_name, root_path, class:"navbar-brand") %></li>
+    </div>
+    <div class="hidden-xs navbar-center">
       <p><a class="navbar-brand navbar-center" href="http://anagorny.com">Copyright© <%=Time.now.year%>  by Andrey Nagorny</a></p>
     </div>
 
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-left">
-    	<li> <%= link_to( app_name, root_path, class:"navbar-brand") %></li>
-    	<li> <%= link_to("About", about_path) %></li>
-    	<li> <%= link_to("FAQ", faq_path) %></li>
-    </ul>
- 
-  <ul class="nav navbar-nav navbar-right">
-   		<li> <%#= link_to("Contacts", contacts_path) %></li>
-      <li><a onclick="contact_modal_call()" href="#">Contact us</a></li>
-    </ul>
-  </div>
-  
+    <div class="navbar-collapse collapse" id="navbar-footer">
+      <ul class="nav navbar-nav navbar-left">
 
-  </div>
+       <li> <%= link_to("About", about_path) %></li>
+       <li> <%= link_to("FAQ", faq_path) %></li>
+     </ul>
+     
+     <ul class="nav navbar-nav navbar-right">
+       <li> <%#= link_to("Contacts", contacts_path) %></li>
+       <li><a onclick="contact_modal_call()" href="#">Contact us</a></li>
+       <li><a class="visible-xs" href="http://anagorny.com">Copyright© <%=Time.now.year%>  by Andrey Nagorny</a></li>
+     </ul>
+   </div>
+   
+
+ </div>
 </div>

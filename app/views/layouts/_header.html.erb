@@ -2,51 +2,59 @@
   <div class="container-fluid">
     <div class="navbar-header">
      <!-- Logo -->
-     <a class="navbar-brand" href="/">
+     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-header">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">
       <%=image_tag("icons/logo-light.png", size: "25x25", alt: "#{app_name}")  %> 
-      </a>
-      <a class="navbar-brand" href="/">
-        Coordinate
-      </a>
-    </div>
-     <!-- Right  block-->
-    <ul class="nav navbar-nav navbar-right" >
-        <% unless current_page?(root_path) %>
-            <li>
-                <%=link_to("Home",root_path)%>   
-            </li>
-        <% end %>
-        <% if signed_in? %>
-          <li id="fat-menu" class="dropdown menu-head">  
-            <a href='#' class="dropdown-toggle" data-toggle="dropdown" >
-              Account <b class="caret"></b>
-              <%=avatar_for(current_user, size: "25x25", alt: "#{current_user.login}", class:"img-circle")  %>
-            </a>
-            <ul class="dropdown-menu">
-              <li data-no-turbolink> <%= link_to("Profile", current_user)%></li>
-              <li><%= link_to("Settings",edit_user_path(current_user) ) %></li>
-              <li class="divider"></li>
-              <li><%= link_to("Help",faq_path)%></li>
-              <% unless current_user.verificated? %>
-                <li class="divider"></li>
-                <li><%= link_to("Verification",verification_user_path(current_user))%></li>
-              <%end%>
-              <% if current_user.admin? %>
-                <li class="divider"></li>
-                <li><%= link_to("Administration",admin_root_path, style:"color: #f00;")%></li>
-              <%end%>
-              <li class="divider"></li>
-              <li> <%= link_to("Sign Out", signout_path, method: "delete") %></li>
-            </ul>
-          </li>
-          <%else%>
-            <%= render 'shared/modals/form', form: 'shared/sign_tabs', id:'sign_modal', title: 'Authorization' %>
-         <li>
-            <a onclick="sign_modal_call()" href="#">Authorization</a>
-         </li>
-           <%end%>
-        </li>
-        </ul>
-     <!-- Right  block-->
+    </a>
+    <a class="navbar-brand" href="/">
+      Coordinate
+    </a>
   </div>
+  <!-- Right  block-->
+  <div class="navbar-collapse collapse" id="navbar-header">
+    <ul class="nav navbar-nav navbar-right" >
+      <% unless current_page?(root_path) %>
+      <li>
+        <%=link_to("Home",root_path)%>   
+      </li>
+      <% end %>
+      <% if signed_in? %>
+      <li id="fat-menu" class="dropdown menu-head">  
+        <a href='#' class="dropdown-toggle" data-toggle="dropdown" >
+          Account <b class="caret"></b>
+          <%=avatar_for(current_user, size: "25x25", alt: "#{current_user.login}", class:"img-circle")  %>
+        </a>
+        <ul class="dropdown-menu">
+          <li data-no-turbolink> <%= link_to("Profile", current_user)%></li>
+          <li><%= link_to("Settings",edit_user_path(current_user) ) %></li>
+          <li class="divider"></li>
+          <li><%= link_to("Help",faq_path)%></li>
+          <% unless current_user.verificated? %>
+          <li class="divider"></li>
+          <li><%= link_to("Verification",verification_user_path(current_user))%></li>
+          <%end%>
+          <% if current_user.admin? %>
+          <li class="divider"></li>
+          <li><%= link_to("Administration",admin_root_path, style:"color: #f00;")%></li>
+          <%end%>
+          <li class="divider"></li>
+          <li> <%= link_to("Sign Out", signout_path, method: "delete") %></li>
+        </ul>
+      </li>
+      <%else%>
+      <%= render 'shared/modals/form', form: 'shared/sign_tabs', id:'sign_modal', title: 'Authorization' %>
+      <li>
+        <a onclick="sign_modal_call()" href="#">Authorization</a>
+      </li>
+      <%end%>
+    </li>
+  </ul>
+</div>
+<!-- Right  block-->
+</div>
 </nav>

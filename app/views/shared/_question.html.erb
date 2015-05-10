@@ -1,0 +1,18 @@
+<%
+head||="Header text"
+body||="Body text"
+%>
+
+<div class="panel panel-default" id="<%=Digest::SHA1.hexdigest(head)%>" >
+	<div class="panel-heading question-trigger question-head" data-toggle="collapse">
+		<%= head %>
+		<span class="pull-right glyphicon glyphicon-plus icon-arrow-right"></span>
+	</div>
+	<div class="panel-collapse collapse out">
+		<div class="panel-body">
+			<blockquote>
+				<%=raw  body %>
+			</blockquote>
+		</div>
+	</div>
+</div>

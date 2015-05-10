@@ -8,3 +8,4 @@ $(document).on "page:change", ->
   $('.custom_tooltip').tooltipster()
   if $(document).height() <= $(window).height()
     $("#footer").addClass("navbar-fixed-bottom")
+    

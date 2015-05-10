@@ -1,0 +1,22 @@
+$(document).on("page:change", function(){
+  $(".question-trigger").click(function() {
+      console.log('asasas')
+  		$(this).next().collapse('toggle');
+      if( $(this).children().hasClass("glyphicon-plus")){
+      	$(this).children().removeClass("glyphicon-plus");
+      	$(this).children().addClass("glyphicon-minus");
+    	}else{
+        $(this).children().removeClass("glyphicon-minus");
+      	$(this).children().addClass("glyphicon-plus");                         
+      }
+  });
+  $('.panel .panel-heading').each(function(i){
+    $("#faq-navigator").append('<li><a data-no-turbolink href="#'+$( this ).parent().attr('id')+'">'+$( this ).text()+'</a></li>')
+  });
+  $("#faq-navigator").append('<li><a data-no-turbolink href="#top"> Back to top </a></li>')
+  $('body').scrollspy({
+    target: '.bs-docs-sidebar',
+    offset: 40
+});
+
+});

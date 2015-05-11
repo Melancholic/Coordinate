@@ -1,6 +1,5 @@
 $(document).on("page:change", function(){
   $(".question-trigger").click(function() {
-      console.log('asasas')
   		$(this).next().collapse('toggle');
       if( $(this).children().hasClass("glyphicon-plus")){
       	$(this).children().removeClass("glyphicon-plus");

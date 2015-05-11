@@ -1,23 +1,26 @@
 $(document).on("page:change",car_init_list);
 
+function car_card_toggle() {
+    var dataFor = $(this).attr('data-for');
+    var idFor = $(dataFor);
+    var currentButton = $(this).find('div.dropdown-car i')
+    idFor.slideToggle(400, function() {
+        if(idFor.is(':visible')){
+              currentButton.removeClass("glyphicon-plus");
+              currentButton.addClass("glyphicon-minus"); 
+          }
+          else{
+                currentButton.removeClass("glyphicon-minus");
+                currentButton.addClass("glyphicon-plus"); 
+            }
+        })
+}
+
 function car_init_list() {
     var panels = $('.car-infos');
     var panelsButton = $('.dropdown-car');
     panels.hide();
-    panelsButton.click(function() {
-        var dataFor = $(this).attr('data-for');
-        var idFor = $(dataFor);
-        var currentButton = $(this);
-        idFor.slideToggle(400, function() {
-            if(idFor.is(':visible')){
-                currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
-            }
-            else{
-                currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
-            }
-        })
-    });
-
+    $('.car-row').click(car_card_toggle);
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#car_color').colorselector();

@@ -8,8 +8,14 @@
     padding-bottom: 5px;
 }
 .car-row {
-    margin-bottom: 14px;
-    // border-top: 1px solid rgb(221, 221, 221);
+    background-color: rgb(250, 250, 250);;
+    border-top: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    border-left: 1px solid rgb(221, 221, 221);
+    padding: 14px;
+    &:last-child{
+        border-bottom: 1px solid rgb(221, 221, 221);
+    };
  }
 .car-small-image {
     margin-top: 5px;
@@ -42,4 +48,10 @@
 
 .table-car-information > tbody > tr > td {
     border-top: 0;
+}
+
+
+
+dl > dd {
+    text-align:center;
 }

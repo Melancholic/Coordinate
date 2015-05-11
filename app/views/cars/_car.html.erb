@@ -1,4 +1,4 @@
-  <div class="row car-row">
+  <div class="row car-row" data-for='.<%="car#{car.id}"%>'>
     <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
         <% if car.image %>
             <%=image_tag(car.img.url, size: "50x50", alt: "#{car.title}", class: "img-rounded car-small-image" )  %>
@@ -6,12 +6,12 @@
             <%=image_tag("icons/auto-icon.png", size: "50x50", alt: "#{car.title}", class: "img-rounded car-small-image" )  %>
         <%end%>
     </div>
-    <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+    <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10 car-row-content">
         <strong><%=link_to car.title, car%></strong><br>
         <span class="text-muted"><p><%= car.description %></p></span>
     </div>
     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 dropdown-car" data-for='.<%="car#{car.id}"%>'>
-        <i class="glyphicon glyphicon-chevron-down text-muted"></i>
+        <i class="glyphicon glyphicon-plus text-muted"></i>
     </div>
+    <%= render 'car_card', car: car %>
 </div>
-<%= render 'car_card', car: car %>

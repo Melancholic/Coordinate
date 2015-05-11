@@ -8,10 +8,13 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <%= car_image car%>
+                    <strong><h2><%=car.title%></h2></strong><br>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <%= car_image car%>
+                    </div>
 
-                    <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
-                        <strong><%=car.title%></strong><br>
+                    <div class="col-xs-10 col-sm-8 hidden-md hidden-lg">
+                        
                         <dl>
                             <dt>Color:</dt>
                             <dd><%=color_to car%></dd>
@@ -33,7 +36,6 @@
                         </dl>
                     </div>
                     <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
-                        <strong><%=car.title%></strong><br>
                         <table class="table table-car-information" >
                             <tbody>
                                 <tr>
@@ -76,7 +78,7 @@
                 <button class="btn btn-sm btn-primary" type="button"
                 data-toggle="tooltip"
                 data-original-title="Import data"
-                ><i class="glyphicon glyphicon-envelope"></i></button>
+                ><i class="glyphicon glyphicon-save"></i></button>
                 <span class="pull-right">
                     <%= edit_car_for car %>
                     <%= delete_car_for car %>

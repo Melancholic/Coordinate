@@ -16,6 +16,7 @@
     </a>
   </div>
   <!-- Right  block-->
+  <%= render 'shared/modals/form',form: 'shared/sign_tabs', id:'sign_modal', title: 'Authorization' unless signed_in? %>
   <div class="navbar-collapse collapse" id="navbar-header">
     <ul class="nav navbar-nav navbar-right" >
       <% unless current_page?(root_path) %>
@@ -47,7 +48,6 @@
         </ul>
       </li>
       <%else%>
-      <%= render 'shared/modals/form', form: 'shared/sign_tabs', id:'sign_modal', title: 'Authorization' %>
       <li>
         <a onclick="sign_modal_call()" href="#">Authorization</a>
       </li>

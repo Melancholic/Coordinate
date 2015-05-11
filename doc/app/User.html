@@ -89,13 +89,23 @@
     
     <li ><a href="#method-i-admin_display_name">#admin_display_name</a>
     
+    <li ><a href="#method-i-all_tracks">#all_tracks</a>
+    
     <li ><a href="#method-i-avatar">#avatar</a>
     
     <li ><a href="#method-i-avatar-3D">#avatar=</a>
     
     <li ><a href="#method-i-avatar-3F">#avatar?</a>
     
+    <li ><a href="#method-i-create_car">#create_car</a>
+    
     <li ><a href="#method-i-full_name">#full_name</a>
+    
+    <li ><a href="#method-i-full_region">#full_region</a>
+    
+    <li ><a href="#method-i-group_tracks_by_day">#group_tracks_by_day</a>
+    
+    <li ><a href="#method-i-local_time">#local_time</a>
     
     <li ><a href="#method-i-make_reset_password">#make_reset_password</a>
     
@@ -174,7 +184,7 @@
 
           
           <div class="method-source-code" id="encrypt-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">token</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">token</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -207,7 +217,7 @@
 
           
           <div class="method-source-code" id="get_regex-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_regex</span>
    <span class="ruby-keyword">return</span> <span class="ruby-regexp">/[@][a-zA-Zа-яА-Я0-9\_]+/</span>;
 <span class="ruby-keyword">end</span></pre>
@@ -240,7 +250,7 @@
 
           
           <div class="method-source-code" id="new_remember_token-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">new_remember_token</span>
   <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">urlsafe_base64</span>;
 <span class="ruby-keyword">end</span></pre>
@@ -281,9 +291,42 @@
 
           
           <div class="method-source-code" id="admin_display_name-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">admin_display_name</span>
   <span class="ruby-node">&quot;#{self.login} [#{self.short_name}]&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-all_tracks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">all_tracks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="all_tracks-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">all_tracks</span>()
+  <span class="ruby-constant">Track</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">car</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cars</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -314,7 +357,7 @@
 
           
           <div class="method-source-code" id="avatar-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 125</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">avatar</span>
   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">image</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">image</span>.<span class="ruby-identifier">img</span>  
@@ -351,8 +394,11 @@
 
           
           <div class="method-source-code" id="avatar-3D-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 133</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">avatar=</span>(<span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">if</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">nil?</span>)
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">image</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">create_image</span>(<span class="ruby-identifier">img</span><span class="ruby-value">:arg</span>)
   <span class="ruby-keyword">else</span>
@@ -389,13 +435,50 @@
 
           
           <div class="method-source-code" id="avatar-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 142</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">avatar?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">image</span>
     <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">image</span>.<span class="ruby-identifier">img</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-create_car" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_car</span><span
+            class="method-args">(args={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_car-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_car</span>(<span class="ruby-identifier">args</span>={})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:user_id</span>]<span class="ruby-operator">!=</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-identifier">args</span>[<span class="ruby-value">:user_id</span>]=<span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cars</span><span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Car</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -426,9 +509,132 @@
 
           
           <div class="method-source-code" id="full_name-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 87</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">full_name</span> 
   ([<span class="ruby-keyword">self</span>.<span class="ruby-identifier">name</span>,<span class="ruby-keyword">self</span>.<span class="ruby-identifier">middle_name</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">second_name</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">empty?</span>}).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-full_region" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">full_region</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="full_region-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">full_region</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>); 
+  [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">country</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">region</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">city</span>].<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">empty?</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-group_tracks_by_day" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">group_tracks_by_day</span><span
+            class="method-args">(arg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="group_tracks_by_day-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 183</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">group_tracks_by_day</span>(<span class="ruby-identifier">arg</span>)
+  <span class="ruby-identifier">arg</span><span class="ruby-operator">||=</span><span class="ruby-value">:all</span>;
+  <span class="ruby-keyword">if</span>(<span class="ruby-identifier">arg</span> <span class="ruby-operator">==</span> <span class="ruby-value">:all</span>)
+    <span class="ruby-identifier">tracks_sql</span>=<span class="ruby-keyword">self</span>.<span class="ruby-identifier">all_tracks</span>
+    <span class="ruby-identifier">name</span>=<span class="ruby-string">&quot;All cars&quot;</span>
+    <span class="ruby-identifier">color</span>=<span class="ruby-node">&quot;#32CD32&quot;</span>
+  <span class="ruby-keyword">elsif</span>(<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">Car</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cars</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">arg</span>))
+    <span class="ruby-identifier">tracks_sql</span>=<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">tracks</span>
+    <span class="ruby-identifier">name</span>=<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">title</span>
+    <span class="ruby-identifier">color</span>=<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">color_html</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">x</span>=<span class="ruby-identifier">tracks_sql</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;start_time &lt; ? AND start_time &gt; ?&quot;</span>,<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">beginning_of_day</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>.<span class="ruby-identifier">day</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">beginning_of_day</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>.<span class="ruby-identifier">month</span>).
+    <span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">x</span>.<span class="ruby-identifier">start_time</span>.<span class="ruby-identifier">beginning_of_day</span> , <span class="ruby-identifier">x</span>.<span class="ruby-identifier">distance</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">3</span>)] <span class="ruby-keyword">if</span>  <span class="ruby-identifier">x</span>.<span class="ruby-identifier">distance</span> <span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>}.<span class="ruby-identifier">compact</span>.
+    <span class="ruby-identifier">group_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:first</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:last</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)] }
+    <span class="ruby-comment">#TrackLocation.unscoped.joins(:track).</span>
+    <span class="ruby-comment">#where(track: tracks_sql).</span>
+    <span class="ruby-comment">#where(&quot;tracks.start_time &lt; ? AND tracks.start_time &gt; ?&quot;,Time.now.to_date, Time.now.to_date-1.year).</span>
+    <span class="ruby-comment">#group(:start_time).maximum(:distance).</span>
+    <span class="ruby-comment">#map{|x,v| {x.beginning_of_day =&gt; v.round(3)} if v}.</span>
+    <span class="ruby-comment">#compact.reduce(Hash.new, :merge).to_a</span>
+    <span class="ruby-identifier">result</span>={<span class="ruby-identifier">name</span><span class="ruby-value">:name</span>, <span class="ruby-identifier">data</span><span class="ruby-value">:x</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">0</span>] }, <span class="ruby-identifier">color</span><span class="ruby-value">:color</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-local_time" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">local_time</span><span
+            class="method-args">(time)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="local_time-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">local_time</span>(<span class="ruby-identifier">time</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;now&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">zone</span>=<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeZone</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">time_zone</span>)
+  <span class="ruby-identifier">time</span>.<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-identifier">zone</span>).<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%d.%m.%y %H:%M&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -459,7 +665,7 @@
 
           
           <div class="method-source-code" id="make_reset_password-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">make_reset_password</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-keyword">if</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">reset_password</span>)
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reset_password</span>.<span class="ruby-identifier">delete</span>;
@@ -497,7 +703,7 @@
 
           
           <div class="method-source-code" id="middle_name-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 116</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">middle_name</span>
   (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>)<span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">middle_name</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -530,7 +736,7 @@
 
           
           <div class="method-source-code" id="middle_name-3D-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 120</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">middle_name=</span>(<span class="ruby-identifier">new_middle_name</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">middle_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_middle_name</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">middle_name</span>
@@ -564,7 +770,7 @@
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 99</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
   (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>)<span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -597,7 +803,7 @@
 
           
           <div class="method-source-code" id="name-3D-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 103</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name=</span>(<span class="ruby-identifier">new_name</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_name</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">name</span>
@@ -631,7 +837,7 @@
 
           
           <div class="method-source-code" id="reset_password_key-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_password_key</span>()
   <span class="ruby-keyword">if</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">reset_password</span>)
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reset_password</span>.<span class="ruby-identifier">password_key</span>
@@ -668,7 +874,7 @@
 
           
           <div class="method-source-code" id="second_name-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 108</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">second_name</span>
   (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>)<span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">second_name</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -701,7 +907,7 @@
 
           
           <div class="method-source-code" id="second_name-3D-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 111</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">second_name=</span>(<span class="ruby-identifier">new_second_name</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">profile</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">second_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_second_name</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">second_name</span>
@@ -735,7 +941,7 @@
 
           
           <div class="method-source-code" id="short_name-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">short_name</span> 
   ([<span class="ruby-keyword">self</span>.<span class="ruby-identifier">second_name</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">initial</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">middle_name</span>.<span class="ruby-identifier">initial</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">empty?</span>}).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -768,7 +974,7 @@
 
           
           <div class="method-source-code" id="verificate-21-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verificate!</span>(<span class="ruby-identifier">flag</span>=<span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">verification_user</span>.<span class="ruby-identifier">nil?</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">verification_user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">verificated</span><span class="ruby-value">:flag</span>)
@@ -806,7 +1012,7 @@
 
           
           <div class="method-source-code" id="verificated-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verificated?</span>()
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">verification_user</span>.<span class="ruby-identifier">verificated</span>
 <span class="ruby-keyword">end</span></pre>
@@ -839,7 +1045,7 @@
 
           
           <div class="method-source-code" id="verification_key-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 66</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verification_key</span>()
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">verification_user</span>.<span class="ruby-identifier">verification_key</span>
 <span class="ruby-keyword">end</span></pre>

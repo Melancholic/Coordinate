@@ -70,6 +70,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-charts_controller">#charts_controller</a>
+    
     <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-destroy">#destroy</a>
@@ -130,6 +132,74 @@
        </header>
 
     
+      <div id="method-i-charts_controller" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">charts_controller</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="charts_controller-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">charts_controller</span>
+  <span class="ruby-keyword">case</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:request</span>])
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;speed_avg&quot;</span>
+      <span class="ruby-identifier">result</span>={<span class="ruby-identifier">success</span><span class="ruby-value">:true</span>,<span class="ruby-identifier">result</span><span class="ruby-value">:TrackLocation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">track</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">all_tracks</span>).<span class="ruby-identifier">average</span>(<span class="ruby-string">&#39;speed&#39;</span>).<span class="ruby-identifier">to_f</span>.<span class="ruby-identifier">round</span>};
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;speed_max&quot;</span>
+      <span class="ruby-identifier">result</span>={<span class="ruby-identifier">success</span><span class="ruby-value">:true</span>,<span class="ruby-identifier">result</span><span class="ruby-value">:TrackLocation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">track</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">all_tracks</span>).<span class="ruby-identifier">maximum</span>(<span class="ruby-string">&#39;speed&#39;</span>).<span class="ruby-identifier">to_f</span>.<span class="ruby-identifier">round</span>};
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;percent_tracks_for_cars&quot;</span>
+      <span class="ruby-ivar">@cars_with_tracs</span>=<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">cars</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">tracks</span>.<span class="ruby-identifier">empty?</span>}
+      <span class="ruby-identifier">colors</span>=[];
+      <span class="ruby-identifier">data</span>=<span class="ruby-ivar">@cars_with_tracs</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> 
+        <span class="ruby-identifier">colors</span>.<span class="ruby-identifier">append</span>(<span class="ruby-node">&quot;##{x.color}&quot;</span>);[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">title</span>, <span class="ruby-identifier">x</span>.<span class="ruby-identifier">tracks</span>.<span class="ruby-identifier">count</span><span class="ruby-operator">*</span><span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">all_tracks</span>.<span class="ruby-identifier">count</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">result</span>={<span class="ruby-identifier">success</span><span class="ruby-value">:true</span>, <span class="ruby-identifier">result</span>{{<span class="ruby-identifier">data</span><span class="ruby-operator">:</span> <span class="ruby-identifier">data</span>, <span class="ruby-identifier">colors</span><span class="ruby-operator">:</span> <span class="ruby-identifier">colors</span>}};
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;percent_distance_for_cars&quot;</span>
+      <span class="ruby-ivar">@cars_with_tracs</span>=<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">cars</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">tracks</span>.<span class="ruby-identifier">empty?</span>}
+      <span class="ruby-identifier">colors</span>=[];
+      <span class="ruby-identifier">data</span>=<span class="ruby-ivar">@cars_with_tracs</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> 
+        <span class="ruby-identifier">colors</span>.<span class="ruby-identifier">append</span>(<span class="ruby-node">&quot;##{x.color}&quot;</span>);[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">title</span>,<span class="ruby-constant">Track</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">car</span><span class="ruby-operator">:</span> <span class="ruby-identifier">x</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sum</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">distance</span>}]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">result</span>={<span class="ruby-identifier">success</span><span class="ruby-value">:true</span>, <span class="ruby-identifier">result</span>{{<span class="ruby-identifier">data</span><span class="ruby-operator">:</span> <span class="ruby-identifier">data</span>, <span class="ruby-identifier">colors</span><span class="ruby-operator">:</span> <span class="ruby-identifier">colors</span>}};
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;length_tracks_of_time&quot;</span>
+      <span class="ruby-identifier">data</span>=[];
+      <span class="ruby-identifier">data</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">group_tracks_by_day</span>(<span class="ruby-value">:all</span>))
+      <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">cars</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-value">10</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">group_tracks_by_day</span>(<span class="ruby-identifier">x</span>)) }
+      <span class="ruby-identifier">result</span>={<span class="ruby-identifier">success</span><span class="ruby-value">:true</span>, <span class="ruby-identifier">result</span><span class="ruby-operator">:</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">compact</span>};
+    <span class="ruby-keyword">else</span> 
+      <span class="ruby-identifier">result</span>= {<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:bad_request</span>,
+        <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>,
+        <span class="ruby-value">:info</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Bad json!&quot;</span> 
+      }};
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">result</span> }
+  <span class="ruby-keyword">end</span>
+
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-create" class="method-detail ">
         
         <div class="method-heading">
@@ -149,7 +219,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_params</span>());
   <span class="ruby-keyword">if</span>(<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>)
@@ -194,7 +264,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 80</span>
  <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
    <span class="ruby-identifier">ulogin</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">login</span>;
    <span class="ruby-keyword">if</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">destroy</span>)
@@ -233,7 +303,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-comment">#Has been added in app/helpers/sessions_helper.rb:current_user?(user)</span>
  <span class="ruby-comment">#@user= User.find(params[:id]);</span>
@@ -267,7 +337,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>()
   <span class="ruby-comment">#@users =  User.all.sort_by { |s| s.login };</span>
   <span class="ruby-ivar">@users</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>]);
@@ -334,7 +404,7 @@
 
           
           <div class="method-source-code" id="recive_email_for_reset_pass-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 113</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">recive_email_for_reset_pass</span>
   <span class="ruby-identifier">user</span>=<span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>]);
   <span class="ruby-identifier">host</span>=<span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_ip</span>;
@@ -379,7 +449,7 @@
 
           
           <div class="method-source-code" id="reset_password-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_password</span>
   <span class="ruby-ivar">@title</span>=<span class="ruby-string">&quot;Reset Password&quot;</span>;
   <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:key</span>] <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-constant">ResetPassword</span>.<span class="ruby-identifier">get_user</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:key</span>]))
@@ -426,7 +496,7 @@
 
           
           <div class="method-source-code" id="resetpass_recive_pass-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 129</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 149</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resetpass_recive_pass</span>
  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:format</span>]);
  <span class="ruby-keyword">if</span>  (<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">user_params</span>()))
@@ -468,7 +538,7 @@
 
           
           <div class="method-source-code" id="sent_verification_mail-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sent_verification_mail</span>()
   <span class="ruby-ivar">@user</span>= <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]);
   <span class="ruby-constant">UsersMailer</span>.<span class="ruby-identifier">verification</span>(<span class="ruby-ivar">@user</span>).<span class="ruby-identifier">deliver_now</span>;
@@ -506,7 +576,26 @@
           <div class="method-source-code" id="show-source">
             <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>()
-  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]); 
+  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>; 
+  <span class="ruby-ivar">@cars</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">cars</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>]);
+  <span class="ruby-keyword">if</span>(<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">all_tracks</span>.<span class="ruby-identifier">count</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>)
+    <span class="ruby-ivar">@days</span>=<span class="ruby-constant">TimeDifference</span>.<span class="ruby-identifier">between</span>(<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">all_tracks</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">start_time</span>, <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">all_tracks</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">start_time</span>).<span class="ruby-identifier">in_days</span>.<span class="ruby-identifier">round</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>
+    <span class="ruby-ivar">@total_tracks</span>=<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">all_tracks</span>.<span class="ruby-identifier">count</span>
+    <span class="ruby-ivar">@total_distance</span>=<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">all_tracks</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:distance</span>).<span class="ruby-identifier">round</span>(<span class="ruby-value">3</span>);
+    <span class="ruby-ivar">@average_distance</span>=(<span class="ruby-ivar">@total_distance</span><span class="ruby-operator">/</span><span class="ruby-ivar">@total_tracks</span>).<span class="ruby-identifier">round</span>(<span class="ruby-value">3</span>)
+    <span class="ruby-ivar">@cars_with_tracs</span>=<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">cars</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">tracks</span>.<span class="ruby-identifier">empty?</span>}
+    <span class="ruby-ivar">@average_distance_per_car</span>=(<span class="ruby-ivar">@total_distance</span><span class="ruby-operator">/</span><span class="ruby-ivar">@cars_with_tracs</span>.<span class="ruby-identifier">count</span>).<span class="ruby-identifier">round</span>(<span class="ruby-value">3</span>)
+    <span class="ruby-ivar">@average_distance_per_day</span>=(<span class="ruby-ivar">@total_distance</span><span class="ruby-operator">/</span><span class="ruby-ivar">@days</span>).<span class="ruby-identifier">round</span>(<span class="ruby-value">3</span>)
+    <span class="ruby-ivar">@favorite_car</span>=<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">cars</span>.<span class="ruby-identifier">max_by</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">tracks</span>.<span class="ruby-identifier">count</span>}
+    <span class="ruby-ivar">@average_tracks_per_day</span>=(<span class="ruby-ivar">@total_tracks</span><span class="ruby-operator">/</span><span class="ruby-ivar">@days</span>).<span class="ruby-identifier">round</span>(<span class="ruby-value">1</span>)
+    <span class="ruby-ivar">@average_tracks_per_car</span>=(<span class="ruby-ivar">@total_tracks</span><span class="ruby-operator">/</span><span class="ruby-ivar">@cars_with_tracs</span>.<span class="ruby-identifier">count</span>).<span class="ruby-identifier">round</span>(<span class="ruby-value">1</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> 
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> {<span class="ruby-identifier">render</span> <span class="ruby-string">&#39;paginate.js&#39;</span>}
+  <span class="ruby-keyword">end</span>
+
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -537,10 +626,10 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
  <span class="ruby-comment">#Has been added in app/helpers/sessions_helper.rb:current_user?(user)</span>
- <span class="ruby-comment">#@user= User.find(params[:id]);</span>
+ <span class="ruby-ivar">@user</span>= <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]);
  <span class="ruby-keyword">if</span>  (<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">user_params</span>()))
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Updating your profile is success&quot;</span>
     <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@user</span>);
@@ -577,7 +666,7 @@
 
           
           <div class="method-source-code" id="verification-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 79</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verification</span>
  <span class="ruby-ivar">@user</span>= <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]);
  <span class="ruby-ivar">@verification_key</span>=<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">verification_key</span>;
@@ -630,9 +719,9 @@
 
           
           <div class="method-source-code" id="user_params-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 202</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">user_params</span>
-  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:login</span>,<span class="ruby-value">:email</span>,<span class="ruby-value">:password</span>, <span class="ruby-value">:password_confirmation</span>,
+  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:login</span>,<span class="ruby-value">:email</span>,<span class="ruby-value">:password</span>, <span class="ruby-value">:password_confirmation</span>, <span class="ruby-value">:time_zone</span>,
    <span class="ruby-identifier">profile_attributes</span>[[<span class="ruby-value">:id</span>,<span class="ruby-value">:name</span>,<span class="ruby-value">:second_name</span>,<span class="ruby-value">:middle_name</span>,<span class="ruby-value">:img</span>,<span class="ruby-value">:mobile_phone</span>,<span class="ruby-value">:country</span>, <span class="ruby-value">:city</span>,<span class="ruby-value">:region</span>, <span class="ruby-identifier">image_attributes</span>[[<span class="ruby-value">:id</span>, <span class="ruby-value">:img</span>, <span class="ruby-value">:_destroy</span>]]);
 <span class="ruby-keyword">end</span></pre>
           </div>

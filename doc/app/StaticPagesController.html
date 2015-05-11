@@ -131,7 +131,7 @@
 
           
           <div class="method-source-code" id="about-source">
-            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">about</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -163,7 +163,7 @@
 
           
           <div class="method-source-code" id="contacts-source">
-            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">contacts</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -195,7 +195,7 @@
 
           
           <div class="method-source-code" id="faq-source">
-            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">faq</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -227,11 +227,17 @@
 
           
           <div class="method-source-code" id="home-source">
-            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 3</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">home</span>
-<span class="ruby-comment">#  @location= Location.new(address: &#39;Stupino&#39;);</span>
-<span class="ruby-comment">#  @location.geocode;</span>
-<span class="ruby-comment">#  @marks=[];</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">signed_in?</span>
+      <span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>=<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">time_zone</span>;
+      <span class="ruby-identifier">gon</span>.<span class="ruby-identifier">timezone</span>=<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">formatted_offset</span>
+    <span class="ruby-comment"># @locs=[];</span>
+    <span class="ruby-comment">#     current_user.cars.first.tracks.each{|x| @locs.append(x.track_locations)} if signed_in?;</span>
+    <span class="ruby-comment"># gon.locs=@locs;</span>
+
+   <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">gon</span>.<span class="ruby-identifier">timezone</span><span class="ruby-operator">||=</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">name</span>;
 <span class="ruby-keyword">end</span></pre>
           </div>
           

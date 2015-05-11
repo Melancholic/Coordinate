@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class ApplicationController - Rails Application Documentation</title>
+<title>class Color - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,26 +58,11 @@
   <h3>Parent</h3>
 
   
-  <p class="link">ActionController::Base
+  <p class="link"><a href="Object.html">Object</a>
   
 </div>
 
-    <div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
-
-  <ul class="link-list">
-  
-  
-    <li><a class="include" href="SessionsHelper.html">SessionsHelper</a>
-  
-  
-  
-    <li><a class="include" href="ApplicationHelper.html">ApplicationHelper</a>
-  
-  
-  </ul>
-</div>
-
+    
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -85,11 +70,11 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-authenticate_admin_user-21">#authenticate_admin_user!</a>
+    <li ><a href="#method-c-all">::all</a>
     
-    <li ><a href="#method-i-current_ability">#current_ability</a>
+    <li ><a href="#method-c-all_html">::all_html</a>
     
-    <li ><a href="#method-i-current_admin_user">#current_admin_user</a>
+    <li ><a href="#method-c-select_array">::select_array</a>
     
   </ul>
 </div>
@@ -97,9 +82,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-ApplicationController">
-  <h1 id="class-ApplicationController" class="class">
-    class ApplicationController
+<main role="main" aria-labelledby="class-Color">
+  <h1 id="class-Color" class="class">
+    class Color
   </h1>
 
   <section class="description">
@@ -115,20 +100,34 @@
     
 
     
-
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="COLORS">COLORS
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
     
 
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3>Public Class Methods</h3>
        </header>
 
     
-      <div id="method-i-authenticate_admin_user-21" class="method-detail ">
+      <div id="method-c-all" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">authenticate_admin_user!</span><span
+          <span class="method-name">all</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -143,13 +142,10 @@
           
 
           
-          <div class="method-source-code" id="authenticate_admin_user-21-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticate_admin_user!</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">current_admin_user</span>
-    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;Access error!&quot;</span>
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span> 
-  <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="all-source">
+            <pre><span class="ruby-comment"># File lib/ext_ruby/color.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
+        <span class="ruby-constant">COLORS</span>;
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -161,10 +157,10 @@
       </div>
 
     
-      <div id="method-i-current_ability" class="method-detail ">
+      <div id="method-c-all_html" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">current_ability</span><span
+          <span class="method-name">all_html</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -179,10 +175,10 @@
           
 
           
-          <div class="method-source-code" id="current_ability-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">current_ability</span>
-  <span class="ruby-ivar">@current_ability</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Ability</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">current_user</span>)
+          <div class="method-source-code" id="all_html-source">
+            <pre><span class="ruby-comment"># File lib/ext_ruby/color.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all_html</span>
+        <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-string">&#39;#&#39;</span><span class="ruby-operator">+</span><span class="ruby-identifier">x</span>};
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -194,10 +190,10 @@
       </div>
 
     
-      <div id="method-i-current_admin_user" class="method-detail ">
+      <div id="method-c-select_array" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">current_admin_user</span><span
+          <span class="method-name">select_array</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -212,12 +208,10 @@
           
 
           
-          <div class="method-source-code" id="current_admin_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">current_admin_user</span>
- <span class="ruby-comment">#signed_in?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">signed_in?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">admin?</span>
-  <span class="ruby-identifier">current_user</span>
+          <div class="method-source-code" id="select_array-source">
+            <pre><span class="ruby-comment"># File lib/ext_ruby/color.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">select_array</span>
+        <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> [<span class="ruby-string">&#39;#&#39;</span><span class="ruby-operator">+</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">x</span>, {<span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">color</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;#&#39;</span><span class="ruby-operator">+</span><span class="ruby-identifier">x</span>}}]}
 <span class="ruby-keyword">end</span></pre>
           </div>
           

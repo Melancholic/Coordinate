@@ -21,6 +21,12 @@ function car_init_list() {
     var panelsButton = $('.dropdown-car');
     panels.hide();
     $('.car-row').click(car_card_toggle);
+    $(".car-row .car-infos").click(function (e) {
+        e.stopPropagation();
+   });
+    $(".car-row a").click(function (e) {
+        e.stopPropagation();
+   });
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#car_color').colorselector();

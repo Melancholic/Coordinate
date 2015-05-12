@@ -1,11 +1,12 @@
 module UsersHelper
   
-  def avatar_for(user,options={size: 100})
+  def avatar_for(user,type= :medium,options={})
     options[:alt]||=user.login
     if user.avatar.nil?
+      options[:size]=Image::SIZES[type];
       return gravatar_for(user, options);
     else
-      image_tag(user.avatar.url, options)
+      image_tag(user.avatar.url(type), options)
     end
   end
 

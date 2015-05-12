@@ -2,7 +2,7 @@
 <div class="center jumbotron container">
  <div class="row">
   <div class ="col-md-4">
-    <%= link_to avatar_for(@user, size: 200, class: 'img-rounded'), @user %>
+    <%= link_to avatar_for(@user, :normal, class: 'img-rounded'), @user %>
   </div>
   <div class="col-md-4">
     <h1><%=@user.login%></h1>  

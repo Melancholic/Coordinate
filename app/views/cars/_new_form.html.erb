@@ -1,15 +1,11 @@
 <div class="col-md-12" id="new_car_form">
 	<%@user ||=current_user %>      
 	<%= simple_form_for(@car, class:"form-horizontal") do |f| %>
-	<div class="col-md-3">
+	<div class="col-sm-5 col-md-4">
 		<div class="text-center">
-			<% if @car.image %>
-			<%= image_tag @car.img.url, height:200, class:"avatar-big img-rounded" %>
-			<% else %>
 			<section>
-				<%= image_tag("icons/auto-icon.png",height:200, class:"avatar-big img-rounded") %>
+				<%= car_image(@car,:normal, class:"img-rounded img-responsitive") %>
 			</section>
-			<% end %>
 			<h3>Upload image of this car</h3>
 
 			<%= f.simple_fields_for :image, f.object.image || f.object.build_image do |i| %>
@@ -18,7 +14,7 @@
 			<%end%>
 		</div>
 	</div>
-	<div class="col-md-offset-1 col-md-6 personal-info">
+	<div class="col-sm-7 col-md-offset-1 col-md-5 personal-info">
 		<div class="row">
 			<%= f.input(:title) %>
 		</div>

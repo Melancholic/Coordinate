@@ -15,7 +15,7 @@
 
           <% @cars.each do |x| %>
           <tr class="car_tooltip" title="..." data-item=<%="#{x.id}"%> >
-            <td><%=car_image x, size:"50x50"%></td>
+            <td><%=car_image x, :small%></td>
             <td><strong><%=link_to x.title, x %></strong></td>
             <td><%=x.priority%></td>
             <td><%= color_to x.color %></td>

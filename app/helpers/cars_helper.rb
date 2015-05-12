@@ -1,13 +1,12 @@
 module CarsHelper
-	def car_image car, arg={size:"100x100"}
+	def car_image car, type=:medium,arg={}
 		arg[:alt]||=car.title;
 		arg[:class]||="img-rounded car-small-image";
 		if car.image 
-            content_tag(:div, image_tag(car.img.url, arg ), class:"col-md-3 col-lg-3 hidden-xs hidden-sm")+
-            content_tag(:div, image_tag(car.img.url, arg), class:"col-xs-2 col-sm-2 hidden-md hidden-lg")
+            image_tag(car.img.url(type), arg )
         else
-            content_tag(:div, image_tag("icons/auto-icon.png", arg), class:"col-md-3 col-lg-3 hidden-xs hidden-sm")+
-            content_tag(:div, image_tag("icons/auto-icon.png", arg), class:"col-xs-2 col-sm-2 hidden-md hidden-lg")
+            arg[:size]=Image::SIZES[type]
+            image_tag("icons/auto-icon.png", arg)
         end
     end
 

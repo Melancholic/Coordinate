@@ -3,10 +3,10 @@
       <div class="col-md-3">
         <div class="text-center">
           <% if @user.avatar? %>
-          <%= avatar_for(@user, height:200, class:"avatar-big img-rounded ") %>
+          <%= avatar_for(@user, :normal, class:"avatar-big img-rounded ") %>
           <% else %>
           <section>
-          <%= link_to(avatar_for(@user,size:200, class:"avatar-big img-rounded"),"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
+          <%= link_to(avatar_for(@user,:normal, class:"avatar-big img-rounded"),"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
           </section>
           <section>
           <%= link_to('Change Gravatar',"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar')%>

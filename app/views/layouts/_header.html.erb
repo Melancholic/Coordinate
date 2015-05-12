@@ -28,7 +28,7 @@
       <li id="fat-menu" class="dropdown menu-head">  
         <a href='#' class="dropdown-toggle" data-toggle="dropdown" >
           Account <b class="caret"></b>
-          <%=avatar_for(current_user, size: "25x25", alt: "#{current_user.login}", class:"img-circle")  %>
+          <%=avatar_for(current_user, :icon, alt: "#{current_user.login}", class:"img-circle")  %>
         </a>
         <ul class="dropdown-menu">
           <li data-no-turbolink> <%= link_to("Profile", current_user)%></li>

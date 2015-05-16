@@ -16,5 +16,9 @@ class TrackLocation < Location
 			self.distance=0;
 		end
 	end
+	after_save do
+		self.track.update_attributes(start_time: self.time) if self.time<self.track.start_time
+		self.track.update_attributes(stop_time: self.time) if !self.track.stop_time.nil? && self.time>self.track.stop_time
+	end
 
 end

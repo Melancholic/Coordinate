@@ -22,7 +22,7 @@ class Car < ActiveRecord::Base
 	end
 
 	def create_track(args)
-		self.tracks.create(args)
+		self.tracks.create!(args)
 	end
 
 	def img

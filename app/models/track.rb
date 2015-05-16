@@ -2,6 +2,11 @@ class Track < ActiveRecord::Base
 	belongs_to :car;
 	has_many :track_locations, -> { order(time: :asc) }, dependent: :destroy ;
 	default_scope -> { order(stop_time: :desc, id: :desc) }
+	#validates(:start_time, uniqueness: true);
+	after_create{
+		pred_track=self.car.tracks.second
+		pred_track.update_attributes(stop_time:pred_track.last_time) unless pred_track.nil?
+	}
 	def create_location(args)
 		self.track_locations.create(args)
 	end
@@ -34,5 +39,11 @@ class Track < ActiveRecord::Base
 		else
 			return "dur"
 		end
+	end
+
+	def last_time
+		x=self.stop_time
+		x||=self.track_locations.last.time unless self.track_locations.empty?
+		x||=self.start_time
 	end
 end

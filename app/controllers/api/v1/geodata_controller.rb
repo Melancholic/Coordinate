@@ -5,57 +5,7 @@ class Api::V1::GeodataController < Api::V1::BaseController
 	def recive
 		new_loc_time=convert_time(params[:time]);
 		@car=Car.find(ApiToken.find_by(token:get_token()).car_id)
-		track=Track.where(car_id:@car.id).order(start_time: :desc).first
-		@cur_track=track
-		if track.nil?
-			@cur_track=@car.create_track(start_time: convert_time(params[:time]))
-			logger.debug("Cur track is create because tracks is nil")
-		else
-			#order by time  DESC 
-			@last_loc=track.track_locations.last;
-			
-			# if(@last_loc && params[:speed]==0)
-			# s=(@last_loc.distance_from ([params[:latitude],params[:longitude]]))*1000
-			# t=TimeDifference.between(@last_loc.time, convert_time(params[:time])).in_seconds
-			# v=(s/t)*3.6;
-			# if(t==0 || v<0.8)
-			# 	logger.debug("Location is duplicated, update pred!")
-			# 	n_coord={latitude: (@last_loc.latitude+params[:latitude])/2,
-			# 			 longitude: (@last_loc.longitude+params[:longitude])/2}
-			# 	@last_loc.update_attributes(n_coord);
-			# 	render status: 200, :json => { :success => true, :info => "Pred location updated"} 
-			# 	return;
-			# else
-			# 	params[:speed]=v;
-			# end
-			# end
-			if(@last_loc.nil?)
-
-				if(TimeDifference.between(convert_time(params[:time]),track.start_time).in_minutes > 15)
-					track.destroy;
-					@cur_track=@car.create_track(start_time: convert_time(params[:time]));
-					logger.debug("New Track is created after destroy old because old Track is empty");
-				else
-					track.update_attributes(start_time: convert_time(params[:time]))
-					@cur_track=track;
-				end
-			elsif (TimeDifference.between(@last_loc.time,convert_time(params[:time])).in_minutes > 15 )
-				if(new_loc_time>@last_loc.time)
-					track.update_attributes(stop_time: @last_loc.time);
-					@cur_track=@car.create_track(start_time: convert_time(params[:time]))	
-					logger.debug("Cur track is create because tracks is ended")
-				else
-					if(new_loc_time>track.start_time)
-						@cur_track=track;
-						logger.debug("Current track is last, because location time > track start time, but < track stop time")
-					elsif 
-						@cur_track=@car.tracks.where(":dt > start_time  AND ((stop_time > :dt) OR (stop_time iS NULL))", dt: new_loc_time).first
-						logger.debug("Find other track, where location time > track start time, but < track stop time")
-					end 
-				end				
-			end
-		end
-
+		@cur_track=find_track(@car,params);
 		@cur_track.create_location({longitude:params[:longitude],latitude:params[:latitude],	speed:params[:speed]*3.6 ,accuracy:params[:accuracy], time:convert_time(params[:time])});
 		logger.debug("Location has been saved!")
 		render status: 200, :json => { :success => true, :info => "New location saved"} 
@@ -63,6 +13,59 @@ class Api::V1::GeodataController < Api::V1::BaseController
 
 
 private
+
+	def find_track(car,params={})
+		@TIME_INTERVAL=15;
+		time_int=convert_time(params[:time])
+		#1
+		track=car.tracks.first;
+		#<nothing>X
+		if(track.nil?)
+			return car.create_track(start_time: time_int); #+
+		#-----  >15min X
+		elsif(time_int>track.last_time)
+			if(TimeDifference.between(track.last_time,time_int).in_minutes > @TIME_INTERVAL)
+				track.update_attributes(stop_time: track.last_time);
+				logger.debug("Location include in new track")
+				return car.create_track(start_time: time_int);
+			else
+				logger.debug("Location include in last track")
+				return track;
+			end
+		end
+		#2
+		track_nxt= car.tracks.where(start_time: time_int .. time_int+@TIME_INTERVAL.minute).last;
+		track_prd=car.tracks.where(stop_time: time_int-@TIME_INTERVAL.minute .. time_int).first;
+		if (track_nxt.nil? && track_prd.nil?)
+			#--- >15min X >15min ---
+			return car.create_track(start_time: time_int);
+		elsif(!track_nxt.nil? && !track_prd.nil?)
+			logger.debug("Track need merge")
+			#--- <15min X <15min ---  (merge 2 path)
+			if(track_nxt.track_locations.count>track_prd.track_locations.count)
+				track_prd.track_locations.update_all(track_id: track_nxt);track_prd.reload;
+				track_nxt.update_attributes(start_time:track_prd.start_time)
+				track_prd.destroy
+				track=track_nxt;
+				logger.debug("Track merged with next")
+			else
+				track_nxt.track_locations.update_all(track_id: track_prd);track_prd.reload;
+				track_prd.update_attributes(start_time:track_nxt.start_time)
+				track_nxt.destroy
+				track=track_prd;
+				logger.debug("Track merged with pred")
+			end
+			return track;
+		elsif (!track_nxt.nil? && track_prd.nil?)
+			#--- <15min X  ..... 
+			logger.debug("location include in next track")
+			return track_nxt;
+		elsif(track_nxt.nil? && !track_prd.nil?)
+			#.... X <15min --- 
+			logger.debug("location include in pred track")
+			return track_prd;
+		end
+	end
 	
 	def loc_params
 

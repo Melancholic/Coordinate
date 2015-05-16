@@ -13,7 +13,8 @@ class UsersMail < ActiveRecord::Base
 
   after_save :send_to_admins;
 
-
+  # pagination
+  self.per_page = 15;
 private
   def send_to_admins
     User.admins.each do |x|

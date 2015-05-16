@@ -6,7 +6,7 @@ class CreateUsersMails < ActiveRecord::Migration
       t.string :email, null:false
       t.string :subject, null:false
       t.string :message, null:false, limit:1000
-      t.boolean :opened, default:false
+      t.boolean :opened, default:true
       t.references :user
       t.string :host, limit:15
       t.timestamps null: false

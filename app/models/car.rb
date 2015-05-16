@@ -12,6 +12,7 @@ class Car < ActiveRecord::Base
 	validates :priority, inclusion:{in: 0..10, message: "is not included in 0 .. 10" }
 	validates :description, length:{maximum: DescriptionLength ,minimum:3}
 	default_scope -> { order(:priority => :desc, :title =>:asc) }
+	scope :lasted, -> {unscoped.order(created_at: :desc)}
 	self.per_page=5;
 
 	before_create do 

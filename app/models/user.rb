@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   #Порядок
   default_scope -> {order('login ASC')}
   scope :admins, -> { where(admin: true)}
+  scope :lasted, -> {unscoped.order(created_at: :desc)}
 #  geocoded_by :ip_address
 
   validates(:login, presence: true, length:{maximum:15,minimum:3},format: {with: VALID_login_REGEX});

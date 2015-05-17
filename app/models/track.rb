@@ -11,7 +11,7 @@ class Track < ActiveRecord::Base
 	def merge!(other)
 		other.track_locations.update_all(track_id: self);other.reload;
 		self.update_attributes(start_time:other.start_time) if other.start_time < self.start_time
-		self.update_attributes(stop_time:other.stop_time) if other.stop_time && other.stop_time > self.stop_time
+		self.update_attributes(stop_time:other.last_time) if  self.stop_time && other.last_time > self.stop_time
 		other.destroy
 	end
 	def create_location(args)

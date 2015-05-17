@@ -39,7 +39,7 @@ private
 		#track_prd=car.tracks.where('(stop_time BETWEEN :r1 AND :r2) OR (stop_time IS NULL)', r1: time_int-@TIME_INTERVAL.minute, r2:time_int).first;
 		if (track_nxt.nil? && track_prd.nil?)
 			#---->15min----- X ----->15min------(middle)
-			outer_tracks=car.tracks.where("(:time BETWEEN start_time AND stop_time) OR (:time >= start_time AND stop_time IS NULL)",time:time)
+			outer_tracks=car.tracks.where("(:time BETWEEN start_time AND stop_time) OR (:time >= start_time AND stop_time IS NULL)",time:time_int)
 			outer_track=outer_tracks.last;
 			unless(outer_track.nil?)
 				outer_tracks.each do |x|

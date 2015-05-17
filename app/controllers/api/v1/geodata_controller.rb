@@ -38,21 +38,35 @@ private
 		track_prd=car.tracks.where(stop_time: time_int-@TIME_INTERVAL.minute .. time_int).first;
 		#track_prd=car.tracks.where('(stop_time BETWEEN :r1 AND :r2) OR (stop_time IS NULL)', r1: time_int-@TIME_INTERVAL.minute, r2:time_int).first;
 		if (track_nxt.nil? && track_prd.nil?)
+			#---->15min----- X ----->15min------(middle)
+			outer_tracks=car.tracks.where("(:time BETWEEN start_time AND stop_time) OR (:time >= start_time AND stop_time IS NULL)",time:time)
+			outer_track=outer_tracks.last;
+			unless(outer_track.nil?)
+				outer_tracks.each do |x|
+					if(outer_track!=x)
+						outer_track.merge!(x)
+					end
+				end
+				logger.debug("location include in middle track")
+				return outer_track;
+			end
 			#--- >15min X >15min ---
 			return car.create_track(start_time: time_int);
 		elsif(!track_nxt.nil? && !track_prd.nil?)
 			logger.debug("Track need merge")
 			#--- <15min X <15min ---  (merge 2 path)
 			if(track_nxt.track_locations.count>track_prd.track_locations.count)
-				track_prd.track_locations.update_all(track_id: track_nxt);track_prd.reload;
-				track_nxt.update_attributes(start_time:track_prd.start_time)
-				track_prd.destroy
+				track_nxt.merge!(track_prd);
+				#track_prd.track_locations.update_all(track_id: track_nxt);track_prd.reload;
+				#track_nxt.update_attributes(start_time:track_prd.start_time)
+				#track_prd.destroy
 				track=track_nxt;
 				logger.debug("Track merged with next")
 			else
-				track_nxt.track_locations.update_all(track_id: track_prd);track_nxt.reload;
-				track_prd.update_attributes(stop_time:track_nxt.start_time)
-				track_nxt.destroy
+				track_prd.merge!(track_nxt);
+				#track_nxt.track_locations.update_all(track_id: track_prd);track_nxt.reload;
+				#track_prd.update_attributes(stop_time:track_nxt.start_time)
+				#track_nxt.destroy
 				track=track_prd;
 				logger.debug("Track merged with pred")
 			end

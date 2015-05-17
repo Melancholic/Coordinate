@@ -7,6 +7,13 @@ class Track < ActiveRecord::Base
 		pred_track=self.car.tracks.second
 		pred_track.update_attributes(stop_time:pred_track.last_time) unless pred_track.nil?
 	}
+
+	def merge!(other)
+		other.track_locations.update_all(track_id: self);other.reload;
+		self.update_attributes(start_time:other.start_time) if other.start_time < self.start_time
+		self.update_attributes(stop_time:other.stop_time) if other.stop_time && other.stop_time > self.stop_time
+		other.destroy
+	end
 	def create_location(args)
 		self.track_locations.create(args)
 	end

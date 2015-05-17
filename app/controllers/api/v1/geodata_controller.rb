@@ -36,6 +36,7 @@ private
 		#2
 		track_nxt= car.tracks.where(start_time: time_int .. time_int+@TIME_INTERVAL.minute).last;
 		track_prd=car.tracks.where(stop_time: time_int-@TIME_INTERVAL.minute .. time_int).first;
+		#track_prd=car.tracks.where('(stop_time BETWEEN :r1 AND :r2) OR (stop_time IS NULL)', r1: time_int-@TIME_INTERVAL.minute, r2:time_int).first;
 		if (track_nxt.nil? && track_prd.nil?)
 			#--- >15min X >15min ---
 			return car.create_track(start_time: time_int);
@@ -49,8 +50,8 @@ private
 				track=track_nxt;
 				logger.debug("Track merged with next")
 			else
-				track_nxt.track_locations.update_all(track_id: track_prd);track_prd.reload;
-				track_prd.update_attributes(start_time:track_nxt.start_time)
+				track_nxt.track_locations.update_all(track_id: track_prd);track_nxt.reload;
+				track_prd.update_attributes(stop_time:track_nxt.start_time)
 				track_nxt.destroy
 				track=track_prd;
 				logger.debug("Track merged with pred")

@@ -1,0 +1,50 @@
+<%
+    data||=[]
+%>
+<div id="users_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+$(function () {
+    $('#users_chart').highcharts({
+        colors: ['#FF0000', '#0066FF', '#00CCFF'],
+        title: {
+            text: "Monthly number of new users, <%=Time.now.year%>",
+            x: -20 //center
+        },
+        subtitle: {
+            text: "Total new users in <%=Time.now.year%>: <%=User.where('created_at >= ?', Time.now.utc.beginning_of_year).count %>",
+            x: -20
+        },
+        xAxis: {
+            categories: <%=raw data[0].as_json%>
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'The number of new users (units)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' units'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'New users with cars',
+            data: <%=raw data[1].as_json%>
+        },
+        {
+            name: 'All new users',
+            data: <%=raw data[2].as_json%>
+        }
+    ]});
+});
+</script>

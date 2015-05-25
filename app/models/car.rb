@@ -13,6 +13,7 @@ class Car < ActiveRecord::Base
 	validates :description, length:{maximum: DescriptionLength ,minimum:3}
 	default_scope -> { order(:priority => :desc, :title =>:asc) }
 	scope :lasted, -> {unscoped.order(created_at: :desc)}
+	scope :with_tracks, -> {joins(:tracks).uniq}
 	self.per_page=5;
 
 	before_create do 

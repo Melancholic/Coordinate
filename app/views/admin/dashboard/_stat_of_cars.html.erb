@@ -1,0 +1,50 @@
+<%
+    data||=[]
+%>
+<div id="cars_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+$(function () {
+    $('#cars_chart').highcharts({
+        colors: ['#FF0000', '#0066FF', '#00CCFF'],
+        title: {
+            text: "Monthly number of new cars, <%=Time.now.year%>",
+            x: -20 //center
+        },
+        subtitle: {
+            text: "Total new cars in <%=Time.now.year%>: <%=Car.where('created_at >= ?', Time.now.utc.beginning_of_year).count %>",
+            x: -20
+        },
+        xAxis: {
+            categories: <%=raw data[0].as_json%>
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'The number of new cars (units)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' units'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'New cars with tracks',
+            data: <%=raw data[1].as_json%>
+        },
+        {
+            name: 'All new cars',
+            data: <%=raw data[2].as_json%>
+        }
+    ]});
+});
+</script>

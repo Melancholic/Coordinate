@@ -7,6 +7,9 @@ class UsersMail < ActiveRecord::Base
   validates(:last_name, length:{maximum:20}, absence: false ,format: {with: VALID_NAME_REGEX},allow_blank: true );
   validates(:subject, length:{maximum:50, minimum:5}, presence: true, allow_blank: false );
   validates(:message, length:{maximum:1000, minimum:25}, presence: true ,allow_blank: false );
+  default_scope -> {order(opened: :desc, created_at: :desc)}
+  scope :opened, -> { where(opened: true)}
+  scope :closed, -> { where(opened: false)}
   before_save{
     self.email=email.downcase;
   } 

@@ -152,6 +152,8 @@ GEM
       request_store (>= 1.0.5)
     gretel (3.0.8)
       rails (>= 3.2.0)
+    groupdate (2.4.0)
+      activesupport (>= 3)
     guard (2.12.5)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -238,6 +240,7 @@ GEM
     pg (0.18.1)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
+    populator (1.0.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -421,6 +424,7 @@ DEPENDENCIES
   geocoder
   gon
   gretel
+  groupdate
   guard-rspec
   guard-spork
   highcharts-rails (~> 4.0.0)
@@ -433,6 +437,7 @@ DEPENDENCIES
   momentjs-rails
   paperclip
   pg
+  populator
   rails (~> 4.2.0)
   rails-erd
   rails_12factor (= 0.0.2)

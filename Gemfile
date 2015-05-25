@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'groupdate'
 gem "highcharts-rails", "~> 4.0.0"
 #gem 'tooltipster-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
@@ -54,6 +55,8 @@ group :development, :test do
     gem 'spork-rails'
     gem 'guard-spork'
     gem 'rails-erd'
+    gem 'faker'
+    gem 'populator'
 end
 
 group :test do
@@ -62,7 +65,6 @@ group :test do
     gem 'capybara'
     gem 'factory_girl_rails' 
     # Use fake users gem
-    gem 'faker'
     gem 'timecop'
     gem 'time_difference' 
 end

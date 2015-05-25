@@ -1,8 +1,8 @@
 ActiveAdmin.register_page "Dashboard" do
 
-  menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
-
+  menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") } 
   content title: proc{ I18n.t("active_admin.dashboard") } do
+
   #  div class: "blank_slate_container", id: "dashboard_default_message" do
   #    span class: "blank_slate" do
   #      span I18n.t("active_admin.dashboard_welcome.welcome")
@@ -12,7 +12,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
         column min_width: "500px" do
             panel 'Opened user requests' do
-                paginated_collection( UsersMail.per_page_kaminari(params[:umails_page]).per(5), param_name: 'umails_page') do
+                paginated_collection( UsersMail.per_page_kaminari(params[:umails_page]).per(5), param_name: 'umails_page', download_links:false) do
                     table_for(collection) do  |x|
                         column 'Opened', :opened do|object|
                             object.opened? ?  status_tag( "yes", :ok ) : status_tag( "no" )
@@ -35,29 +35,40 @@ ActiveAdmin.register_page "Dashboard" do
                     end
                 end
             end
+                 panel 'Statistics for the month users requests' do
+                    div do 
+                        render 'stat_of_urequests', opened:UsersMail.opened.where('created_at >= ?',Time.now.utc.beginning_of_year).count, 
+                                                    closed:UsersMail.closed.where('created_at >= ?',Time.now.utc.beginning_of_year).count;
+                    end 
+                end
         end
             column min_width: "500px" do
                 panel 'System notifications' do
-                    paginated_collection( User.per_page_kaminari(params[:users_page]).per(15), param_name: 'users_page') do
+                    paginated_collection( User.per_page_kaminari(params[:users_page]).per(15), param_name: 'notifications_page', download_links:false) do
                         table_for(collection) do  |x|
                             "..."
                         end
                     end
                 end
+                panel 'Statistics for the month of notifications' do
+                     div do 
+                        render 'stat_of_notifications'
+                     end  
+                end
             end
             column min_width: "500px" do
                 panel 'Database info' do
-                    info={}
-                    config   = Rails.configuration.database_configuration
-                    info[:dbname]=config[Rails.env]["database"]
-                    info[:dbsize]=ActiveRecord::Base.connection.execute("SELECT pg_size_pretty(pg_database_size('#{info[:dbname]}'))").first.first.last
-                    info[:tables]=ActiveRecord::Base.connection.execute("SELECT count(relname) as tables_count 
+                    dbinfo={}
+                    config = Rails.configuration.database_configuration
+                    dbinfo[:dbname]=config[Rails.env]["database"]
+                    dbinfo[:dbsize]=ActiveRecord::Base.connection.execute("SELECT pg_size_pretty(pg_database_size('#{dbinfo[:dbname]}'))").first.first.last
+                    dbinfo[:tables]=ActiveRecord::Base.connection.execute("SELECT count(relname) as tables_count 
                         FROM pg_class WHERE relname not SIMILAR TO '(pg|sql)_%' AND relkind = 'r';").
                         first['tables_count'] || '???'
-                    info[:indexes]=ActiveRecord::Base.connection.execute("SELECT count(relname) as tables_count 
+                    dbinfo[:indexes]=ActiveRecord::Base.connection.execute("SELECT count(relname) as tables_count 
                         FROM pg_class WHERE relname not SIMILAR TO '(pg|sql)_%' AND relkind = 'i';").
                         first['tables_count'] || '???'
-                    info[:rows]=ActiveRecord::Base.connection.execute("SELECT
+                    dbinfo[:rows]=ActiveRecord::Base.connection.execute("SELECT
                           SUM(pgClass.reltuples) AS rows
                         FROM
                           pg_class pgClass
@@ -67,19 +78,26 @@ ActiveAdmin.register_page "Dashboard" do
                           pgNamespace.nspname NOT IN ('pg_catalog', 'information_schema') AND
                           pgClass.relkind='r';").first['rows']
 
-                    table_for (info) do  |x|
+                    table_for (dbinfo) do  |x|
                         column 'Database',:dbname
                         column 'Size',:dbsize
                         column 'Tables',:tables
                         column 'Indexes',:indexes
                         column 'Rows',:rows
                     end
-                    table_for (info) do  |x|
-                        column 'Database',:dbname
-                        column 'Size',:dbsize
-                        column 'Tables',:tables
-                        column 'Indexes',:indexes
+                    tbinfo= ActiveRecord::Base.connection.execute("SELECT
+                          pgClass.reltuples AS rows, pgClass.relname AS table, (pgClass.relpages * 8) / 1024 AS size_mb
+                        FROM
+                          pg_class pgClass
+                        LEFT JOIN
+                          pg_namespace pgNamespace ON (pgNamespace.oid = pgClass.relnamespace)
+                        WHERE
+                          pgNamespace.nspname NOT IN ('pg_catalog', 'information_schema') AND
+                          pgClass.relkind='r';").to_a.each(&:symbolize_keys!)
+                    table_for (tbinfo) do  |x|
+                        column 'Table',:table
                         column 'Rows',:rows
+                        column 'Size (MB)', :size_mb
                     end
                 end
             end
@@ -87,7 +105,7 @@ ActiveAdmin.register_page "Dashboard" do
         columns do
             column min_width: "500px" do
                 panel 'Last users' do
-                    paginated_collection( User.lasted.per_page_kaminari(params[:users_page]).per(5), param_name: 'users_page') do
+                    paginated_collection( User.lasted.per_page_kaminari(params[:users_page]).per(5), param_name: 'users_page',  download_links:false) do
                         table_for(collection) do  |x|
                             column 'id', :id
                             column 'avatar' do |y|
@@ -99,21 +117,38 @@ ActiveAdmin.register_page "Dashboard" do
                             column 'email' do |y|
                                 mail_to y.email
                             end
+                            column 'verificated' do |y|
+                                y.verificated? ?  status_tag( "yes", :ok ) : status_tag( "no" )
+                            end
                             column 'created_at', :created_at
                         end
                     end
                 end
+                panel "Statistics of new users per year"do
+                     div do 
+                        with_cars_array=(User.unscoped.with_cars.group_by_month('users.created_at').count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        all_array=(User.unscoped.group_by_month('users.created_at').count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        (1 .. Time.now.month).each do |x| 
+                            with_cars_array[x]=0 unless with_cars_array.include? x     
+                            all_array[x]=0 unless all_array.include? x
+                        end
+                        all_array=all_array.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        with_cars_array=with_cars_array.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        keys=all_array.keys.map{|x|Date::MONTHNAMES[x] }
+                        render 'stat_of_users', data:[keys,with_cars_array.values,all_array.values]
+                     end  
+                end
             end
             column min_width: "500px" do
                 panel 'Last cars' do
-                    paginated_collection( Car.lasted.per_page_kaminari(params[:cars_page]).per(5), param_name: 'cars_page') do
+                    paginated_collection( Car.lasted.per_page_kaminari(params[:cars_page]).per(5), param_name: 'cars_page', download_links:false) do
                         table_for(collection) do  |x|
                             column 'id', :id
                             column 'title' do |y|
                                 link_to  y.title, admin_car_path(y)
                             end
                             column 'image' do |y|
-                                image_tag(Car.first.image.img.url(:icon), height:"20") if y.image
+                                image_tag(y.image.img.url(:icon), height:"20", class:"img img-rounded") if y.image
                             end
                             column 'user' do |y|
                                 link_to  y.user.login, admin_user_path(y.user)
@@ -122,8 +157,21 @@ ActiveAdmin.register_page "Dashboard" do
                         end
                     end
                 end
+                panel "Statistics of new cars per year"do
+                     div do 
+                        with_tracks_array=(Car.unscoped.with_tracks.group_by_month('cars.created_at').count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        all_array=(Car.unscoped.group_by_month('cars.created_at').count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        (1 .. Time.now.month).each do |x| 
+                            with_tracks_array[x]=0 unless with_tracks_array.include? x     
+                            all_array[x]=0 unless all_array.include? x
+                        end
+                        all_array=all_array.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        with_tracks_array=with_tracks_array.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        keys=all_array.keys.map{|x|Date::MONTHNAMES[x] }
+                        render 'stat_of_cars', data:[keys,with_tracks_array.values,all_array.values]
+                     end  
+                end
             end
         end
-        "<p>Hello!</p>"
     end # content
 end

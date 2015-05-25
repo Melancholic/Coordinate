@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   default_scope -> {order('login ASC')}
   scope :admins, -> { where(admin: true)}
   scope :lasted, -> {unscoped.order(created_at: :desc)}
+  scope :by_time_asc, -> {unscoped.order(created_at: :asc)}
+  scope :with_cars, ->{joins(:cars).uniq}
 #  geocoded_by :ip_address
 
   validates(:login, presence: true, length:{maximum:15,minimum:3},format: {with: VALID_login_REGEX});
@@ -35,7 +37,7 @@ class User < ActiveRecord::Base
 
 
   before_create{
-    self.build_profile
+    #self.build_profile
     create_remember_token
   }
   

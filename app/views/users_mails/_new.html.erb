@@ -6,14 +6,14 @@
 <div class="form-inputs">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-      <%if(signed_in? && !current_user.name.empty?)%>
+      <%if(signed_in? && current_user.name && !current_user.name.empty?)%>
         <%= f.input :first_name, required: true, autofocus: true, span:'span6', input_html: {value:current_user.name}, placeholder:"Name", label:false %>
       <%else%>
         <%= f.input :first_name, required: true, autofocus: true, span:'span6', placeholder:"Name", label:false %>
       <%end%>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-      <%if(signed_in? && !current_user.second_name.empty?)%>
+      <%if(signed_in? && current_user.second_name && !current_user.second_name.empty?)%>
         <%= f.input :last_name, required: true, placeholder:"Lastname", input_html: {value:current_user.second_name},label:false%>
       <%else%>
         <%= f.input :last_name, required: true, placeholder:"Lastname", label:false%>

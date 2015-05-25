@@ -46,6 +46,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params());
+    @user.build_profile;
     if(@user.save)
       flash[:success] = "Welcome to #{app_name}!";
       sign_in @user;

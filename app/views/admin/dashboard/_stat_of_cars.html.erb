@@ -7,7 +7,7 @@ $(function () {
     $('#cars_chart').highcharts({
         colors: ['#FF0000', '#0066FF', '#00CCFF'],
         title: {
-            text: "Monthly number of new cars, <%=Time.now.year%>",
+            text: "Monthly share of the cars, <%=Time.now.year%>",
             x: -20 //center
         },
         subtitle: {
@@ -20,7 +20,7 @@ $(function () {
         yAxis: {
             min: 0,
             title: {
-                text: 'The number of new cars (units)'
+                text: 'New cars (pcs.)'
             },
             plotLines: [{
                 value: 0,
@@ -29,7 +29,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: ' units'
+            valueSuffix: ''
         },
         legend: {
             layout: 'vertical',

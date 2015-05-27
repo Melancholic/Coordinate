@@ -7,7 +7,7 @@ $(function () {
     $('#users_chart').highcharts({
         colors: ['#FF0000', '#0066FF', '#00CCFF'],
         title: {
-            text: "Monthly number of new users, <%=Time.now.year%>",
+            text: "Monthly share of the users, <%=Time.now.year%>",
             x: -20 //center
         },
         subtitle: {
@@ -29,7 +29,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: ' units'
+            valueSuffix: ''
         },
         legend: {
             layout: 'vertical',

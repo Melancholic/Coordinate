@@ -18,16 +18,22 @@ ActiveAdmin.register_page "Dashboard" do
                             object.opened? ?  status_tag( "yes", :ok ) : status_tag( "no" )
                         end
                         column 'Аuthor' do |x|
-                            x.first_name+' '+x.last_name unless x.user
-                            link_to( x.first_name+' '+x.last_name, admin_user_path(x.user)) if x.user
+                            if x.user
+                                link_to( x.first_name+' '+x.last_name, admin_user_path(x.user)) 
+                            else
+                                x.first_name+' '+x.last_name
+                            end
                         end
-                        column  'email:' do |y|
-                            mail_to y.email
-                        end 
-                        column 'Subject', :subject
+
+                        column 'Subject' do |x|
+                            x.subject.truncate(30);
+                        end
+                        column 'Created at' do |x|
+                            x.created_at.strftime("%d.%m.%y %H:%m")
+                        end
                         column "Operations" do |x|
                             link_to('Show', admin_users_mail_path(x))+" | "+
-                            link_to('Edit status', edit_admin_users_mail_path(x))
+                            link_to('Close', edit_admin_users_mail_path(x))
                         end
                         #column "Message", :message
                             #other columns...
@@ -44,15 +50,43 @@ ActiveAdmin.register_page "Dashboard" do
         end
             column min_width: "500px" do
                 panel 'System notifications' do
-                    paginated_collection( User.per_page_kaminari(params[:users_page]).per(15), param_name: 'notifications_page', download_links:false) do
+                    paginated_collection( ExceptionLogger::LoggedException.sorted.where(fixed: false).per_page_kaminari(params[:exception_page]).per(5), param_name: 'exception_page', download_links:false) do
                         table_for(collection) do  |x|
-                            "..."
+                            column 'Fixed', :opened do|object|
+                                object.fixed? ?  status_tag( "yes", :ok ) : status_tag( "no" )
+                            end
+                            column 'Class' do |x|
+                                link_to(x.exception_class, admin_exception_path(x))
+                            end
+                            #column 'Controller', :controller_name
+                            column 'Time' do |x|
+                                x.created_at.strftime("%d.%m.%y %H:%m")
+                            end
+                            column "Operations" do |x|
+                                link_to('Show', admin_exception_path(x))+" | "+
+                                link_to('Close', switch_status_admin_exception_path(x), method: :put)
+                            end
                         end
                     end
                 end
                 panel 'Statistics for the month of notifications' do
                      div do 
-                        render 'stat_of_notifications'
+                        opened=(ExceptionLogger::LoggedException.unscoped.where("created_at > ?", Time.now.utc.beginning_of_year).where('created_at <> updated_at').where(fixed:false).group_by_month(:created_at).count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        closed=(ExceptionLogger::LoggedException.unscoped.where("created_at > ?", Time.now.utc.beginning_of_year).where(fixed:true).group_by_month(:created_at).count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        newed=(ExceptionLogger::LoggedException.unscoped.where("created_at > ?", Time.now.utc.beginning_of_year).where('created_at = updated_at').where(fixed:false).group_by_month(:created_at).count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        all=(ExceptionLogger::LoggedException.unscoped.where("created_at > ?", Time.now.utc.beginning_of_year).group_by_month(:created_at).count).map{|k,v| {k.month=>v}}.reduce Hash.new, :merge
+                        (1 .. Time.now.month).each do |x| 
+                            opened[x]=0 unless opened.include? x     
+                            closed[x]=0 unless closed.include? x  
+                            newed[x]=0 unless newed.include? x 
+                            all[x]=0 unless all.include? x 
+                        end
+                        opened=opened.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        closed=closed.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        newed=newed.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        all=all.sort_by{|k| k.first}.map{|k| {k.first=>k.second} }.reduce( Hash.new, :merge)
+                        keys=all.keys.map{|x|Date::MONTHNAMES[x] }
+                        render 'stat_of_notifications', data:[keys,opened.values,closed.values,newed.values,all.values]
                      end  
                 end
             end
@@ -100,6 +134,9 @@ ActiveAdmin.register_page "Dashboard" do
                         column 'Size (MB)', :size_mb
                     end
                 end
+                panel "Database operations" do
+
+                end
             end
         end
         columns do
@@ -120,7 +157,9 @@ ActiveAdmin.register_page "Dashboard" do
                             column 'verificated' do |y|
                                 y.verificated? ?  status_tag( "yes", :ok ) : status_tag( "no" )
                             end
-                            column 'created_at', :created_at
+                            column 'Created at' do |x|
+                                x.created_at.strftime("%d.%m.%y %H:%m")
+                            end
                         end
                     end
                 end
@@ -153,7 +192,9 @@ ActiveAdmin.register_page "Dashboard" do
                             column 'user' do |y|
                                 link_to  y.user.login, admin_user_path(y.user)
                             end
-                            column 'created_at', :created_at
+                            column 'Created at' do |x|
+                                x.created_at.strftime("%d.%m.%y %H:%m")
+                            end
                         end
                     end
                 end

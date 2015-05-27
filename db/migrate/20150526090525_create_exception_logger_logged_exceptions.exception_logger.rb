@@ -1,0 +1,16 @@
+# This migration comes from exception_logger (originally 20120507081835)
+class CreateExceptionLoggerLoggedExceptions < ActiveRecord::Migration
+  def change
+    create_table :logged_exceptions, :force => true do |t|
+      t.string :exception_class
+      t.string :controller_name
+      t.string :action_name
+      t.text :message
+      t.text :backtrace
+      t.text :environment
+      t.text :request
+      t.boolean :fixed, default:false
+      t.timestamps null: false
+    end
+  end
+end

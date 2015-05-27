@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  get 'users_mails/new'
-
-  get 'users_mails/create'
-
-  get 'users_mails/new'
-
-  get 'users_mails/create'
-
   ActiveAdmin.routes(self)
   root 'static_pages#home'
   match '/about',to:'static_pages#about', via:'get'

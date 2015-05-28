@@ -12,11 +12,6 @@ ActiveAdmin.register ExceptionLogger::LoggedException, as: "Exception" do
        permitted
     end
 
-    member_action :lock, method: :put do
-        resource.lock!
-        redirect_to resource_path, notice: "Locked!"
-    end
-
     show do
         attributes_table do
             row :id
@@ -66,6 +61,7 @@ ActiveAdmin.register ExceptionLogger::LoggedException, as: "Exception" do
           redirect_to resource_path, notice: "Errors: #{resource.errors.map{ |x,y| "#{x.to_s} #{ y}"}.join(";  ")}."      
         end
     end
+
     
     action_item :switch_status, only: :show do
         link_to 'Switch status', switch_status_admin_exception_path(exception), method: :put

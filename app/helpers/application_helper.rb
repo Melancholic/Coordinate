@@ -11,5 +11,8 @@ module ApplicationHelper
     end
   end
 
+  def formated_text(text)
+    raw text.split("\n").join("<br>")
+  end
   
 end

@@ -11,7 +11,7 @@ ActiveAdmin.register_page "Dashboard" do
   #  end
     columns do
         column min_width: "500px" do
-            panel 'Opened user requests' do
+            panel 'Lasted users tickets' do
                 paginated_collection( UsersMail.per_page_kaminari(params[:umails_page]).per(5), param_name: 'umails_page', download_links:false) do
                     table_for(collection) do  |x|
                         column 'Opened', :opened do|object|
@@ -32,8 +32,8 @@ ActiveAdmin.register_page "Dashboard" do
                             x.created_at.strftime("%d.%m.%y %H:%m")
                         end
                         column "Operations" do |x|
-                            link_to('Show', admin_users_mail_path(x))+" | "+
-                            link_to('Close', edit_admin_users_mail_path(x))
+                            link_to('Show', admin_ticket_path(x))+" | "+
+                            link_to((x.opened?) ? 'Close' : 'Reopen', switch_status_admin_ticket_path(x), method: :put)
                         end
                         #column "Message", :message
                             #other columns...

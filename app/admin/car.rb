@@ -8,7 +8,7 @@ ActiveAdmin.register Car do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs "Car Details" do
-      f.input :user
+      f.input :user_id, :label => 'User', :as => :select, :collection => User.all.map{|u| ["#{u.login}", u.id]}
       f.input :title
       f.input :description
       f.input :color, as: :select, :collection =>Color.all, label: "Color"

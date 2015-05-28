@@ -5,6 +5,41 @@ ActiveAdmin.register User do
     permitted.append(profile_attributes:[:name,:second_name,:middle_name,:img,:mobile_phone,:country, :city,:region, image_attributes:[:img]]);
     permitted
   end
+  
+  show do |x|
+    attributes_table do
+      row :id
+      row :login
+      row :email
+      row :verificated do|object|
+        object.verificated? ?  status_tag( "yes", :ok ) : status_tag( "no" )
+      end
+      row :created_at
+      row :updated_at
+      row :admin do|object|
+        object.admin? ?  status_tag( "yes", :ok ) : status_tag( "no" )
+      end
+      row :time_zone
+   end
+   panel 'Profile details' do
+     attributes_table_for x.profile do
+        row :id
+        row 'Image' do |p|
+          image_tag(p.image.img.url(:normal)) unless p.image.nil?
+        end
+        row :name
+        row :second_name
+        row :middle_name
+        row :mobile_phone
+        row :country
+        row :region
+        row :city
+        row :created_at
+        row :updated_at
+      end
+    end
+   active_admin_comments
+ end
 
    index do 
     selectable_column

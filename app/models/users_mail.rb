@@ -14,7 +14,7 @@ class UsersMail < ActiveRecord::Base
     self.email=email.downcase;
   } 
 
-  after_save :send_to_admins;
+  after_create :send_to_admins;
 
   # pagination
   self.per_page = 15;

@@ -60,7 +60,7 @@ ActiveAdmin.register_page "Dashboard" do
                             end
                             #column 'Controller', :controller_name
                             column 'Time' do |x|
-                                x.created_at.strftime("%d.%m.%y %H:%m")
+                                x.created_at.strftime("%d.%m.%y %H:%M")
                             end
                             column "Operations" do |x|
                                 link_to('Show', admin_exception_path(x))+" | "+

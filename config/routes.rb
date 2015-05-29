@@ -38,9 +38,14 @@ Rails.application.routes.draw do
 
   namespace :maps,  :defaults => {:format => :json} do
     resources :cars, only:[:index]
-    resources :tracks, only:[:index]
+    resources :tracks, only:[:index] do
+      get :info, :defaults => { format: :js }
+      collection do
+        get :info_all, :defaults => { format: :js }
+      end
+    end
     resources :locations, only:[:index] 
-    get :location, to:'locations#show' ;
+    get :location, to:'locations#show' 
   end
 
   namespace :api,  :defaults => {:format => :json}do

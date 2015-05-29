@@ -3,7 +3,7 @@ class Maps::LocationsController <  Maps::JsonController
 	before_action :correct_param, except: [:show];
 	before_action :correct_param_for_show, only: [:show];
 	def index
-		@tracks=params[:tracks].map{|x| Track.find_by_id(x.to_i)}.compact;
+		@tracks=params[:tracks].map{|x| Track.by_user(current_user).find_by_id(x.to_i)}.compact;
 		@locs=@tracks.map{|x| x.track_locations};
 		render status: 200, :json => { :success => true, locations: @locs , :info => "ok!"}
 	end

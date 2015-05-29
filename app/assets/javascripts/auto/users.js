@@ -1,4 +1,4 @@
-var ready = function(){
+/*var ready = function(){
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
     return {
         radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
@@ -12,10 +12,10 @@ var ready = function(){
 }
 
 
-$(document).ready(ready);
+//$(document).ready(ready);
 $(document).on('page:load', ready);
 $(document).on('page:change', ready);
-
+*/
 function percent_tracks_for_cars_init(data) {
     // Build the chart
     $('#tracks_for_cars_diagram').highcharts({

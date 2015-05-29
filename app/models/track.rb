@@ -2,6 +2,8 @@ class Track < ActiveRecord::Base
 	belongs_to :car;
 	has_many :track_locations, -> { order(time: :asc) }, dependent: :destroy ;
 	default_scope -> { order(start_time: :desc, id: :desc) }
+	scope :by_user, ->(usr) {joins(:car).where("cars.user_id = ?", usr)}
+	scope :by_car, ->(car) {where(car: car)}
 	#validates(:start_time, uniqueness: true);
 	after_create{
 		pred_track=self.car.tracks.second

@@ -1,0 +1,68 @@
+<div id="id<%=@track.id%>" style="min-width: 310px; margin: 0 auto"></div>
+<script>
+$(function () {
+    $("#id<%=@track.id%>").highcharts({
+        chart: {
+            zoomType: 'x'
+        },
+        title: {
+            text: "<%= @start_time.strftime('%H:%M')%> - <%=@stop_time.strftime('%H:%M')%>",
+            x: -20 //center
+        },
+        subtitle: {
+            text: "<%= @start_time.strftime('%D')%>",
+            x: -20
+        },
+        xAxis: {
+            categories: <%=raw @times.as_json%>
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Speed (km/h)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' km/h'
+        },
+        legend: {
+            enabled: false
+        },
+
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                    stops: [
+                        [0, Highcharts.getOptions().colors[5]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                lineWidth: 2,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                marker:{
+                    fillColor:Highcharts.getOptions().colors[0],
+                    lineWidth: 1
+                },
+                threshold: null
+            }
+        },
+
+        series: [{
+            type: 'area',
+            name: 'Speed',
+            data: <%=raw @speeds.as_json%>
+        }
+    ]});
+});
+
+</script>

@@ -55,8 +55,19 @@ $('#start_date').datepicker().on('changeDate', update_tracks);
 $('#end_date').datepicker().on('changeDate', update_tracks);
 
 
-
+//Max selected = 15
 $("#tracks_sel").on ('change', function(){
+    if($("#tracks_sel option:selected").length > 15){
+        $("#track_sel_error").html("Maximum: 15");
+        return;    
+    }else{
+        $("#track_sel_error").html("");
+    }
+    if($("#tracks_sel option:selected").length > 1){
+        $("#track_info_all_area").show();   
+    }else{
+        $("#track_info_all_area").hide();
+    }
     var tracks_array = []; 
     $('#tracks_sel :selected').each(function(i, selected){ 
       tracks_array[i] = $(selected).val(); 
@@ -66,5 +77,23 @@ $("#tracks_sel").on ('change', function(){
             add_locs_to_map(data.locations)   
         }
     });
+    load_track_info(tracks_array);
+
 });
+
+function load_track_info(arr){
+    if (arr>10){
+        arr=arr.slice(0,10)
+    }
+    $.each(arr, function(key,value) { 
+        $("#track_info_area").html("");
+        $.get( "/maps/tracks/"+value+"/info", null);
+    });   
+
+    if(arr.length>1){
+        $("#track_info_all_area").html("");
+        $.get( "/maps/tracks/info_all", { track_ids: arr});
+    }
+}
+
 </script>

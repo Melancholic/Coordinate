@@ -14,6 +14,7 @@ class Car < ActiveRecord::Base
 	default_scope -> { order(:priority => :desc, :title =>:asc) }
 	scope :lasted, -> {unscoped.order(created_at: :desc)}
 	scope :with_tracks, -> {joins(:tracks).uniq}
+	scope :by_user, ->(usr) {where(user:usr)};
 	self.per_page=5;
 
 	before_create do 

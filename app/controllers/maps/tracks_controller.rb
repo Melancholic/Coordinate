@@ -1,6 +1,8 @@
 class Maps::TracksController <  Maps::JsonController
 	include Maps::TracksHelper;
-	before_filter :correct_param
+	before_filter :correct_param, only:[:index]
+	before_filter :correct_param_for_info, only:[:info]
+	before_filter :correct_param_for_info_all, only:[:info_all]
 	def index
 		@car=Car.find_by_id(params[:car]);
 
@@ -17,5 +19,39 @@ class Maps::TracksController <  Maps::JsonController
 			@tracks=@car.tracks;
 		end
 		render status: 200, :json => { :success => true, tracks: @tracks , :info => "ok!"}
+	end
+
+	def info
+		@track=Track.by_user(current_user).find(params[:track_id]);
+		@distance=@track.distance.round(3);
+		@duration=@track.duration_humanize
+		@avg_speed=@track.track_locations.average(:speed).to_i
+		@max_speed=@track.track_locations.maximum(:speed).to_i
+		@start_time=@track.start_time.in_time_zone(current_user.time_zone)
+		@stop_time = (@track.stop_time.nil?) ? @track.track_locations.last.time : @track.stop_time
+		@stop_time=@stop_time.in_time_zone(current_user.time_zone)
+		array=TrackLocation.unscoped.where(track: @track).group_by_minute(:time).average(:speed).map{|x,v| {x=>v.to_i} }.delete_if{|x| x.first.second==0}.reduce Hash.new, :merge
+		@speeds=array.values
+		@times=array.keys.map{|x| x.in_time_zone(current_user.time_zone).strftime("%H:%M")}
+		respond_to do |format|
+		    format.js {render 'show_info.js'}
+  		end
+	end
+	def info_all
+		@tracks=Track.by_user(current_user).where(id:params[:track_ids]);
+		@distances=@tracks.to_a.sum{|x| x.distance}.round(3);
+		@durations=duration_humanize(@tracks.to_a.sum{|x| x.duration}.round)
+		@max_duration=@tracks.to_a.max{|x| x.duration}.duration_humanize
+		@max_distance=@tracks.to_a.max{|x| x.distance}.distance.round(3)
+		@min_duration=@tracks.to_a.min{|x| x.duration}.duration_humanize
+		@min_distance=@tracks.to_a.min{|x| x.distance}.distance.round(3)
+
+		@avg_speed= TrackLocation.where(track: @tracks).average(:speed).to_i
+		@max_speed=TrackLocation.where(track: @tracks).maximum(:speed).to_i
+
+
+		respond_to do |format|
+		    format.js {render 'show_info_all.js'}
+  		end
 	end
 end

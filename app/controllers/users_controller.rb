@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if(@user.all_tracks.count>0)
       @days=TimeDifference.between(@user.all_tracks.last.start_time, @user.all_tracks.first.start_time).in_days.round+1
       @total_tracks=@user.all_tracks.count
-      @total_distance=@user.all_tracks.to_a.sum(&:distance).round(3);
+      @total_distance=Track.total_distance_for_user(current_user).round(3)
       @average_distance=(@total_distance/@total_tracks).round(3)
       @cars_with_tracs=current_user.cars.to_a.delete_if{|x| x.tracks.empty?}
       @average_distance_per_car=(@total_distance/@cars_with_tracs.count).round(3)
@@ -174,16 +174,17 @@ class UsersController < ApplicationController
         end
         result={success:true, result:{data: data, colors: colors}};
       when "percent_distance_for_cars"
-        @cars_with_tracs=current_user.cars.to_a.delete_if{|x| x.tracks.empty?}
+        @cars_with_tracs=current_user.cars.with_tracks
         colors=[];
         data=@cars_with_tracs.map do |x| 
-          colors.append("##{x.color}");[x.title,Track.where(car: x).to_a.sum{|x| x.distance}]
+          distance=TrackLocation.unscoped.where("track_id in (#{x.tracks.select(:id).to_sql})").group(:track).maximum(:distance).values.compact.sum
+          colors.append("##{x.color}");[x.title, distance]
         end
         result={success:true, result:{data: data, colors: colors}};
       when "length_tracks_of_time"
         data=[];
         data.push(current_user.group_tracks_by_day(:all))
-        current_user.cars.limit(10).each{|x|  data.push(current_user.group_tracks_by_day(x)) }
+        current_user.cars.with_tracks.limit(10).each{|x|  data.push(current_user.group_tracks_by_day(x)) }
         result={success:true, result: data.compact};
       else 
         result= {:status => :bad_request,

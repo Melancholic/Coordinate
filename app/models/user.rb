@@ -196,15 +196,16 @@ class User < ActiveRecord::Base
     else
       return nil
     end
-      x=tracks_sql.where("start_time < ? AND start_time > ?",Time.now.beginning_of_day+1.day, Time.now.beginning_of_day-1.month).
-      map{|x| [x.start_time.beginning_of_day , x.distance.round(3)] if  x.distance >0}.compact.
-      group_by(&:first).map { |k,v| [k, v.map(&:last).inject(:+)] }
-      #TrackLocation.unscoped.joins(:track).
-      #where(track: tracks_sql).
-      #where("tracks.start_time < ? AND tracks.start_time > ?",Time.now.to_date, Time.now.to_date-1.year).
-      #group(:start_time).maximum(:distance).
-      #map{|x,v| {x.beginning_of_day => v.round(3)} if v}.
-      #compact.reduce(Hash.new, :merge).to_a
+      #x=tracks_sql.where("start_time < ? AND start_time > ?",Time.now.beginning_of_day+1.day, Time.now.beginning_of_day-1.month).
+      #map{|x| [x.start_time.beginning_of_day , x.distance.round(3)] if  x.distance >0}.compact.
+      #group_by(&:first).map { |k,v| [k, v.map(&:last).inject(:+)] }
+      
+      x=Track.unscoped.from(
+        "(SELECT tracks.start_time, MAX(distance) AS distance FROM 
+          locations INNER JOIN tracks ON locations.track_id = tracks.id
+          WHERE track_id IN (#{tracks_sql.select(:id).to_sql}) 
+          GROUP BY track_id, tracks.start_time ) AS subquery").group_by_day(:start_time, last: 30).sum(:distance)
+
       result={name:name, data:x.sort{|a,b| a[0] <=> b[0] }, color:color } unless x.empty?
   end
 

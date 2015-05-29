@@ -27,6 +27,16 @@ class Track < ActiveRecord::Base
 			self.track_locations.select(:distance).last.distance || 0;
 		end
 	end
+#arg - array of tracks
+#return: {track=>distance}
+	def self.distance_all(arg)
+		TrackLocation.unscoped.where(track:arg).group(:track).maximum(:distance)
+	end
+
+#user
+	def self.total_distance_for_user(user)
+		TrackLocation.unscoped.where(track:Track.by_user(user).ids).group(:track).maximum(:distance).values.compact.sum
+	end
 
 	def duration
 		if(track_locations.empty?)

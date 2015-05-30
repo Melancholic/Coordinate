@@ -41,10 +41,10 @@ class Maps::TracksController <  Maps::JsonController
 		@tracks=Track.by_user(current_user).where(id:params[:track_ids]);
 		@distances=@tracks.to_a.sum{|x| x.distance}.round(3);
 		@durations=duration_humanize(@tracks.to_a.sum{|x| x.duration}.round)
-		@max_duration=@tracks.to_a.max{|x| x.duration}.duration_humanize
-		@max_distance=@tracks.to_a.max{|x| x.distance}.distance.round(3)
-		@min_duration=@tracks.to_a.min{|x| x.duration}.duration_humanize
-		@min_distance=@tracks.to_a.min{|x| x.distance}.distance.round(3)
+		@max_duration=duration_humanize(@tracks.map{|x| x.duration}.max)
+		@min_duration=duration_humanize(@tracks.map{|x| x.duration}.min)
+		@max_distance=@tracks.map{|x| x.distance}.max.round(3)
+		@min_distance=@tracks.map{|x| x.distance}.min.round(3)
 
 		@avg_speed= TrackLocation.where(track: @tracks).average(:speed).to_i
 		@max_speed=TrackLocation.where(track: @tracks).maximum(:speed).to_i

@@ -3,6 +3,7 @@ VALID_login_REGEX = /\A[a-z \d \- \_]*[a-z \- \_]+[a-z \d \- \_]*\z/i
 TIME_LIM_PASSRST_KEY =30;
 class User < ActiveRecord::Base
     extend ActiveModel::Callbacks
+  apply_simple_captcha
   has_one :verification_user, dependent: :destroy;
   has_one :reset_password;
   has_one :profile, dependent: :destroy;

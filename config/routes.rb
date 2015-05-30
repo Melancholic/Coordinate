@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   match '/faq', to:'static_pages#faq', via: 'get'
   match '/signup', to: 'users#new',via: 'get' 
   
-  resources :sessions, only: [:new, :create, :destroy];
+  resources :sessions, only: [:create, :destroy];
   match '/signin', to: 'sessions#new', via:'get';
   match '/signout', to:'sessions#destroy', via:'delete';
-  resources :users, except: [:index] do
+  resources :users, except: [:index, :new] do
     
      #add user/id/following and user/id/followers
     member do

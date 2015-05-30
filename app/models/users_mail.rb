@@ -1,6 +1,7 @@
 class UsersMail < ActiveRecord::Base
 	VALID_EMAIL_REGEX =  /\A[\w+\-.0-9]+@([a-z\d\-]+(\.[a-z\d]+)*\.[a-z]+)+\z/i
 	VALID_NAME_REGEX = /\A[a-zA-Zа-яА-Я]+\z/i
+  apply_simple_captcha
   validates(:email, presence: true, length:{maximum:50,minimum:3},
       format: {with: VALID_EMAIL_REGEX});
   validates(:first_name, length:{maximum:20}, presence: true, format: {with: VALID_NAME_REGEX},allow_blank: false );

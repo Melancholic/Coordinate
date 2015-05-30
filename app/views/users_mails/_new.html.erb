@@ -40,7 +40,13 @@
       <%= f.input :message,as: :text, required: true, input_html: {rows: 6, placeholder:"Message..."},label:false %>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <%=f.input :captcha do  %>
+      <%= show_simple_captcha(:object=>"users_mail") %>
+      <%end%>
+    </div>
+  </div>
   <%if signed_in?%>
     <%= f.input :user_id, as: :hidden,input_html: {value:current_user.id,hide:true} %>
   <%end%>

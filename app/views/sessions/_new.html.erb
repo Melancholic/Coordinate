@@ -6,6 +6,9 @@
     <%= f.input :email, required: true, autofocus: true %>
     <%= f.input :password, required: true %>
     <%= f.input :remember_me, as: :boolean %>
+    <%=f.input :captcha do  %>
+        <%= show_simple_captcha %>
+    <%end%>
   </div>
 
   <div class="form-actions">

@@ -1,5 +1,6 @@
 <%# remote - AJAX status %>
 <%remote||=false%>
+<% user ||=@user%>
 <% user ||=User.new%>
 <%= simple_form_for(user, remote: remote) do |f| %>
   <%= f.error_notification %>
@@ -8,6 +9,10 @@
     <%= f.input :email, required: true %>
     <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
     <%= f.input :password_confirmation, required: true %>
+  <%=f.input :captcha do  %>
+    <%= show_simple_captcha(:object=>"user") %>
+  <%end%>
+
   </div>
 
   <div class="form-actions">

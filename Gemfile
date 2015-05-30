@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+
+
+gem 'simple_captcha2', require: 'simple_captcha'
 gem 'groupdate'
 gem "highcharts-rails", "~> 4.0.0"
 #gem 'tooltipster-rails'

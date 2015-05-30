@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   before_action :signing_user, only:[:new] # in app/helpers/session_helper.rb
   before_action :signed_in_user, only:[:destroy]
+  include SimpleCaptcha::ControllerHelpers
+  before_action :check_captcha, only:[:create]
   def new
   end
 
@@ -19,5 +21,11 @@ class SessionsController < ApplicationController
   def destroy
       sign_out;
       redirect_to(root_url);
+  end
+  def check_captcha
+    unless simple_captcha_valid?
+       flash[:error]= I18n.t('simple_captcha.message.user')
+       redirect_to(:back);
+    end
   end
 end

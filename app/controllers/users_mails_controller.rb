@@ -1,11 +1,13 @@
 class UsersMailsController < ApplicationController
+	include SimpleCaptcha::ControllerHelpers
 	def new
 	end
 
 	def create
 		@mail = UsersMail.new(users_mails_params());
 		@mail.host = request.remote_ip;
-		if(@mail.save)
+		puts @mail.captcha;
+		if(@mail.save_with_captcha)
 			flash[:success] = "Thank you for your message! We will contact you as soon as possible!";
 			respond_to do |format|
 				format.html {redirect_to root_path}
@@ -25,7 +27,7 @@ class UsersMailsController < ApplicationController
 
 	protected
 	def users_mails_params
-		params.require(:users_mail).permit(:email,:first_name,:last_name,:subject,:message, :user_id);
+		params.require(:users_mail).permit(:email,:first_name,:last_name,:subject,:message, :user_id, :captcha, :captcha_key);
 	end
 end
 

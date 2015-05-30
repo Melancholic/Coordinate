@@ -11,9 +11,10 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
   #for signed for NEW and CREATE
   before_action :signed_user_to_new, only:[:new, :create,:reset_password]
- 
+  include SimpleCaptcha::ControllerHelpers
+  #before_action :check_captcha, only:[:create]
   def new
-    @user=User.new();
+    @user||=User.new();
   end
 
   def show()
@@ -39,23 +40,22 @@ class UsersController < ApplicationController
 
   end
 
-  def index()
-    #@users =  User.all.sort_by { |s| s.login };
-    @users=User.paginate(page: params[:page]);
-  end
 
   def create
     @user = User.new(user_params());
     @user.build_profile;
-    if(@user.save)
+    if(@user.save_with_captcha)
       flash[:success] = "Welcome to #{app_name}!";
       sign_in @user;
-      redirect_to(@user);
-      
       UsersMailer.verification(@user).deliver_now;
+      respond_to do|format|
+        format.html{redirect_to(@user)};
+        format.js{render js: "window.location.href = '#{root_path}';"}
+      end
     else
       respond_to do |format|
-        format.html {render 'new'}
+        format.js {render 'ajax_new.js'}
+        format.html {redirect_to :back}
         format.json { render :json => {errors: @user.errors.full_messages} }
       end
     end
@@ -202,7 +202,7 @@ class UsersController < ApplicationController
 
 protected
   def user_params
-    params.require(:user).permit(:login,:email,:password, :password_confirmation, :time_zone,
+    params.require(:user).permit(:login,:email,:password, :password_confirmation, :time_zone, :captcha, :captcha_key,
      profile_attributes:[:id,:name,:second_name,:middle_name,:img,:mobile_phone,:country, :city,:region, image_attributes:[:id, :img, :_destroy]]);
   end
 private

@@ -7,7 +7,7 @@
      <%= render 'shared/modals/warning', messege:messege %>
   <% when 'success'%>
      <%= render 'shared/modals/success', messege:messege %>
-
-
-
+  <% when 'notice'%>
+     <%= render 'shared/modals/default', messege:messege %>  
 <%end%>
+

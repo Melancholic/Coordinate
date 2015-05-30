@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'font-awesome-sass'
 
 gem 'simple_captcha2', require: 'simple_captcha'
 gem 'groupdate'

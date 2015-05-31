@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < Api::V1::BaseController
 	#skip_before_filter :verify_authenticity_token, :only => :login
-	before_filter :check_token, except:[:login]
+	before_filter :check_token, except:[:login, :ping]
 	protect_from_forgery unless: -> { request.format.json? }
 
 	def login
@@ -55,6 +55,10 @@ class Api::V1::SessionsController < Api::V1::BaseController
 
 	def hello
 		render status:200, json:{status:'ok',data:'hello'}
+	end
+
+	def ping
+		render status:200, html:'pong'
 	end
 
 protected

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       post 'login' => 'sessions#login'
       post 'logout' => 'sessions#logout'
       post 'hello' => 'sessions#hello'
+      get 'ping' => 'sessions#ping'
       namespace :geodata do
         post 'recive'
       end

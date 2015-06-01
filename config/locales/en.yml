@@ -37,6 +37,7 @@ en:
     cancel_but: "Cancel"
     change_but: "Change %{name}"
     browse_but: "Browse"
+    fix_but: "Fix it"
     author: "Nagorny Andrey"
     email: "e-mail"
     password: "password"
@@ -59,7 +60,7 @@ en:
     verification: "Verification e-mail"
     now: 'now'
     today: 'today'
-    
+
     confirm:
         title: "Confirmation"
         cancel: "Cancel"
@@ -68,6 +69,25 @@ en:
         warning: "Warning!"
         max_length_msg: "The maximum length of the field contents: {{max}} symbols!"
         del_car_confirm_html: "<h4>Are you sure you want to delete this car: <b>%{title}</b> ?<br><p class='text-danger'>Warning: All data on it will be deleted permanently!</p></h4>"
+        access_error: "Access error!"
+        car_saved: "Car has been saved!"
+        car_updating: 'Updating car "%{car}" is success'
+        car_deleting: 'Car "%{car}" has been deleted!'
+        car_not_deleting: 'Car "%{title}" has not been deleted!'
+        uncorrect_params: 'Uncorrect params!'
+        welcome_msg: "%{user}, welcome to Coordinate!"
+        uncorrect_login_data: "Uncorrect e-mail or password!"
+        usr_updating: "Updating your profile is success"
+        usr_deleted: 'User "%{ulogin}" has been deleted!'
+        usr_not_deleted: 'User "%{ulogin}" has not been deleted!'
+        send_verif_instruct: "Mail to %{email} has been sended!"
+        user_verificated: "User %{user} has been verificated!"
+        user_not_verificated: "User %{user} has not been verificated!"
+        lifetime_ended: "The lifetime of this reference completion. Please try the request again."
+        reset_pass_send: "Mail with instructions has been sended to e-mail:  %{email}!"
+        reset_pass_email_not_founded: "User with e-mail: %{email} not found!"
+        user_not_deleted_self: "You has not been deleted self!"
+        user_mails_thank: "Thank you for your message! We will contact you as soon as possible!"
     map:
         lat: "Latitude"
         long: "Longitude"
@@ -130,6 +150,10 @@ en:
             date_pick_at: "at:"
             date_pick_to: "to:"
             select_tracks: "Select tracks (<15):"
+        home4guest:
+            welcome: "Welcome to Coordinate!"
+            descript1: "Coordinate is a service of constant monitoring the location of your car"
+
     layouts:
         header:
             account: "Account"
@@ -137,10 +161,6 @@ en:
             settings: "Settings"
             help: "Help"
             administration: "Administration"
-    users:
-        verification_form:
-            verification_key: "Verification key:"
-            letter_to: "key a letter to %{mail}"
     maps:
         tracks:
             info:
@@ -156,6 +176,9 @@ en:
             car_settings: "Car settings"
             my_cars: "My cars"
             new_cars: "Add car"
+        empty_message:
+            msg: "Something is missing ..."
+            sub_msg: "You forgot something, and something we have lost..."
     cars:
         tooltip:
             wait_message: 'Wait while we load new content...'
@@ -182,6 +205,11 @@ en:
     tracks:
         val: "tracks"
     users:
+        show: 
+            edit_info: 'Edit information'
+        verification_form:
+            verification_key: "Verification key:"
+            letter_to: "key a letter to %{mail}"
         edit:
             change_gravatar: 'Change Gravatar'
             change_gravatar_hint: 'Your Gravatar changes to the project site "Gravatar"'

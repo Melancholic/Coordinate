@@ -10,10 +10,10 @@ class SessionsController < HTTPApplicationController
     user= User.find_by(email: params[:session][:email].downcase);
     if(user && user.authenticate(params[:session][:password]))
         sign_in(user)
-        flash[:succes]="#{user.login}, welcome!";
+        #flash[:success]=t("modals.welcome_msg", user:user.login);
         redirect_to(root_url);
     else
-        flash[:error]='Uncorrect email or password!'
+        flash[:error]=t("modals.uncorrect_login_data") 
         redirect_to(:back);
     end
   end

@@ -45,11 +45,12 @@ class UsersController < HTTPApplicationController
     @user = User.new(user_params());
     @user.build_profile;
     if(@user.save_with_captcha)
-      flash[:success] = "Welcome to #{app_name}!";
+      flash[:success] = t("modals.welcome_msg", user:@user.login);;
       sign_in @user;
       UsersMailer.verification(@user).deliver_now;
       respond_to do|format|
         format.html{redirect_to(@user)};
+        #redirect to root page
         format.js{render js: "window.location.href = '#{root_path}';"}
       end
     else
@@ -74,7 +75,7 @@ class UsersController < HTTPApplicationController
       if(@user.locale!=session[:locale])
         session.delete(:locale)
       end
-      flash[:success] = "Updating your profile is success"
+      flash[:success] =  t('modals.usr_updating')
       redirect_to(@user);
     else
         render 'edit';
@@ -84,9 +85,9 @@ class UsersController < HTTPApplicationController
   def destroy
     ulogin=User.find(params[:id]).login;
     if(User.find(params[:id]).destroy)
-      flash[:success]="User #{ulogin} has been deleted!";
+      flash[:success]= t('modals.usr_deleted', login: ulogin);
     else
-      flash[:error]="User #{ulogin} has not been deleted!";
+      flash[:error]=t('modals.usr_not_deleted', login: ulogin);
     end
     redirect_to(users_url);
  end
@@ -95,7 +96,7 @@ class UsersController < HTTPApplicationController
   def sent_verification_mail()
     @user= User.find(params[:id]);
     UsersMailer.verification(@user).deliver_now;
-    flash[:success]="Mail to #{@user.email} has been sended!";
+    flash[:success]=t('modals.send_verif_instruct', email: @user.email);
     redirect_to(verification_user_url(@user));
   end
 
@@ -107,10 +108,10 @@ class UsersController < HTTPApplicationController
     if(params[:key]==@user.verification_key)
       @user.verification_user.update(verification_key:"",verificated:true);
       UsersMailer.verificated(@user).deliver_now;
-      flash[:success]="User #{@user.login} has been verificated!";
+      flash[:success]=t('modals.user_verificated', user: @user.login);
       redirect_to(user_path(@user));
     else
-      flash[:error]="User #{@user.login} has not been verificated!";
+      flash[:error]=t('modals.user_not_verificated', user: @user.login);
       render('verification');
     end
   end
@@ -128,7 +129,7 @@ class UsersController < HTTPApplicationController
         #@key=params[:key];
       else
         user.reset_password.destroy;
-        flash[:error]="The lifetime of this reference completion. Please try the request again.";
+        flash[:error]=t('modals.lifetime_ended');
         redirect_to(reset_password_users_url);
       end
     end
@@ -138,14 +139,14 @@ class UsersController < HTTPApplicationController
     user=User.find_by(email: params[:email]);
     host=request.remote_ip;
     if(user)
-      flash[:success]="Mail with instructions has been sended to e-mail:  #{user.email}!";
       #Make key for reset
       user.make_reset_password(host:host);
       #user.reset_password= ResetPassword.create(user_id: user.id, host:host);
       UsersMailer.recived_email_for_passrst(user).deliver_now;
+      flash[:success]=t('modals.reset_pass_send', email: user.email);
       redirect_to(root_url);
     else
-      flash[:error]="User with e-mail: #{params[:email]} not found!";
+      flash[:error]=t('modals.reset_pass_email_not_founded', email: params[:email]);
       redirect_to(reset_password_users_url);
     end
   end
@@ -153,7 +154,7 @@ class UsersController < HTTPApplicationController
   def resetpass_recive_pass
    @user = User.find(params[:format]);
    if  (@user.update_attributes(user_params()))
-      flash[:success] = "Updating your profile is success"
+      flash[:success] =  t('modals.usr_updating');
       redirect_to(root_url);
       UsersMailer.send_new_pass_notification(@user).deliver_now;
       @user.reset_password.destroy;
@@ -218,7 +219,7 @@ private
   def user_exist
     if(params[:id])
       unless User.find_by_id(params[:id])
-        flash[:error]='Uncorrect params!';
+        flash[:error]=t('modals.uncorrect_params');
         logger.error("User with params[:id]=#{params[:id]} not founded!")
         redirect_to(root_url);
       end
@@ -242,7 +243,7 @@ private
 
   def admin_user
     if (current_user==User.find(params[:id]))
-       flash[:error]="You has not been deleted!";
+       flash[:error]=t('modals.user_not_deleted_self');
        redirect_to(users_url);
 
     else

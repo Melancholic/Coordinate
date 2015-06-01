@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin_user!
     unless current_admin_user
-      flash[:error] = "Access error!"
+      flash[:error] = t('modals.access_error')
       redirect_to root_path 
     end
   end

@@ -8,7 +8,7 @@ class UsersMailsController < HTTPApplicationController
 		@mail.host = request.remote_ip;
 		puts @mail.captcha;
 		if(@mail.save_with_captcha)
-			flash[:success] = "Thank you for your message! We will contact you as soon as possible!";
+			flash[:success] = t("modals.user_mails_thank");
 			respond_to do |format|
 				format.html {redirect_to root_path}
 				#format.js {render :js => "window.location = '#{root_path}'"}

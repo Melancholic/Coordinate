@@ -26,7 +26,7 @@ end
 	def create
    @car = current_user.cars.build(car_params());
     if(@car.save)
-      flash[:success] = "Car has been saved!";
+      flash[:success] = t('modals.car_saved');
       redirect_to(cars_path);
     else
       respond_to do |format|
@@ -43,7 +43,7 @@ end
   def update
     @car=Car.find(params[:id]);
    if  (@car.update_attributes(car_params()))
-      flash[:success] = "Updating car \"#{@car.title}\" is success"
+      flash[:success] = t('modals.car_updating', car:@car.title)
       redirect_to(cars_path);
     else
         render 'edit';
@@ -63,9 +63,9 @@ def destroy
   car= Car.find(params[:id]);
   title=car.title;
   if(car.destroy)
-    flash[:success] = "Car \"#{title}\" has been deleted!";
+    flash[:success] = t('modals.car_deleting', car:title);
   else
-    flash[:error] = "Car \"#{title}\" has not been deleted!";
+    flash[:error] =  t('modals.car_not_deleting', car:title);
   end
   redirect_to (cars_path);
 end
@@ -87,7 +87,7 @@ protected
   def car_exist
     if(params.has_key?(:id))
       unless Car.find_by_id(params[:id])
-        flash[:error]='Uncorrect params!';
+        flash[:error]=t('modals.uncorrect_params')
         logger.error("Car with params[:id]=#{params[:id]} not founded!")
         redirect_to(user_path(current_user)); 
       end
@@ -100,7 +100,7 @@ protected
     if params.has_key?(:id)
       car=Car.find_by_id(params[:id]);
       unless (current_user==car.user)
-        flash[:error]='Uncorrect params!';
+        flash[:error]=t('modals.uncorrect_params');
         logger.error("Unauthorized  access to a car with id=#{car.id} by user id=#{current_user.id}!")
         redirect_to(user_path(current_user)); 
       end

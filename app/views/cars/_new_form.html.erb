@@ -6,11 +6,11 @@
 			<section>
 				<%= car_image(@car,:normal, class:"img-rounded img-responsitive") %>
 			</section>
-			<h3>Upload image of this car</h3>
+			<h3><%=t(".upload_text")%></h3>
 
 			<%= f.simple_fields_for :image, f.object.image || f.object.build_image do |i| %>
 			<%=i.input :img, label: false, input_html:{class:"form-control"}%>
-			<%= i.input  :_destroy, as: :boolean, label:"Don't use custom image", hint:"Your image will be deleted." %>
+			<%= i.input  :_destroy, as: :boolean, label:t(".img_destroy_txt"), hint:t(".img_destroy_hint") %>
 			<%end%>
 		</div>
 	</div>
@@ -35,7 +35,7 @@
 				<span id="counter"> <%= 180-((@car.description.nil?)? 0 : @car.description.length) %> / <%= Car::DescriptionLength %></span>
 			</div>
 			<div class=" center row">
-				<%= f.button :submit, "Save",class:"btn btn-primary" %>
+				<%= f.button :submit, t('save_but'),class:"btn btn-primary" %>
 			</div>
 		<% end %>
 	</div>

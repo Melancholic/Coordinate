@@ -7,9 +7,9 @@ class Car < ActiveRecord::Base
 	accepts_nested_attributes_for :image, update_only: true, :reject_if => proc { |attributes| attributes['img'].blank? }, :allow_destroy => true
 	validates(:title, presence: true, length:{maximum:15,minimum:3});
 	validates(:title, uniqueness: {scope: :user_id,
-    message: "You already have a car with the same title" });
+    message: :title_uniq_valid });
 	validates :color, :color_format => true
-	validates :priority, inclusion:{in: 0..10, message: "is not included in 0 .. 10" }
+	validates :priority, inclusion:{in: 0..10, message: :priority_valid }
 	validates :description, length:{maximum: DescriptionLength ,minimum:3}
 	default_scope -> { order(:priority => :desc, :title =>:asc) }
 	scope :lasted, -> {unscoped.order(created_at: :desc)}

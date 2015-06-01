@@ -1,24 +1,24 @@
 crumb :root do
-  link "Home", root_path
+  link t("breadcrumbs.home"), root_path
 end
  crumb :profile do |user|
-   link "Profile", user_path(user)
+   link t("breadcrumbs.profile"), user_path(user)
  end
  crumb :settings do |user|
-   link "Settings", edit_user_path(user)
+   link t("breadcrumbs.settings"), edit_user_path(user)
    parent :profile, user
  end
  crumb :cars do |user|
-   link "Your cars", cars_path
+   link t("breadcrumbs.cars"), cars_path
    parent :settings, user
  end
 
  crumb :new_car do |user|
-   link "Add car", new_car_path
+   link t("breadcrumbs.new_cars"), new_car_path
    parent :cars, user
  end
   crumb :edit_car do |user|
-   link "Edit car", new_car_path
+   link t("breadcrumbs.edit_cars"), new_car_path
    parent :cars, user
  end
 # crumb :project do |project|

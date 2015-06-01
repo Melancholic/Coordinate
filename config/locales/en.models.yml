@@ -1,0 +1,7 @@
+en:
+    activerecord:
+        errors:
+            models:
+                car:
+                    priority_valid: "is not included in 0 .. 10"
+                    title_uniq_valid: "You already have a car with the same title"

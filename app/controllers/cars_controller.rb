@@ -1,4 +1,4 @@
-class CarsController < ApplicationController
+class CarsController < HTTPApplicationController
   before_action :signed_in_user # in app/helpers/session_helper.rb
   before_action :verificated_user
   before_action :car_exist

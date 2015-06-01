@@ -1,5 +1,10 @@
 ru:
     activerecord:
+        errors:
+            models:
+                car:
+                    priority_valid: "не входит в допустимый диапазон: 0 .. 10"
+                    title_uniq_valid: "Вы уже имеете автомобиль с таким названием"
         models:
             user: 
                 one: "Пользователь"

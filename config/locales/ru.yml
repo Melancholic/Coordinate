@@ -267,10 +267,13 @@ ru:
   send_but: "Отправить"
   reset_but: "Очистить"
   close_but: "Закрыть"
+  edit_but: "Изменить"
+  delete_but: "Удалить"
   resend_but: "Отправить повторно"
   save_but: "Сохранить"
   cancel_but: "Отмена"
   change_but: "Изменить %{name}"
+  browse_but: "Обзор"
   authorization: "Авторизация"
   home: "Главная"
   email: "e-mail"
@@ -289,9 +292,16 @@ ru:
   days_val: "дней"
   loading: "Загрузка..."
   verification: "Подтверждение e-mail"
+  now: 'сейчас'
+  today: 'сегодня'
+  confirm:
+    title: "Подтверждение"
+    cancel: "Отмена"
+    ok: "Ок"
   modals:
     warning: "Предупреждение!"
     max_length_msg: "Максимальная длина: {{max}} символов!"
+    del_car_confirm_html: "<h4>Вы согласны удалить данный автомобиль: <b>%{title}</b> ?<br><p class='text-danger'>Внимание: Все данные будут безвозвратно удалены!</p></h4>"
   map:
     lat: "Широта"
     long: "Долгота"
@@ -379,6 +389,25 @@ ru:
   cars:
     tooltip:
       wait_message: 'Подождите, контент загружается ...'
+    car_card:
+      head1: "Информация об автомобиле"
+      color: "Цвет"
+      priority: "Приоритет"
+      created_at: "Создан"
+      total_tracks: "Всего треков"
+      last_loc: "Последние координаты получены"
+      uuid: "UUID трекера"
+      description: "Описание"
+    new_form:
+      upload_text: "Загрузить изображение для автомобиля"
+      img_destroy_txt: "Не использовать изображение"
+      img_destroy_hint: "Изображение автомобиля может быть удалено."
+    edit:
+      edit_car: "Изменение %{title}"
+    index:
+      head1: "Ваши автомобили"
+    new:
+      new_car: "Добавление автомобиля"
   tracks:
     val: "треков"
   users:
@@ -415,3 +444,10 @@ ru:
       total_days: "Всего дней, с момента создания первого трека"
     verification:
       head2: "На указанный Вами e-mail отправлены инструкции, с указаниями, необходимыми для завершения подтвержения e-mail адреса. Пожалуйста, проверьте свой e-mail!"
+  breadcrumbs:
+    home: "Главная"
+    edit_cars: "Изменение автомобиля"
+    new_cars: "Новый автомобиль"
+    cars: "Ваши автомобили"
+    settings: "Настройки"
+    profile: "Профиль"

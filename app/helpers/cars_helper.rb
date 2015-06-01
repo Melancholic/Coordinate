@@ -15,9 +15,8 @@ module CarsHelper
         class: "btn btn-sm btn-danger",
             type:"button", 
             "data-toggle" => "tooltip", 
-            "data-original-title"=>"Delete car", 
-            "data-confirm"=>"<h4>Are you sure you want to delete this car: <b>#{car.title}</b> ?<br>"+
-            "<p class='text-danger'>Warning: All data on it will be deleted permanently!</p></h4>",
+            "data-original-title"=>t("delete_but"), 
+            "data-confirm"=>t("modals.del_car_confirm_html", title: car.title),
         method: :delete do 
             content_tag(:i,"", class:"glyphicon glyphicon-remove")
         end
@@ -28,7 +27,7 @@ module CarsHelper
         class: "btn btn-sm btn-warning",
             type:"button", 
             "data-toggle" => "tooltip", 
-            "data-original-title"=>"Edit car", 
+            "data-original-title"=>t("edit_but"), 
         method: :get do 
                 content_tag(:i,"", class:"glyphicon glyphicon-edit")
             end

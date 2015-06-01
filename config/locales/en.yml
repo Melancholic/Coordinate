@@ -28,12 +28,15 @@ en:
     sign_up: "Sign up"
     sign_out: "Sign out"
     send_but: "Send"
+    edit_but: "Edit"
+    delete_but: "Delete"
     resend_but: "Resend"
     reset_but: "Clear"
     close_but: "Close"
     save_but: "Save"
     cancel_but: "Cancel"
     change_but: "Change %{name}"
+    browse_but: "Browse"
     author: "Nagorny Andrey"
     email: "e-mail"
     password: "password"
@@ -54,9 +57,17 @@ en:
     days_val: "days"
     loading: "Loading..."
     verification: "Verification e-mail"
+    now: 'now'
+    today: 'today'
+    
+    confirm:
+        title: "Confirmation"
+        cancel: "Cancel"
+        ok: "Ok"
     modals:
         warning: "Warning!"
         max_length_msg: "The maximum length of the field contents: {{max}} symbols!"
+        del_car_confirm_html: "<h4>Are you sure you want to delete this car: <b>%{title}</b> ?<br><p class='text-danger'>Warning: All data on it will be deleted permanently!</p></h4>"
     map:
         lat: "Latitude"
         long: "Longitude"
@@ -148,6 +159,26 @@ en:
     cars:
         tooltip:
             wait_message: 'Wait while we load new content...'
+        car_card:
+            head1: "Car information"
+            color: "Color"
+            priority: "Priority"
+            created_at: "Created at"
+            total_tracks: "Total tracks"
+            last_loc: "Last location at"
+            uuid: "Tracker UUID"
+            description: "Description"
+        new_form:
+            upload_text: "Upload image of this car"
+            img_destroy_txt: "Don't use custom image"
+            img_destroy_hint: "Your image will be deleted."
+        edit:
+            edit_car: "Edit %{title}"
+        index:
+            head1: "Your cars"
+        new:
+            new_car: "Add new car"
+
     tracks:
         val: "tracks"
     users:
@@ -181,3 +212,10 @@ en:
             total_days: "Total days, since the establishment of the first track"
         verification:
             head2: "To your email address sent an email with instructions required to confirm your e-mail. Please check your e-mail!"
+    breadcrumbs:
+        home: "Home"
+        edit_cars: "Edit car"
+        new_cars: "Add car"
+        cars: "Your cars"
+        settings: "Settings"
+        profile: "Profile"

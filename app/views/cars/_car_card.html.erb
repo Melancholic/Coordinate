@@ -4,7 +4,7 @@
     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Car information</h3>
+                <h3 class="panel-title"><%=t('.head1')%></h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -16,22 +16,22 @@
                     <div class="col-xs-10 col-sm-8 hidden-md hidden-lg">
                         
                         <dl>
-                            <dt>Color:</dt>
+                            <dt><%=t('.color')%>:</dt>
                             <dd><%=color_to car%></dd>
-                            <dt>Priority:</dt>
+                            <dt><%=t('.priority')%>:</dt>
                             <dd><%=car.priority%></dd>
-                            <dt>Created at:</dt>
+                            <dt><%=t('.created_at')%>:</dt>
                             <dd><%=car.created_at.in_time_zone(car.user.time_zone).strftime("%d/%m/%Y")%></dd>
-                            <dt>Total tracks:</dt>
+                            <dt><%=t('.total_tracks')%>:</dt>
                             <dd><%=car.tracks.count%></dd>
                             <% if !car.tracks.empty? && !car.tracks.first.track_locations.empty? %>
-                            <dt>Last location at:</dt>
+                            <dt><%=t('.last_loc')%>:</dt>
                             <dd><%=car.tracks.first.track_locations.last.time
                             .in_time_zone(car.user.time_zone).strftime("%d/%m/%Y %H:%M:%S")%></td></dd>
                             <%end%>   
-                            <dt>Tracker UUID:</dt>
+                            <dt><%=t('.uuid')%>:</dt>
                             <dd><%=car.tracker_uuid%></dd>                                
-                            <dt>Description:</dt>
+                            <dt><%=t('.description')%>Description:</dt>
                             <dd><%=car.description%></dd>
                         </dl>
                     </div>
@@ -39,34 +39,34 @@
                         <table class="table table-car-information" >
                             <tbody>
                                 <tr>
-                                    <td>Color:</td>
+                                    <td><%=t('.color')%>:</td>
                                     <td ><%=color_to car%></td>
                                 </tr>
                                 <tr>
-                                    <td>Priority:</td>
+                                    <td><%=t('.priority')%>:</td>
                                     <td ><%=car.priority%></td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4">Created at:</td>
+                                    <td class="col-md-4"><%=t('.created_at')%>:</td>
                                     <td class="col-md-12"><%=car.created_at.in_time_zone(car.user.time_zone).strftime("%d/%m/%Y")%></td>
                                 </tr>
                                 <tr>
-                                    <td>Total tracks:</td>
+                                    <td><%=t('.total_tracks')%>:</td>
                                     <td><%=car.tracks.count%></td>
                                 </tr>
                                 <% if !car.tracks.empty? && !car.tracks.first.track_locations.empty? %>
                                 <tr>
-                                    <td>Last location at:</td>
+                                    <td><%=t('.last_loc')%>:</td>
                                     <td><%=car.tracks.first.track_locations.last.time
                                     .in_time_zone(car.user.time_zone).strftime("%d/%m/%Y %H:%M:%S")%></td>
                                 </tr>   
                                 <%end%>                                 
                                 <tr>
-                                    <td>Tracker UUID:</td>
+                                    <td><%=t('.uuid')%>:</td>
                                     <td><%=car.tracker_uuid%></td>
                                 </tr>                                    
                                 <tr>
-                                    <td>Description:</td>
+                                    <td><%=t('.description')%>:</td>
                                     <td ><%=car.description%></td>
                                 </tr>
                             </tbody>

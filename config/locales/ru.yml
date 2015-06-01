@@ -292,6 +292,7 @@ ru:
   distance_val: "км"
   days_val: "дней"
   loading: "Загрузка..."
+  date: "Дата"
   verification: "Подтверждение e-mail"
   now: 'сейчас'
   today: 'сегодня'
@@ -480,3 +481,12 @@ ru:
     cars: "Ваши автомобили"
     settings: "Настройки"
     profile: "Профиль"
+  charts:
+    track_distance: 'Длина трека (км)'
+    distance4day: 'Пройденное расстояние по дням'
+    distance4day_full: 'Ежедневное расстояние треков'
+    distance_per_cars: 'Процентное соотношение пройденного расстояния для автомобилей'
+    tracks_per_cars: 'Процентное соотношение треков для автомобилей'
+    of_tracks: 'от общего кол-ва треков'
+    of_distance: 'от общего расстояния'
+    all_cars: "Все автомобили"

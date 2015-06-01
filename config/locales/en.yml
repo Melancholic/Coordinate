@@ -57,6 +57,7 @@ en:
     distance_val: "km"
     days_val: "days"
     loading: "Loading..."
+    date: "Date"
     verification: "Verification e-mail"
     now: 'now'
     today: 'today'
@@ -247,3 +248,12 @@ en:
         cars: "Your cars"
         settings: "Settings"
         profile: "Profile"
+    charts:
+        track_distance: 'Track distance (km)'
+        distance4day: 'Distance for days'
+        distance4day_full: 'The daily distance of your tracks'
+        distance_per_cars: 'The percentage distance for cars'
+        tracks_per_cars: 'The percentage tracks for cars'
+        of_tracks: 'of total tracks'
+        of_distance: 'of total distance'
+        all_cars: "All your cars"

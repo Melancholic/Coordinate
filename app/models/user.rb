@@ -188,7 +188,7 @@ class User < ActiveRecord::Base
     arg||=:all;
     if(arg == :all)
       tracks_sql=self.all_tracks
-      name="All cars"
+      name=I18n.t('charts.all_cars')
       color="#32CD32"
     elsif(arg.instance_of?(Car) && self.cars.include?(arg))
       tracks_sql=arg.tracks

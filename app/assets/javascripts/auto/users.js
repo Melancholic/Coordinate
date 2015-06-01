@@ -25,7 +25,7 @@ function percent_tracks_for_cars_init(data) {
             plotShadow: false
         },
         title: {
-            text: 'The percentage tracks for cars'
+            text: I18n.t("charts.tracks_per_cars")
         },
         tooltip: {
             pointFormat: '<b>{point.percentage:.1f}%</b> {series.name}'
@@ -62,7 +62,7 @@ function percent_distance_for_cars_init(data) {
             plotShadow: false
         },
         title: {
-            text: 'The percentage distance for cars'
+            text: I18n.t("charts.distance_per_cars") 
         },
         tooltip: {
             pointFormat: '<b>{point.percentage:.1f}%</b> {series.name}'
@@ -98,10 +98,10 @@ function length_tracks_of_time() {
             type: 'column'
         },
         title: {
-            text: 'Distance for days'
+            text: I18n.t('charts.distance4day')
         },
         subtitle: {
-            text: 'The daily distance of your tracks'
+            text:  I18n.t('charts.distance4day_full')
         },
         xAxis: {
             type: 'datetime',
@@ -110,18 +110,18 @@ function length_tracks_of_time() {
                 year: '%b'
             },
             title: {
-                text: 'Date'
+                text: I18n.t('date')
             }
         },
         yAxis: {
             title: {
-                text: 'Track distance (km)'
+                text: I18n.t('charts.track_distance')
             },
             min: 0
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e. %b}: {point.y:.2f} km'
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f} '+I18n.t('speed_val')
         },
 
         plotOptions: {
@@ -150,7 +150,7 @@ function avg_speed_chart_init() {
         },
 
         title: {
-            text: 'Speed Average'
+            text: I18n.t('map.avg_speed')
         },
 
         pane: {
@@ -208,7 +208,7 @@ function max_speed_chart_init() {
         },
 
         title: {
-            text: 'Max Speed'
+            text: I18n.t("map.max_speed") 
         },
 
         pane: {
@@ -258,7 +258,7 @@ function data_labels_for_speedometer (data){
         formatter: function () {
             var kmh = data
             mph = Math.round(kmh * 0.621);
-            return '<span style="color:#339">' + kmh + ' km/h</span><br/>' +
+            return '<span style="color:#339">' + kmh + ' '+I18n.t('speed_val')+'</span><br/>' +
             '<span style="color:#933">' + mph + ' mph</span>';
         },
         backgroundColor: {
@@ -281,13 +281,13 @@ function data_labels_for_speedometer (data){
 //private
 function tooltip_for_speedometer(){
     return {
-        valueSuffix: ' km/h'
+        valueSuffix: ' '+I18n.t('speed_val')
     }
 }
 //private
 function make_series_for_speedometer(data){
     return {
-            name: 'Speed',
+            name: I18n.t('map.speed'),
             data: [data],
             dataLabels: data_labels_for_speedometer(data),
             tooltip: tooltip_for_speedometer()

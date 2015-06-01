@@ -100,7 +100,7 @@
       if ( data.success ) {
         $("#tracks_for_cars_diagram").highcharts().addSeries({
             type: 'pie',
-            name: 'of total tracks',
+            name: I18n.t('charts.of_tracks'),
             colors:get_highcharts_colors(data.result.colors),
             data: data.result.data
         });
@@ -112,7 +112,7 @@
       if ( data.success ) {
         $("#distance_for_cars_diagram").highcharts().addSeries({
             type: 'pie',
-            name: 'of total distance',
+            name: I18n.t('charts.of_distance') ,
             colors:get_highcharts_colors(data.result.colors),
             data: data.result.data
         });

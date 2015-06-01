@@ -259,6 +259,7 @@ ru:
   to_en: "English version"
   to_ru: "Русская версия"
   log_in: "Войти"
+  sign_in: "Вход"
   sign_up: "Регистрация"
   sign_out: "Выход"
   about: "О проекте"
@@ -267,9 +268,13 @@ ru:
   reset_but: "Очистить"
   close_but: "Закрыть"
   resend_but: "Отправить повторно"
+  save_but: "Сохранить"
+  cancel_but: "Отмена"
+  change_but: "Изменить %{name}"
   authorization: "Авторизация"
   home: "Главная"
   email: "e-mail"
+  password: "пароль"
   here: "здесь"
   to_home: "На главную"
   to_FAQ: "перейти в FAQ"
@@ -281,6 +286,7 @@ ru:
   max_selected_track: "Максимум: %{count}"
   speed_val: "км/ч"
   distance_val: "км"
+  days_val: "дней"
   loading: "Загрузка..."
   verification: "Подтверждение e-mail"
   modals:
@@ -292,18 +298,21 @@ ru:
     speed: "Скорость"
     distance: "Расстояние"
     total_distance: "Общее расстояние"
-    min_distance: "Минимальное расстояние"
-    max_distance: "Максимальное расстояние"
+    min_distance: "Минимальная длина трека"
+    max_distance: "Максимальная длина трека"
     duration: "Длительность"
     total_duration: "Общая длительность"
-    min_duration: "Минимальная длительность"
-    max_duration: "Максимальная длительность"
+    min_duration: "Минимальная длительность трека"
+    max_duration: "Максимальная длительность трека"
     address: "Адрес"
     avg_speed: "Средняя скорость"
     min_speed: "Минимальная скорость"
     max_speed: "Максимальная скорость"
     start_time: "Начало"
     end_time: "Конец"
+    points: 'Маркеры'
+    lines: 'Линии'
+
   about_page:
     developer_stamp: "Разработано Нагорным Андреем"
     desc0: "Любопытный студент"
@@ -352,13 +361,57 @@ ru:
       settings: "Настройки"
       help: "Помощь"
       administration: "Администрирование"
-  users:
-    verification_form:
-      verification_key: "Код:"
-      letter_to: "код на адрес: %{mail}."
   maps:
     tracks:
       info:
         head: "Подробная статистика о треке %{track}"
       info_all:
         head: "Подробная статистика обо всех выбранных треков"
+  shared:
+    question:
+      header_default: "Некоторый текст заголовка..."
+      body_default: "Некоторое содержимое ..."
+    settings_nav:
+      user_settings: "Настройки пользователя"
+      car_settings: "Настройки автомобилей"
+      my_cars: "Мои автомобили"
+      new_cars: "Добавить автомобиль"
+  cars:
+    tooltip:
+      wait_message: 'Подождите, контент загружается ...'
+  tracks:
+    val: "треков"
+  users:
+    verification_form:
+      verification_key: "Код:"
+      letter_to: "код на адрес: %{mail}."
+    edit:
+      change_gravatar: 'Изменить Gravatar'
+      change_gravatar_hint: 'Ваш gravatar будет изменен на сайте проекта "Gravatar"'
+      upload_avatar: 'Загрузить Ваш аватар'
+      delete_avatar_label: "Не использовать загружаемый аватар"
+      delete_avatar_hint: "Вы будете использовать глобальный аватар (grvatar) (http://gravatar.com), а загружаемый аватар будет удален."
+      user_settings: "Настройки пользователя"
+      profile_settings: "Настройки профиля"
+      region_settings: "Настройки региона"
+      system_settings: "Системные настройки"
+      head1: "Пользовательские настройки"
+    reset_password_email_form:
+      head1: "Сброс пароля, шаг 1"
+      head2: "На указанный адрес будут высланы инструкции, с дальнейшими указаниями. проверьте свой e-mail!"
+    reset_password_new_pass_request:
+      head1: "Сброс пароля, шаг 2"
+      head2: "Введите новый пароль!"
+    users_charts:
+      track_statistic_head: "Общая статистика о треках"
+      total_tracks: "Всего треков"
+      total_distance: "Общее пройденное расстояние"
+      avg_dist_per_track: "Среднее расстояние на трек"
+      avg_dist_per_day: "Среднее расстояние в день"
+      avg_dist_per_car: "Среднее расстояние на автомобиль"
+      avg_tracks_per_day: "Среднее кол-во треков в день"
+      avg_tracks_per_car: "Среднее кол-во треков на автомобиль"
+      favorite_car: '"Любимый" автомобиль'
+      total_days: "Всего дней, с момента создания первого трека"
+    verification:
+      head2: "На указанный Вами e-mail отправлены инструкции, с указаниями, необходимыми для завершения подтвержения e-mail адреса. Пожалуйста, проверьте свой e-mail!"

@@ -21,7 +21,10 @@
 @import "bootstrap-slider";
 @import "font-awesome-sprockets";
 @import "font-awesome";
-
+@import url(http://fonts.googleapis.com/css?family=Roboto&subset=cyrillic,latin);
+body{
+  font-family: 'Roboto', sans-serif;
+}
 //OVERIDES
 a{
 	color:rgb(44, 62, 80);

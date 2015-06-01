@@ -43,33 +43,38 @@ ru:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Пожалуйста, исправьте следующие ошибки:"
-      labels:
-        user:
-          login: "Логин"
-          email: "E-mail"
-          password: "Пароль"
-          password_confirmation: "Повторите пароль"
-          locale: "Язык"
-          time_zone: "Часовой пояс"
-        profile:
-          first_name: "Имя"
-          second_name: "Фамилия"
-          middle_name: "Отчество"
-          mobile_phone: "Мобильный телефон"
-          country: "Страна"
-          region: "Область (регион)"   
-          city: "Город"  
-        car:
-          title: "Название"
-          color: "Цвет"
-          priority: "Приоритет"
-          description: "Описание"
-        users_mail:
-          first_name: "Имя"
-          last_name: "Фамилия"
-          subject: "Тема"
-          message: "Сообщение"
-          email: "E-mail"
+    labels:
+      defaults:
+        login: "Логин"
+        email: "E-mail"
+        password: "Пароль"
+        password_confirmation: "Повторите пароль"
+      user:
+        login: "Логин"
+        email: "E-mail"
+        password: "Пароль"
+        password_confirmation: "Повторите пароль"
+        locale: "Язык"
+        time_zone: "Часовой пояс"
+      profile:
+        first_name: "Имя"
+        second_name: "Фамилия"
+        middle_name: "Отчество"
+        mobile_phone: "Мобильный телефон"
+        country: "Страна"
+        region: "Область (регион)"   
+        city: "Город"  
+      car:
+        title: "Название"
+        color: "Цвет"
+        priority: "Приоритет"
+        description: "Описание"
+      users_mail:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        subject: "Тема"
+        message: "Сообщение"
+        email: "E-mail"
 
     # hints:
     #   defaults:

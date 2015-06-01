@@ -4,9 +4,7 @@ map.locate({setView : true});
 L.control.locate({setView : true}).addTo(map);
 L.control.fullscreen().addTo(map);
 var layers = document.getElementById('menu-ui');
-/*$("#findme_but").click(function() {
-	map.locate({setView : true});
-});*/
+
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
@@ -19,8 +17,8 @@ function getRandomColor() {
 var pointsAdded = 0;
 var featureGroup = L.featureGroup()
 var path_points = new L.MarkerClusterGroup();
-addLayer(path_points, "Points",1)
-addLayer(featureGroup, "Lines",2)
+addLayer(path_points, I18n.t("map.points"),1)
+addLayer(featureGroup, I18n.t("map.lines"),2)
 function add_locs_to_map(locs) {
 		featureGroup.clearLayers();
 		path_points.clearLayers();

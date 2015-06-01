@@ -24,14 +24,19 @@ en:
     to_en: "English version"
     to_ru: "Русская версия"
     log_in: "Log in"
+    sign_in: "Log in"
     sign_up: "Sign up"
     sign_out: "Sign out"
     send_but: "Send"
     resend_but: "Resend"
     reset_but: "Clear"
     close_but: "Close"
+    save_but: "Save"
+    cancel_but: "Cancel"
+    change_but: "Change %{name}"
     author: "Nagorny Andrey"
     email: "e-mail"
+    password: "password"
     here: "here"
     about: "About"
     contact_us: "Contact us"
@@ -46,6 +51,7 @@ en:
     max_selected_track: "Maximum: %{count}"
     speed_val: "km/h"
     distance_val: "km"
+    days_val: "days"
     loading: "Loading..."
     verification: "Verification e-mail"
     modals:
@@ -57,19 +63,20 @@ en:
         speed: "Speed"
         distance: "Distance"
         total_distance: "Total distance"
-        min_distance: "Min distance"
-        max_distance: "Max distance"
+        min_distance: "Min track length"
+        max_distance: "Max track length"
         duration: "Duration"
         total_duration: "Total duration"
-        min_duration: "Min duration"
-        max_duration: "Max duration"
+        min_duration: "Min track duration"
+        max_duration: "Max track duration"
         address: "Address"
-        avg_speed: "Avarage speed"
+        avg_speed: "Average speed"
         min_speed: "Min speed"
         max_speed: "Max speed"
         start_time: "Start time"
         end_time: "Stop time"
-
+        points: 'Points'
+        lines: 'Lines'
 
     about_page:
         developer_stamp: "Developed by Andrey Nagorny"
@@ -129,3 +136,48 @@ en:
                 head: "General statistic of track %{track}"
             info_all:
                 head: "General statistic of all selected track"
+    shared:
+        question:
+            header_default: "Some header text..."
+            body_default: "Some body text..."
+        settings_nav:
+            user_settings: "User settings"
+            car_settings: "Car settings"
+            my_cars: "My cars"
+            new_cars: "Add car"
+    cars:
+        tooltip:
+            wait_message: 'Wait while we load new content...'
+    tracks:
+        val: "tracks"
+    users:
+        edit:
+            change_gravatar: 'Change Gravatar'
+            change_gravatar_hint: 'Your Gravatar changes to the project site "Gravatar"'
+            upload_avatar: 'Upload your avatar'
+            delete_avatar_label: "Don't use native avatar"
+            delete_avatar_hint: "Will use an avatar from http://gravatar.com, and native avatar will be deleted."
+            user_settings: "User settings"
+            profile_settings: "Profile settings"
+            region_settings: "Region settings"
+            system_settings: "System settings"
+            head1: "User settings"
+        reset_password_email_form:
+            head1: "Reset your password, Step 1"
+            head2: "To your email address sent an email with instructions required to reset your password. Please check your e-mail!"
+        reset_password_new_pass_request:
+            head1: "Reset your password, Step 2"
+            head2: "Enter your new password!"
+        users_charts:
+            track_statistic_head: "General statistic of your tracks"
+            total_tracks: "Total tracks"
+            total_distance: "Total distance"
+            avg_dist_per_track: "Average distance per track"
+            avg_dist_per_day: "Average distance per day"
+            avg_dist_per_car: "Average distance per car"
+            avg_tracks_per_day: "Average tracks per day"
+            avg_tracks_per_car: "Average tracks per car"
+            favorite_car: "Favorite car"
+            total_days: "Total days, since the establishment of the first track"
+        verification:
+            head2: "To your email address sent an email with instructions required to confirm your e-mail. Please check your e-mail!"

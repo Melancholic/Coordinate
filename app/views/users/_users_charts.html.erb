@@ -25,44 +25,44 @@
 <div class="row">
   <div class="col-md-12 well">
     <div class="tracks_statistic" style="min-width: 250px;" >
-      <h1> General statistic of your tracks </h1>
+      <h1> <%=t('.track_statistic_head')%> </h1>
       <table class="table table-striped" >
         <tr>
-          <td><strong>Total tracks:</strong></td>
+          <td><strong><%=t('.total_tracks')%>:</strong></td>
           <td><%=@total_tracks%></td>
         </tr>
         <tr>
-          <td><strong>Total distance:</strong></td>
-          <td><%=@total_distance%> km</td>
+          <td><strong><%=t('.total_distance')%>:</strong></td>
+          <td><%=@total_distance%> <%=t('distance_val')%></td>
         </tr>
         <tr>
-          <td><strong>Average distance per track:</strong></td>
-          <td><%=@average_distance%> km</td>
+          <td><strong><%=t('.avg_dist_per_track')%>:</strong></td>
+          <td><%=@average_distance%> <%=t('distance_val')%></td>
         </tr>
         <tr>
-          <td><strong>Average distance per day:</strong></td>
-          <td><%=@average_distance_per_day%> km</td>
+          <td><strong><%=t('.avg_dist_per_day')%>:</strong></td>
+          <td><%=@average_distance_per_day%> <%=t('distance_val')%></td>
         </tr>
         <tr>
-          <td><strong>Average distance per car:</strong></td>
-          <td><%=@average_distance_per_car%> km</td>
+          <td><strong><%=t('.avg_dist_per_car')%>:</strong></td>
+          <td><%=@average_distance_per_car%> <%=t('distance_val')%></td>
         </tr>
         <tr>
           <tr>
-            <td><strong>Average tracks per day:</strong></td>
+            <td><strong><%=t('.avg_tracks_per_day')%>:</strong></td>
             <td><%=@average_tracks_per_day%></td>
           </tr>
           <tr>
-            <td><strong>Average tracks per car:</strong></td>
+            <td><strong><%=t('.avg_tracks_per_car')%>:</strong></td>
             <td><%=@average_tracks_per_car%> </td>
           </tr>
           <tr>
-            <td><strong>Favorite car:</strong></td>
-            <td><%=link_to  @favorite_car.title, car_path( @favorite_car)%> (<%= @favorite_car.tracks.count%> tracks)</td>
+            <td><strong><%=t('.favorite_car')%>:</strong></td>
+            <td><%=link_to  @favorite_car.title, car_path( @favorite_car)%> (<%= @favorite_car.tracks.count%>  <%=t('tracks.val')%>)</td>
           </tr>
           <tr>
-            <td><strong>Total days:</strong></td>
-            <td><%=@days%> days</td>
+            <td><strong><%=t('.total_days')%>:</strong></td>
+            <td><%=@days%> <%=t('days_val')%></td>
           </tr>
         </table>
       </div>

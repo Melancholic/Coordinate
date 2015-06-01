@@ -9,15 +9,15 @@
           <%= link_to(avatar_for(@user,:normal, class:"avatar-big img-rounded"),"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar') %>
           </section>
           <section>
-          <%= link_to('Change Gravatar',"http://gravatar.com/emails" ,:target => "_blank", :hint =>'Change Gravatar')%>
+          <%= link_to( t('.change_gravatar'),"http://gravatar.com/emails" ,:target => "_blank", :hint =>t('.change_gravatar_hint'))%>
           </section>
           <% end %>
-          <h3>Upload your avatar</h3>
+          <h3><%=t('.upload_avatar')%></h3>
 
           <%= f.simple_fields_for :profile,f.object.profile || f.object.build_profile do |p| %>
             <%= p.simple_fields_for :image, p.object.image || p.object.build_image do |i| %>
               <%=i.input :img, label: false, input_html:{class:"form-control"}%>
-              <%= i.input  :_destroy, as: :boolean, label:"Don't use native avatar", hint:"Will use an avatar from http://gravatar.com, and native avatar will be deleted." %>
+              <%= i.input  :_destroy, as: :boolean, label: t('.delete_avatar_label'), hint:t('.delete_avatar_hint') %>
             <%end%>
           <%end%>
         </div>
@@ -28,7 +28,7 @@
         <%= f.error_notification %>
         <div class="row">
           <div class="col-md-offset-1 col-md-5">
-            <h2>User settings</h2>
+            <h2 class="settings-header"><%=t('.user_settings')%></h2>
             <div class="form-inputs">
               <%= f.input :login, required: true, autofocus: true, span:'span6' %>
               <%= f.input :email, required: true %>
@@ -38,7 +38,7 @@
           </div>
           <div class="col-md-offset-1 col-md-5">
             <div class="form-inputs">
-              <h2>Profile settings</h2>
+              <h2 class="settings-header"><%=t('.profile_settings')%></h2>
               <%= f.simple_fields_for :profile,f.object.profile || f.object.build_profile do |p| %>
               <%= p.input :name %>  
               <%= p.input :second_name %>  
@@ -51,7 +51,7 @@
         <hr>
         <div class="row">
           <div class="col-md-offset-1 col-md-5">
-            <h2>Region settings</h2>
+            <h2 class="settings-header"><%=t('.region_settings')%></h2>
             <%= f.simple_fields_for :profile,f.object.profile || f.object.build_profile do |p| %>
             <%= p.input :country %>  
             <%= p.input :region %>  
@@ -59,7 +59,7 @@
             <% end %>
           </div>
            <div class="col-md-offset-1 col-md-5">
-            <h2>System settings</h2>
+            <h2 class="settings-header"><%=t('.system_settings')%></h2>
             <div class="form-inputs">
               <%= f.input :time_zone %>
             </div>
@@ -73,10 +73,10 @@
             <hr>
           <div class="col-md-9">
             <div class="col-xs-6 col-sm-offset-3 col-sm-3 col-md-offset-5 col-md-3">
-              <%= f.button :submit, "Save Changes",class:"btn btn-primary" %>
+              <%= f.button :submit, t("save_but"),class:"btn btn-primary" %>
             </div>
           <div class="col-xs-6 col-sm-6 col-md-offset-1  col-md-3">
-            <%= link_to "Cancel", user_url(@user), class:"btn btn-default", role:"button"  %>
+            <%= link_to t("cancel_but"), user_url(@user), class:"btn btn-default", role:"button"  %>
           </div>
         </div>
         </div>

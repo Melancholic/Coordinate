@@ -1,6 +1,6 @@
 <%
-head||="Header text"
-body||="Body text"
+head||=t('.header_default')
+body||=t('.body_default') 
 %>
 
 <div class="panel panel-default" id="<%=Digest::SHA1.hexdigest(head)%>" >

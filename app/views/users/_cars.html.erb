@@ -46,20 +46,20 @@
                 async: true,
                 data: {car_id : this.data('item')},
                 success: function( data ) {
-                  console.log(data)
-                  origin.tooltipster('content',  '<b>'+'Speed average: '+'</b>'+data['speed_avg']+'<br>'+
-                    '<b>'+'Speed max: '+'</b>'+data['speed_max']+'<br>'+
-                    '<b>'+'Total tracks length: '+'</b>'+data['total_tracks_length']+'<br>'+
-                    '<b>'+'Max track length: '+'</b>'+data['max_track_length']+'<br>'+
-                    '<b>'+'Total tracks durations: '+'</b>'+data['total_tracks_duration']+'<br>'+
-                    '<b>'+'Max track duration: '+'</b>'+data['max_track_duration']+'<br>'+
-                    '<b>'+'Min track duration: '+'</b>'+data['min_track_duration']+'<br>'
+                  console.log(I18n.t)
+                  origin.tooltipster('content',  '<b>'+I18n.t('map.avg_speed')+': </b>'+data['speed_avg']+'<br>'+
+                    '<b>'+I18n.t('map.max_speed')+': </b>'+data['speed_max']+'<br>'+
+                    '<b>'+I18n.t('map.total_distance')+': </b>'+data['total_tracks_length']+'<br>'+
+                    '<b>'+I18n.t('map.max_distance')+': </b>'+data['max_track_length']+'<br>'+
+                    '<b>'+I18n.t('map.total_duration')+': </b>'+data['total_tracks_duration']+'<br>'+
+                    '<b>'+I18n.t('map.max_duration')+': </b>'+data['max_track_duration']+'<br>'+
+                    '<b>'+I18n.t('map.min_duration')+': </b>'+data['min_track_duration']+'<br>'
                     )  
                 }});
               
               
             // this returned string will overwrite the content of the tooltip for the time being
-            return 'Wait while we load new content...';
+            return I18n.t('cars.tooltip.wait_message');
           }
           else {
             // return nothing : the initialization continues normally with its content unchanged.

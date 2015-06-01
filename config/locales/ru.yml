@@ -260,11 +260,13 @@ ru:
   to_ru: "Русская версия"
   log_in: "Войти"
   sign_up: "Регистрация"
+  sign_out: "Выход"
   about: "О проекте"
   contact_us: "Обратная связь"
   send_but: "Отправить"
   reset_but: "Очистить"
   close_but: "Закрыть"
+  resend_but: "Отправить повторно"
   authorization: "Авторизация"
   home: "Главная"
   email: "e-mail"
@@ -280,6 +282,7 @@ ru:
   speed_val: "км/ч"
   distance_val: "км"
   loading: "Загрузка..."
+  verification: "Подтверждение e-mail"
   modals:
     warning: "Предупреждение!"
     max_length_msg: "Максимальная длина: {{max}} символов!"
@@ -331,3 +334,15 @@ ru:
       date_pick_at: "от:"
       date_pick_to: "до:"
       select_tracks: "Выберите треки (<15):"
+  layouts:
+    header:
+      account: "Аккаунт"
+      profile: "Профиль"
+      settings: "Настройки"
+      help: "Помощь"
+      administration: "Администрирование"
+  users:
+    verification_form:
+      verification_key: "Код:"
+      letter_to: "код на адрес: %{mail}."
+      

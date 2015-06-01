@@ -27,24 +27,24 @@
       <% if signed_in? %>
       <li id="fat-menu" class="dropdown menu-head">  
         <a href='#' class="dropdown-toggle" data-toggle="dropdown" >
-          Account <b class="caret"></b>
+          <%=t('.account')%> <b class="caret"></b>
           <%=avatar_for(current_user, :icon, alt: "#{current_user.login}", class:"img-circle")  %>
         </a>
         <ul class="dropdown-menu">
-          <li data-no-turbolink> <%= link_to("Profile", current_user)%></li>
-          <li><%= link_to("Settings",edit_user_path(current_user) ) %></li>
+          <li data-no-turbolink> <%= link_to(t(".profile"), current_user)%></li>
+          <li><%= link_to(t(".settings"),edit_user_path(current_user) ) %></li>
           <li class="divider"></li>
-          <li><%= link_to("Help",faq_path)%></li>
+          <li><%= link_to(t(".help"),faq_path)%></li>
           <% unless current_user.verificated? %>
           <li class="divider"></li>
-          <li><%= link_to("Verification",verification_user_path(current_user))%></li>
+          <li><%= link_to(t("verification"),verification_user_path(current_user))%></li>
           <%end%>
           <% if current_user.admin? %>
           <li class="divider"></li>
-          <li><%= link_to("Administration",admin_root_path, style:"color: #f00;")%></li>
+          <li><%= link_to(t(".administration"),admin_root_path, style:"color: #f00;")%></li>
           <%end%>
           <li class="divider"></li>
-          <li> <%= link_to("Sign Out", signout_path, method: "delete") %></li>
+          <li> <%= link_to(t("sign_out"), signout_path, method: "delete") %></li>
         </ul>
       </li>
       <%else%>

@@ -1,7 +1,9 @@
 ru:
     activerecord:
         models:
-            user: "Пользователь"
+            user: 
+                one: "Пользователь"
+                other: "Пользователи"
         attributes:
             user:
                 login: "Логин"
@@ -10,7 +12,7 @@ ru:
                 password_confirmation: "Повторите пароль"
                 locale: "Язык"
                 time_zone: "Часовой пояс"
-                captcha: "Докажите, свою человечность!"
+                captcha: "Докажите, что Вы человек"
             profile:
                 first_name: "Имя"
                 second_name: "Фамилия"
@@ -29,4 +31,4 @@ ru:
                 last_name: "Фамилия"
                 subject: "Тема"
                 message: "Сообщение"
-                captcha: "Докажите, свою человечность!"
+                captcha: "Докажите, что Вы человек"

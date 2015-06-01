@@ -25,7 +25,9 @@ en:
     to_ru: "Русская версия"
     log_in: "Log in"
     sign_up: "Sign up"
+    sign_out: "Sign out"
     send_but: "Send"
+    resend_but: "Resend"
     reset_but: "Clear"
     close_but: "Close"
     author: "Nagorny Andrey"
@@ -45,6 +47,7 @@ en:
     speed_val: "km/h"
     distance_val: "km"
     loading: "Loading..."
+    verification: "Verification e-mail"
     modals:
         warning: "Warning!"
         max_length_msg: "The maximum length of the field contents: {{max}} symbols!"
@@ -97,3 +100,14 @@ en:
             date_pick_at: "at:"
             date_pick_to: "to:"
             select_tracks: "Select tracks (<15):"
+    layouts:
+        header:
+            account: "account"
+            profile: "Profile"
+            settings: "Settings"
+            help: "Help"
+            administration: "Administration"
+    users:
+        verification_form:
+            verification_key: "Verification key:"
+            letter_to: "key a letter to %{mail}"

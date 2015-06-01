@@ -1,29 +1,29 @@
 <div class="row">
   <div class="col-md-4">
-    <h3> General statistic of track <%="<##{@track.id}>"%> </h3>
+    <h3> <%= t('.head', track:"<##{@track.id}>")%> </h3>
     <table class="table table-striped" >
       <tr>
-        <td><strong>Distance:</strong></td>
-        <td><%=@distance%> km</td>
+        <td><strong><%=t('map.distance')%>:</strong></td>
+        <td><%=@distance%> <%=t('distance_val')%></td>
       </tr>
       <tr>
-        <td><strong>Duration:</strong></td>
+        <td><strong><%=t('map.duration')%>:</strong></td>
         <td><%=@duration%></td>
       </tr>
       <tr>
-        <td><strong>Max Speed:</strong></td>
-        <td><%=@max_speed%> km/h</td>
+        <td><strong><%=t('map.max_speed')%>:</strong></td>
+        <td><%=@max_speed%> <%=t('speed_val')%></td>
       </tr>
       <tr>
-        <td><strong>Avarage Speed:</strong></td>
-        <td><%=@avg_speed%> km/h</td>
+        <td><strong><%=t('map.avg_speed')%>:</strong></td>
+        <td><%=@avg_speed%> <%=t('speed_val')%></td>
       </tr>
       <tr>
-        <td><strong>Time start:</strong></td>
+        <td><strong><%=t('map.start_time')%>:</strong></td>
         <td><%=@start_time.strftime("%d.%m.%Y %T (%Z)")%></td>
       </tr>
       <tr>
-        <td><strong>Time end:</strong></td>
+        <td><strong><%=t('map.end_time')%>:</strong></td>
         <td><%=@stop_time.strftime("%d.%m.%Y %T (%Z)")%></td>
       </tr>                  
     </table>

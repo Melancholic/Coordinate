@@ -56,8 +56,20 @@ en:
         long: "Longitude"
         speed: "Speed"
         distance: "Distance"
+        total_distance: "Total distance"
+        min_distance: "Min distance"
+        max_distance: "Max distance"
         duration: "Duration"
+        total_duration: "Total duration"
+        min_duration: "Min duration"
+        max_duration: "Max duration"
         address: "Address"
+        avg_speed: "Avarage speed"
+        min_speed: "Min speed"
+        max_speed: "Max speed"
+        start_time: "Start time"
+        end_time: "Stop time"
+
 
     about_page:
         developer_stamp: "Developed by Andrey Nagorny"
@@ -102,7 +114,7 @@ en:
             select_tracks: "Select tracks (<15):"
     layouts:
         header:
-            account: "account"
+            account: "Account"
             profile: "Profile"
             settings: "Settings"
             help: "Help"
@@ -111,3 +123,9 @@ en:
         verification_form:
             verification_key: "Verification key:"
             letter_to: "key a letter to %{mail}"
+    maps:
+        tracks:
+            info:
+                head: "General statistic of track %{track}"
+            info_all:
+                head: "General statistic of all selected track"

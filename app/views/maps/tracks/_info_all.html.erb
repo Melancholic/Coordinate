@@ -1,38 +1,38 @@
 <div class="row all_info">
   <div class="col-md-12">
-    <h3> General statistic of all selected track </h3>
+    <h3> <%= t('.head')%></h3>
     <table class="table table-striped" >
       <tr>
-        <td><strong>Total distance:</strong></td>
-        <td><%=@distances%> km</td>
+        <td><strong> <%= t('map.total_distance')%>:</strong></td>
+        <td><%=@distances%> <%=t('distance_val')%></td>
       </tr>
       <tr>
-        <td><strong>Max distance:</strong></td>
-        <td><%=@max_distance%> km</td>
+        <td><strong> <%= t('map.max_distance')%>:</strong></td>
+        <td><%=@max_distance%> <%=t('distance_val')%></td>
       </tr>
       <tr>
-        <td><strong>Min distance:</strong></td>
-        <td><%=@min_distance%> km</td>
+        <td><strong> <%= t('map.min_distance')%>:</strong></td>
+        <td><%=@min_distance%> <%=t('distance_val')%></td>
       </tr>
       <tr>
-        <td><strong>Total duration:</strong></td>
+        <td><strong> <%= t('map.total_duration')%>:</strong></td>
         <td><%=@durations%></td>
       </tr>
       <tr>
-        <td><strong>Max duration:</strong></td>
+        <td><strong> <%= t('map.max_duration')%>:</strong></td>
         <td><%=@max_duration%></td>
       </tr>
       <tr>
-        <td><strong>Min duration:</strong></td>
+        <td><strong> <%= t('map.min_duration')%>:</strong></td>
         <td><%=@min_duration%></td>
       </tr>
       <tr>
-        <td><strong>Max Speed:</strong></td>
-        <td><%=@max_speed%> km/h</td>
+        <td><strong> <%= t('map.max_speed')%>:</strong></td>
+        <td><%=@max_speed%> <%=t('speed_val')%></td>
       </tr>
       <tr>
-        <td><strong>Avarage Speed:</strong></td>
-        <td><%=@avg_speed%> km/h</td>
+        <td><strong> <%= t('map.avg_speed')%>:</strong></td>
+        <td><%=@avg_speed%> <%=t('speed_val')%></td>
       </tr>                 
     </table>
   </div>

@@ -19,7 +19,7 @@ $(function () {
         yAxis: {
             min: 0,
             title: {
-                text: 'Speed (km/h)'
+                text: I18n.t('map.speed')+' '+I18n.t('speed_val')
             },
             plotLines: [{
                 value: 0,
@@ -28,7 +28,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: ' km/h'
+            valueSuffix: ' '+I18n.t('speed_val')
         },
         legend: {
             enabled: false
@@ -59,7 +59,7 @@ $(function () {
 
         series: [{
             type: 'area',
-            name: 'Speed',
+            name: I18n.t('map.speed'),
             data: <%=raw @speeds.as_json%>
         }
     ]});

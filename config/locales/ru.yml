@@ -291,8 +291,19 @@ ru:
     long: "Долгота"
     speed: "Скорость"
     distance: "Расстояние"
+    total_distance: "Общее расстояние"
+    min_distance: "Минимальное расстояние"
+    max_distance: "Максимальное расстояние"
     duration: "Длительность"
+    total_duration: "Общая длительность"
+    min_duration: "Минимальная длительность"
+    max_duration: "Максимальная длительность"
     address: "Адрес"
+    avg_speed: "Средняя скорость"
+    min_speed: "Минимальная скорость"
+    max_speed: "Максимальная скорость"
+    start_time: "Начало"
+    end_time: "Конец"
   about_page:
     developer_stamp: "Разработано Нагорным Андреем"
     desc0: "Любопытный студент"
@@ -345,4 +356,9 @@ ru:
     verification_form:
       verification_key: "Код:"
       letter_to: "код на адрес: %{mail}."
-      
+  maps:
+    tracks:
+      info:
+        head: "Подробная статистика о треке %{track}"
+      info_all:
+        head: "Подробная статистика обо всех выбранных треков"

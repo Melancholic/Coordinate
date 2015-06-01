@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'font-awesome-sass'
-
+gem 'i18n-js', '~> 2.1.2'
 gem 'simple_captcha2', require: 'simple_captcha'
 gem 'groupdate'
 gem "highcharts-rails", "~> 4.0.0"

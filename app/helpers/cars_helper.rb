@@ -11,7 +11,7 @@ module CarsHelper
     end
 
     def delete_car_for car
-        link_to car, id:"car#{car.id}delete", 
+        link_to car, 
         class: "btn btn-sm btn-danger",
             type:"button", 
             "data-toggle" => "tooltip", 

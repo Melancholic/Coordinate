@@ -34,7 +34,7 @@ function add_locs_to_map(locs) {
             		icon: L.mapbox.marker.icon({'marker-symbol': 'marker', 'marker-color': rand_color}),
             		title: convert_datetime(loc.time)
         		});
-        		marker.bindPopup("Loading...");
+        		marker.bindPopup(I18n.t("loading"));
         		marker['loc_id']=loc.id;
         		path_points.addLayer(marker);
 
@@ -48,12 +48,12 @@ map.on('popupopen',function(e) {
 	$.getJSON( maps_location_path, params,  function( data ) {
 			var loc=data.location;
 			e.popup.setContent('<b> '+convert_datetime(loc.time)+'</b><hr>'+
-				'<b>Latitude</b> '+loc.latitude+'<br>'+
-				'<b>Longitude</b> '+loc.longitude+'<br>'+
-				'<b>Speed</b> '+loc.speed+' km/h.<br>'+
-				'<b>Distance:</b> '+loc.distance+' km.<br>'+
-				'<b>Duration: </b> '+moment.duration(loc.dur_time,"minutes").humanize()+'.'+
-				'<p><b>Address: </b> '+loc.address+'. </p>'
+				'<b>'+I18n.t("map.lat")+'</b> '+loc.latitude+'<br>'+
+				'<b>'+I18n.t("map.long")+'</b> '+loc.longitude+'<br>'+
+				'<b>'+I18n.t("map.speed")+'</b> '+loc.speed+I18n.t("speed_val")+'.<br>'+
+				'<b>'+I18n.t("map.distance")+'</b> '+loc.distance+ I18n.t("distance_val")+'.<br>'+
+				'<b>'+I18n.t("map.duration")+'</b> '+moment.duration(loc.dur_time,"minutes").locale(I18n.locale).humanize()+'.'+
+				'<p><b>'+I18n.t("map.address")+': </b> '+loc.address+'. </p>'
 			);
     });
 });

@@ -67,7 +67,7 @@ def destroy
   else
     flash[:error] = "Car \"#{title}\" has not been deleted!";
   end
-  redirect_to :back;
+  redirect_to (cars_path);
 end
 
 def info

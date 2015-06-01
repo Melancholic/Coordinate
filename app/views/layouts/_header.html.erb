@@ -16,12 +16,12 @@
     </a>
   </div>
   <!-- Right  block-->
-  <%= render('shared/modals/form',form: 'shared/sign_tabs', id:'sign_modal', title: 'Authorization', remote: true) unless signed_in? || (current_page?(signin_path) ||current_page?(signup_path) )%>
+  <%= render('shared/modals/form',form: 'shared/sign_tabs', id:'sign_modal', title: t('authorization'), remote: true) unless signed_in? || (current_page?(signin_path) ||current_page?(signup_path) )%>
   <div class="navbar-collapse collapse" id="navbar-header">
     <ul class="nav navbar-nav navbar-right" >
       <% unless current_page?(root_path) %>
       <li>
-        <%=link_to("Home",root_path)%>   
+        <%=link_to(t('to_home'),root_path)%>   
       </li>
       <% end %>
       <% if signed_in? %>
@@ -50,7 +50,7 @@
       <%else%>
         <%unless(current_page?(signin_path) ||current_page?(signup_path))%>
           <li>
-            <a onclick="sign_modal_call()" href="#">Authorization</a>
+            <a onclick="sign_modal_call()" href="#"><%=t('authorization')%></a>
           </li>
         <%end%>
       <%end%>

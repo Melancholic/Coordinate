@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy];
   match '/signin', to: 'sessions#new', via:'get';
   match '/signout', to:'sessions#destroy', via:'delete';
+  match 'set_custom_locale', to:'sessions#set_custom_locale', via:'post';
   resources :users, except: [:index, :new] do
     
      #add user/id/following and user/id/followers

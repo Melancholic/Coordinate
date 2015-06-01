@@ -27,8 +27,8 @@ window.maps_location_path="<%=maps_location_path%>"
                         </div>
                     </div>
                     <% if (current_user.cars.empty?)%>
-                        <%= render 'shared/empty_message', msg:"You have not added any car!",
-                        sub_msg:"You can go into the settings and add your car right now.",
+                        <%= render 'shared/empty_message', msg:t('not_car_h'),
+                        sub_msg: t('not_car_b'),
                         target_url: new_car_path %>
                     <%else%>
                     <div class="col-sm-12 well">
@@ -37,24 +37,24 @@ window.maps_location_path="<%=maps_location_path%>"
                                 <div class="col-md-offset-1 col-sm-4 ">
                                     <div class="row">
                                         <div class="form-group">
-                                            <label for="car_sel">Select car:</label>
+                                            <label for="car_sel"><%=t('.select_car')%></label>
                                             <select class="form-control" id="car_sel">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group" >
-                                            <label for="datepicker">Date pick:</label>
+                                            <label for="datepicker"><%=t('.date_pick')%></label>
                                             <div id="datepicker">
                                              <div class="col-sm-6">
                                                 <div class="input-group" >
-                                                    <span class="input-group-addon">at</span>
+                                                    <span class="input-group-addon"><%=t('.date_pick_at')%></span>
                                                     <input type="text" class="form-control" id="start_date" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="input-group" >
-                                                    <span class="input-group-addon">to</span>
+                                                    <span class="input-group-addon"><%=t('.date_pick_to')%></span>
                                                     <input type="text" class="form-control" id="end_date" /> 
                                                     <!--<div id="end_date"></div>-->
                                                 </div>
@@ -66,7 +66,7 @@ window.maps_location_path="<%=maps_location_path%>"
                             <div class="col-sm-offset-1 col-sm-4">
                                 <div class="form-group">
                                     <span id="track_sel_error"></span>
-                                    <label for="tracks_sel">Select tracks:</label>
+                                    <label for="tracks_sel"><%=t('.select_tracks')%></label>
                                     <select multiple class="form-control" id="tracks_sel" size="6">
                                     </select>
                                 </div>
@@ -79,9 +79,9 @@ window.maps_location_path="<%=maps_location_path%>"
 
                 <%if Track.by_user(current_user).empty?%>
                 <%= render 'shared/empty_message',
-                msg:"You have not made a of one track...",
-                sub_msg:"Learn how bind a tracker to your car!",
-                but_msg: "to FAQ",
+                msg: t('not_tracks_h'),
+                sub_msg: t('not_tracks_b'),
+                but_msg: t("to_FAQ"),
                 target_url: faq_path
                 %>
                 <%else%>    

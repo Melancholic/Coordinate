@@ -1,4 +1,4 @@
-class UsersMailsController < ApplicationController
+class UsersMailsController < HTTPApplicationController
 	include SimpleCaptcha::ControllerHelpers
 	def new
 	end

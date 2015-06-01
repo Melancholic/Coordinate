@@ -20,4 +20,80 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+    forgot_password: "Forgot your password?"
+    to_en: "English version"
+    to_ru: "Русская версия"
+    log_in: "Log in"
+    sign_up: "Sign up"
+    send_but: "Send"
+    reset_but: "Clear"
+    close_but: "Close"
+    author: "Nagorny Andrey"
+    email: "e-mail"
+    here: "here"
+    about: "About"
+    contact_us: "Contact us"
+    authorization: "Authorization"
+    home: "Home"
+    to_home: "Home"
+    to_FAQ: "to FAQ"
+    not_car_h: "You have not added any car!"
+    not_car_b: "You can go into the settings and add your car right now."
+    not_tracks_h: "You have not made a of one track..."
+    not_tracks_b: "Learn how bind a tracker to your car!"
+    max_selected_track: "Maximum: %{count}"
+    speed_val: "km/h"
+    distance_val: "km"
+    loading: "Loading..."
+    modals:
+        warning: "Warning!"
+        max_length_msg: "The maximum length of the field contents: {{max}} symbols!"
+    map:
+        lat: "Latitude"
+        long: "Longitude"
+        speed: "Speed"
+        distance: "Distance"
+        duration: "Duration"
+        address: "Address"
+
+    about_page:
+        developer_stamp: "Developed by Andrey Nagorny"
+        desc0: "Curious student"
+        desc1: "Full-stack developer"
+        desc2: "Passionate motorist"
+        p1_html: "<p><strong>Coordinate</strong> - a non-profit, and free product, with a number of registered trade marks and free libraries.</p>"
+        p2_html: "<p><strong>Coordinate</strong> will allow you to monitor the location of your vehicle, view tracks, and detailed statistics. I tried to make service, as comfortable as possible for the end user, while not forgetting about the safety of the system as a whole.</p>"
+        p31_html: "<p>The project is developing, and your opinions and suggestions are important to me."
+        p32_html: "You can send them to me via any appropriate form on the site of the project (such as %{contact}) or by %{mail}.</p>"
+        p4_html: "<p>Thank you for your attention!</p>"
+        p5_html: "<p>I express my deep gratitude to the following for their help in project development:</p>"
+    faq:
+        back_to_top: "Back to top"
+        q1h: 'What are the requirements for using the service?'
+        q1b_html: "To use the service you need a device that is running <strong>Android 2.0</strong> and above, with the presence of <strong>GPS</strong> and <strong>Internet</strong> connection (EDGE/3G/4G/etc)."
+        q2h: "Where do I begin?"
+        q2b_html: '<p>First, you need to register or sign in using the form below.</p> <p>Then, you will need to fill in the profile data (%{user}) and add new your car (%{car}), and install the application "Coordinate-tracker" to your device.</p>'
+        q2_2b_html: '<p>First, you need to register or sign in using the form below(%{signin}).</p> <p>Then, you will need to fill in the profile data and add new your car, and install the application "Coordinate-tracker" to your device.</p>'
+        q3h: "What then?"
+        q3b_html: "<p>Next, you need to install (integrate) your mobile device in the car. You can arrange meals on-board network, or follow the battery status himself.</p><p>During their travels, the unit will automatically transmit data to our server, for further processing and storage.</p> <p><strong>Warning!</strong> Your data will only be available to you!</p>"
+        q4h: 'What is the "Coordinate-tracker"?'
+        q4b_html: '"Coordinate-tracker" is an application for OS Android, which determines the location of your car (which is installed a mobile device running the "Coordinate-tracker") and send the information to our server.'
+        q5h: 'How can I get a "Coordinate-tracker"?'
+        q5b_html: '<p>Unfortunately, the ability to download applications from <strong>"Google Play"</strong> are not available :(</p><p>Unfortunately, the ability to download an application from our website are not available :(</p><p>Im working on it!</p>'
+        q6h: 'How to configure "Coordinate-tracker"'
+        q6b_html: "<p>When you create a car, it will be assigned a unique identifier tracker (UUID), to be entered in the authorization application.</p><p><strong>Note:</strong> Each car can not have more than one tracker!</p><p>hus, it is necessary to adjust the tracker: email-user, the user's password, and UUID of a particular vehicle.</p>"
+        q7h: 'How to use the service?'
+        q7b_html:  '<p>After configuration, "Coordinate-tracker" further action is required. You can easily travel by car: all further actions will be automated.</p><p>You will be able to monitor the situation and statistics on the website of the service.</p>'
+        q8h: 'How to view detailed statistics?'
+        q8b_html: '<p>Detailed statistics can be viewed in your profile %{link} after registration.</p>'
+        q9h: 'How to view information about the tracks?'
+        q9b_html: '<p>For information on your tracks you can see in home page %{link} after registration.</p>'
+        q10h: 'Who owns the rights to ownership of the service?'
+        q10b_html: '<p>The right to own service (including mobile application "Coordinate-tracker" service belong to a single developer - Andrey Nagorny. You can learn more on the page "%{link}".</p>'
+    static_pages:
+        home4user:
+            select_car: "Select car:"
+            date_pick: "Date pick:"
+            date_pick_at: "at:"
+            date_pick_to: "to:"
+            select_tracks: "Select tracks (<15):"

@@ -58,7 +58,7 @@ $('#end_date').datepicker().on('changeDate', update_tracks);
 //Max selected = 15
 $("#tracks_sel").on ('change', function(){
     if($("#tracks_sel option:selected").length > 15){
-        $("#track_sel_error").html("Maximum: 15");
+        $("#track_sel_error").html("<%=t('max_selected_track', count: 15)%>");
         return;    
     }else{
         $("#track_sel_error").html("");

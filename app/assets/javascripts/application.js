@@ -12,18 +12,21 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
 //= require turbolinks
+//= require bootstrap
 //= require cocoon
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.ru.js
 //= require moment
 //= require moment-timezone-with-data-2010-2020
+//= require moment/ru.js
 //= require data-confirm-modal
 //= require bootstrap-slider
 //= require highcharts
 //= require highcharts/highcharts-more
-
+//= require i18n
+//= require i18n.js
+//= require i18n/translations
 //= require_tree ./auto/
 //= require_tree ./vendor/

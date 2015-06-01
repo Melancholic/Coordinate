@@ -7,7 +7,7 @@
                         <div class="col-md-6"><%= image_tag "icons/logo-gray.png", width:150%></div>
                         <div class="col-md-6">
                             <h1>Coordinate</h1>
-                            <h6>Developed by Andrey Nagorny, 2015</h6>
+                            <h6><%=t('about_page.developer_stamp')%>, 2015</h6>
                         </div>
                 </div>
             </div>
@@ -23,11 +23,11 @@
             </div>
             <div class="info">
                 <div class="title">
-                    <a target="_blank" href="http://anagorny.com/">Nagorny Andrey</a>
+                    <a target="_blank" href="http://anagorny.com/"><%=t('author')%></a>
                 </div>
-                <div class="desc">Curious student</div>
-                <div class="desc">Full-stack developer</div>
-                <div class="desc">Passionate motorist</div>
+                <div class="desc"><%=t('about_page.desc0')%></div>
+                <div class="desc"><%=t('about_page.desc1')%></div>
+                <div class="desc"><%=t('about_page.desc2')%></div>
                 <div class="desc"><%= mail_to "mail@anagorny.com"%></div>
             </div>
             <div class="bottom">
@@ -56,17 +56,17 @@
 
     <div class='row well'>
         <div class='col-xs-12 col-md-12'>
-            <p><strong>Coordinate</strong> - a non-profit, and free product, with a number of registered trade marks and free libraries.</p>
-            <p><strong>Coordinate</strong> will allow you to monitor the location of your vehicle, view tracks, and detailed statistics. I tried to make service, as comfortable as possible for the end user, while not forgetting about the safety of the system as a whole.</p>
-            <p>The project is developing, and your opinions and suggestions are important to me. You can send them to me via any appropriate form on the site of the project (such as <%=link_to "here", "#", onclick:"contact_modal_call()" %>) or by <%=mail_to "mail@anagorny.com","e-mail"%>.</p>
-
-            <p>Thank you for your attention!</p>
+            <%=t('about_page.p1_html')%>
+            <%=t('about_page.p2_html')%>
+            <%=t('about_page.p31_html')%>
+            <%=t('about_page.p32_html', contact: link_to(t('here'), "#", onclick:"contact_modal_call()"), mail: mail_to("mail@anagorny.com",t("email")))%>
+            <%=t('about_page.p4_html')%>
         </div>
 
     </div>
     <div class='row well'>
         <div class="col-xs-12 col-sm-12">
-            <p>I express my deep gratitude to the following for their help in project development:</p>
+            <%=t('about_page.p5_html')%>
         </div>
         <div class="col-xs-4 col-sm-2">
             <%=link_to "http://rubyonrails.org/",class:"thumbnail", target:"_blank" do%>

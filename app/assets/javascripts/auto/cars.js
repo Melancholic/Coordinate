@@ -23,10 +23,11 @@ function car_init_list() {
     $('.car-row').click(car_card_toggle);
     $(".car-row .car-infos").click(function (e) {
         e.stopPropagation();
-   });
+      });
     $(".car-row a").click(function (e) {
         e.stopPropagation();
    });
+
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#car_color').colorselector();
@@ -44,8 +45,8 @@ function length_check(len_max, field_id, counter_id) {
     document.getElementById(counter_id).firstChild.data = rest + ' / ' + len_max; 
     BootstrapDialog.show({
         type: BootstrapDialog.TYPE_WARNING,
-        title: 'Warning!',
-        message: 'The maximum length of the field contents:  ' + len_max + ' symbols!',
+        title: I18n.t("modals.warning"),
+        message: I18n.t('modals.max_length_msg',{'max':len_max}) 
     });
     } else {    
       document.getElementById(counter_id).firstChild.data = rest + ' / ' + len_max;   

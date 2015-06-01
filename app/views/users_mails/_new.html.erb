@@ -7,16 +7,16 @@
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
       <%if(signed_in? && current_user.name && !current_user.name.empty?)%>
-        <%= f.input :first_name, required: true, autofocus: true, span:'span6', input_html: {value:current_user.name}, placeholder:"Name", label:false %>
+        <%= f.input :first_name, required: true, autofocus: true, span:'span6', input_html: {value:current_user.name}%>
       <%else%>
-        <%= f.input :first_name, required: true, autofocus: true, span:'span6', placeholder:"Name", label:false %>
+        <%= f.input :first_name, required: true, autofocus: true, span:'span6' %>
       <%end%>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
       <%if(signed_in? && current_user.second_name && !current_user.second_name.empty?)%>
-        <%= f.input :last_name, required: true, placeholder:"Lastname", input_html: {value:current_user.second_name},label:false%>
+        <%= f.input :last_name, required: true%>
       <%else%>
-        <%= f.input :last_name, required: true, placeholder:"Lastname", label:false%>
+        <%= f.input :last_name, required: true%>
       <%end%>
     </div>
   </div>
@@ -24,20 +24,20 @@
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
       <%if(signed_in?)%>
-        <%= f.input :email, required: true, placeholder:"E-mail", label:false, input_html: {value:current_user.email}%>
+        <%= f.input :email, required: true, label:false, input_html: {value:current_user.email}%>
       <%else%>
-        <%= f.input :email, required: true, placeholder:"E-mail", label:false%>
+        <%= f.input :email, required: true%>
       <%end%>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
-      <%= f.input :subject, required: true, placeholder:"Subject...", label:false  %> 
+      <%= f.input :subject, required: true %> 
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
-      <%= f.input :message,as: :text, required: true, input_html: {rows: 6, placeholder:"Message..."},label:false %>
+      <%= f.input :message,as: :text, required: true, input_html: {rows: 6} %>
     </div>
   </div>
   <div class="row">
@@ -54,8 +54,8 @@
 
 <div class="form-actions">
     <div class="panel-footer" style="margin-bottom:-14px;">
-    <%= f.button :submit, "Send", class:"btn btn-success" %>
-    <input type="reset" class="btn btn-danger" value="Clear">
+    <%= f.button :submit, t('send_but'), class:"btn btn-success" %>
+    <input type="reset" class="btn btn-danger" value="<%=t('reset_but')%>">
     <!--<button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>-->
   </div>
 </div>

@@ -21,3 +21,24 @@ en:
       save: "Save %{model}"
       new: "New %{model}"
       delete: "Delete %{model}"
+
+ru:
+  breadcrumbs:
+    application:
+      root: "Главная"
+    pages:
+      pages: "Страницы"
+  helpers:
+    actions: "Действия"
+    links:
+      back: "Назад"
+      cancel: "Отмена"
+      confirm: "Вы согласны?"
+      destroy: "Удалить"
+      new: "Новый"
+      edit: "Изменить"
+    titles:
+      edit: "Изменить %{model}"
+      save: "Сохранить %{model}"
+      new: "Новый %{model}"
+      delete: "Удалить %{model}"

@@ -1,0 +1,12 @@
+<!--        <%= select_tag 'set_locale',  options_for_select(LANGUAGES, I18n.locale.to_s), class: "form-control"%>
+            <script>
+                $('select[name=set_locale]').on("change",function(){
+                    $.post('<%= set_custom_locale_path%>', {'locale': this.value},null);
+                });
+            </script>
+</div>-->
+<% if (I18n.locale.to_s!='en')%>
+    <%= link_to(t('to_en'), set_custom_locale_path( locale: 'en'), method: :post, remote: :true) %>
+<%else%>
+    <%= link_to(t('to_ru'), set_custom_locale_path( locale: 'ru'), method: :post, remote: :true) %>
+<%end%>

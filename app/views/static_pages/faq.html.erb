@@ -22,50 +22,24 @@
           </nav>
 	</div>
 	<div class="col-md-9 col-md-pull-3 well">
-		<%=render "shared/question", head:'What are the requirements for using the service?',
-			body:"To use the service you need a device that is running <strong>Android 2.0</strong>
-			and above, with the presence of <strong>GPS</strong> and <strong>Internet</strong> connection (EDGE/3G/4G/etc)."
-		%>
+		<%=render "shared/question", head: t('faq.q1h'), body:t('faq.q1b_html')%>
 		<%if(signed_in?)%>
-			<%=render "shared/question", head:"Where do I begin?",
-				body: '<p>First, you need to register or sign in using the form below.</p>
-						<p>Then, you will need to fill in the profile data ('+link_to("here", edit_user_path(current_user), target:"_blank")+') and add new your car ('+link_to("here", new_car_path, target:"_blank")+'),
-						and install the application "Coordinate-tracker" to your device.</p>'
-			 %>
+			<%=render "shared/question", head:t('faq.q2h'),
+				body: t('faq.q2b_html', user:link_to(t("here"), edit_user_path(current_user), target:"_blank"), car:link_to(t("here"), new_car_path, target:"_blank"));%>
 		<%else%>
-			<%=render "shared/question", head:"Where do I begin?",
-				body: '<p>First, you need to register or sign in using the '+ link_to("form", "#", onclick:"sign_modal_call()")+' below.</p>
-						<p>Then, you will need to fill in the profile data and add new your car,
-						and install the application "Coordinate-tracker" to your device.</p>'
-			 %>
+            <%=render "shared/question", head:t('faq.q2h'), body: t('faq.q2_2b_html', signin:link_to(t("here"), "#", onclick:"sign_modal_call()"))%>
 		<%end%>
-		<%=render "shared/question", head:"What then?",
-			body:"<p>Next, you need to install (integrate) your mobile device in the car. You can arrange meals on-board network, or follow the battery status himself.</p><p>During their travels, the unit will automatically transmit data to our server, for further processing and storage.</p>
-				<p><strong>Warning!</strong> Your data will only be available to you!</p>"%>
-		<%=render "shared/question", head:'What is the "Coordinate-tracker"?',
-			body: '"Coordinate-tracker" is an application for OS Android, which determines the location of your car (which is installed a mobile device running the "Coordinate-tracker") and send the information to our server.'
-		 %>
-		<%=render "shared/question", head:'How can I get a "Coordinate-tracker"?',
-			body:'<p>Unfortunately, the ability to download applications from <strong>"Google Play"</strong> are not available :(</p>
-				 <p>Unfortunately, the ability to download an application from our website are not available :(</p>
-				<p>We are working on it!</p>'
-		 %>
-		<%=render "shared/question", head:'How to configure "Coordinate-tracker"',
-			body:'<p>When you create a car, it will be assigned a unique identifier tracker (UUID), to be entered in the authorization application.</p>
-				<p><strong>Note:</strong> Each car can not have more than one tracker!</p>
-				<p>hus, it is necessary to adjust the tracker: email-user, the user\'s password, and UUID of a particular vehicle.</p>'
-		 %>
-		<%=render "shared/question", head:'How to use the service?',
-			body: '<p>After configuration, "Coordinate-tracker" further action is required. You can easily travel by car: all further actions will be automated.</p>
-				<p>You will be able to monitor the situation and statistics on the website of the service.</p>'
-		 %>
-		<%=render "shared/question", head:'How to view detailed statistics?',
-			body:'<p>Detailed statistics can be viewed in your profile '+((signed_in?) ? "(#{link_to 'here', user_path(current_user), target:'_blank'})" : "" )+ ' after registration.</p>' %>
-		<%=render "shared/question", head:'How to view information about the tracks?',
-			body:'<p>For information on your tracks you can see in home page '+((signed_in?) ? "(#{link_to 'here', root_path(), target:'_blank'})" : "" )+ ' after registration.</p>'  %>
-		<%=render "shared/question", head:'Who owns the rights to ownership of the service?',
-			body:"<p>The right to own service (including mobile application \"Coordinate-tracker\" service belong to a single developer - Andrey Nagorny. You can learn more on the page #{link_to 'About us', about_path, target:'_blank'}.</p>"
-		 %>	
+		<%=render "shared/question", head:t('faq.q3h'),body:t('faq.q3b_html')%>
+		<%=render "shared/question", head:t('faq.q4h'),body:t('faq.q4b_html')%>
+		<%=render "shared/question", head:t('faq.q5h'),body:t('faq.q5b_html')%>
+		<%=render "shared/question", head:t('faq.q6h'),body:t('faq.q6b_html')%>
+		<%=render "shared/question", head:t('faq.q7h'),body:t('faq.q7b_html')%>
+		<%=render "shared/question", head:t('faq.q8h'),
+			body:t('faq.q8b_html', link:("(#{link_to t('here'), user_path(current_user), target:'_blank'})" if (signed_in?) )) %>
+		<%=render "shared/question", head:t('faq.q9h'),
+			body:t('faq.q9b_html', link:("(#{link_to 'here', root_path(), target:'_blank'})" if (signed_in?) )) %>
+		<%=render "shared/question", head:t('faq.q10h'),
+			body:t('faq.q10b_html', link: link_to(t('about'), about_path, target:'_blank'))%>	
 
 	</div>
 

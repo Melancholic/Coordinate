@@ -29,3 +29,55 @@ en:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
+
+
+ru:
+  simple_form:
+    "yes": 'Да'
+    "no": 'Нет'
+    required:
+      text: 'Обязательное для заполнения'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Пожалуйста, исправьте следующие ошибки:"
+      labels:
+        user:
+          login: "Логин"
+          email: "E-mail"
+          password: "Пароль"
+          password_confirmation: "Повторите пароль"
+          locale: "Язык"
+          time_zone: "Часовой пояс"
+        profile:
+          first_name: "Имя"
+          second_name: "Фамилия"
+          middle_name: "Отчество"
+          mobile_phone: "Мобильный телефон"
+          country: "Страна"
+          region: "Область (регион)"   
+          city: "Город"  
+        car:
+          title: "Название"
+          color: "Цвет"
+          priority: "Приоритет"
+          description: "Описание"
+        users_mail:
+          first_name: "Имя"
+          last_name: "Фамилия"
+          subject: "Тема"
+          message: "Сообщение"
+          email: "E-mail"
+
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

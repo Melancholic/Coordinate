@@ -17,9 +17,10 @@ class User < ActiveRecord::Base
   scope :with_cars, ->{joins(:cars).uniq}
 #  geocoded_by :ip_address
 
-  validates(:login, presence: true, length:{maximum:15,minimum:3},format: {with: VALID_login_REGEX});
+  validates(:login, presence: true, uniqueness: {case_sensitive: false}, length:{maximum:15,minimum:3},format: {with: VALID_login_REGEX});
   validates(:email, presence: true, length:{maximum:50,minimum:3},
       format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false});
+  validates :locale, presence: true, :locale_format => true
   
   #after_initialize{
   #  self.create_profile
@@ -35,7 +36,6 @@ class User < ActiveRecord::Base
   }
 
  # after_validation :geocode 
-
 
   before_create{
     #self.build_profile

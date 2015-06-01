@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < HTTPApplicationController
   before_action :user_exist
   #for not signed users redirect to root
   before_action :signed_in_user, only:[:show,:index,:edit,:update, :destroy,  :verification, :sent_verification_mail, :charts_controller] # in app/helpers/session_helper.rb
@@ -71,6 +71,9 @@ class UsersController < ApplicationController
    #Has been added in app/helpers/sessions_helper.rb:current_user?(user)
    @user= User.find(params[:id]);
    if  (@user.update_attributes(user_params()))
+      if(@user.locale!=session[:locale])
+        session.delete(:locale)
+      end
       flash[:success] = "Updating your profile is success"
       redirect_to(@user);
     else
@@ -202,8 +205,11 @@ class UsersController < ApplicationController
 
 protected
   def user_params
-    params.require(:user).permit(:login,:email,:password, :password_confirmation, :time_zone, :captcha, :captcha_key,
-     profile_attributes:[:id,:name,:second_name,:middle_name,:img,:mobile_phone,:country, :city,:region, image_attributes:[:id, :img, :_destroy]]);
+    params.require(:user).permit(:login,:email,:password, :password_confirmation, 
+        :time_zone, :captcha, :captcha_key, :locale,
+      profile_attributes:[:id,:name,:second_name,:middle_name,:img,
+        :mobile_phone,:country, :city,:region, 
+        image_attributes:[:id, :img, :_destroy]]);
   end
 private
 

@@ -6,9 +6,16 @@ class Api::V1::GeodataController < Api::V1::BaseController
 		new_loc_time=convert_time(params[:time]);
 		@car=Car.find(ApiToken.find_by(token:get_token()).car_id)
 		@cur_track=find_track(@car,params);
-		@cur_track.create_location({longitude:params[:longitude],latitude:params[:latitude],	speed:params[:speed]*3.6 ,accuracy:params[:accuracy], time:convert_time(params[:time])});
-		logger.debug("Location has been saved!")
-		render status: 200, :json => { :success => true, :info => "New location saved"} 
+		begin
+			@cur_track.create_location({longitude:params[:longitude],latitude:params[:latitude],	speed:params[:speed]*3.6 ,accuracy:params[:accuracy], time:convert_time(params[:time])});
+			logger.debug("Location has been saved!")
+			render status: 200, :json => { :success => true, :info => "New location saved"} 
+		rescue ActiveRecord::RecordNotUnique => x
+			logger.info("Location has not saved, rescue ActiveRecord::RecordNotUnique");
+			logger.error(x.to_s)
+			render status: 200, :json => { :success => true, :info => "Location alredy exist"}
+		end
+
 	end
 
 

@@ -35,9 +35,9 @@
 		<%=render "shared/question", head:t('faq.q6h'),body:t('faq.q6b_html')%>
 		<%=render "shared/question", head:t('faq.q7h'),body:t('faq.q7b_html')%>
 		<%=render "shared/question", head:t('faq.q8h'),
-			body:t('faq.q8b_html', link:("(#{link_to t('here'), user_path(current_user), target:'_blank'})" if (signed_in?) )) %>
+			body:t('faq.q8b_html', link:(link_to("(#{t('here')})", user_path(current_user), target:'_blank') if (signed_in?) )) %>
 		<%=render "shared/question", head:t('faq.q9h'),
-			body:t('faq.q9b_html', link:("(#{link_to 'here', root_path(), target:'_blank'})" if (signed_in?) )) %>
+			body:t('faq.q9b_html', link:(link_to("(#{t('here')})", root_path(), target:'_blank') if (signed_in?) )) %>
 		<%=render "shared/question", head:t('faq.q10h'),
 			body:t('faq.q10b_html', link: link_to(t('about'), about_path, target:'_blank'))%>	
 

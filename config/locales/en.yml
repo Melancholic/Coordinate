@@ -241,6 +241,15 @@ en:
             total_days: "Total days, since the establishment of the first track"
         verification:
             head2: "To your email address sent an email with instructions required to confirm your e-mail. Please check your e-mail!"
+        cars:
+            image: 'Image'
+            title: 'Title'
+            priority: 'Priority'
+            color: "Color"
+            created_at: "Created at"
+            total_tracks: "Total tracks"
+            last_track: "Last track"
+            actions: "Actions"
     breadcrumbs:
         home: "Home"
         edit_cars: "Edit car"

@@ -121,7 +121,7 @@ function length_tracks_of_time() {
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e. %b}: {point.y:.2f} '+I18n.t('speed_val')
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f} '+I18n.t('distance_val')
         },
 
         plotOptions: {

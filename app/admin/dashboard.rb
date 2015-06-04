@@ -52,7 +52,7 @@ ActiveAdmin.register_page "Dashboard" do
                 panel 'System notifications' do
                     paginated_collection( ExceptionLogger::LoggedException.sorted.where(fixed: false).per_page_kaminari(params[:exception_page]).per(5), param_name: 'exception_page', download_links:false) do
                         table_for(collection) do  |x|
-                            column 'Fixed', :opened do|object|
+                            column 'Fixed', :fixed do|object|
                                 object.fixed? ?  status_tag( "yes", :ok ) : status_tag( "no" )
                             end
                             column 'Class' do |x|

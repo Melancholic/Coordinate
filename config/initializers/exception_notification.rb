@@ -37,7 +37,7 @@ ExceptionNotification.configure do |config|
   # Email notifier sends notifications by email.
   config.add_notifier :email, {
         email_prefix:   "[#{server_name} error] ",
-        sender_address: "tweets@anagorny.com",
+        sender_address: "coordinate@anagorny.com",
         exception_recipients: ["mail@anagorny.com"],
         
       }

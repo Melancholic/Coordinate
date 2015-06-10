@@ -35,4 +35,9 @@ module ApplicationHelper
     locale ||= current_user.locale if signed_in?
     I18n.locale=locale unless locale.nil?
   end
+
+  #for ActiveAdmin
+  def set_en_locale
+    I18n.locale='en'
+  end
 end

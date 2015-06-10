@@ -291,6 +291,9 @@ ru:
   speed_val: "км/ч"
   distance_val: "км"
   days_val: "дней"
+  hours_val: "час."
+  min_val: "мин."
+  sec_val: "сек."
   loading: "Загрузка..."
   date: "Дата"
   verification: "Подтверждение e-mail"
@@ -304,7 +307,7 @@ ru:
     warning: "Предупреждение!"
     max_length_msg: "Максимальная длина: {{max}} символов!"
     del_car_confirm_html: "<h4>Вы согласны удалить данный автомобиль: <b>%{title}</b> ?<br><p class='text-danger'>Внимание: Все данные будут безвозвратно удалены!</p></h4>"
-    ccess_error: "ошибка доступа!"
+    access_error: "Ошибка доступа!"
     car_saved: "Автомобиль успешно сохранен!"
     car_updating: 'Автомобиль "%{car}" успешно обновлен!'
     car_deleting: 'Автомобиль "%{car}" успешно удален!'

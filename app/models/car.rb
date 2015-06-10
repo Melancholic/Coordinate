@@ -35,16 +35,20 @@ class Car < ActiveRecord::Base
 		"##{self.color}"
 	end
 
+	#Метод, предоставляющий информацию о автомобиле
+	#Результат - хеш
+	#Используется в в профиле пользователя, при наведении
+	#на строку с автомобилем.
 	def info
 		result={};
-		result[:speed_avg]="#{TrackLocation.where(track_id: self.track_ids).average('speed').to_f.round} kmh";
-		result[:speed_max]="#{TrackLocation.where(track_id: self.track_ids).maximum('speed').to_f.round} kmh";
-		result[:total_tracks_length]="#{self.total_tracks_length.round(3)} km";
-		result[:total_tracks_duration]="#{(self.total_tracks_duration/60/60).round()} hrs";
+		result[:speed_avg]="#{TrackLocation.where(track_id: self.track_ids).average('speed').to_f.round} #{I18n.t('speed_val')}";
+		result[:speed_max]="#{TrackLocation.where(track_id: self.track_ids).maximum('speed').to_f.round} #{I18n.t('speed_val')}";
+		result[:total_tracks_length]="#{self.total_tracks_length.round(3)} #{I18n.t('distance_val')}";
+		result[:total_tracks_duration]="#{(self.total_tracks_duration/60/60).round()} #{I18n.t('hours_val')}";
 		result[:tracks_count]="#{self.tracks.count}";
-		result[:max_track_length]="#{self.max_track_length.round(3)} km";
-		result[:min_track_duration]="#{(self.min_track_duration/3600).round()} hrs"
-		result[:max_track_duration]="#{(self.max_track_duration/3600).round()} hrs"
+		result[:max_track_length]="#{self.max_track_length.round(3)} #{I18n.t('distance_val')}";
+		result[:min_track_duration]="#{(self.min_track_duration/3600).round()} #{I18n.t('hours_val')}"
+		result[:max_track_duration]="#{(self.max_track_duration/3600).round()} #{I18n.t('hours_val')}"
 		return result
 	end
 

@@ -45,18 +45,20 @@ class Track < ActiveRecord::Base
 			TimeDifference.between(self.start_time , self.stop_time || self.track_locations.last.time ).in_minutes
 		end
 	end
-
+	
+	#Возварщает длительность трека
+	#в человекочитаемом формате
 	def duration_humanize
 		dur=self.duration()
 		case(dur)
 		when 0..1
-			return "#{(dur*60.0).round()} sec"
+			return "#{(dur*60.0).round()} #{I18n.t('sec_val')}"
 		when  1..60
-			return "#{(dur).round()} min"
+			return "#{(dur).round()} #{I18n.t('min_val')}"
 		when 60..1.0/0
-			return "#{(dur*1.0/60).round(2)} h"
+			return "#{(dur*1.0/60).round(2)}  #{I18n.t('hours_val')}"
 		else
-			return "dur"
+			return dur
 		end
 	end
 

@@ -1,7 +1,7 @@
 class UsersMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
   include ApplicationHelper
-  default from: "tweets@anagorny.com"
+  default from: "coordinate@anagorny.com"
 
   def verification(user)
     @user=user;

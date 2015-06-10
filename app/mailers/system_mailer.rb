@@ -1,7 +1,7 @@
 class SystemMailer < ApplicationMailer
   add_template_helper(ApplicationHelper)
   include ApplicationHelper
-  default from: "tweets@anagorny.com"
+  default from: "coordinate@anagorny.com"
 
 	def contact_us_mail(user_mail, target_user)
 	    @user = target_user;

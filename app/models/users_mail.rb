@@ -1,5 +1,14 @@
+##
+#Модель, содержащая данные о сообщениях,
+#отправленных пользователсями
+#с контактной формы.
+##
 class UsersMail < ActiveRecord::Base
+    # Константное регулярное выражение,
+    # определяющее валидный e-mail 
 	VALID_EMAIL_REGEX =  /\A[\w+\-.0-9]+@([a-z\d\-]+(\.[a-z\d]+)*\.[a-z]+)+\z/i
+    # Константное регулярное выражение,
+    # определяющее валидные имя и фамилию
 	VALID_NAME_REGEX = /\A[a-zA-Zа-яА-Я]+\z/i
   apply_simple_captcha
   validates(:email, presence: true, length:{maximum:50,minimum:3},
@@ -20,6 +29,8 @@ class UsersMail < ActiveRecord::Base
   # pagination
   self.per_page = 15;
 private
+  # Метод, создающий рассылку
+  # администраторам.
   def send_to_admins
     User.admins.each do |x|
       SystemMailer.contact_us_mail(self,x).deliver_now;

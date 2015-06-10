@@ -1,5 +1,8 @@
+# Регулярное выражение, задающее корректный e-mail ползователя.
 VALID_EMAIL_REGEX =  /\A[\w+\-.0-9]+@([a-z\d\-]+(\.[a-z\d]+)*\.[a-z]+)+\z/i
+# Регулярное выражение, задающее корректный логин пользователя.
 VALID_login_REGEX = /\A[a-z \d \- \_]*[a-z \- \_]+[a-z \d \- \_]*\z/i
+# Максимальное время жизни ссылки на сброс пароля (мин.).
 TIME_LIM_PASSRST_KEY =30;
 class User < ActiveRecord::Base
     extend ActiveModel::Callbacks

@@ -80,11 +80,12 @@ ActiveAdmin.register User do
       #  i.input :img
       #end
     end
-    unless controller.action_name == 'new'
+    #unless controller.action_name == 'new'
+   # unless params[:action] == 'new'
       f.inputs "Avatar" do
         f.input :avatar, as: :file
       end
-    end
+    #end
     f.inputs "User Perference" do
       f.input :admin, type: :boolean
     end

@@ -73,7 +73,7 @@ group :test do
     gem 'time_difference' 
 end
 gem "exception_logger", :github => "ryancheung/exception_logger"
-gem 'exception_notification', '~>4.0.1.rc1'
+gem 'exception_notification' #, '~>4.0.1.rc1'
 
 #gem 'simple_form'
 gem 'authlogic'

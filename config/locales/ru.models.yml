@@ -19,6 +19,7 @@ ru:
                 time_zone: "Часовой пояс"
                 captcha: "Докажите, что Вы человек"
             profile:
+                name: "Имя"
                 first_name: "Имя"
                 second_name: "Фамилия"
                 middle_name: "Отчество"

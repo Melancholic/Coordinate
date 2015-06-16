@@ -1,35 +1,49 @@
-== README
+== About
+<b>Coordinate</b> - a non-profit, and free product, with a number of registered trade marks and free libraries.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<b>Coordinate</b> will allow you to monitor the location of your vehicle, view tracks, and detailed statistics. I tried to make service, as comfortable as possible for the end user, while not forgetting about the safety of the system as a whole.
 
-Things you may want to cover:
+The project is developing, and your opinions and suggestions are important to me. You can send them to me via any appropriate form on the site of the project  or by e-mail.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Thank you for your attention!
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== How to deploy?
 
+* Сlone a repository <tt>git clone git@github.com:Melancholic/Coordinate.git</tt>
+* Perform installation required gems <tt>bundle</tt>
+* Configure <i>config/database.yml</i> for every environment.
+  Example:
+    
+    production:
+    adapter: postgresql
+    host: [HOST]
+    username: [USER_NAME]
+    database: [DATA_BASE]
+    password: [PASSWORD]
 
-Update images:
-<tt>rake paperclip:refresh CLASS=Image</tt>
-<tt>rake paperclip:refresh:missing_styles</tt>
-<tt>rake i18n:js:export</tt>
+* Configure <i>config/initializers/setup_mail.rb</i>.  Example:
+  
+    ActionMailer::Base.delivery_method = :smtp
+    ActionMailer::Base.smtp_settings = { 
+      :address => "smtp.yandex.ru",
+      :port => 587,
+      :domain => [DOMAIN],
+      :user_name => [USER_NAME],
+      :password => [PASSWORD],
+      :authentication => "plain",
+      :enable_starttls_auto => true
+    }
+
+* Generate files asset for production environments <tt>rake assets:precompile</tt>
+
+== Hint
+* Clean all assets
+    rake assets:clean
+    rake assets:clobber
+* Update images:
+    rake paperclip:refresh CLASS=Image
+    rake paperclip:refresh:missing_styles
+* Export your *.yml locales to JS
+    rake i18n:js:export
 

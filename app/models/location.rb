@@ -9,8 +9,12 @@ class Location < ActiveRecord::Base
   	after_validation :geocode_run;
 
   	
-private 
-	def geocode_run
-    	reverse_geocode
-  	end
+    private 
+    def geocode_run
+        begin
+            reverse_geocode
+        rescue Errno::ENETUNREACH => x
+            logger.error("Geocoder is down: #{x.to_s}")
+        end
+    end
 end

@@ -19,7 +19,9 @@ class Track < ActiveRecord::Base
 	def create_location(args)
 		self.track_locations.create(args)
 	end
-
+	def create_location!(args)
+		self.track_locations.create!(args)
+	end
 	def distance
 		if(track_locations.empty?)
 			0

@@ -153,16 +153,16 @@ ActiveRecord::Schema.define(version: 20150531104709) do
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "users_mails", force: :cascade do |t|
-    t.string   "first_name",                             null: false
+    t.string   "first_name",                              null: false
     t.string   "last_name"
-    t.string   "email",                                  null: false
-    t.string   "subject",                                null: false
-    t.string   "message",    limit: 1000,                null: false
-    t.boolean  "opened",                  default: true
+    t.string   "email",                                   null: false
+    t.string   "subject",                                 null: false
+    t.string   "message",    limit: 1000,                 null: false
+    t.boolean  "opened",                  default: false
     t.integer  "user_id"
     t.string   "host",       limit: 15
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "verification_users", force: :cascade do |t|

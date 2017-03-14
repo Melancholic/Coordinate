@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'font-awesome-sass'
-gem 'i18n-js', '~> 2.1.2'
+gem 'i18n-js'#, '~> 2.1.2'
 gem 'simple_captcha2', require: 'simple_captcha'
 gem 'groupdate'
-gem "highcharts-rails", "~> 4.0.0"
+gem "highcharts-rails"#, "~> 4.0.0"
 #gem 'tooltipster-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'gon'
@@ -17,7 +17,7 @@ gem "paperclip"
 gem 'country_select'
 gem 'require_all'
 #gem "cancan"
-gem 'cancancan', '~> 1.10'
+gem 'cancancan'#, '~> 1.10'
 #admin
 gem "cocoon"
 gem 'activeadmin', github: 'activeadmin'
@@ -31,18 +31,19 @@ gem 'geocoder'
 gem "resque"
 #show map
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 5.0.0'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-slider-rails'
 gem "gretel"
 #gem "twitter-bootstrap-rails"
+gem 'sprockets', '3.6.3'
 gem 'sprockets-rails'
 gem 'bcrypt-ruby'
 gem 'autoprefixer-rails'
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 #gem "jqcloud-rails"
 #Use pagination
 gem 'kaminari'
@@ -51,12 +52,12 @@ gem "less-rails"
 gem 'bootstrap-will_paginate' 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
-    gem 'bazaar', '~> 0.0.2'
+    gem 'bazaar'#, '~> 0.0.2'
     gem 'sqlite3'
     gem 'pg'#, '0.15.1';
     gem 'rspec-rails'
     gem 'guard-rspec'
-    gem 'spork-rails'
+   # gem 'spork-rails'
     gem 'guard-spork'
     gem 'rails-erd'
     gem 'faker'
@@ -66,7 +67,7 @@ end
 group :test do
     gem "minitest"
     gem 'selenium-webdriver'
-    gem 'capybara'
+    #gem 'capybara'
     gem 'factory_girl_rails' 
     # Use fake users gem
     gem 'timecop'

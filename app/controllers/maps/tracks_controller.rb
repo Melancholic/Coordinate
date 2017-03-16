@@ -1,8 +1,8 @@
 class Maps::TracksController <  Maps::JsonController
 	include Maps::TracksHelper;
-	before_filter :correct_param, only:[:index]
-	before_filter :correct_param_for_info, only:[:info]
-	before_filter :correct_param_for_info_all, only:[:info_all]
+	before_action :correct_param, only:[:index]
+	before_action :correct_param_for_info, only:[:info]
+	before_action :correct_param_for_info_all, only:[:info_all]
 	def index
 		@car=Car.find_by_id(params[:car]);
 

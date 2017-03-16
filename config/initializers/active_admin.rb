@@ -1,13 +1,13 @@
 ActiveAdmin.setup do |config|
  config.display_name_methods = [:admin_display_name]
-  #config.skip_before_filter :authenticate_active_admin_user
+  #config.skip_before_action :authenticate_active_admin_user
   # == Site Title
   #
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
   config.site_title = "Coordinate"
-  config.before_filter :set_en_locale
+  config.before_action :set_en_locale
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -144,7 +144,7 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources and pages from here.
   #
-  # config.before_filter :do_something_awesome
+  # config.before_action :do_something_awesome
 
   # == Setting a Favicon
   #

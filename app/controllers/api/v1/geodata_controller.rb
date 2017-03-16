@@ -1,6 +1,6 @@
 class Api::V1::GeodataController < Api::V1::BaseController
-	before_filter :check_token
-	before_filter :check_data
+	before_action :check_token
+	before_action :check_data
 	protect_from_forgery unless: -> { request.format.json? }
 	def recive
 		new_loc_time=convert_time(params[:time]);

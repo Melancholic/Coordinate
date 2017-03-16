@@ -55,8 +55,6 @@ group :development, :test do
     gem 'bazaar'#, '~> 0.0.2'
     gem 'sqlite3'
     gem 'pg'#, '0.15.1';
-    gem 'rspec-rails'
-    gem 'guard-rspec'
    # gem 'spork-rails'
     gem 'guard-spork'
     gem 'rails-erd'
@@ -65,6 +63,8 @@ group :development, :test do
 end
 
 group :test do
+    gem 'rspec-rails'
+    gem 'guard-rspec'
     gem "minitest"
     gem 'selenium-webdriver'
     #gem 'capybara'

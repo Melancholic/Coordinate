@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < Api::V1::BaseController
-	#skip_before_filter :verify_authenticity_token, :only => :login
-	before_filter :check_token, except:[:login, :ping]
+	#skip_before_action :verify_authenticity_token, :only => :login
+	before_action :check_token, except:[:login, :ping]
 	protect_from_forgery unless: -> { request.format.json? }
 
 	def login

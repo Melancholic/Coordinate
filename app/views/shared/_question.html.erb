@@ -1,14 +1,25 @@
 <%
-head||=t('.header_default')
-body||=t('.body_default') 
+	#Head content
+	head||=t('.header_default')
+	#Body content
+	body||=t('.body_default')
+
+	#Question position 
+	@questionPos = (@questionPos) ? @questionPos.next : 0
+	#Question id
+	questionId = "question_#{@questionPos}"
+	#Header id
+	headerId = "question_header_#{@questionPos}"
+	#Body id
+	bodyId = "question_body_#{@questionPos}"
 %>
 
-<div class="panel panel-default" id="<%=Digest::SHA1.hexdigest(head)%>" >
-	<div class="panel-heading question-trigger question-head" data-toggle="collapse">
+<div class="panel panel-default" id="<%=questionId%>" >
+	<div class="panel-heading question-trigger question-head" data-toggle="collapse"   data-target="#<%=bodyId%>" id="<%=headerId%>">
 		<%= head %>
 		<span class="pull-right glyphicon glyphicon-plus icon-arrow-right"></span>
 	</div>
-	<div class="panel-collapse collapse out">
+	<div class="panel-collapse collapse out" id="<%=bodyId%>"> 
 		<div class="panel-body">
 			<blockquote>
 				<%=raw  body %>

@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/activeadmin/activeadmin.git
-  revision: 9739ac47dc4dd7f821cdf84adf2dd3afed536942
+  remote: https://github.com/activeadmin/activeadmin.git
+  revision: 7461a55e8c367cb6546c96ed7bfb90c952da2eb5
   specs:
     activeadmin (1.0.0.pre5)
       arbre (~> 1.0, >= 1.0.2)
@@ -18,14 +18,14 @@ GIT
       sprockets (< 4.1)
 
 GIT
-  remote: git://github.com/ifad/data-confirm-modal.git
+  remote: https://github.com/ifad/data-confirm-modal.git
   revision: ffb29b28d033438a86fb8681e156c5e460cea3ca
   specs:
     data-confirm-modal (1.2.0)
       railties (>= 3.0)
 
 GIT
-  remote: git://github.com/ryancheung/exception_logger.git
+  remote: https://github.com/ryancheung/exception_logger.git
   revision: 47b0053cc709a02ea0645b269056586c8766fff0
   specs:
     exception_logger (0.2.0)
@@ -270,6 +270,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (3.2.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -460,6 +461,7 @@ DEPENDENCIES
   paperclip
   pg
   populator
+  puma
   rails (~> 5.0.0)
   rails-erd
   rails_12factor (= 0.0.2)
@@ -481,4 +483,4 @@ DEPENDENCIES
   uglifier
 
 BUNDLED WITH
-   1.12.5
+   1.14.6

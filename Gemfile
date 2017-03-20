@@ -51,6 +51,11 @@ gem 'kaminari'
 gem "less-rails"
 gem 'bootstrap-will_paginate' 
 # Use sqlite3 as the database for Active Record
+
+group :development do
+	gem 'puma'
+end
+
 group :development, :test do
     gem 'bazaar'#, '~> 0.0.2'
     gem 'sqlite3'

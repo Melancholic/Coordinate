@@ -4,7 +4,7 @@
 		<li <%="class=active" if current_page?(edit_user_path(@user))%> >
 			<a href="<%=edit_user_path(@user)%>" ><%=t('.user_settings')%></a> </li>
 			<li >
-				<a href="#"  id="cars_set"><%=t('.car_settings')%></a>
+				<a data-turbolinks="false" href="#"  id="cars_set"><%=t('.car_settings')%></a>
 			</li>
 			<li>
 				<div class="col-md-12 " id="cars_child">

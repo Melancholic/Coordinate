@@ -1,4 +1,4 @@
-$(document).on("page:change",car_init_list);
+$(document).on("turbolinks:load",car_init_list);
 
 function car_card_toggle() {
     var dataFor = $(this).attr('data-for');

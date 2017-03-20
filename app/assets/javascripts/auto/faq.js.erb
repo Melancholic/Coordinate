@@ -1,4 +1,4 @@
-$(document).on("page:change", function(){
+$(document).on("turbolinks:load", function(){
   $(".question-trigger").click(function() {
   		$(this).next().collapse('toggle');
       if( $(this).children().hasClass("glyphicon-plus")){
@@ -10,9 +10,9 @@ $(document).on("page:change", function(){
       }
   });
   $('.panel .panel-heading').each(function(i){
-    $("#faq-navigator").append('<li><a data-no-turbolink href="#'+$( this ).parent().attr('id')+'">'+$( this ).text()+'</a></li>')
+    $("#faq-navigator").append('<li><a data-turbolinks="false" href="#'+$( this ).parent().attr('id')+'">'+$( this ).text()+'</a></li>')
   });
-  $("#faq-navigator").append('<li><a data-no-turbolink href="#top">'+I18n.t("faq.back_to_top")+'</a></li>')
+  $("#faq-navigator").append('<li><a data-turbolinks="false" href="#top">'+I18n.t("faq.back_to_top")+'</a></li>')
   $('body').scrollspy({
     target: '.bs-docs-sidebar',
     offset: 40

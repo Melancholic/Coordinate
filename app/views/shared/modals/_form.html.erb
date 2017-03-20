@@ -9,7 +9,7 @@
   remote||=false
   %>
 <% unless (run == 'auto') %>
-  <%#<a onclick="signup_form_call()" href="#">Sign Up</a> %>
+  <%#<a data-turbolinks="false" onclick="signup_form_call()" href="#">Sign Up</a> %>
   <script>
     function <%= id%>_call(){
       $("#<%= id %>").modal('show')

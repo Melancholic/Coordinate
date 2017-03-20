@@ -27,7 +27,7 @@
 			<%=render "shared/question", head:t('faq.q2h'),
 				body: t('faq.q2b_html', user:link_to(t("here"), edit_user_path(current_user), target:"_blank"), car:link_to(t("here"), new_car_path, target:"_blank"));%>
 		<%else%>
-            <%=render "shared/question", head:t('faq.q2h'), body: t('faq.q2_2b_html', signin:link_to(t("here"), "#", onclick:"sign_modal_call()"))%>
+            <%= render "shared/question", head:t('faq.q2h'), body: t('faq.q2_2b_html', signin:link_to(t("here"), "#", data: {turbolinks: "false"}, onclick:"sign_modal_call()"))%>
 		<%end%>
 		<%=render "shared/question", head:t('faq.q3h'),body:t('faq.q3b_html')%>
 		<%=render "shared/question", head:t('faq.q4h'),body:t('faq.q4b_html')%>

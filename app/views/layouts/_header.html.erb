@@ -50,7 +50,7 @@
       <%else%>
         <%unless(current_page?(signin_path) ||current_page?(signup_path))%>
           <li>
-            <a onclick="sign_modal_call()" href="#"><%=t('authorization')%></a>
+            <a data-turbolinks="false" onclick="sign_modal_call()" href="#"><%=t('authorization')%></a>
           </li>
         <%end%>
       <%end%>

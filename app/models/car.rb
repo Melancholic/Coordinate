@@ -13,7 +13,7 @@ class Car < ActiveRecord::Base
 	validates :description, length:{maximum: DescriptionLength ,minimum:3}
 	default_scope -> { order(:priority => :desc, :title =>:asc) }
 	scope :lasted, -> {unscoped.order(created_at: :desc)}
-	scope :with_tracks, -> {joins(:tracks).uniq}
+	scope :with_tracks, -> {joins(:tracks).distinct}
 	scope :by_user, ->(usr) {where(user:usr)};
 	self.per_page=5;
 
@@ -41,8 +41,8 @@ class Car < ActiveRecord::Base
 	#на строку с автомобилем.
 	def info
 		result={};
-		result[:speed_avg]="#{TrackLocation.where(track_id: self.track_ids).average('speed').to_f.round} #{I18n.t('speed_val')}";
-		result[:speed_max]="#{TrackLocation.where(track_id: self.track_ids).maximum('speed').to_f.round} #{I18n.t('speed_val')}";
+		result[:speed_avg]="#{TrackLocation.where(track_id: self.tracks).average('speed').to_f.round} #{I18n.t('speed_val')}";
+		result[:speed_max]="#{TrackLocation.where(track_id: self.tracks).maximum('speed').to_f.round} #{I18n.t('speed_val')}";
 		result[:total_tracks_length]="#{self.total_tracks_length.round(3)} #{I18n.t('distance_val')}";
 		result[:total_tracks_duration]="#{(self.total_tracks_duration/60/60).round()} #{I18n.t('hours_val')}";
 		result[:tracks_count]="#{self.tracks.count}";
@@ -71,7 +71,7 @@ class Car < ActiveRecord::Base
 	#returned in seconds
 	def total_tracks_duration
 		sql= Location.select(" EXTRACT(EPOCH FROM MAX(time) - MIN(time) ) as duration")
-				.joins("INNER JOIN tracks ON tracks.id=locations.track_id")
+				.joins("INNER JOIN tracks ON tracks.id = locations.track_id")
 				.where("tracks.car_id = ?", self.id).group(:track_id).to_sql
 		res=Car.from("(#{sql}) l").sum("l.duration")
 		res||=0;

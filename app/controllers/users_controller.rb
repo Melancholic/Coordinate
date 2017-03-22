@@ -181,8 +181,9 @@ class UsersController < HTTPApplicationController
         @cars_with_tracs=current_user.cars.with_tracks
         colors=[];
         data=@cars_with_tracs.map do |x| 
-          distance=TrackLocation.unscoped.where("track_id in (#{x.tracks.select(:id).to_sql})").group(:track).maximum(:distance).values.compact.sum
-          colors.append("##{x.color}");[x.title, distance]
+          distance = TrackLocation.unscoped.where(track: x.tracks).group('track_id').maximum(:distance).values.compact.sum
+          colors.append("##{x.color}");
+          [x.title, distance]
         end
         result={success:true, result:{data: data, colors: colors}};
       when "length_tracks_of_time"

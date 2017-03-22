@@ -37,7 +37,7 @@ class Track < ActiveRecord::Base
 
 #user
 	def self.total_distance_for_user(user)
-		TrackLocation.unscoped.where(track:Track.by_user(user).ids).group(:track).maximum(:distance).values.compact.sum
+		TrackLocation.unscoped.where(track:Track.by_user(user)).group('track_id').maximum('distance').values.compact.sum
 	end
 
 	def duration

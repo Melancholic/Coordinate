@@ -44,7 +44,7 @@
                 url: "<%=info_cars_path%>",
                 dataType: 'json',
                 async: true,
-                data: {id : this.data('item')},
+                data: {car: {id : this.data('item')}},
                 success: function( data ) {
                   console.log(I18n.t)
                   origin.tooltipster('content',  '<b>'+I18n.t('map.avg_speed')+': </b>'+data['speed_avg']+'<br>'+

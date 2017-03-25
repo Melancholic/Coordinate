@@ -71,7 +71,7 @@ def destroy
 end
 
 def info
-  @car=Car.find(params[:id]);
+  @car=Car.find(car_params[:id]);
   car_info=@car.info();
     respond_to do |format|
     format.json { render json: car_info }
@@ -81,7 +81,7 @@ end
 
 protected
   def car_params
-    params.require(:car).permit(:title, :description, :user_id, :color, :priority, image_attributes:[:id, :img, :_destroy]);
+    params.require(:car).permit(:id, :title, :description, :user_id, :color, :priority, image_attributes:[:id, :img, :_destroy]);
   end
 
   def car_exist

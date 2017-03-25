@@ -71,7 +71,7 @@ def destroy
 end
 
 def info
-  @car=Car.find(params[:car_id]);
+  @car=Car.find(params[:id]);
   car_info=@car.info();
     respond_to do |format|
     format.json { render json: car_info }

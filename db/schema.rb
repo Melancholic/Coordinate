@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531104709) do
+ActiveRecord::Schema.define(version: 20170325140637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "cube"
+  enable_extension "earthdistance"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -25,20 +26,18 @@ ActiveRecord::Schema.define(version: 20150531104709) do
     t.string   "author_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "api_tokens", force: :cascade do |t|
     t.integer  "car_id"
     t.string   "token",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_api_tokens_on_car_id", using: :btree
   end
-
-  add_index "api_tokens", ["car_id"], name: "index_api_tokens_on_car_id", using: :btree
 
   create_table "cars", force: :cascade do |t|
     t.string   "title",                                     null: false
@@ -50,10 +49,9 @@ ActiveRecord::Schema.define(version: 20150531104709) do
     t.string   "color",                  default: "FF0000", null: false
     t.integer  "priority",     limit: 2, default: 5,        null: false
     t.integer  "image_id"
+    t.index ["title", "user_id"], name: "index_cars_on_title_and_user_id", unique: true, using: :btree
+    t.index ["tracker_uuid"], name: "index_cars_on_tracker_uuid", unique: true, using: :btree
   end
-
-  add_index "cars", ["title", "user_id"], name: "index_cars_on_title_and_user_id", unique: true, using: :btree
-  add_index "cars", ["tracker_uuid"], name: "index_cars_on_tracker_uuid", unique: true, using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "img_file_name"
@@ -66,19 +64,18 @@ ActiveRecord::Schema.define(version: 20150531104709) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "address"
-    t.float    "latitude",                        null: false
-    t.float    "longitude",                       null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "state",      default: "Location", null: false
+    t.float    "latitude",   null: false
+    t.float    "longitude",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.float    "accuracy"
     t.float    "speed"
     t.datetime "time"
     t.integer  "track_id"
     t.float    "distance"
+    t.index ["time"], name: "locations_time_idx", using: :btree
+    t.index ["track_id", "latitude", "longitude", "time"], name: "track_id_lat_long_time_index", unique: true, using: :btree
   end
-
-  add_index "locations", ["track_id", "latitude", "longitude", "time"], name: "track_id_lat_long_time_index", unique: true, using: :btree
 
   create_table "logged_exceptions", force: :cascade do |t|
     t.string   "exception_class"
@@ -105,9 +102,8 @@ ActiveRecord::Schema.define(version: 20150531104709) do
     t.string   "city"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
-
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "reset_passwords", force: :cascade do |t|
     t.integer  "user_id"
@@ -115,18 +111,16 @@ ActiveRecord::Schema.define(version: 20150531104709) do
     t.string   "host"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_reset_passwords_on_user_id", using: :btree
   end
-
-  add_index "reset_passwords", ["user_id"], name: "index_reset_passwords_on_user_id", using: :btree
 
   create_table "simple_captcha_data", force: :cascade do |t|
     t.string   "key",        limit: 40
     t.string   "value",      limit: 6
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["key"], name: "idx_key", using: :btree
   end
-
-  add_index "simple_captcha_data", ["key"], name: "idx_key", using: :btree
 
   create_table "tracks", force: :cascade do |t|
     t.datetime "start_time"
@@ -134,6 +128,7 @@ ActiveRecord::Schema.define(version: 20150531104709) do
     t.integer  "car_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_tracks_on_car_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -147,10 +142,9 @@ ActiveRecord::Schema.define(version: 20150531104709) do
     t.string   "auth_hash"
     t.string   "time_zone",       limit: 255, default: "UTC"
     t.string   "locale",                      default: "ru",  null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "users_mails", force: :cascade do |t|
     t.string   "first_name",                              null: false

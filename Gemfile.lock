@@ -1,9 +1,9 @@
 GIT
-  remote: git://github.com/activeadmin/activeadmin.git
-  revision: c22973709cba23f953a584c388f21edd5f616652
+  remote: https://github.com/activeadmin/activeadmin.git
+  revision: fc08c0faff09d8257860c80fd81ee4278fc186be
   specs:
     activeadmin (1.0.0.pre5)
-      arbre (~> 1.0, >= 1.0.2)
+      arbre (>= 1.1.1)
       bourbon
       coffee-rails
       formtastic (~> 3.1)
@@ -18,14 +18,14 @@ GIT
       sprockets (< 4.1)
 
 GIT
-  remote: git://github.com/ifad/data-confirm-modal.git
+  remote: https://github.com/ifad/data-confirm-modal.git
   revision: ffb29b28d033438a86fb8681e156c5e460cea3ca
   specs:
     data-confirm-modal (1.2.0)
       railties (>= 3.0)
 
 GIT
-  remote: git://github.com/ryancheung/exception_logger.git
+  remote: https://github.com/ryancheung/exception_logger.git
   revision: 47b0053cc709a02ea0645b269056586c8766fff0
   specs:
     exception_logger (0.2.0)

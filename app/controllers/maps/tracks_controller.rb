@@ -54,4 +54,5 @@ class Maps::TracksController <  Maps::JsonController
 		    format.js {render 'show_info_all.js'}
   		end
 	end
+
 end

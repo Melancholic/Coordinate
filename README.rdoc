@@ -35,6 +35,13 @@ Thank you for your attention!
       :enable_starttls_auto => true
     }
 
+* Configure <i>config/local_env.yml</i>.  Example:
+
+    RAILS_LOG_PATH_PROD: 'production.log'
+    RAILS_LOG_PATH_DEV: 'development.log'
+    RAILS_LOG_PATH_TEST: 'test.log'
+ 
+
 * Generate files asset for production environments <tt>rake assets:precompile</tt>
 
 == Hint

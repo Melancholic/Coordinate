@@ -8,6 +8,16 @@ Bundler.require(*Rails.groups)
 
 module Coordinate
   class Application < Rails::Application
+
+    #See in config/local_env.yml
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      env_content = YAML.load(File.open(env_file)) if File.exists?(env_file)
+      env_content.each do |key, value|
+        ENV[key.to_s] = value
+      end if env_content
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

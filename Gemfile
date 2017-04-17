@@ -54,6 +54,7 @@ gem 'bootstrap-will_paginate'
 
 group :development do
 	gem 'puma'
+	gem 'railroady'
 end
 
 group :development, :test do

@@ -1,12 +1,12 @@
 class UsersController < HTTPApplicationController
   before_action :user_exist
   #for not signed users redirect to root
-  before_action :signed_in_user, only:[:show,:index,:edit,:update, :destroy,  :verification, :sent_verification_mail, :charts_controller] # in app/helpers/session_helper.rb
-  before_action :verificated_user, only:[:index, :destroy,:show, :charts_controller]
+  before_action :signed_in_user, only:[:show,:index,:edit,:update, :destroy,  :verification, :sent_verification_mail] # in app/helpers/session_helper.rb
+  before_action :verificated_user, only:[:index, :destroy,:show]
   #For verificated user - redirect to root
   before_action :verificated_user_is_done, only: [:verification, :sent_verification_mail]
   #for signied users
-  before_action :correct_user, only:[:edit,:update,:verification, :show, :charts_controller]
+  before_action :correct_user, only:[:edit,:update,:verification, :show]
   #for admins
   before_action :admin_user, only: :destroy
   #for signed for NEW and CREATE
@@ -20,18 +20,6 @@ class UsersController < HTTPApplicationController
   def show()
     @user = current_user; 
     @cars = @user.cars.paginate(page: params[:page]);
-    if(@user.all_tracks.count>0)
-      @days=TimeDifference.between(@user.all_tracks.last.start_time, @user.all_tracks.first.start_time).in_days.round+1
-      @total_tracks=@user.all_tracks.count
-      @total_distance=Track.total_distance_for_user(current_user).round(3)
-      @average_distance=(@total_distance/@total_tracks).round(3)
-      @cars_with_tracs=current_user.cars.to_a.delete_if{|x| x.tracks.empty?}
-      @average_distance_per_car=(@total_distance/@cars_with_tracs.count).round(3)
-      @average_distance_per_day=(@total_distance/@days).round(3)
-      @favorite_car=@user.cars.max_by{|x| x.tracks.count}
-      @average_tracks_per_day=(@total_tracks/@days).round(1)
-      @average_tracks_per_car=(@total_tracks/@cars_with_tracs.count).round(1)
-    end
     respond_to do |format|
       format.html 
       format.json
@@ -92,7 +80,7 @@ class UsersController < HTTPApplicationController
     redirect_to(users_url);
  end
 
-#verification meil sent  function (step 1 in create)
+#verification mail sent  function (step 1 in create)
   def sent_verification_mail()
     @user= User.find(params[:id]);
     UsersMailer.verification(@user).deliver_now;
@@ -164,47 +152,6 @@ class UsersController < HTTPApplicationController
     end
   end
 
-  def charts_controller
-    case(params[:request])
-      when "speed_avg"
-        result={success:true,result:TrackLocation.where(track: current_user.all_tracks).average('speed').to_f.round};
-      when "speed_max"
-        result={success:true,result:TrackLocation.where(track: current_user.all_tracks).maximum('speed').to_f.round};
-      when "percent_tracks_for_cars"
-        @cars_with_tracs=current_user.cars.to_a.delete_if{|x| x.tracks.empty?}
-        colors=[];
-        data=@cars_with_tracs.map do |x| 
-          colors.append("##{x.color}");[x.title, x.tracks.count*1.0/current_user.all_tracks.count]
-        end
-        result={success:true, result:{data: data, colors: colors}};
-      when "percent_distance_for_cars"
-        @cars_with_tracs=current_user.cars.with_tracks
-        colors=[];
-        data=@cars_with_tracs.map do |x| 
-          distance = TrackLocation.unscoped.where(track: x.tracks).group('track_id').maximum(:distance).values.compact.sum
-          colors.append("##{x.color}");
-          [x.title, distance]
-        end
-        result={success:true, result:{data: data, colors: colors}};
-      when "length_tracks_of_time"
-        data=[];
-        data.push(current_user.group_tracks_by_day(:all))
-        current_user.cars.with_tracks.limit(10).each{|x|  data.push(current_user.group_tracks_by_day(x)) }
-        result={success:true, result: data.compact};
-      else 
-        result= {:status => :bad_request,
-          :json => { :success => false,
-          :info => "Bad json!" 
-        }};
-    end
-
-    respond_to do |format|
-      format.json { render json: result }
-    end
-
-
-  end
-
 protected
   def user_params
     params.require(:user).permit(:login,:email,:password, :password_confirmation, 
@@ -213,8 +160,8 @@ protected
         :mobile_phone,:country, :city,:region, 
         image_attributes:[:id, :img, :_destroy]]);
   end
-private
 
+private
 
   #before-filter
   def user_exist

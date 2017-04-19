@@ -51,10 +51,6 @@ class User < ActiveRecord::Base
   # pagination
   self.per_page = 10;
   
-  def self.get_regex
-     return /[@][a-zA-Zа-яА-Я0-9\_]+/;
-  end
-  
   def User.new_remember_token
     SecureRandom.urlsafe_base64;
   end
@@ -200,17 +196,14 @@ class User < ActiveRecord::Base
     else
       return nil
     end
-      #x=tracks_sql.where("start_time < ? AND start_time > ?",Time.now.beginning_of_day+1.day, Time.now.beginning_of_day-1.month).
-      #map{|x| [x.start_time.beginning_of_day , x.distance.round(3)] if  x.distance >0}.compact.
-      #group_by(&:first).map { |k,v| [k, v.map(&:last).inject(:+)] }
-      
+
       x=Track.unscoped.from(
         "(SELECT tracks.start_time, MAX(distance) AS distance FROM 
           locations INNER JOIN tracks ON locations.track_id = tracks.id
           WHERE track_id IN (#{tracks_sql.select(:id).to_sql}) 
           GROUP BY track_id, tracks.start_time ) AS subquery").group_by_day(:start_time, last: 30).sum(:distance)
 
-      result={name:name, data:x.sort{|a,b| a[0] <=> b[0] }, color:color } unless x.empty?
+      result={name: name, data: x.sort{|a,b| a[0] <=> b[0] }, color: color } unless x.empty?
   end
 
 private

@@ -38,7 +38,6 @@
         $('.car_tooltip').tooltipster({
           contentAsHTML: true,
           functionInit: function(origin, content) {
-            console.log();
             if (content === '...') {
               $.ajax({
                 url: "<%=info_cars_path%>",
@@ -46,7 +45,6 @@
                 async: true,
                 data: {car: {id : this.data('item')}},
                 success: function( data ) {
-                  console.log(I18n.t)
                   origin.tooltipster('content',  '<b>'+I18n.t('map.avg_speed')+': </b>'+data['speed_avg']+'<br>'+
                     '<b>'+I18n.t('map.max_speed')+': </b>'+data['speed_max']+'<br>'+
                     '<b>'+I18n.t('map.total_distance')+': </b>'+data['total_tracks_length']+'<br>'+

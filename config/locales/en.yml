@@ -20,252 +20,252 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-    forgot_password: "Forgot your password?"
-    to_en: "English version"
-    to_ru: "Русская версия"
-    log_in: "Log in"
-    sign_in: "Log in"
-    sign_up: "Sign up"
-    sign_out: "Sign out"
-    send_but: "Send"
-    edit_but: "Edit"
-    delete_but: "Delete"
-    resend_but: "Resend"
-    reset_but: "Clear"
-    close_but: "Close"
-    save_but: "Save"
-    cancel_but: "Cancel"
-    change_but: "Change %{name}"
-    browse_but: "Browse"
-    fix_but: "Fix it"
-    author: "Nagorny Andrey"
-    email: "e-mail"
-    password: "password"
-    here: "here"
-    about: "About"
-    contact_us: "Contact us"
-    authorization: "Authorization"
-    home: "Home"
-    to_home: "Home"
-    to_FAQ: "to FAQ"
-    not_car_h: "You have not added any car!"
-    not_car_b: "You can go into the settings and add your car right now."
-    not_tracks_h: "You have not made a of one track..."
-    not_tracks_b: "Learn how bind a tracker to your car!"
-    max_selected_track: "Maximum: %{count}"
-    speed_val: "km/h"
-    distance_val: "km"
-    days_val: "days"
-    hours_val: "hrs"
-    min_val: "min."
-    sec_val: "sec."
-    loading: "Loading..."
-    date: "Date"
-    verification: "Verification e-mail"
-    now: 'now'
-    today: 'today'
-
-    confirm:
-        title: "Confirmation"
-        cancel: "Cancel"
-        ok: "Ok"
-    modals:
-        warning: "Warning!"
-        max_length_msg: "The maximum length of the field contents: {{max}} symbols!"
-        del_car_confirm_html: "<h4>Are you sure you want to delete this car: <b>%{title}</b> ?<br><p class='text-danger'>Warning: All data on it will be deleted permanently!</p></h4>"
-        access_error: "Access error!"
-        car_saved: "Car has been saved!"
-        car_updating: 'Updating car "%{car}" is success'
-        car_deleting: 'Car "%{car}" has been deleted!'
-        car_not_deleting: 'Car "%{title}" has not been deleted!'
-        uncorrect_params: 'Uncorrect params!'
-        welcome_msg: "%{user}, welcome to Coordinate!"
-        uncorrect_login_data: "Uncorrect e-mail or password!"
-        usr_updating: "Updating your profile is success"
-        usr_deleted: 'User "%{ulogin}" has been deleted!'
-        usr_not_deleted: 'User "%{ulogin}" has not been deleted!'
-        send_verif_instruct: "Mail to %{email} has been sended!"
-        user_verificated: "User %{user} has been verificated!"
-        user_not_verificated: "User %{user} has not been verificated!"
-        lifetime_ended: "The lifetime of this reference completion. Please try the request again."
-        reset_pass_send: "Mail with instructions has been sended to e-mail:  %{email}!"
-        reset_pass_email_not_founded: "User with e-mail: %{email} not found!"
-        user_not_deleted_self: "You has not been deleted self!"
-        user_mails_thank: "Thank you for your message! We will contact you as soon as possible!"
-    map:
-        lat: "Latitude"
-        long: "Longitude"
-        speed: "Speed"
-        distance: "Distance"
-        total_distance: "Total distance"
-        min_distance: "Min track length"
-        max_distance: "Max track length"
-        duration: "Duration"
-        total_duration: "Total duration"
-        min_duration: "Min track duration"
-        max_duration: "Max track duration"
-        address: "Address"
-        avg_speed: "Average speed"
-        min_speed: "Min speed"
-        max_speed: "Max speed"
-        start_time: "Start time"
-        end_time: "Stop time"
-        points: 'Points'
-        lines: 'Lines'
-
-    about_page:
-        developer_stamp: "Developed by Andrey Nagorny"
-        desc0: "Curious student"
-        desc1: "Full-stack developer"
-        desc2: "Passionate motorist"
-        p1_html: "<p><strong>Coordinate</strong> - a non-profit, and free product, with a number of registered trade marks and free libraries.</p>"
-        p2_html: "<p><strong>Coordinate</strong> will allow you to monitor the location of your vehicle, view tracks, and detailed statistics. I tried to make service, as comfortable as possible for the end user, while not forgetting about the safety of the system as a whole.</p>"
-        p31_html: "<p>The project is developing, and your opinions and suggestions are important to me."
-        p32_html: "You can send them to me via any appropriate form on the site of the project (such as %{contact}) or by %{mail}.</p>"
-        p4_html: "<p>Thank you for your attention!</p>"
-        p5_html: "<p>I express my deep gratitude to the following for their help in project development:</p>"
-    faq:
-        back_to_top: "Back to top"
-        q1h: 'What are the requirements for using the service?'
-        q1b_html: "To use the service you need a device that is running <strong>Android 2.0</strong> and above, with the presence of <strong>GPS</strong> and <strong>Internet</strong> connection (EDGE/3G/4G/etc)."
-        q2h: "Where do I begin?"
-        q2b_html: '<p>First, you need to register or sign in using the form below.</p> <p>Then, you will need to fill in the profile data (%{user}) and add new your car (%{car}), and install the application "Coordinate-tracker" to your device.</p>'
-        q2_2b_html: '<p>First, you need to register or sign in using the form below(%{signin}).</p> <p>Then, you will need to fill in the profile data and add new your car, and install the application "Coordinate-tracker" to your device.</p>'
-        q3h: "What then?"
-        q3b_html: "<p>Next, you need to install (integrate) your mobile device in the car. You can arrange meals on-board network, or follow the battery status himself.</p><p>During their travels, the unit will automatically transmit data to our server, for further processing and storage.</p> <p><strong>Warning!</strong> Your data will only be available to you!</p>"
-        q4h: 'What is the "Coordinate-tracker"?'
-        q4b_html: '"Coordinate-tracker" is an application for OS Android, which determines the location of your car (which is installed a mobile device running the "Coordinate-tracker") and send the information to our server.'
-        q5h: 'How can I get a "Coordinate-tracker"?'
-        q5b_html: '<p>Unfortunately, the ability to download applications from <strong>"Google Play"</strong> are not available :(</p><p>Unfortunately, the ability to download an application from our website are not available :(</p><p>Im working on it!</p>'
-        q6h: 'How to configure "Coordinate-tracker"'
-        q6b_html: "<p>When you create a car, it will be assigned a unique identifier tracker (UUID), to be entered in the authorization application.</p><p><strong>Note:</strong> Each car can not have more than one tracker!</p><p>hus, it is necessary to adjust the tracker: email-user, the user's password, and UUID of a particular vehicle.</p>"
-        q7h: 'How to use the service?'
-        q7b_html:  '<p>After configuration, "Coordinate-tracker" further action is required. You can easily travel by car: all further actions will be automated.</p><p>You will be able to monitor the situation and statistics on the website of the service.</p>'
-        q8h: 'How to view detailed statistics?'
-        q8b_html: '<p>Detailed statistics can be viewed in your profile %{link} after registration.</p>'
-        q9h: 'How to view information about the tracks?'
-        q9b_html: '<p>For information on your tracks you can see in home page %{link} after registration.</p>'
-        q10h: 'Who owns the rights to ownership of the service?'
-        q10b_html: '<p>The right to own service (including mobile application "Coordinate-tracker" service belong to a single developer - Andrey Nagorny. You can learn more on the page "%{link}".</p>'
-    static_pages:
-        home4user:
-            select_car: "Select car:"
-            date_pick: "Date pick:"
-            date_pick_at: "at:"
-            date_pick_to: "to:"
-            select_tracks: "Select tracks (<15):"
-        home4guest:
-            welcome: "Welcome to Coordinate!"
-            descript1: "Coordinate is a service of constant monitoring the location of your car"
-
-    layouts:
-        header:
-            account: "Account"
-            profile: "Profile"
-            settings: "Settings"
-            help: "Help"
-            administration: "Administration"
-    maps:
-        tracks:
-            info:
-                head: "General statistic of track %{track}"
-            info_all:
-                head: "General statistic of all selected track"
-    shared:
-        question:
-            header_default: "Some header text..."
-            body_default: "Some body text..."
-        settings_nav:
-            user_settings: "User settings"
-            car_settings: "Car settings"
-            my_cars: "My cars"
-            new_cars: "Add car"
-        empty_message:
-            msg: "Something is missing ..."
-            sub_msg: "You forgot something, and something we have lost..."
-    cars:
-        tooltip:
-            wait_message: 'Wait while we load new content...'
-        car_card:
-            head1: "Car information"
-            color: "Color"
-            priority: "Priority"
-            created_at: "Created at"
-            total_tracks: "Total tracks"
-            last_loc: "Last location at"
-            uuid: "Tracker UUID"
-            description: "Description"
-        new_form:
-            upload_text: "Upload image of this car"
-            img_destroy_txt: "Don't use custom image"
-            img_destroy_hint: "Your image will be deleted."
-        edit:
-            edit_car: "Edit %{title}"
-        index:
-            head1: "Your cars"
-        new:
-            new_car: "Add new car"
-
+  mask_loading_label: "Loading..."
+  forgot_password: "Forgot your password?"
+  to_en: "English version"
+  to_ru: "Русская версия"
+  log_in: "Log in"
+  sign_in: "Log in"
+  sign_up: "Sign up"
+  sign_out: "Sign out"
+  send_but: "Send"
+  edit_but: "Edit"
+  delete_but: "Delete"
+  resend_but: "Resend"
+  reset_but: "Clear"
+  close_but: "Close"
+  save_but: "Save"
+  cancel_but: "Cancel"
+  change_but: "Change %{name}"
+  browse_but: "Browse"
+  fix_but: "Fix it"
+  author: "Nagorny Andrey"
+  email: "e-mail"
+  password: "password"
+  here: "here"
+  about: "About"
+  contact_us: "Contact us"
+  authorization: "Authorization"
+  home: "Home"
+  to_home: "Home"
+  to_FAQ: "to FAQ"
+  not_car_h: "You have not added any car!"
+  not_car_b: "You can go into the settings and add your car right now."
+  not_tracks_h: "You have not made a of one track..."
+  not_tracks_b: "Learn how bind a tracker to your car!"
+  max_selected_track: "Maximum: %{count}"
+  speed_val: "km/h"
+  distance_val: "km"
+  days_val: "days"
+  hours_val: "hrs"
+  min_val: "min."
+  sec_val: "sec."
+  loading: "Loading..."
+  date: "Date"
+  verification: "Verification e-mail"
+  now: 'now'
+  today: 'today'
+  confirm:
+    title: "Confirmation"
+    cancel: "Cancel"
+    ok: "Ok"
+  modals:
+    warning: "Warning!"
+    max_length_msg: "The maximum length of the field contents: {{max}} symbols!"
+    del_car_confirm_html: "<h4>Are you sure you want to delete this car: <b>%{title}</b> ?<br><p class='text-danger'>Warning: All data on it will be deleted permanently!</p></h4>"
+    access_error: "Access error!"
+    car_saved: "Car has been saved!"
+    car_updating: 'Updating car "%{car}" is success'
+    car_deleting: 'Car "%{car}" has been deleted!'
+    car_not_deleting: 'Car "%{title}" has not been deleted!'
+    uncorrect_params: 'Uncorrect params!'
+    welcome_msg: "%{user}, welcome to Coordinate!"
+    uncorrect_login_data: "Uncorrect e-mail or password!"
+    usr_updating: "Updating your profile is success"
+    usr_deleted: 'User "%{ulogin}" has been deleted!'
+    usr_not_deleted: 'User "%{ulogin}" has not been deleted!'
+    send_verif_instruct: "Mail to %{email} has been sended!"
+    user_verificated: "User %{user} has been verificated!"
+    user_not_verificated: "User %{user} has not been verificated!"
+    lifetime_ended: "The lifetime of this reference completion. Please try the request again."
+    reset_pass_send: "Mail with instructions has been sended to e-mail:  %{email}!"
+    reset_pass_email_not_founded: "User with e-mail: %{email} not found!"
+    user_not_deleted_self: "You has not been deleted self!"
+    user_mails_thank: "Thank you for your message! We will contact you as soon as possible!"
+  map:
+    lat: "Latitude"
+    long: "Longitude"
+    speed: "Speed"
+    distance: "Distance"
+    total_distance: "Total distance"
+    min_distance: "Min track length"
+    max_distance: "Max track length"
+    duration: "Duration"
+    total_duration: "Total duration"
+    min_duration: "Min track duration"
+    max_duration: "Max track duration"
+    address: "Address"
+    avg_speed: "Average speed"
+    min_speed: "Min speed"
+    max_speed: "Max speed"
+    start_time: "Start time"
+    end_time: "Stop time"
+    points: 'Points'
+    lines: 'Lines'
+  about_page:
+    developer_stamp: "Developed by Andrey Nagorny"
+    desc0: "Curious student"
+    desc1: "Full-stack developer"
+    desc2: "Passionate motorist"
+    p1_html: "<p><strong>Coordinate</strong> - a non-profit, and free product, with a number of registered trade marks and free libraries.</p>"
+    p2_html: "<p><strong>Coordinate</strong> will allow you to monitor the location of your vehicle, view tracks, and detailed statistics. I tried to make service, as comfortable as possible for the end user, while not forgetting about the safety of the system as a whole.</p>"
+    p31_html: "<p>The project is developing, and your opinions and suggestions are important to me."
+    p32_html: "You can send them to me via any appropriate form on the site of the project (such as %{contact}) or by %{mail}.</p>"
+    p4_html: "<p>Thank you for your attention!</p>"
+    p5_html: "<p>I express my deep gratitude to the following for their help in project development:</p>"
+  faq:
+    back_to_top: "Back to top"
+    q1h: 'What are the requirements for using the service?'
+    q1b_html: "To use the service you need a device that is running <strong>Android 2.0</strong> and above, with the presence of <strong>GPS</strong> and <strong>Internet</strong> connection (EDGE/3G/4G/etc)."
+    q2h: "Where do I begin?"
+    q2b_html: '<p>First, you need to register or sign in using the form below.</p> <p>Then, you will need to fill in the profile data (%{user}) and add new your car (%{car}), and install the application "Coordinate-tracker" to your device.</p>'
+    q2_2b_html: '<p>First, you need to register or sign in using the form below(%{signin}).</p> <p>Then, you will need to fill in the profile data and add new your car, and install the application "Coordinate-tracker" to your device.</p>'
+    q3h: "What then?"
+    q3b_html: "<p>Next, you need to install (integrate) your mobile device in the car. You can arrange meals on-board network, or follow the battery status himself.</p><p>During their travels, the unit will automatically transmit data to our server, for further processing and storage.</p> <p><strong>Warning!</strong> Your data will only be available to you!</p>"
+    q4h: 'What is the "Coordinate-tracker"?'
+    q4b_html: '"Coordinate-tracker" is an application for OS Android, which determines the location of your car (which is installed a mobile device running the "Coordinate-tracker") and send the information to our server.'
+    q5h: 'How can I get a "Coordinate-tracker"?'
+    q5b_html: '<p>Unfortunately, the ability to download applications from <strong>"Google Play"</strong> are not available :(</p><p>Unfortunately, the ability to download an application from our website are not available :(</p><p>Im working on it!</p>'
+    q6h: 'How to configure "Coordinate-tracker"'
+    q6b_html: "<p>When you create a car, it will be assigned a unique identifier tracker (UUID), to be entered in the authorization application.</p><p><strong>Note:</strong> Each car can not have more than one tracker!</p><p>hus, it is necessary to adjust the tracker: email-user, the user's password, and UUID of a particular vehicle.</p>"
+    q7h: 'How to use the service?'
+    q7b_html:  '<p>After configuration, "Coordinate-tracker" further action is required. You can easily travel by car: all further actions will be automated.</p><p>You will be able to monitor the situation and statistics on the website of the service.</p>'
+    q8h: 'How to view detailed statistics?'
+    q8b_html: '<p>Detailed statistics can be viewed in your profile %{link} after registration.</p>'
+    q9h: 'How to view information about the tracks?'
+    q9b_html: '<p>For information on your tracks you can see in home page %{link} after registration.</p>'
+    q10h: 'Who owns the rights to ownership of the service?'
+    q10b_html: '<p>The right to own service (including mobile application "Coordinate-tracker" service belong to a single developer - Andrey Nagorny. You can learn more on the page "%{link}".</p>'
+  static_pages:
+    home4user:
+      select_car: "Select car:"
+      date_pick: "Date pick:"
+      date_pick_at: "at:"
+      date_pick_to: "to:"
+      select_tracks: "Select tracks (<15):"
+    home4guest:
+      welcome: "Welcome to Coordinate!"
+      descript1: "Coordinate is a service of constant monitoring the location of your car"
+  layouts:
+    header:
+      account: "Account"
+      profile: "Profile"
+      settings: "Settings"
+      help: "Help"
+      administration: "Administration"
+  maps:
     tracks:
-        val: "tracks"
-    users:
-        show: 
-            edit_info: 'Edit information'
-        verification_form:
-            verification_key: "Verification key:"
-            letter_to: "key a letter to %{mail}"
-        edit:
-            change_gravatar: 'Change Gravatar'
-            change_gravatar_hint: 'Your Gravatar changes to the project site "Gravatar"'
-            upload_avatar: 'Upload your avatar'
-            delete_avatar_label: "Don't use native avatar"
-            delete_avatar_hint: "Will use an avatar from http://gravatar.com, and native avatar will be deleted."
-            user_settings: "User settings"
-            profile_settings: "Profile settings"
-            region_settings: "Region settings"
-            system_settings: "System settings"
-            head1: "User settings"
-        reset_password_email_form:
-            head1: "Reset your password, Step 1"
-            head2: "To your email address sent an email with instructions required to reset your password. Please check your e-mail!"
-        reset_password_new_pass_request:
-            head1: "Reset your password, Step 2"
-            head2: "Enter your new password!"
-        users_charts:
-            track_statistic_head: "General statistic of your tracks"
-            total_tracks: "Total tracks"
-            total_distance: "Total distance"
-            avg_dist_per_track: "Average distance per track"
-            avg_dist_per_day: "Average distance per day"
-            avg_dist_per_car: "Average distance per car"
-            avg_tracks_per_day: "Average tracks per day"
-            avg_tracks_per_car: "Average tracks per car"
-            favorite_car: "Favorite car"
-            total_days: "Total days, since the establishment of the first track"
-        verification:
-            head2: "To your email address sent an email with instructions required to confirm your e-mail. Please check your e-mail!"
-        cars:
-            image: 'Image'
-            title: 'Title'
-            priority: 'Priority'
-            color: "Color"
-            created_at: "Created at"
-            total_tracks: "Total tracks"
-            last_track: "Last track"
-            actions: "Actions"
-    breadcrumbs:
-        home: "Home"
-        edit_cars: "Edit car"
-        new_cars: "Add car"
-        cars: "Your cars"
-        settings: "Settings"
-        profile: "Profile"
-    charts:
-        track_distance: 'Track distance (km)'
-        distance4day: 'Distance for days'
-        distance4day_full: 'The daily distance of your tracks'
-        distance_per_cars: 'The percentage distance for cars'
-        tracks_per_cars: 'The percentage tracks for cars'
-        of_tracks: 'of total tracks'
-        of_distance: 'of total distance'
-        all_cars: "All your cars"
+      info:
+        head: "General statistic of track %{track}"
+      info_all:
+        head: "General statistic of all selected track"
+  shared:
+    question:
+      header_default: "Some header text..."
+      body_default: "Some body text..."
+    settings_nav:
+      user_settings: "User settings"
+      car_settings: "Car settings"
+      my_cars: "My cars"
+      new_cars: "Add car"
+    empty_message:
+      msg: "Something is missing ..."
+      sub_msg: "You forgot something, and something we have lost..."
+  cars:
+    tooltip:
+      wait_message: 'Wait while we load new content...'
+    car_card:
+      head1: "Car information"
+      color: "Color"
+      priority: "Priority"
+      created_at: "Created at"
+      total_tracks: "Total tracks"
+      last_loc: "Last location at"
+      uuid: "Tracker UUID"
+      description: "Description"
+    new_form:
+      upload_text: "Upload image of this car"
+      img_destroy_txt: "Don't use custom image"
+      img_destroy_hint: "Your image will be deleted."
+    edit:
+      edit_car: "Edit %{title}"
+    index:
+      head1: "Your cars"
+    new:
+      new_car: "Add new car"
+
+  tracks:
+    val: "tracks"
+  users:
+    users_charts:
+      track_statistic_head: "General statistic of your tracks"
+    show: 
+      edit_info: 'Edit information'
+    verification_form:
+      verification_key: "Verification key:"
+      letter_to: "key a letter to %{mail}"
+    edit:
+      change_gravatar: 'Change Gravatar'
+      change_gravatar_hint: 'Your Gravatar changes to the project site "Gravatar"'
+      upload_avatar: 'Upload your avatar'
+      delete_avatar_label: "Don't use native avatar"
+      delete_avatar_hint: "Will use an avatar from http://gravatar.com, and native avatar will be deleted."
+      user_settings: "User settings"
+      profile_settings: "Profile settings"
+      region_settings: "Region settings"
+      system_settings: "System settings"
+      head1: "User settings"
+    reset_password_email_form:
+      head1: "Reset your password, Step 1"
+      head2: "To your email address sent an email with instructions required to reset your password. Please check your e-mail!"
+    reset_password_new_pass_request:
+      head1: "Reset your password, Step 2"
+      head2: "Enter your new password!"
+    verification:
+      head2: "To your email address sent an email with instructions required to confirm your e-mail. Please check your e-mail!"
+    cars:
+      image: 'Image'
+      title: 'Title'
+      priority: 'Priority'
+      color: "Color"
+      created_at: "Created at"
+      total_tracks: "Total tracks"
+      last_track: "Last track"
+      actions: "Actions"
+  breadcrumbs:
+    home: "Home"
+    edit_cars: "Edit car"
+    new_cars: "Add car"
+    cars: "Your cars"
+    settings: "Settings"
+    profile: "Profile"
+  charts:
+    track_distance: 'Track distance (km)'
+    distance4day: 'Distance for days'
+    distance4day_full: 'The daily distance of your tracks'
+    distance_per_cars: 'The percentage distance for cars'
+    tracks_per_cars: 'The percentage tracks for cars'
+    of_tracks: 'of total tracks'
+    of_distance: 'of total distance'
+    all_cars: "All your cars"
+    tracks:
+      stats_of_track_by_user:
+        total_tracks: "Total tracks"
+        total_distance: "Total distance"
+        avg_dist_per_track: "Average distance per track"
+        avg_dist_per_day: "Average distance per day"
+        avg_dist_per_car: "Average distance per car"
+        avg_tracks_per_day: "Average tracks per day"
+        avg_tracks_per_car: "Average tracks per car"
+        favorite_car: "Favorite car"
+        total_days: "Total days, since the establishment of the first track"

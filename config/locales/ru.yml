@@ -254,7 +254,7 @@ ru:
       long: ! '%d %B %Y, %H:%M'
       short: ! '%d %b, %H:%M'
     pm: вечера
-
+  mask_loading_label: "Загрузка..."
   forgot_password: "Забыли пароль?"
   to_en: "English version"
   to_ru: "Русская версия"
@@ -442,6 +442,8 @@ ru:
   tracks:
     val: "треков"
   users:
+    users_charts:
+      track_statistic_head: "Общая статистика о треках"
     show: 
       edit_info: 'Изменить информацию'
     verification_form:
@@ -464,17 +466,6 @@ ru:
     reset_password_new_pass_request:
       head1: "Сброс пароля, шаг 2"
       head2: "Введите новый пароль!"
-    users_charts:
-      track_statistic_head: "Общая статистика о треках"
-      total_tracks: "Всего треков"
-      total_distance: "Общее пройденное расстояние"
-      avg_dist_per_track: "Среднее расстояние на трек"
-      avg_dist_per_day: "Среднее расстояние в день"
-      avg_dist_per_car: "Среднее расстояние на автомобиль"
-      avg_tracks_per_day: "Среднее кол-во треков в день"
-      avg_tracks_per_car: "Среднее кол-во треков на автомобиль"
-      favorite_car: '"Любимый" автомобиль'
-      total_days: "Всего дней, с момента создания первого трека"
     verification:
       head2: "На указанный Вами e-mail отправлены инструкции, с указаниями, необходимыми для завершения подтвержения e-mail адреса. Пожалуйста, проверьте свой e-mail!"
     cars:
@@ -502,3 +493,14 @@ ru:
     of_tracks: 'от общего кол-ва треков'
     of_distance: 'от общего расстояния'
     all_cars: "Все автомобили"
+    tracks:
+      stats_of_track_by_user:
+        total_tracks: "Всего треков"
+        total_distance: "Общее пройденное расстояние"
+        avg_dist_per_track: "Среднее расстояние на трек"
+        avg_dist_per_day: "Среднее расстояние в день"
+        avg_dist_per_car: "Среднее расстояние на автомобиль"
+        avg_tracks_per_day: "Среднее кол-во треков в день"
+        avg_tracks_per_car: "Среднее кол-во треков на автомобиль"
+        favorite_car: '"Любимый" автомобиль'
+        total_days: "Всего дней, с момента создания первого трека"

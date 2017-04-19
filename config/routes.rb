@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     member do
       get :verification
       post :sent_verification_mail
-      get :charts_controller, :defaults => {:format => :json}
     end
-     #add user/otherpages (without id!!!)
-     collection do
+
+    #add user/otherpages (without id!!!)
+    collection do
       get :reset_password
       post :recive_email_for_reset_pass
       post :resetpass_recive_pass
@@ -37,6 +37,16 @@ Rails.application.routes.draw do
 
   resources :users_mails, only:[:create];
 
+  #Profile charts
+  namespace :charts,  :defaults => {:format => :json} do
+    get :speed_agg_info, to:'tracks#speed_agg_info'
+    get :tracks_per_car, to:'tracks#tracks_per_car' 
+    get :distance_per_car, to:'tracks#distance_per_car'  
+    get :tracks_per_time, to:'tracks#tracks_per_time'  
+    get :stats_of_track_by_user, to:'tracks#stats_of_track_by_user'  
+  end
+
+  #Homepage Map
   namespace :maps,  :defaults => {:format => :json} do
     resources :cars, only:[:index]
     resources :tracks, only:[:index] do
@@ -49,7 +59,8 @@ Rails.application.routes.draw do
     get :location, to:'locations#show' 
   end
 
-  namespace :api,  :defaults => {:format => :json}do
+  #GPS Tracker API
+  namespace :api,  :defaults => {:format => :json} do
     namespace :v1 do
       post 'login' => 'sessions#login'
       post 'logout' => 'sessions#logout'

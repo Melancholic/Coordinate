@@ -1,0 +1,2 @@
+module Charts::TracksHelper
+end

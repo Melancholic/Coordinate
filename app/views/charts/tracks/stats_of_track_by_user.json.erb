@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": [
+  {
+    "title": <%= t('.total_tracks').to_json.html_safe %>,
+    "value": <%= @total_tracks.to_json.html_safe%>
+  },
+  {
+    "title": <%= t('.total_distance').to_json.html_safe %>,
+    "value": <%="#{@total_distance} #{t('distance_val')}.".to_json.html_safe%>
+  },
+  {
+    "title": <%= t('.avg_dist_per_track').to_json.html_safe %>,
+    "value": <%= "#{@average_distance} #{t('distance_val')}.".to_json.html_safe %>
+  },
+  {
+    "title": <%= t('.avg_dist_per_day').to_json.html_safe %>,
+    "value": <%= "#{@average_distance_per_day} #{t('distance_val')}.".to_json.html_safe%>
+  },
+  {
+    "title": <%= t('.avg_dist_per_car').to_json.html_safe %>,
+    "value": <%= "#{@average_distance_per_car} #{t('distance_val')}.".to_json.html_safe%>
+  },
+  {
+    "title": <%= t('.avg_tracks_per_day').to_json.html_safe%>,
+    "value": <%= @average_tracks_per_day %>
+  },
+  {
+    "title": <%= t('.avg_tracks_per_car').to_json.html_safe %>,
+    "value": <%= @average_tracks_per_car.to_json.html_safe %>
+  },
+  {
+    "title": <%=t('.favorite_car').to_json.html_safe %>,
+    "value": <%= "#{(link_to @favorite_car.title, car_path( @favorite_car))} (#{@favorite_car.tracks.count} #{t('tracks.val')}).".to_json.html_safe%>
+  },
+
+  {
+    "title": <%= t('.total_days').to_json.html_safe %>,
+    "value": <%= "#{@days} #{t('days_val')}.".to_json.html_safe %>
+  }
+  ]
+}

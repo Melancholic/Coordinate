@@ -24,52 +24,16 @@
 </div>
 <div class="row">
   <div class="col-md-12 well">
-    <div class="tracks_statistic" style="min-width: 250px;" >
+    <div class="tracks_statistic" id="stats_of_track_by_user" style="min-width: 250px;" >
       <h1> <%=t('.track_statistic_head')%> </h1>
       <table class="table table-striped" >
-        <tr>
-          <td><strong><%=t('.total_tracks')%>:</strong></td>
-          <td><%=@total_tracks%></td>
-        </tr>
-        <tr>
-          <td><strong><%=t('.total_distance')%>:</strong></td>
-          <td><%=@total_distance%> <%=t('distance_val')%></td>
-        </tr>
-        <tr>
-          <td><strong><%=t('.avg_dist_per_track')%>:</strong></td>
-          <td><%=@average_distance%> <%=t('distance_val')%></td>
-        </tr>
-        <tr>
-          <td><strong><%=t('.avg_dist_per_day')%>:</strong></td>
-          <td><%=@average_distance_per_day%> <%=t('distance_val')%></td>
-        </tr>
-        <tr>
-          <td><strong><%=t('.avg_dist_per_car')%>:</strong></td>
-          <td><%=@average_distance_per_car%> <%=t('distance_val')%></td>
-        </tr>
-        <tr>
-          <tr>
-            <td><strong><%=t('.avg_tracks_per_day')%>:</strong></td>
-            <td><%=@average_tracks_per_day%></td>
-          </tr>
-          <tr>
-            <td><strong><%=t('.avg_tracks_per_car')%>:</strong></td>
-            <td><%=@average_tracks_per_car%> </td>
-          </tr>
-          <tr>
-            <td><strong><%=t('.favorite_car')%>:</strong></td>
-            <td><%=link_to  @favorite_car.title, car_path( @favorite_car)%> (<%= @favorite_car.tracks.count%>  <%=t('tracks.val')%>)</td>
-          </tr>
-          <tr>
-            <td><strong><%=t('.total_days')%>:</strong></td>
-            <td><%=@days%> <%=t('days_val')%></td>
-          </tr>
-        </table>
-      </div>
+        <!-- ASYNC -->
+      </table>
     </div>
   </div>
+</div>
 
-  <script>
+<script>
   $(document).ready(function(){
     max_speed_chart_init();
     avg_speed_chart_init();
@@ -81,55 +45,72 @@
     $("#speed_max_for_all_car").highcharts().showLoading();
     $("#tracks_for_cars_diagram").highcharts().showLoading();
     $("#distance_for_cars_diagram").highcharts().showLoading();
-
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "speed_max"} , function( data ) {
-      if ( data.success ) {
-        $("#speed_max_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.result));
+    $("#stats_of_track_by_user").mask();
+    
+    // Table with stats of tracks configure 
+    $.getJSON( "<%=charts_stats_of_track_by_user_path%>", function( response ) {
+      if ( response.success ) { 
+        var data = response.data;
+        $("#stats_of_track_by_user > table").html($.map(data, function(row){
+          var html = "<tr><td class='col-md-8'><strong>"+row.title+":</strong></td>";
+          html = html+"<td class='col-md-4'>"+row.value+"</td></tr>";
+          return html;
+        }).join());
+      }
+      $("#stats_of_track_by_user").unmask();
+    });
+    
+    // Speed info for all car
+    $.getJSON( "<%=charts_speed_agg_info_path%>", /*{request : ...},*/ function( response ) {
+      if ( response.success ) {
+        var data = response.data;
+        $("#speed_max_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.max));
+        $("#speed_avg_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.avg));
+        $("#speed_avg_for_all_car").highcharts().hideLoading();
         $("#speed_max_for_all_car").highcharts().hideLoading();
       }
     });
 
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "speed_avg"} , function( data ) {
-      if ( data.success ) {
-        $("#speed_avg_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.result));
-        $("#speed_avg_for_all_car").highcharts().hideLoading();
-      }
-    });
-
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "percent_tracks_for_cars"} , function( data ) {
-      if ( data.success ) {
+    // Tracks per car
+    $.getJSON( "<%=charts_tracks_per_car_path%>", /*{request : ...},*/ function( response ) {
+      if ( response.success ) {
+        var data = response.data;
         $("#tracks_for_cars_diagram").highcharts().addSeries({
-            type: 'pie',
-            name: I18n.t('charts.of_tracks'),
-            colors:get_highcharts_colors(data.result.colors),
-            data: data.result.data
+          type: 'pie',
+          name: I18n.t('charts.of_tracks'),
+          colors: get_highcharts_colors(data.colors),
+          data: data.values
         });
         $("#tracks_for_cars_diagram").highcharts().hideLoading();
       }
     });
 
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "percent_distance_for_cars"} , function( data ) {
-      if ( data.success ) {
+    // Distance per car
+    $.getJSON( "<%=charts_distance_per_car_path%>", /*{request : ...},*/ function( response ) {
+      if ( response.success ) {
+        var data = response.data;
         $("#distance_for_cars_diagram").highcharts().addSeries({
-            type: 'pie',
-            name: I18n.t('charts.of_distance') ,
-            colors:get_highcharts_colors(data.result.colors),
-            data: data.result.data
+          type: 'pie',
+          name: I18n.t('charts.of_distance') ,
+          colors: get_highcharts_colors(data.colors),
+          data: data.values
         });
         $("#distance_for_cars_diagram").highcharts().hideLoading();
       }
     });
     
-    $.getJSON( "<%=charts_controller_user_path%>", {request : "length_tracks_of_time"} , function( data ) {
-      if ( data.success ) {   
-        for(var i in data.result){
-          for(var j in data.result[i].data){
-            data.result[i].data[j]=[Date.parse(data.result[i].data[j][0]), data.result[i].data[j][1]]
+    // Distance of tracks per days
+    $.getJSON( "<%=charts_tracks_per_time_path%>", /*{request : ...},*/ function( response ) {
+      if ( response.success ) { 
+        var data = response.data;
+        for(var i in data){
+          for(var j in data[i].data){
+            data[i].data[j]=[Date.parse(data[i].data[j][0]), data[i].data[j][1]]
           }
-          $("#length_tracks_of_time_diagram").highcharts().addSeries(data.result[i]);
+          $("#length_tracks_of_time_diagram").highcharts().addSeries(data[i]);
         }
-           $("#length_tracks_of_time_diagram").highcharts().hideLoading();
-         }
-       });
+        $("#length_tracks_of_time_diagram").highcharts().hideLoading();
+      }
+    });
   });
 </script>

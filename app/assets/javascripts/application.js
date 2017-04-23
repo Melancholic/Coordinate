@@ -28,5 +28,7 @@
 //= require i18n
 //= require i18n.js
 //= require i18n/translations
+//= require tooltipster.core.min
+//= require tooltipster.bundle.min
 //= require_tree ./auto/
 //= require_tree ./vendor/

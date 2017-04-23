@@ -25,12 +25,7 @@ function percent_tracks_for_cars_init(data) {
                     connectorColor: 'silver'
                 }
             }
-        },
-        /*series: [{
-            type: 'pie',
-            name: 'of total tracks',
-            data: data.data
-        }]*/
+        }
     });
 }
 
@@ -62,12 +57,7 @@ function percent_distance_for_cars_init(data) {
                     connectorColor: 'silver'
                 }
             }
-        },
-        /*series: [{
-            type: 'pie',
-            name: 'of total distance',
-            data: data.data
-        }]*/
+        }
     });
 }
 
@@ -112,9 +102,7 @@ function length_tracks_of_time() {
                     enabled: true
                 }
             }
-        },
-
-        //series: data
+        }
     });
 }
 
@@ -172,8 +160,7 @@ function avg_speed_chart_init() {
             },
             offset: -20,
             endOnTick: false
-        }],
-
+        }]
     })
 }
 
@@ -230,13 +217,12 @@ function max_speed_chart_init() {
             },
             offset: -20,
             endOnTick: false
-        }],
-
+        }]
     })
 }
 //private
 function data_labels_for_speedometer (data){
-    res={
+    var res = {
         formatter: function () {
             var kmh = data
             mph = Math.round(kmh * 0.621);
@@ -255,7 +241,7 @@ function data_labels_for_speedometer (data){
             [1, '#FFF']
             ]
         }
-    }
+    };
 
     return res;
 }
@@ -278,12 +264,13 @@ function make_series_for_speedometer(data){
 
 //public
 function get_highcharts_colors(colors){
-    x=Highcharts.map(colors, function (color) {
+    var x = Highcharts.map(colors, function (color) {
         return {
             radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
             stops: [
             [0, color],
-                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                [
+                    1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
                 ]
             };
         });

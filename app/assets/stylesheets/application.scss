@@ -22,6 +22,10 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import url(https://fonts.googleapis.com/css?family=Roboto&subset=cyrillic,latin);
+
+@import "tooltipster.core.min";
+@import "tooltipster.bundle.min";
+
 body{
   font-family: 'Roboto', sans-serif;
 }

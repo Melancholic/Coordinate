@@ -34,83 +34,84 @@
 </div>
 
 <script>
-  $(document).ready(function(){
-    max_speed_chart_init();
-    avg_speed_chart_init();
-    percent_tracks_for_cars_init();
-    percent_distance_for_cars_init();
-    length_tracks_of_time();
-    $("#length_tracks_of_time_diagram").highcharts().showLoading();
-    $("#speed_avg_for_all_car").highcharts().showLoading();
-    $("#speed_max_for_all_car").highcharts().showLoading();
-    $("#tracks_for_cars_diagram").highcharts().showLoading();
-    $("#distance_for_cars_diagram").highcharts().showLoading();
-    $("#stats_of_track_by_user").mask();
-    
-    // Table with stats of tracks configure 
-    $.getJSON( "<%=charts_stats_of_track_by_user_path%>", function( response ) {
-      if ( response.success ) { 
-        var data = response.data;
-        $("#stats_of_track_by_user > table").html($.map(data, function(row){
-          var html = "<tr><td class='col-md-8'><strong>"+row.title+":</strong></td>";
-          html = html+"<td class='col-md-4'>"+row.value+"</td></tr>";
-          return html;
-        }).join());
-      }
-      $("#stats_of_track_by_user").unmask();
-    });
-    
-    // Speed info for all car
-    $.getJSON( "<%=charts_speed_agg_info_path%>", /*{request : ...},*/ function( response ) {
-      if ( response.success ) {
-        var data = response.data;
-        $("#speed_max_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.max));
-        $("#speed_avg_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.avg));
-        $("#speed_avg_for_all_car").highcharts().hideLoading();
-        $("#speed_max_for_all_car").highcharts().hideLoading();
-      }
-    });
+    $(document).ready(function(){
+        max_speed_chart_init();
+        avg_speed_chart_init();
+        percent_tracks_for_cars_init();
+        percent_distance_for_cars_init();
+        length_tracks_of_time();
+        $("#length_tracks_of_time_diagram").highcharts().showLoading();
+        $("#speed_avg_for_all_car").highcharts().showLoading();
+        $("#speed_max_for_all_car").highcharts().showLoading();
+        $("#tracks_for_cars_diagram").highcharts().showLoading();
+        $("#distance_for_cars_diagram").highcharts().showLoading();
+        $("#stats_of_track_by_user").mask();
 
-    // Tracks per car
-    $.getJSON( "<%=charts_tracks_per_car_path%>", /*{request : ...},*/ function( response ) {
-      if ( response.success ) {
-        var data = response.data;
-        $("#tracks_for_cars_diagram").highcharts().addSeries({
-          type: 'pie',
-          name: I18n.t('charts.of_tracks'),
-          colors: get_highcharts_colors(data.colors),
-          data: data.values
+        // Table with stats of tracks configure
+        $.getJSON( "<%=charts_stats_of_track_by_user_path%>", function( response ) {
+            if ( response.success ) {
+                var data = response.data;
+                $("#stats_of_track_by_user > table").html($.map(data, function(row){
+                    var html = "<tr><td class='col-md-8'><strong>"+row.title+":</strong></td>";
+                    html = html+"<td class='col-md-4'>"+row.value+"</td></tr>";
+                    return html;
+                }).join());
+            }
+            $("#stats_of_track_by_user").unmask();
         });
-        $("#tracks_for_cars_diagram").highcharts().hideLoading();
-      }
-    });
 
-    // Distance per car
-    $.getJSON( "<%=charts_distance_per_car_path%>", /*{request : ...},*/ function( response ) {
-      if ( response.success ) {
-        var data = response.data;
-        $("#distance_for_cars_diagram").highcharts().addSeries({
-          type: 'pie',
-          name: I18n.t('charts.of_distance') ,
-          colors: get_highcharts_colors(data.colors),
-          data: data.values
+        // Distance of tracks per days
+        $.getJSON( "<%=charts_tracks_per_time_path%>", /*{request : ...},*/ function( response ) {
+            if ( response.success ) {
+                var data = response.data;
+                for(var i in data){
+                    for(var j in data[i].data){
+                        data[i].data[j]=[Date.parse(data[i].data[j][0]), data[i].data[j][1]]
+                    }
+                    $("#length_tracks_of_time_diagram").highcharts().addSeries(data[i]);
+                }
+                $("#length_tracks_of_time_diagram").highcharts().hideLoading();
+            }
         });
-        $("#distance_for_cars_diagram").highcharts().hideLoading();
-      }
+
+        // Speed info for all car
+        $.getJSON( "<%=charts_speed_agg_info_path%>", /*{request : ...},*/ function( response ) {
+            if ( response.success ) {
+                var data = response.data;
+                $("#speed_max_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.max));
+                $("#speed_avg_for_all_car").highcharts().addSeries(make_series_for_speedometer(data.avg));
+                $("#speed_avg_for_all_car").highcharts().hideLoading();
+                $("#speed_max_for_all_car").highcharts().hideLoading();
+            }
+        });
+
+        // Tracks per car
+        $.getJSON( "<%=charts_tracks_per_car_path%>", /*{request : ...},*/ function( response ) {
+            if ( response.success ) {
+                var data = response.data;
+                $("#tracks_for_cars_diagram").highcharts().addSeries({
+                    type: 'pie',
+                    name: I18n.t('charts.of_tracks'),
+                    colors: get_highcharts_colors(data.colors),
+                    data: data.values
+                });
+                $("#tracks_for_cars_diagram").highcharts().hideLoading();
+            }
+        });
+
+        // Distance per car
+        $.getJSON( "<%=charts_distance_per_car_path%>", /*{request : ...},*/ function( response ) {
+            if ( response.success ) {
+                var data = response.data;
+                $("#distance_for_cars_diagram").highcharts().addSeries({
+                    type: 'pie',
+                    name: I18n.t('charts.of_distance') ,
+                    colors: get_highcharts_colors(data.colors),
+                    data: data.values
+                });
+                $("#distance_for_cars_diagram").highcharts().hideLoading();
+            }
+        });
+
     });
-    
-    // Distance of tracks per days
-    $.getJSON( "<%=charts_tracks_per_time_path%>", /*{request : ...},*/ function( response ) {
-      if ( response.success ) { 
-        var data = response.data;
-        for(var i in data){
-          for(var j in data[i].data){
-            data[i].data[j]=[Date.parse(data[i].data[j][0]), data[i].data[j][1]]
-          }
-          $("#length_tracks_of_time_diagram").highcharts().addSeries(data[i]);
-        }
-        $("#length_tracks_of_time_diagram").highcharts().hideLoading();
-      }
-    });
-  });
 </script>

@@ -5,7 +5,7 @@ gem 'i18n-js'#, '~> 2.1.2'
 gem 'simple_captcha2', require: 'simple_captcha'
 gem 'groupdate'
 gem "highcharts-rails"#, "~> 4.0.0"
-#gem 'tooltipster-rails'
+gem 'tooltipster-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'gon'
 gem 'momentjs-rails'

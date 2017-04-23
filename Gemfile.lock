@@ -398,6 +398,7 @@ GEM
     time_difference (0.5.0)
       activesupport
     timecop (0.8.1)
+    tooltipster-rails (4.1.2)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -474,6 +475,7 @@ DEPENDENCIES
   therubyracer
   time_difference
   timecop
+  tooltipster-rails
   turbolinks
   uglifier
 

@@ -31,7 +31,7 @@
           <%=avatar_for(current_user, :icon, alt: "#{current_user.login}", class:"img-circle")  %>
         </a>
         <ul class="dropdown-menu">
-          <li data-no-turbolink> <%= link_to(t(".profile"), current_user)%></li>
+          <li> <%= link_to(t(".profile"), current_user)%></li>
           <li><%= link_to(t(".settings"),edit_user_path(current_user) ) %></li>
           <li class="divider"></li>
           <li><%= link_to(t(".help"),faq_path)%></li>
@@ -41,7 +41,7 @@
           <%end%>
           <% if current_user.admin? %>
           <li class="divider"></li>
-          <li><%= link_to(t(".administration"),admin_root_path, style:"color: #f00;")%></li>
+          <li><%= link_to(t(".administration"),admin_root_path, data: { turbolinks: false},  style:"color: #f00;")%></li>
           <%end%>
           <li class="divider"></li>
           <li> <%= link_to(t("sign_out"), signout_path, method: "delete") %></li>
@@ -54,7 +54,6 @@
           </li>
         <%end%>
       <%end%>
-    </li>
   </ul>
 </div>
 <!-- Right  block-->

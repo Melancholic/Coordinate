@@ -188,7 +188,7 @@ ActiveAdmin.setup do |config|
   #
      config.namespace :admin do |admin|
        admin.build_menu :utility_navigation do |menu|
-         menu.add label: "Home", url: "/"#, html_options: { target: :blank }
+         menu.add label: "Home", url: "/", html_options: { 'data-turbolinks': false }
          admin.add_logout_button_to_menu menu
        end
      end

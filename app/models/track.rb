@@ -1,4 +1,7 @@
 class Track < ActiveRecord::Base
+	# Inerval between 2 tracks (in minutes)
+	@@time_interval = 15;
+
 	belongs_to :car;
 	has_many :track_locations, -> { order(time: :asc) }, dependent: :destroy ;
 	default_scope -> { order(start_time: :desc, id: :desc) }
@@ -9,6 +12,10 @@ class Track < ActiveRecord::Base
 		pred_track=self.car.tracks.second
 		pred_track.update_attributes(stop_time:pred_track.last_time) unless pred_track.nil?
 	}
+
+	def self.time_interval
+		@@time_interval
+	end
 
 	def merge!(other)
 		other.track_locations.update_all(track_id: self);other.reload;

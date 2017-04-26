@@ -11,12 +11,12 @@ class Api::V1::GeodataController < Api::V1::BaseController
 		@cur_track = find_track(@car, params);
 		begin
 			@cur_track.create_location!({longitude:params[:longitude],latitude:params[:latitude],	speed:params[:speed]*3.6 ,accuracy:params[:accuracy], time:convert_time(params[:time])});
-			logger.debug("Location has been saved!")
-			render status: 200, :json => { :success => true, :info => "New location saved"} 
+			logger.debug("Location has been saved.")
+			render status: 200, :json => { :success => true, :info => "New location saved.", clear: true} 
 		rescue ActiveRecord::RecordNotUnique => x
-			logger.info("Location has not saved, rescue ActiveRecord::RecordNotUnique");
+			logger.info("Location alredy exist.");
 			logger.error(x.to_s)
-			render status: 200, :json => { :success => true, :info => "Location alredy exist"}
+			render status: 200, :json => { :success => true, :info => "Location alredy exist.", clear: true}
 		end
 
 	end
@@ -94,10 +94,10 @@ private
 	end
 	def check_data
 		unless  (params.has_key?(:longitude)&& params.has_key?(:latitude)&& params.has_key?(:speed) && params.has_key?(:time))
-			render status: :bad_request, :json => { :success => false, :info => "Required parameters not present: longitude, latitude, speed, time"} 
+			render status: :bad_request, :json => { :success => false, :info => "Required parameters not present: longitude, latitude, speed, time", clear: true} 
 		end
 		if (params[:speed].to_f == 0)
-			render status: :bad_request, :json => { :success => false, :info => "Speed can't be zero!"} 
+			render status: :bad_request, :json => { :success => false, :info => "Speed can't be zero!", clear: true} 
 		end
 	end
 end

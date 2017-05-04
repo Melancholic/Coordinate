@@ -8,7 +8,7 @@ class TrackLocation < Location
   scope :by_track, -> (track) {where(track: track)}
   scope :by_car, -> (car) {joins(:track).where('tracks.car_id = ?', car.id)}
 
-  before_save :calculate_distance
+  before_save :set_distance
 
 
   after_save do
@@ -17,25 +17,11 @@ class TrackLocation < Location
 
     self.track.update_attributes(stop_time: self.time) if self.track.stop_time.nil? ||
         (self.time > self.track.stop_time)
-
-    Thread.new do
-      locs = self.track.track_locations.where('time > ?', self.time)
-      locs.each(&:calculate_distance!)
-      ActiveRecord::Base.connection.close
-    end
   end
 
-  def calculate_distance!
-    pred = self.track.track_locations.where('time < ?', self.time).last
-    if pred && pred.distance.present?
-      self.update_attributes!(distance: pred.distance + Geocoder::Calculations.distance_between(self, pred))
-    else
-      self.update_attributes!(distance: 0)
-    end
-  end
-
+  # TODO Re-calculate track distance on merge
   private
-  def calculate_distance
+  def set_distance
     pred = self.track.track_locations.where('time < ?', self.time).last
     if pred && pred.distance.present?
       self.distance = pred.distance || 0

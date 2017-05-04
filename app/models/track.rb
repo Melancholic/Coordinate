@@ -15,11 +15,14 @@ class Track < ApplicationRecord
     pred_track.update_attributes(stop_time: pred_track.last_time) unless pred_track.nil?
   end
 
+  # TODO Re-calculate track distance on merge
   def merge!(other)
-    other.track_locations.update_all(track_id: self.id); other.reload
-    self.update_attributes(start_time: other.start_time) if other.start_time < self.start_time
-    self.update_attributes(stop_time: other.last_time) if self.stop_time && other.last_time > self.stop_time
-    other.destroy
+    ActiveRecord::Base.transaction do
+      other.track_locations.update_all(track_id: self.id); other.reload
+      self.update_attributes(start_time: other.start_time) if other.start_time < self.start_time
+      self.update_attributes(stop_time: other.last_time) if self.stop_time && other.last_time > self.stop_time
+      other.destroy
+    end
   end
 
   def self.recursive_merge tracks

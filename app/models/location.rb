@@ -3,7 +3,7 @@ class Location < ApplicationRecord
   validates :time, presence: false
   validates :distance, presence: false
   reverse_geocoded_by :latitude, :longitude
-  after_validation :geocode_run
+  after_validation :geocode_run, on: [:create]
 
 
   private

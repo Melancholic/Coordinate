@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
 <head>
   <title><%= full_title(yield(:title))%></title>
   <%= Gon::Base.render_data({}) %>
@@ -12,13 +12,12 @@
   <%= render 'layouts/i18n_js' %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/ie' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 </head>
 <body>
  <%= render 'layouts/header' %>
   <div class="container">
-
-
     <!-- Hello new user! END -->
     <%= yield %>
     <hr>

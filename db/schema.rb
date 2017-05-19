@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325140637) do
+ActiveRecord::Schema.define(version: 20170517080245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,8 @@ ActiveRecord::Schema.define(version: 20170325140637) do
     t.string   "auth_hash"
     t.string   "time_zone",       limit: 255, default: "UTC"
     t.string   "locale",                      default: "ru",  null: false
+    t.boolean "is_agreed", default: false, null: false
+    t.datetime "agreed_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end

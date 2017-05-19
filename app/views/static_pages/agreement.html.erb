@@ -1,0 +1,11 @@
+<div class="agreement-container">
+  <%= render :file => "public/agreement-#{I18n.locale}.html" %>
+</div>
+<% if signed_in? && !current_user.is_agreed? %>
+    <div class="container">
+      <%= form_for current_user, url: do_agree_users_path, :method => :put do |f| %>
+          <%= f.hidden_field :is_agreed, :value => true %>
+          <%= f.submit t(".agreed_but"), class: "btn btn-default pull-right" %>
+      <% end %>
+    </div>
+<% end %>

@@ -1,0 +1,7 @@
+ru:
+  license_agreement: "Лицензионное соглашениие"
+  static_pages:
+    agreement:
+      agreed_but: "С условиями согласен"
+  modals:
+    user_not_agreed: "Для пользования сервисом Вы обязаны принять пользовательское соглашение."

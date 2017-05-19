@@ -1,0 +1,41 @@
+.agreement-container {
+  font-family: "Times New Roman", sans-serif !important;
+  font-size: 20px;
+  color: #2E2F30;
+}
+
+.agreement-container > h1 {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: inherit;
+  font-family: inherit
+}
+
+.agreement-container > h2 {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.agreement-container > h3 {
+  text-align: right;
+  font-size: 1em;
+  color: darkgrey;
+  font-style: italic;
+  font-family: inherit;
+  margin: 0;
+}
+
+.agreement-container > ul {
+  list-style: none;
+}
+
+.agreement-container > ul > li:before {
+  content: "\2043";
+  position: relative;
+  left: -5px;
+}

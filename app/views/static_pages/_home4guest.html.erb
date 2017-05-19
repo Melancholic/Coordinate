@@ -13,7 +13,7 @@
             <div class="carousel-caption">
               <h1><%=t('.welcome')%></h1>
               <p><%=t('.descript1')%></p>
-              <p><a class="btn btn-lg btn-primary" href="#" data-turbolinks="false" onclick="sign_modal_call()" role="button"> <%= t('sign_up')%></a></p>
+              <p><%= link_to(t('sign_up'), '#', class: "btn btn-primary", data: {turbolinks: false, toggle: "modal", target: "#sign_modal"}) %></p>
             </div>
           </div>
         </div>

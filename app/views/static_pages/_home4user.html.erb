@@ -1,95 +1,97 @@
 <script>
-window.maps_locations_path= "<%=maps_locations_path%>"
-window.maps_location_path="<%=maps_location_path%>"
+    window.maps_locations_path = "<%=maps_locations_path%>"
+    window.maps_location_path = "<%=maps_location_path%>"
 </script>
 <% content_for :javascript_includes do %>
-<%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.js', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js', 'data-turbolinks-track' => true %>
-<%=stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css', media: 'all', 'data-turbolinks-track' => true %>
-<%=stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css', media: 'all', 'data-turbolinks-track' => true %>
-<%=stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css', media: 'all', 'data-turbolinks-track' => true %>
-<%=stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css', media: 'all', 'data-turbolinks-track' => true %>
-<%=stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.js', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css', media: 'all', 'data-turbolinks-track' => true %>
 <% end %>
 <div class="row">
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-12">
-                <%= render 'shared/maps/root_map'%>
-            </div> <hr>
-            <div class="row">
-                <div class="container">
-                    <div class="col-sm-12">
-                        <div class="btn-group">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-12">
+        <%= render 'shared/maps/root_map' %>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="container">
+          <div class="col-sm-12">
+            <div class="btn-group">
 
-                        </div>
-                    </div>
-                    <% if (current_user.cars.empty?)%>
-                        <%= render 'shared/empty_message', msg:t('not_car_h'),
-                        sub_msg: t('not_car_b'),
-                        target_url: new_car_path %>
-                    <%else%>
-                    <div class="col-sm-12 well">
-                        <form role="form">
-                            <div class="row">
-                                <div class="col-md-offset-1 col-sm-4 ">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label for="car_sel"><%=t('.select_car')%></label>
-                                            <select class="form-control" id="car_sel">
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group" >
-                                            <label for="datepicker"><%=t('.date_pick')%></label>
-                                            <div id="datepicker">
-                                             <div class="col-sm-6">
-                                                <div class="input-group" >
-                                                    <span class="input-group-addon"><%=t('.date_pick_at')%></span>
-                                                    <input type="text" class="form-control" id="start_date" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="input-group" >
-                                                    <span class="input-group-addon"><%=t('.date_pick_to')%></span>
-                                                    <input type="text" class="form-control" id="end_date" /> 
-                                                    <!--<div id="end_date"></div>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-offset-1 col-sm-4">
-                                <div class="form-group">
-                                    <span id="track_sel_error"></span>
-                                    <label for="tracks_sel"><%=t('.select_tracks')%></label>
-                                    <select multiple class="form-control" id="tracks_sel" size="6">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <%= render 'shared/maps/map_filters'%>
-                <%end%>
-
-                <%if Track.by_user(current_user).empty?%>
-                <%= render 'shared/empty_message',
-                msg: t('not_tracks_h'),
-                sub_msg: t('not_tracks_b'),
-                but_msg: t("to_FAQ"),
-                target_url: faq_path
-                %>
-                <%else%>    
-                <div class="col-sm-12 well" id="track_info_area"></div>
-                <div class="col-sm-12 well" id="track_info_all_area"></div>
-                <%end%>
             </div>
+          </div>
+          <% if (current_user.cars.empty?) %>
+              <%= render 'shared/empty_message', msg: t('not_car_h'),
+                         sub_msg: t('not_car_b'),
+                         target_url: new_car_path %>
+          <% else %>
+              <div class="col-sm-12 well">
+                <form role="form">
+                  <div class="row">
+                    <div class="col-md-offset-1 col-sm-4 ">
+                      <div class="row">
+                        <div class="form-group">
+                          <label for="car_sel"><%= t('.select_car') %></label>
+                          <select class="form-control" id="car_sel">
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                          <label for="datepicker"><%= t('.date_pick') %></label>
+                          <div id="datepicker">
+                            <div class="col-sm-6">
+                              <div class="input-group">
+                                <span class="input-group-addon"><%= t('.date_pick_at') %></span>
+                                <input type="text" class="form-control" id="start_date"/>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="input-group">
+                                <span class="input-group-addon"><%= t('.date_pick_to') %></span>
+                                <input type="text" class="form-control" id="end_date"/>
+                                <!--<div id="end_date"></div>-->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-4">
+                      <div class="form-group">
+                        <span id="track_sel_error"></span>
+                        <label for="tracks_sel"><%= t('.select_tracks') %></label>
+                        <select multiple class="form-control" id="tracks_sel" size="6">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <%= render 'shared/maps/map_filters' %>
+          <% end %>
 
+          <% if Track.by_user(current_user).empty? %>
+              <%= render 'shared/empty_message',
+                         msg: t('not_tracks_h'),
+                         sub_msg: t('not_tracks_b'),
+                         but_msg: t("to_FAQ"),
+                         target_url: faq_path
+              %>
+          <% else %>
+              <div class="col-sm-12 well" id="track_info_area"></div>
+              <div class="col-sm-12 well" id="track_info_all_area"></div>
+          <% end %>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>

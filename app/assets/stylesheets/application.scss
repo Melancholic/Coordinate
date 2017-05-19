@@ -1,20 +1,13 @@
 // Example using 'Cerulean' bootswatch
-
 //Import bootstrap-sprockets
 @import "bootstrap-sprockets";
-
 // Import cerulean variables
 @import "bootswatch/flatly/variables";
-
 // Then bootstrap itself
 @import "bootstrap";
-
-
 // And finally bootswatch style itself
 @import "bootswatch/flatly/bootswatch";
-
 //find -name "*.css" -exec echo '@import "'$1{}'";'  \;
-
 @import "**/*";
 @import "vendor/*";
 @import "bootstrap-datepicker3";
@@ -22,20 +15,21 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import url(https://fonts.googleapis.com/css?family=Roboto&subset=cyrillic,latin);
-
 @import "tooltipster.core.min";
 @import "tooltipster.bundle.min";
 
-body{
+body {
   font-family: 'Roboto', sans-serif;
 }
-//OVERIDES
-a{
-	color:rgb(44, 62, 80);
+
+//OVERRIDES
+a {
+  color: rgb(44, 62, 80);
   font-weight: 500;
 }
-a:hover{
-	color:rgb(44, 62, 80);
+
+a:hover {
+  color: rgb(44, 62, 80);
 }
 
 .pagination > .disabled > span,
@@ -47,6 +41,7 @@ a:hover{
   color: #ecf0f1;
   background-color: rgba(44, 62, 80, 0.6);
 }
+
 .pagination > li > a:hover, .pagination > li > a:focus,
 .pagination > li > span:hover,
 .pagination > li > span:focus {
@@ -73,7 +68,7 @@ a:hover{
   color: #666666;
 }
 
-.table > tbody >tr >td{
+.table > tbody > tr > td {
   vertical-align: middle;
 }
 
@@ -81,8 +76,8 @@ table a:not(.btn),
 .table a:not(.btn) {
   text-decoration: none;
 }
+
 table a:hover,
 .table a:hover {
   text-decoration: underline;
 }
-

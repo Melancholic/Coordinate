@@ -3,40 +3,31 @@
 <%# title - title form %>
 <%# run - bind run form to elem (auto - onload) %>
 
-<%  
-  run||=nil  
-  without_footer||=false
+<%
+  run||=nil
   remote||=false
-  %>
-<% unless (run == 'auto') %>
-  <%#<a data-turbolinks="false" onclick="signup_form_call()" href="#">Sign Up</a> %>
-  <script>
-    function <%= id%>_call(){
-      $("#<%= id %>").modal('show')
-    }
-  </script>
-<% else %>
-  <script>
-    $(document).on ("turbolinks:load", function (){
-      $("#<%= id %>").modal('show');
-    });
-  </script>
-<%end%>
+%>
+
+<% if (run == 'auto') %>
+    <%= javascript_tag do %>
+        $(document).on ("turbolinks:load", function (){
+        $("#<%= id %>").modal('show');
+        });
+    <% end %>
+<% end %>
+
+
 <div class="modal fade" role="dialog" id="<%= id %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"><%= title %></h4>
       </div>
       <div class="modal-body">
-        <%= render form, remote:remote%> 
+        <%= render form, remote: remote %>
       </div>
-      <%unless without_footer %>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><%=t('close_but')%> </button>
-        </div>
-      <%end%>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

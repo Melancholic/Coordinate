@@ -1,5 +1,9 @@
+<!-- Modals -->
+<div class="container">
+  <%= render 'shared/modals/form', form: 'users_mails/new', id: 'contact_modal', title: t("contact_us"), remote: true %>
+</div>
 <!-- Static navbar -->
-<%= render 'shared/modals/form', form: 'users_mails/new', id:'contact_modal', title:t("contact_us"),  remote:true %>
+
 <div class="navbar navbar-default" role="navigation" id="footer">
   <div class="container-id">
     <div class="navbar-header">
@@ -11,22 +15,23 @@
       </button>
     </div>
     <div class="hidden-xs navbar-center">
-      <p><a class="navbar-brand navbar-center" href="http://anagorny.com">Copyright© <%=Time.now.year%>  by Andrey Nagorny</a></p>
+      <p><a class="navbar-brand navbar-center" href="http://anagorny.com">Copyright© <%= Time.now.year %>  by Andrey
+        Nagorny</a></p>
     </div>
 
     <div class="navbar-collapse collapse" id="navbar-footer">
       <ul class="nav navbar-nav navbar-left">
-       <li> <%= link_to(t("about"), about_path) %></li>
-       <li> <%= link_to("FAQ", faq_path) %></li>
-       <li> <%=render 'shared/select_locale'%></li>
-     </ul>
-     <ul class="nav navbar-nav navbar-right">
-       <li> <%#= link_to("Contacts", contacts_path) %></li>
-       <li><a data-turbolinks="false" onclick="contact_modal_call()" href="#"><%=t("contact_us")%></a></li>
-       <li><a class="visible-xs" href="http://anagorny.com">Copyright© <%=Time.now.year%>  by Andrey Nagorny</a></li>
-     </ul>
-   </div>
-   
+        <li> <%= link_to(t("about"), about_path) %></li>
+        <li> <%= link_to("FAQ", faq_path) %></li>
+        <li> <%= render 'shared/select_locale' %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li> <%= link_to(t("contact_us"), '#', data: {turbolinks: false, toggle: "modal", target: "#contact_modal"}) %></li>
+        <li> <%= link_to(t("license_agreement"), agreement_path) %></li>
+        <li><a class="visible-xs" href="http://anagorny.com">Copyright© <%= Time.now.year %>  by Andrey Nagorny</a></li>
+      </ul>
+    </div>
 
- </div>
+
+  </div>
 </div>

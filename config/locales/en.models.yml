@@ -2,6 +2,44 @@ en:
     activerecord:
         errors:
             models:
+              user:
+                attributes:
+                  is_agreed:
+                    accepted: "to use the service, you must accept the user agreement."
                 car:
                     priority_valid: "is not included in 0 .. 10"
                     title_uniq_valid: "You already have a car with the same title"
+        models:
+            user:
+                one: "User"
+                other: "Users"
+        attributes:
+            user:
+                login: "Login"
+                email: "E-mail"
+                password: "Password"
+                password_confirmation: "Confirm password"
+                locale: "Language"
+                time_zone: "Timezone"
+                captcha: "Prove you are a human"
+                is_agreed: "I agree all the terms of the user agreement"
+            profile:
+                name: "Name"
+                first_name: "First name"
+                second_name: "Last Name"
+                middle_name: "Middle Name"
+                mobile_phone: "Telephone number"
+                country: "Country"
+                region: "State"
+                city: "City"
+            car:
+                title: "Title"
+                color: "Color"
+                priority: "Priority"
+                description: "Description"
+            users_mail:
+                first_name: "First name"
+                last_name: "Last Name"
+                subject: "Subject"
+                message: "Message"
+                captcha: "Prove you are a human"

@@ -37,7 +37,7 @@
   </div>
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
-      <%= f.input :message,as: :text, required: true, input_html: {rows: 6} %>
+      <%= f.input :message, as: :text, required: true, input_html: {rows: 6} %>
     </div>
   </div>
   <div class="row">
@@ -48,7 +48,7 @@
     </div>
   </div>
   <%if signed_in?%>
-    <%= f.input :user_id, as: :hidden,input_html: {value:current_user.id,hide:true} %>
+      <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id, hide: true} %>
   <%end%>
 </div>
 

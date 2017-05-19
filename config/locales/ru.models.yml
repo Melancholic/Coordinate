@@ -2,9 +2,13 @@ ru:
     activerecord:
         errors:
             models:
+              user:
+                attributes:
+                  is_agreed:
+                    accepted: "для пользования сервисом необходимо принять пользовательское соглашение."
                 car:
                     priority_valid: "не входит в допустимый диапазон: 0 .. 10"
-                    title_uniq_valid: "Вы уже имеете автомобиль с таким названием"
+                    title_uniq_valid: "Вы уже имеете автомобиль с таким названием."
         models:
             user: 
                 one: "Пользователь"
@@ -18,6 +22,7 @@ ru:
                 locale: "Язык"
                 time_zone: "Часовой пояс"
                 captcha: "Докажите, что Вы человек"
+                is_agreed: "Принимаю все условия пользовательского соглашения"
             profile:
                 name: "Имя"
                 first_name: "Имя"

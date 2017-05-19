@@ -1,0 +1,7 @@
+en:
+  license_agreement: "License agreement"
+  static_pages:
+    agreement:
+      agreed_but: "Agree with the terms"
+  modals:
+      user_not_agreed: "To use the service, you must accept the user agreement."

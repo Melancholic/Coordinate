@@ -2,14 +2,15 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root 'static_pages#home'
   match '/about',to:'static_pages#about', via:'get'
+  match '/agreement', to: 'static_pages#agreement', via: 'get'
   #match '/contacts',to:'users_mails#new', via:'get'
   match '/faq', to:'static_pages#faq', via: 'get'
-  match '/signup', to: 'users#new',via: 'get' 
-  
-  resources :sessions, only: [:create, :destroy];
-  match '/signin', to: 'sessions#new', via:'get';
-  match '/signout', to:'sessions#destroy', via:'delete';
-  match 'set_custom_locale', to:'sessions#set_custom_locale', via:'post';
+  match '/signup', to: 'users#new', via: 'get'
+
+  resources :sessions, only: [:create, :destroy]
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+  match 'set_custom_locale', to: 'sessions#set_custom_locale', via: 'post'
   resources :users, except: [:index, :new] do
     
      #add user/id/following and user/id/followers
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
       get :reset_password
       post :recive_email_for_reset_pass
       post :resetpass_recive_pass
+      put :do_agree
      end
   end
   resources :cars do
@@ -30,12 +32,12 @@ Rails.application.routes.draw do
     end
      #add user/otherpages (without id!!!)
      collection do
-      get :info, :defaults => {:format => :json};
+       get :info, :defaults => {:format => :json}
       get 'edit' => 'cars#edit_collection'
      end
   end
 
-  resources :users_mails, only:[:create];
+  resources :users_mails, only: [:create]
 
   #Profile charts
   namespace :charts,  :defaults => {:format => :json} do

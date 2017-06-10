@@ -225,6 +225,10 @@ en:
       region_settings: "Region settings"
       system_settings: "System settings"
       head1: "User settings"
+      download_tracker_apk_header: "Coordinate-tracker"
+      download_tracker_url: "Download for Android"
+      download_tracker_url_hint: "Download and install mobile application for Android"
+      download_tracker_help: "The application will monitor the movement of your car and send the received data to the server of \"Coordinate\"."
     reset_password_email_form:
       head1: "Reset your password, Step 1"
       head2: "To your email address sent an email with instructions required to reset your password. Please check your e-mail!"

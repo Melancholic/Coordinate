@@ -454,12 +454,16 @@ ru:
       change_gravatar_hint: 'Ваш gravatar будет изменен на сайте проекта "Gravatar"'
       upload_avatar: 'Загрузить Ваш аватар'
       delete_avatar_label: "Не использовать загружаемый аватар"
-      delete_avatar_hint: "Вы будете использовать глобальный аватар (grvatar) (http://gravatar.com), а загружаемый аватар будет удален."
+      delete_avatar_hint: "Вы будете использовать глобальный аватар (gravatar) (http://gravatar.com), а загружаемый аватар будет удален."
       user_settings: "Настройки пользователя"
       profile_settings: "Настройки профиля"
       region_settings: "Настройки региона"
       system_settings: "Системные настройки"
       head1: "Пользовательские настройки"
+      download_tracker_apk_header: "Coordinate-tracker"
+      download_tracker_url: "Скачать для Android"
+      download_tracker_url_hint: "Скачать и установить мобильное приложение-трекер для ОС Android"
+      download_tracker_help: "Приложение будет производить мониторинг передвижения Вашего автомобиля и отправлять полученные данные на сервер \"Coordinate\""
     reset_password_email_form:
       head1: "Сброс пароля, шаг 1"
       head2: "На указанный адрес будут высланы инструкции, с дальнейшими указаниями. проверьте свой e-mail!"

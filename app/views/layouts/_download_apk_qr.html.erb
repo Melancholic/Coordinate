@@ -1,0 +1,9 @@
+<% unless ENV['TRACKER_APP_DOWNLOAD_URL'].nil? %>
+    <%= link_to ENV['TRACKER_APP_DOWNLOAD_URL'], target: '_blank' do %>
+        <img src=<%= "http://qrcoder.ru/code/?#{URI.encode_www_form_component(ENV['TRACKER_APP_DOWNLOAD_URL'])}&6&0" %>
+                 width="200" height="200" border="0" title="QR код" class="img-rounded">
+    <% end %>
+<% else %>
+    <% raise "Environment variable 'TRACKER_APP_DOWNLOAD_URL' not defined, please fix it!" %>
+<% end %>
+

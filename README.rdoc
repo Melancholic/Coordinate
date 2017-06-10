@@ -40,6 +40,7 @@ Thank you for your attention!
     RAILS_LOG_PATH_PROD: 'production.log'
     RAILS_LOG_PATH_DEV: 'development.log'
     RAILS_LOG_PATH_TEST: 'test.log'
+    TRACKER_APP_DOWNLOAD_URL: 'https://example.com'
  
 
 * Generate files asset for production environments <tt>rake assets:precompile</tt>
